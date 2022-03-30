@@ -1,0 +1,963 @@
+:root { /* Defining Color Variables To Use Rather Than Using The Codes*/
+
+    --green: #00FF00;
+    --white: #ffffff;
+    --black: #000000;
+    --red: #FF0000;
+    --yellow: #FFF000;
+    --blue: #0000FF;
+    --silver: #C0C0C0;
+    --gray: #808080;
+    --cyan: #00FFFF;
+    --purple: #800080;
+    --magenta: #FF00FF;
+    --orange: #FFA500;
+    --gutter: 30px;
+
+  }
+  /* Global Styles*/
+  .Main-Theme {
+    --fontcolor: silver;
+    --bgs: rgba(0,0,0,.8);
+    --btnbgs: var(--black);
+    --btnfontcolor: var(--orange);
+    --scrollcolor: gray;
+    --hovercolor : rgb(97, 89, 89);
+    --formcolor : white;
+    --formfontcolor: black;
+    --bordercolor: black;
+    --gradcolor1: black;
+    --gradcolor2: rgb(73,73,73);
+    --gradrowcolor1: rgba(0, 0, 0, 0.7);
+    --gradrowcolor2:rgba(73, 73, 73, 0.7);
+
+  }
+/* Defining the font for all font colors not specifically defined. Color is based on the theme*/
+* {
+    color: var(--fontcolor);
+    
+    
+
+  } /* Doing this same thing with the background */
+.app{
+  display: grid;
+  
+}
+body {
+    
+    font-family: 'Courier New', Courier, monospace;
+    display: grid;
+    
+    /*place-items: center;*/
+  }
+
+.app {
+  background: var(--bgs);
+
+}
+html{
+  height: 100%;
+ 
+}
+
+html::after,
+html::before {
+  background: var(--bgs);
+ 
+}
+
+
+.Light-Theme{
+  --fontcolor: var(--blue);
+  --bgs: var(--white);
+  --btnbgs: var(--white);
+  --btnfontcolor: var(--blue);
+  --scrollcolor : var(--black);
+  --hovercolor: gray; 
+  --formcolor : silver;
+  --formfontcolor: white;
+  --bordercolor: white;
+  }
+
+  h1 {
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-left: 5px;
+    font-size: 4vw;
+    text-align: center;
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, purple, aqua);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+  }
+
+  header {
+    grid-column: 1/-1;
+  }
+
+  h2,#Highest-Heading {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    text-align: left !important;  
+    margin-left: 10px;
+    font-size: 3vw;
+    color:var(--fontcolor)
+  }
+
+  h3{
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bolder;
+      text-align: center;
+      margin: auto;
+      font-size: 2.2vw;
+      color:var(--fontcolor)
+
+    }
+
+    h4,h5{
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bolder;
+      text-align: center;
+      margin: auto;
+      font-size: 1vw;
+      color:var(--fontcolor)
+
+    }
+
+
+  hr {
+    color: var(--fontcolor);
+  }
+
+  a{
+    color: var(--fontcolor);
+    text-decoration: none;
+
+
+  }
+  a:hover{
+    transition: color 1s;
+    /* transition: background-image 1s ; */
+    color:blue; 
+    /* background-color: #f3ec78;
+    background-image: linear-gradient(45deg, blue,blue );
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent; */
+    transition: 1s; 
+
+    text-decoration: underline white;
+    text-decoration-thickness: 5%;
+    text-underline-offset: 20%;
+
+  }
+
+/* --------
+
+---------------------------------------------------------------------------------------------------------------------------- */
+/* Specificities */
+/* Choosing background color for navigation bar */
+header>div>div.row {
+    /*background-color: var(--fontcolor);*/
+    background:linear-gradient(45deg,var(--gradrowcolor1),var(--gradrowcolor2));
+    position:sticky;
+    top: 0;
+    
+     /* Negative half of width. */
+
+    /* Clipping Content too big to fit the area*/
+    /*overflow: hidden;*/ 
+
+  }
+  
+  /* Formatting the navigation bar links */
+  .row a:not(.account-text) {
+    display: inline-block;
+    /* color: var(--bgs); */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #f3ec78;
+    background-image: linear-gradient(45deg, purple, aqua);
+    background-size: 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-text-fill-color: transparent;
+  
+  }
+  
+  /* Changing color of links if hover over them*/
+  .row a:hover {
+    /* background-color: var(--bgs); */
+    color: var(--fontcolor);
+    transition: .5s;
+    text-decoration: underline white;
+    text-decoration-thickness: 10%;
+    text-underline-offset: 50%;
+    transition: 1.0s;
+
+  }
+  
+  /* Graying out the nav par page that the user is on */
+  .row a.active {
+    background-color: var(--gray);
+    color: var(--white);
+  }
+  
+  /* formatting the button to switch themes that is on the nav bar */
+  
+  /*.row button {
+    position: absolute;
+    right: 20px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    padding: 14px 16px;
+    outline: 0 !important;
+    color: var(--btnfontcolor);
+    background-color: var(--btnbgs);
+    font-family: monospace;
+    font-weight: bold;
+    margin-top: 2px;
+  
+  }
+  
+  When the button is hovered over its color changes to gray 
+  .row button:hover {
+    --btnbgs : var(--gray)
+  }
+*/
+
+button{
+  font-weight: bolder;
+}
+
+
+
+  div.scrollmenu {
+
+    background-color:var(--scrollcolor);
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    white-space: nowrap;
+  }
+  
+  div.scrollmenu a {
+    display: inline-grid;
+    color: var(--fontcolor);
+    font-weight: bolder; 
+    text-align: center;
+    padding-bottom: 10px;
+    text-decoration: none;
+    font-size: 1.5vw;
+    height: 40%;
+    width: 40%;
+  }
+  
+  div.scrollmenu a:hover {
+    background-color: var(--hovercolor);
+    transition: .5s;
+    
+  }
+  .platform {
+    --fontcolor: var(--bgs);
+    font-weight : bolder;
+    
+  }
+  div.rankings{
+    font-style: normal !important;
+    font-weight: bold !important;
+    color: white !important;
+    font-size: 2vw !important;
+    margin: 3.5%;
+    padding: 6px 12px;
+    background-color: var(--red);
+    line-height: 1.5;
+    border-radius: 40%;
+    
+  }
+
+
+  
+  .game-image-items { 
+    display: inline-block;
+    height: 400px !important;
+    width: 80% !important;
+    object-fit: fill;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20%;
+
+  }
+
+  .add-list-images{
+    height: 400px !important;
+    width: 80% !important;
+    object-fit: fill;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20%;
+  }
+  .warning { 
+    font-weight: bolder !important;
+    font-size: 140%
+  }
+
+  .login-form, .registerinput,.game-highlight {
+    color:var(--formfontcolor);
+
+  }
+  .login-title {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 240%
+
+  }
+
+  .vl {
+    border-left: .5vw solid var(--bordercolor);
+    height: 150%;
+  }
+
+  .container-fluid {
+   padding: 0px;
+}
+.add-warning {
+  display: grid;
+  font-size :1.5vw; 
+  font-weight: bolder;
+  line-height:5cm;
+  background-color: #f3ec78;
+  background-image: linear-gradient(45deg, purple, aqua);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.hs {
+  display: grid;
+  gap: calc(var(--gutter) / 2);
+  grid-template-columns: 10px repeat(var(--total), calc(50% - var(--gutter) * 2)) 10px;
+  grid-template-rows: minmax(150px, 1fr);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: calc(.75 * var(--gutter));
+  margin-bottom: calc(-.25 * var(--gutter));
+  
+}
+
+
+.hs:before,
+.hs:after {
+  content: '';
+}
+
+.hs > li,
+.item {
+  scroll-snap-align: center;
+  padding: calc(var(--gutter) / 2 * 1.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg,var(--gradcolor1),var(--gradcolor2));
+  border-radius: 12%;
+  font-weight: bolder;
+  font-size: 1.5vw;
+  
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.hs .item:hover {
+  background: linear-gradient(45deg,var(--gradcolor2),var(--gradcolor1));
+  transition: .5s;
+  /* box-shadow: 0 0 6px 6px rgba(255,255,255,0.2); */
+
+
+
+}
+
+.my-list {
+  font-weight: bolder;
+}
+.my-list-images {
+  height: 10vw !important;
+  width: 80% !important;
+  object-fit: fill;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 40%;
+}
+
+#list-page-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  text-align: center !important;  
+  margin-left: 10px;
+  font-size: 3vw;
+}
+
+#edit-list-word{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  font-size: 2vw;
+  color:var(--fontcolor);
+  display:inline;
+}
+
+.edit-list-heading{
+
+  text-align: center !important;  
+
+}
+
+.edit-list-choices > a {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  margin-left: 10px;
+  font-size: 3vw;
+  color:var(--fontcolor);
+  text-decoration: none;
+  display:inline;
+
+}
+
+
+
+#index-my-list-link, .list-table-websites, #add-list-my-list-link, .wishlist-websites {
+  text-decoration: none;
+  color:var(--fontcolor)
+}
+
+#add-list-my-list-link:hover, #index-my-list-link:hover, .edit-list-choices > a:hover{
+  color:blue;
+  transition: .5s;
+
+}
+
+.list-table-websites:hover{
+  text-decoration: underline white;
+  text-decoration-thickness: 10%;
+  text-underline-offset: 50%;
+  transition: 1.0s;
+
+}
+a{
+  text-decoration: none;
+}
+
+input {
+  font-size: 18px;
+  padding: 5px;
+  height: 35px;
+  width: 350px;
+  border: 1px solid blue;
+  outline: none;
+  border-radius: 5px;
+  color: blue;
+/*   border-bottom: none; */
+}
+datalist {
+  background: linear-gradient(45deg,var(--gradcolor1),var(--gradcolor2));
+  border-radius: 0 0 15px 15px;
+  border-top: none;
+  width: 75%;
+  padding: 5px;
+  max-height: 10rem;
+  overflow-y: auto;
+  font-weight: bolder;
+  margin: auto;
+  
+}
+.searchlistdropdown{
+  width: 25% !important;
+
+
+}
+
+
+option {
+  background-color: var(--fontcolor);
+  padding: 4px;
+  color: var(--bgs);
+  margin-bottom: 1px;
+   font-size: 1.5vw;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+option a {
+  font-size: .5vw !important;
+}
+option:hover,  .active{
+  background-color: lightblue;
+  transition: .5s;
+
+}
+
+
+label {
+  font-weight: bolder;
+}
+
+
+td.green, .tablerating.green{
+  /* color:limegreen */
+
+  background-color: limegreen;
+  background-image: limegreen;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+   -webkit-text-fill-color: transparent;  
+  -moz-text-fill-color: transparent;
+}
+
+
+td.orange, .tablerating.orange{
+  /* color:darkorange */
+  background-color: darkorange;
+  background-image: darkorange;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+   -webkit-text-fill-color: transparent;  
+  -moz-text-fill-color: transparent;
+}
+td.red , .tablerating.red{
+  /* color:red */
+
+  background-color: red;
+  background-image: red;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+   -webkit-text-fill-color: transparent;  
+  -moz-text-fill-color: transparent;
+}
+
+td.gold,.tablerating.gold{
+  /* color:gold */
+  background-color: gold;
+  background-image: gold;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+   -webkit-text-fill-color: transparent;  
+  -moz-text-fill-color: transparent;
+  }
+
+
+td{
+  color:red
+}
+
+tr:hover:not(td){
+  background: linear-gradient(45deg,var(--gradcolor2),var(--gradcolor1)) !important;
+}
+
+div.green:not(.tablerating) {
+  background-color: limegreen !important;
+  border-color: limegreen !important;
+
+}
+div.orange:not(.tablerating) {
+  background-color:darkorange!important;
+  border-color: darkorange !important;
+
+}
+div.red:not(.tablerating) {
+  background-color:red !important;
+  border-color: red !important;
+  
+}
+
+div.gold:not(.tablerating) {
+  background-color:gold!important;
+  border-color: gold !important;
+  
+}
+
+.website{
+  margin: 3.5%;
+}
+
+.password-alert{
+  border-radius: 0%;
+  background-color: var(--bgs);
+  color:var(--fontcolor);
+  position:-webkit-sticky;
+  position: sticky;
+  top: 0; 
+  border-style: outset;
+  border-color: var(--fontcolor);
+}
+
+
+body { 
+  background: url("https://www.destructoid.com//ul/334467-GRRR1.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+
+
+th{
+  position:sticky;
+  top:0;
+}
+
+.item-text {
+  background-color: #f3ec78;
+  background-image: linear-gradient(45deg, purple, aqua);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+}
+
+
+.personalratingchange{
+  color:black !important
+}
+
+
+.profile-head{
+  margin:auto;
+
+}
+.profile-name{
+  display:inline;
+  color:var(--fontcolor);
+  font-weight: bolder;
+  font-size:3vw;
+
+
+}
+.profile-avatar{
+  display: inline;
+  padding:1%;
+  border-radius: 50%;
+  color:white;
+  background-image: linear-gradient(45deg,purple,aqua);
+  font-weight: bolder;
+  font-size:2.5vw;
+  text-transform: uppercase;}
+
+.profile-row{
+  margin:auto;
+  padding: 2%;
+  font-weight: bolder;
+  font-size : 1.5vw;
+  text-decoration: none;
+  position: sticky;
+  top: 0;
+  
+}
+.profile-row>a{
+background-color: #f3ec78;
+background-image: linear-gradient(45deg, purple, aqua);
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+
+margin-right: 2%;
+margin-left: 2%
+
+
+}
+.profile-row>a:hover {
+  text-decoration: underline white;
+  text-decoration-thickness: 10%;
+  text-underline-offset: 50%;
+  transition: .5s;
+
+
+  
+}
+.game-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 40px; /* 5px rounded corners */
+  display:inline-grid;
+  font-weight: bolder;
+}
+
+.game-card:hover {
+box-shadow: 0 0 13px 13px rgba(255,255,255,0.2);
+}
+
+
+/* Add rounded corners to the top left and the top right corner of the image */
+.game-card-images {
+  border-radius: 20px 20px 0 0;
+  height: 20vw !important;
+  width: 22vw !important;
+  object-fit: fill;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.container{
+  background: linear-gradient(45deg, black, rgb(73, 73, 73));
+  width: 22vw;
+  padding: 2px 16px;
+  border-radius: 0 0 20px 20px;
+
+  grid-gap: 200px;
+  
+
+}
+.account-text:not(.wishlist-websites){
+background-color: #f3ec78;
+background-image: linear-gradient(45deg, purple, aqua);
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+margin-right:auto;
+margin-left: auto;
+margin-top: 2%;
+margin-bottom: 2%;
+
+  
+
+}
+
+/* Rating Styles */
+.accountranks {
+padding:.5% !important;
+width: 25%;
+
+margin: auto;
+margin-top: 3.5%;
+margin-bottom: 3.5%;
+text-align: center;
+/* border-radius: 50% !important; */
+
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+}
+/* Metacritic Rating */
+.account-mcr{
+  display:inline;
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+  margin:auto;
+
+}
+.rating-border{
+  border: 2px solid ;
+  border-radius: 0% !important;
+  border-color: red ;
+
+
+}
+div.rankings2{
+font-style: normal !important;
+font-weight: bold !important;
+color: white !important;
+font-size: 1.5vw !important;
+
+padding: 6px 6px;
+background-color: var(--red);
+line-height: 1.5;
+border-radius: 40%;
+
+}
+/* Rating Styles Stop */
+  
+.wishlist-websites{
+line-height: 2%;
+margin:auto;
+font-size: .8vw;
+display:inline;
+background-color: #f3ec78;
+background-image: linear-gradient(225deg, white, gray)!important;
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+}
+
+.gameoptionimages{
+  width: 6vw;
+  height: 6vw
+}
+
+.fullsearchresults:hover{
+  background-color: linear-gradient(45deg,var(--gradcolor2),var(--gradcolor1)) !important;
+}
+
+.editgamelistoptions{
+  margin-top: 5%;
+  margin-bottom:  5%;
+}
+
+
+th { position: sticky; top: 0; }
+
+
+.gradientcolor { 
+  background-color: #f3ec78;
+  background-image: linear-gradient(45deg, purple, aqua);
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+}
+
+.gradientcolorpinkwhite { 
+  background-color: #f3ec78;
+  background-image: linear-gradient(45deg, white, hotpink);
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+}
+/* ---------------------------------------------------AutoGenerated Game Pages CSS------------------------------------------------------ */
+.vargamelabels {
+font-size: 2vw;
+font-weight: bolder;
+
+}
+
+
+
+.vargamerankings{
+  font-style: normal !important;
+  font-weight: bold !important;
+  color: white !important;
+  font-size: 2vw !important;
+  margin-top: 3.5%;
+  margin: auto;
+  padding: 6px 6px;
+  background-color: var(--red);
+  line-height: 1.5;
+  border-radius: 40%;
+  width: 5.5vw !important;
+
+}
+.varpersonalrankings{
+  font-style: normal !important;
+font-weight: bold !important;
+ background-color: red;
+font-size: 2vw !important;
+line-height: 1.5;
+
+padding: 1% !important;
+width: 50%;
+/* width: 25%; */
+
+margin: auto;
+margin-top: 3.5%;
+margin-bottom: 3.5%;
+text-align: center;
+
+background-size: 100%;
+background-clip: text;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+-webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent;
+}
+
+h6{
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  text-align: center;
+  margin: auto;
+  font-size: 2vw;
+  color:var(--fontcolor)
+
+}
+.var-rating-border{
+  border: 2px solid ;
+  border-radius: 0% !important;
+  border-color: red ;
+}
+
+
+.vl {
+  border-left: var(--fontcolor);
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+  
+}
+
+.main-page-game-list{
+  animation-fill-mode: both;
+  animation-duration: 1000ms;
+  animation-delay: 0ms;
+  animation-iteration-count: 1;
+  opacity: 1;
+  animation-name: react-reveal-970355184815119-1;
+}
+
+/* ABOUT REACT PAGE */
+.about-title{
+  text-align: left;
+  margin-bottom: 0%;
+  margin-left: 1%;
+}
+
+hr.about-title-separator{
+  border:10px;
+}

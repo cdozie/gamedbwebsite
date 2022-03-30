@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block title %}
+UG DATABASE
+{% endblock %}
+
+
+
+{% block main %}
+{% with messages = get_flashed_messages() %}  
+{% if messages %}  
+      {% for message in messages %}  
+           <hr>
+                <p class="alert alert-success border text-center w-25 m-auto font-weight-bolder password-alert sticky-top" role="alert">{{ message }}</p> 
+           <hr> 
+      {% endfor %}  
+{% endif %}  
+{% endwith %}  
+
+        <h2 id = "Highest-Heading"> RANDOM GAMES TO TRY</h2> 
+        <hr>
+        <ul class="hs full">
+            {%for i in range(0, 10)%}
+            
+
+                <li class = "item"> <div class = "item-text"> {{gamedatameta.rank[i]}}. {{gamedatameta.name[i]}} </div>
+                    
+                    <img class = "game-image-items" src = "{{gamedatameta.backgroundimage[i]}}" onerror="this.src='thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';" /> 
+                    
+                    <div class = "item-text">Metacritic Rating:</div> 
+                    <div data-color ="{{gamedatameta['rating'][i]}}" class = "rankings inlinemarker">{{gamedatameta['rating'][i]}}</div>
+                </li> 
+
+            {%endfor%}
+            </ul>
+            <hr>
+            <h2 id="add-list-label"><a href ="/mylist" id="index-my-list-link">Your Games</a></h2> 
+            <hr>
+            <ul class = "hs full main-page-game-list">
+                <!-- {% set counter = 0 %} -->
+
+
+
+                    {% for i in range(numblist|length) %}
+                    {% set j = numblist[i] %}
+                        <li class = "item"> 
+                        <div class = "item-text" ><a href = "/game/{{gamedataserver.name[j]}}">{{gamedataserver.name[j]}} </a> </div>
+                        <img class = "add-list-images" alt = "{{gamedataserver.name[j]}} Image" src = "{{gamedataserver.backgroundimages[j]}}" onerror>          
+                        <div data-color = "{{gamedataserver.personalrating[j]}}" class = "rankings">{{gamedataserver.personalrating[j]}}</div>
+
+                        <div class = "status item-text"> {{gamedataserver.status[j]}}</div> 
+                    </li>
+                    <!-- {% set counter = counter + 1 %} -->
+
+                    {% endfor  %}
+
+</ul>
+                    
+
+<!-- <div id="like_button_container"></div> -->
+
+<style>
+    .inlinemarker{
+        display:inline;
+    }
+</style>
+
+{% endblock %}
+
+

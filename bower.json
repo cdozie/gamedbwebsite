@@ -1,0 +1,23 @@
+{
+  "name": "web_scrape",
+  "description": "scrape",
+  "main": "webscrape.js",
+  "authors": [
+    "Chidozie"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "./project/static/bower_components",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "react": "^15.1.0"
+  }
+}

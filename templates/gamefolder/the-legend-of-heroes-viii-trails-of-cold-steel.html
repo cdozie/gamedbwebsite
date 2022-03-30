@@ -1,0 +1,39 @@
+
+    {% extends "layout.html" %}
+    {% block main %}
+
+    <div class="container-fluid">
+        <p class = "login-title gradientcolor"> <a href = "http://www.trailsofcoldsteel.com/cs1/" > The Legend of Heroes VIII: Trails of Cold Steel </a></p>
+        <span class = "vargamelabels gradientcolor"> Metacritic Rating </span>
+        <div data-color ="79" class = "vargamerankings">79</div>
+        <hr>
+        <div class = "var-page-main"> 
+                <img class = "var-game-image" src = "https://media.rawg.io/media/games/291/2917eaf996afa24584de1f020ce6571a.jpg">
+        </div>
+
+    </div>
+
+    <style> 
+        .var-page-main {
+            display:grid;
+            grid-template-columns: 1fr .5fr 10px;
+            gap: 10px;
+            grid-auto-rows: min-content;
+        }
+        .var-game-image {
+            grid-column: 2;
+            grid-row: 1;
+            max-height:100% !important;
+            
+            width: 100% !important;
+            border-radius: 20%;
+        }
+    </style>
+
+
+    
+
+
+    {% endblock %}
+
+    

@@ -1,0 +1,107 @@
+
+    {% extends "layout.html" %}
+    {% block main %}
+    {% with messages = get_flashed_messages() %} 
+    {% if messages %} 
+        {% for message in messages %}  
+            <hr>
+                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top" role="alert">{{ message }}</p> 
+            <hr> 
+        {% endfor %}  
+    {% endif %}  
+    {% endwith %}  
+
+    <div class="container-fluid">
+        <p class = "login-title gradientcolor"> <a href = "" > Gran Turismo 7 </a></p>
+        <span class = "vargamelabels gradientcolor"> Metacritic Rating: </span>
+        <div data-color ="87" class = "vargamerankings">87</div>
+        <hr>
+        <div class = "var-page-main"> 
+                <img class = "var-game-image" src = "https://media.rawg.io/media/games/3f6/3f6a04b856f23310d3c2f5be8c5963f7.jpg">
+                <div class = "var-user-analytics">
+                    <h6 class = "var-personal-rating"> Your Rating : 
+                    <div data-color = "_" class = "varpersonalrankings var-rating-border">_</div> 
+                    </h6>
+                    <h6 class = "var-status"> Game Status:
+                    <div class = "gradientcolorpinkwhite"> Not in List</div>
+                    </h6>
+                    <h6 class = "var-release-date"> Game Release Date:
+                    <div class = "gradientcolorpinkwhite">2022-03-04</div>
+                    </h6>
+                    <h6 class = "var-hours-played"> Game Hours Played:
+                    <div class = "gradientcolorpinkwhite"> Not in List</div>
+                    </h6>
+
+                </div>
+               <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
+                <input name = "deletedgame" style = "display:none" value = "Gran Turismo 7">
+                <button type = "submit" class="btn btn-danger var-remove-button" id = "Gran Turismo 7" style = "display:none;">Remove from List</button>
+               </form>
+               <button type="button" class="btn btn-success var-add-button" id = "Gran Turismo 7" style =  "display:block;">Add to List</button>
+
+
+        </div>
+        
+
+    </div>
+
+    <style> 
+        .var-page-main {
+            display:grid;
+            grid-template-columns: 1fr .5fr 10px;
+            gap: 10px;
+            grid-auto-rows: min-content;
+        }
+        .var-game-image {
+            grid-column: 2;
+            grid-row: 1;
+            max-height:100% !important;
+            height:100%;
+            min-height:100%;
+            width: 100% !important;
+            border-radius: 20%;
+        }
+
+        .var-personal-rating {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .var-user-analytics {
+            grid-column: 1;
+            display: grid;
+            row-gap:20px;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: min-content;
+        }
+        .var-status {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .var-release-date{
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .var-hours-played{
+            grid-column:2;
+            grid-row: 2;
+        }
+        .var-add-button,.var-remove-button-form{
+            grid-column:1/-1;
+            grid-row:2;
+            margin:auto;
+            width:25%;
+
+        }
+        .var-remove-button{
+            width:100%;
+            }
+
+    </style>
+
+
+    
+
+
+    {% endblock %}
+
+    

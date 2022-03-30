@@ -1,0 +1,57 @@
+{% extends "accountlayout.html" %}
+
+{% block main %}
+{% with messages = get_flashed_messages() %}  
+{% if messages %}  
+      {% for message in messages %}  
+           <hr>
+                <p class="alert alert-success border text-center w-25 m-auto font-weight-bolder password-alert sticky-top" role="alert">{{ message }}</p> 
+           <hr> 
+      {% endfor %}  
+{% endif %}  
+{% endwith %}  
+    <div class = "account-content">
+    <div class = "game-cards">
+        {%for i in range(gamedata.name|length)%} 
+
+        {% if (i % 24 == 0) and (i != 0 ) %}
+        <section class = "tablesection{{(i/24)|int + 1}}" style = "display:none">
+        {% endif %}
+            {% if (i % 4 == 0) %}
+            <div class="mb-3 row add-list-row">
+            {% endif %}
+                <div class="col">
+                    <div class = "game-card"> 
+                        <img class = "game-card-images" alt = "{{gamedata.name[i]}} Image" src = "{{gamedata.backgroundimages[i]}}" onerror> 
+                        <div class = "container">  
+
+                            <div class = "account-text" ><a href= "/game/{{onlynames[i]}}">{{gamedata.name[i]}} </a> </div>
+                            
+                            <div data-color = "{{gamedata.onlinerating[i]}}" class = "card-metacritic-rating account-text">Metacritic Rating: 
+                                <div data-color = "{{gamedata.onlinerating[i]}}" class=" card-metacritic-rating account-mcr">{{gamedata.onlinerating[i]}}</div> </div> 
+                            <div data-color = "{{gamedata.personalrating[i]}}" class = "rankings2 accountranks rating-border">{{gamedata.personalrating[i]}}</div>
+                                <div class = "status account-text"> Status: {{gamedata.status[i]}}</div> 
+                        </div>     
+                    </div>
+                </div>
+            {% if (i % 4 == 3) and (i != 0) %}
+            </div>
+                {% endif %}
+        {% if (i % 24 == 23) and (i != 23) %}
+        </section>
+        {% endif %}
+        
+        {% endfor %}
+    </div>
+
+    </div>
+
+<style>
+
+</style>
+
+<script>
+
+
+</script>
+{% endblock %}

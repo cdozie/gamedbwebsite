@@ -1,0 +1,577 @@
+'use strict'
+
+
+//@ts-check
+
+function myFunc(vars) {
+    return vars
+}
+/*
+const scroller = document.querySelector('.scroll-menu');
+
+
+    
+
+if (scroller) {
+
+}*/
+
+(function () {
+    $('.registerinput, .login-form, .email-verify-form').on('keyup click keydown',function() {
+
+        var empty = false;
+        $('.registerinput').each(function() {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('#submitbutton').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+        } else {
+            $('#submitbutton').removeAttr('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+        }
+    });
+})();
+
+
+
+var root = document.documentElement;
+const lists = document.querySelectorAll('.hs'); 
+
+lists.forEach(el => {
+  const listItems = el.querySelectorAll('li');
+  const n = el.children.length;
+  el.style.setProperty('--total', n);
+});
+
+var typingTimer;                //timer identifier
+var doneTypingInterval = 0;  //time in ms, 5 seconds for example
+
+globalThis.names = [];
+globalThis.slugs = [];
+globalThis.images = [];
+
+
+function searchGame() {
+    
+        var gamesearch = $("#gameSearch, #gameSearch3").val()
+        //console.log(gameSearch)
+        const api_key = "bbd0f6e116b145bd81a72ee35824f71f"
+        var url2 = `https://api.rawg.io/api/games?key=${api_key}&page_size=10&search=${gamesearch}`
+
+        
+        axios.get(url2)
+            .then(response => {
+                const gameresponse = response.data;
+                //console.log (gameresponse.results.length)
+                slugs = [] 
+                names = []
+                images = []
+                for(let i =0; i < gameresponse.results.length; i++) {
+
+                    names.push(gameresponse.results[i].name);
+                    var gamename = gameresponse.results[i].name;
+                    var nameindex = i+1
+                    slugs.push(gameresponse.results[i].slug); 
+                    images.push(gameresponse.results[i].background_image);
+                    var bgimage = gameresponse.results[i].background_image;
+                    //console.log(bgimage)
+                    var dropdownopts= document.getElementById(`game${i+1}`);
+                    var dropdownimages = document.getElementById(`game${i+1}images`)
+                    dropdownopts.innerText= `${gamename}`;
+                    dropdownimages.src = `${bgimage}`
+
+                
+            }
+
+            //console.log (names)
+            var searchqueries={
+                names:names,
+                queries: slugs
+            }
+            //console.log (searchqueries);
+            })
+            .catch(error => console.error(error));
+    
+;
+
+};
+
+
+$('#gameSearch, #gameSearch3').on('input',function(){
+    clearTimeout(typingTimer);
+    if ($('#gameSearch, #gameSearch3').val()) {
+        typingTimer = setTimeout(searchGame, doneTypingInterval);
+    }
+});
+
+
+(function() {
+    $('.game-form').on ('keyup click keydown', function() {
+
+        var empty = false;
+        $('.game-form').each(function() {
+            if ($(this).val() == '' ) {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('#game-submit-button').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+        } else {
+          if  ($("#gamedropdown").css('display') == 'none'){
+            $('#game-submit-button').removeAttr('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
+        }
+        else {
+          $('#game-submit-button').attr('disabled', 'disabled')
+        }}
+    });
+})();
+var addsubmission
+var submissionindex
+var submissionslug
+var gameid
+
+
+$('.gamedboptions').on('click', function() {
+  gameid=$(this).attr('id') //using the game id to get the slug by finding the index of the game and extracting the slug
+  var last = gameid.charAt(gameid.length-1)
+  submissionindex = parseInt(last) -1 
+  // addsubmission = $('#gameSearch').val()
+
+  
+
+  // localStorage.setItem("addsubmission", addsubmission);
+  localStorage.setItem("submissionindex", submissionindex);
+  submissionslug = slugs[submissionindex]
+  // console.log(alert(slugs))
+  localStorage.setItem("submissionslug", submissionslug);
+  console.log(alert(localStorage.getItem("submissionslug")))
+  $('#realgameSearch, #realgameSearch3').val(localStorage.getItem("submissionslug"))
+
+$('#gameSearch').on('input', function(){
+  $('#realgameSearch').val($('#gameSearch').val())
+
+})
+$('#gameSearch3').on('input', function(){
+  $('#realgameSearch3').val($('#gameSearch3').val())
+
+})
+
+  // // addsubmission = localStorage.getItem("addsubmission")
+  // if (names.includes(addsubmission)){
+  //   // submissionindex = slugs.indexOf(addsubmission)
+  //   submissionslug = slugs[submissionindex]
+  //   localStorage.setItem("submissionslug", submissionslug);
+  //   // console.log(alert(localStorage.getItem("submissionslug")))
+  //   $('gameSearch').val(localStorage.getItem("submissionslug"))
+
+  // }
+})
+
+
+$(function(){
+  
+    var mc = {
+      '0-59'     : 'red',
+      '60-79'    : 'orange',
+      '80-99'   : 'green',
+      '100-100'     : 'gold'
+    };
+    
+  function between(x, min, max) {
+    return x >= min && x <= max;
+  }
+    
+  
+    
+    var dc;
+    var first; 
+    var second;
+    var th;
+    
+    $('.rankings,.rankings2,.account-mcr,.tablerating,.accountranks, .vargamerankings, .varpersonalrankings').each(function(index){
+      
+      th = $(this);
+      
+      dc = parseInt($(this).attr('data-color'),10);
+      
+      
+        $.each(mc, function(name, value){
+          
+          
+          first = parseInt(name.split('-')[0],10);
+          second = parseInt(name.split('-')[1],10);
+          
+          // console.log(between(dc, first, second));
+          
+          if( between(dc, first, second) ){
+            th.addClass(value);
+            // console.log(value)
+            // $('.rating-border').css({'border-color': name})
+          }
+  
+      
+      
+        });
+      
+    });
+
+  });
+
+
+$('img').map(function(){
+    // console.log(this.src)
+    $(this).attr('onerror',"this.onerror=null;this.src='https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';")
+    if(this.src > "s"){
+        $(this).attr('src',"https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg")
+    }
+});
+
+
+function isEmpty(str) {
+    return !str.trim().length;
+}
+var classundefined = 1
+
+$(function(){
+//  $('.personalratingchange').on('click',function(){
+//     $(this).trigger('focus')
+//  })
+$('.table-personal-rating, .table-hours-played, .table-status').on('click', function(){
+     var formerrating = $(this).text()
+    var modifyingelements = document.getElementsByClassName('modifying')
+    classundefined = 0
+    console.log($(this).attr('class'))
+     if(modifyingelements.length == 0 && $(this).attr('class') =="table-personal-rating"){
+        $(this).html('<input type = "number" class = "mx-auto w-auto blah " id=  "personalratingchange"  name = "rating"  min = "0" max = "100">')
+        $(this).addClass('modifying')
+        globalThis.classname = $(this).attr('class')
+        
+        $('.modifying > #personalratingchange').val(formerrating)
+         globalThis.editgamename = ($(this).closest( "tr" ).find('.editgamenames').text())
+         console.log(editgamename)
+     }
+
+     if(modifyingelements.length == 0 && $(this).attr('class') =="table-status"){
+        $(this).html('<select name="status" id = "edit-select-status" autocomplete="off"  class = "form-select form-control mx-auto w-100 game-form game-highlight "  placeholder = "Choose Status:" required> ' + 
+        '<option disable selected value>Choose Status:</option>'
+        +'<option>Plan to Play</option>'
+        +'<option>Dropped</option>'
+        +'<option>Playing</option>'
+        +'<option>On Hold</option>'
+        +'<option>Completed</option>'
+        + '<option>Wishlist</option>'
+    +'</select>')
+        $(this).addClass('modifying')
+        globalThis.classname = $(this).attr('class')
+        //var conceptName = $('#aioConceptName').find(":selected").text();
+        $('.modifying > #edit-select-status').val(formerrating)
+         globalThis.editgamename = ($(this).closest( "tr" ).find('.editgamenames').text())
+         console.log(editgamename)
+     }
+
+     if(modifyingelements.length == 0 && $(this).attr('class') =="table-hours-played"){
+        $(this).html('<input type = "number" class = "form-control mx-auto w-100 game-highlight" name = "hoursplayed" id = "hoursplayed" " min="0">')
+        $(this).addClass('modifying')
+        globalThis.classname = $(this).attr('class')
+        $('.modifying > #hoursplayed').val(formerrating)
+         globalThis.editgamename = ($(this).closest( "tr" ).find('.editgamenames').text())
+         console.log(editgamename)
+     }
+     
+     
+     //$('.table-personal-rating').off("click")
+     //$(this).val(formerrating);
+     const ratingchange = $(this).val()
+     console.log(ratingchange)
+    })
+$(document).on ('dblclick', function(e){
+
+    // var container = $(".modifying>");
+    // if (!$(e.target).closest(container).length) {
+        if (classundefined == 1) {
+            e.stopPropagation();
+        
+    }
+    if (classundefined == 0){// if (classname) { }
+    if (classname == "table-personal-rating modifying"){
+
+    //$("#url-displayname").html($(this).val())
+     $('#personalratingchange').trigger('blur');
+     var personalratingchange = $('#personalratingchange').val()
+     $('.game-name-submit').val(editgamename)
+     //$('#personalratingchange').on('focusout',function(){
+        //$('.personalratingchange').each (function(){
+            // console.log($('.modifying > #personalratingchange').val())
+            // console.log($('.modifying > #personalratingchange').val() == "" || $('.modifying > #personalratingchange').val() == undefined)
+            // console.log(isNaN($('.modifying > #personalratingchange').val()))
+
+            // if  ($('.modifying > #personalratingchange').val() === "" || $('.modifying > #personalratingchange').val() == undefined){
+            //     $('.modifying > #personalratingchange').html("_") 
+            // }
+            var inputranking = $('.modifying > #personalratingchange').val()
+            if (inputranking==="") {
+                $("#edit-form").trigger('submit')
+                $(".modifying").html("_")
+                $('.game-name-submit').val(editgamename)
+                
+            }
+            else if (!isNaN(inputranking)){
+
+                
+                $("#edit-form").trigger('submit')
+                $(".modifying").html(inputranking)
+                $('.game-name-submit').val(editgamename)
+                
+            }
+            
+            else{
+                
+                $(".modifying").html("_")
+            }
+            //$("#edit-form").trigger('submit')
+            $('.table-personal-rating').removeClass("modifying")
+
+        }
+        if (classname == "table-hours-played modifying"){
+
+            $('.game-name-submit').val(editgamename)
+
+                   var inputplayed = $('.modifying > #hoursplayed').val()
+                   if (inputplayed==="") {
+                       $("#edit-form").trigger('submit')
+                       $(".modifying").html("_")
+                       $('.game-name-submit').val(editgamename)
+                       
+                   }
+                   else if (!isNaN(inputplayed)){
+       
+                       
+                       $("#edit-form").trigger('submit')
+                       $(".modifying").html(inputplayed)
+                       $('.game-name-submit').val(editgamename)
+                       
+                   }
+                   
+                   else{
+                       
+                       $(".modifying").html("_")
+                   }
+                   //$("#edit-form").trigger('submit')
+                   $('.table-hours-played').removeClass("modifying")
+        }
+        if (classname == "table-status modifying"){
+
+            $('.game-name-submit').val(editgamename)
+
+                   var inputstatus = $('.modifying > #edit-select-status').find(":selected").text();
+                   if (inputstatus==="") {
+                       $(".modifying").html("_")
+                       $('.game-name-submit').val(editgamename)
+                       
+                   }
+                   else if (isNaN(inputstatus)){
+       
+                       
+                       $("#edit-form").trigger('submit')
+                       $(".modifying").html(inputstatus)
+                       $('.game-name-submit').val(editgamename)
+                       
+                   }
+                   
+                   else{
+                       
+                       $(".modifying").html("_")
+                   }
+                   //$("#edit-form").trigger('submit')
+                   $('.table-hours-played').removeClass("modifying")
+        }
+    }
+        // }
+       // })
+    // })
+
+})
+
+
+});
+
+// let db = new sqlite3.Database('C:/sqlite/gamestorage.db')
+// db.run(`UPDATE gamestorage SET personalrating = ? where id = ? AND game = ?`,$(this).text()
+
+  //console.log($('.editgamelistoptions'))
+  $( "#add-form" ).on('submit', function() {
+    var gamechoice = $("#gameSearch2, #gameSearch , #gameSearch3" ).val();
+    var gameindex = names.indexOf(gamechoice);
+    
+    $("#gameSearch2, #gameSearch, #gameSearch3").html(`${slugs[gameindex]}`);
+    console.log(slugs[gameindex]);
+  
+    return true;
+  });
+  
+  $('#gameSearch2, #gameSearch, #gameSearch3').on('keypress',function () {
+    $("#gamedropdown").css("display","block");
+    $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius","5px 5px 0 0");  
+  });
+  $('.editgamelistoptions, .gamedboptions').each(function(){
+    $(this).on('click',function () {
+      $('#gameSearch2 , #gameSearch, #gameSearch3').val($(this).val());
+      $('#headingsearch').trigger("submit");
+      $("#gamedropdown").css("display",'none');
+      $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius","5px");  
+    }
+)});
+  
+  $('#gameSearch2, #gameSearch, #gameSearch3').on('input',function() {
+    currentFocus = -1;
+    var text = $(this).val().toUpperCase()
+    console.log(text);
+    $('.editgamelistoptions').each(function(){
+      
+      if($(this).text().toUpperCase().indexOf(text) > -1){
+        $(this).css('display', 'block');
+    }else{
+      $(this).css('display', 'none');
+      }
+    });
+    $('.gamedboptions').each(function(){
+           
+      if($(this).text().toUpperCase().indexOf(text) > -3){
+        $(this).css('display', 'block');
+    }else{
+      $(this).css('display', 'none');
+      }
+    });
+  })
+  var currentFocus = -1;
+  $('#gameSearch2, #gameSearch, #gameSearch3').on('keydown',function(e) {
+    if(e.key === 'ArrowDown'){
+      currentFocus++
+     addActive($('.editgamelistoptions, .gamedboptions'));
+    }
+    else if(e.key === 'ArrowUp'){
+      currentFocus--
+     addActive($('.editgamelistoptions , .gamedboptions'));
+    }
+    else if(e.key === 'Enter'){
+      e.preventDefault();
+          if (currentFocus > -1) {
+            /*and simulate a click on the "active" item:*/
+            if (gamedropdown.options) gamedropdown.options[currentFocus].click();
+          }
+    }
+  })
+  
+  function addActive(x) {
+      if (!x) return false;
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      x[currentFocus].classList.add("active");
+    }
+    function removeActive(x) {
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("active");
+      }
+    };
+
+    
+    var scrollcheck = 1
+    $(window).on('scroll',function() {
+     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+         scrollcheck++
+         $(`.tablesection${scrollcheck}`).css('display','inline');
+         $(`.actualtablesection${scrollcheck}`).css('display','table-row-group');
+         
+     }})
+    //  var listscrollcheck = 1
+    //  $('.hs').on('scroll',function(){
+    //    if ($(window).scrollLeft()*2+ $(window).width() > $(document).width()-100){
+    //      listscrollcheck++
+    //     $(`.listrowsection${listscrollcheck}`).css('display','flex');
+
+    //    }
+    //  })
+    var presearch
+     $('.var-add-button').on('click', function(){
+      presearch = String($('.var-add-button').attr('id'))
+      localStorage.setItem("presearchgame", presearch);
+      window.location.href='/addlist#varredirect';
+
+
+
+    //  })
+    });
+
+$(function () {
+  if (window.location.hash) {
+    presearch = localStorage.getItem("presearchgame");
+    // console.log(alert(presearch))
+    // console.log(presearch)
+  $('#gameSearch').val(presearch)
+  $('#realgameSearch').val(localStorage.getItem("submissionslug"))
+
+}
+})
+
+
+// var observer = new IntersectionObserver(function(seekedelement) {
+//   if(seekedelement[0].isIntersecting === true)
+//     console.log("The Element is Visible");
+
+//   },{threshold:[0]});
+
+  
+// observer.observe(document.querySelector(".main-page-game-list"))
+
+// const e = React.createElement;
+
+// class LikeButton extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { liked: false };
+//   }
+
+//   render() {
+//     if (this.state.liked) {
+//       return 'You liked this.';
+//     }
+
+//     return e(
+//       'button',
+//       { onClick: () => this.setState({ liked: true }) },
+//       'Like'
+//     );
+//   }
+// }
+
+
+// const domContainer = document.querySelector('#like_button_container');
+// ReactDOM.render(e(LikeButton), domContainer);
+
+
+// // comp = React.Component
+
+// class ShoppingList extends React.Component {
+//   render(){
+//     return (
+//       <div className="shopping-list">
+//         <h1>Shopping List for {this.props.name}</h1>
+//         <ul>
+//           <li>Instagram</li>
+//           <li>WhatsApp</li>
+//           <li>Oculus</li>
+//         </ul>
+//       </div>
+//     );
+//   }
+// }
+
+
+
+// import Zoom from 'react-reveal/Zoom';
+
+

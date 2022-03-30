@@ -1,0 +1,39 @@
+
+    {% extends "layout.html" %}
+    {% block main %}
+
+    <div class="container-fluid">
+        <p class = "login-title gradientcolor"> <a href = "" > Persona 3: The Night Before </a></p>
+        <span class = "vargamelabels gradientcolor"> Metacritic Rating </span>
+        <div data-color ="None" class = "vargamerankings">None</div>
+        <hr>
+        <div class = "var-page-main"> 
+                <img class = "var-game-image" src = "None">
+        </div>
+
+    </div>
+
+    <style> 
+        .var-page-main {
+            display:grid;
+            grid-template-columns: 1fr .5fr 10px;
+            gap: 10px;
+            grid-auto-rows: min-content;
+        }
+        .var-game-image {
+            grid-column: 2;
+            grid-row: 1;
+            max-height:100% !important;
+            
+            width: 100% !important;
+            border-radius: 20%;
+        }
+    </style>
+
+
+    
+
+
+    {% endblock %}
+
+    
