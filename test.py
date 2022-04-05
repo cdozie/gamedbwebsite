@@ -35,7 +35,10 @@ response2 = requests.get(url2)
 response2.raise_for_status()
 
 namelistdata = response2.json()
-# print(namelistdata)
+
+
+
+print (namelistdata["results"][3]["slug"])
 #print(namelistdata["results"][0]["platforms"][0]["platform"]["name"])
 
 #listresults = namelistdata["results"]

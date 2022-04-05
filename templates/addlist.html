@@ -1,7 +1,15 @@
 {% extends "layoutnosearch.html" %}
 {% block main %}
 
-
+{% with messages = get_flashed_messages(with_categories=true) %}  
+{% if messages %}  
+      {% for category, message in messages %}  
+           <hr>
+                <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top {{category}}" role="alert">{{ message }}</p> 
+           <hr> 
+      {% endfor %}  
+{% endif %}  
+{% endwith %}  
 <script language="JavaScript">
 function slugConversion() {
     var gamechoice = $("#gameSearch").val();
@@ -75,19 +83,23 @@ function slugConversion() {
 </form>
 
 <hr>
-<h2 id="add-list-label"> <a href ="/mylist" id="add-list-my-list-link"> Your List </a></h2> 
+<h2 id="add-list-label" class = "left-align"> <a href ="/mylist" id="add-list-my-list-link"> Your List </a></h2> 
 <hr>
 <ul class = "hs full">
   {% for i in range(numblist|length) %}
   {% set j = numblist[i] %}
         
-        <li class = "item"> 
+          <li class = "item"> 
           <div class = "item-text" ><a href = "/game/{{gamedata.name[j]}}" >{{gamedata.name[j]}} </a> </div>
-            <img class = "add-list-images" alt = "{{gamedata.name[j]}} Image" src = "{{gamedata.backgroundimages[j]}}">          
+            <img class = "add-list-images" alt = "{{gamedata.name[j]}} Image" src = "{{gamedata.backgroundimages[j]}}"> 
+            
+            <div class = "item-text">Your Rating:</div>          
             <div data-color = "{{gamedata.personalrating[j]}}" class = "rankings">{{gamedata.personalrating[j]}}</div>
             <div class = "status item-text"> {{gamedata.status[j]}}</div> 
-        </li>
+           </li>
     {% endfor %}
+
+
 <script>
   //   $( "#add-form" ).on('submit', function() {
   //   var gamechoice = $("#gameSearch").val();

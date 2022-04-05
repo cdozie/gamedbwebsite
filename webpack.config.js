@@ -1,29 +1,29 @@
-const webpack = require('webpack');
 const resolve = require('path').resolve;
+const path = require('path');
+var webpack = require('webpack');
 const config = {
- entry: __dirname + '/js/index.jsx',
+ entry: __dirname + '/static/js/webscrape.js',
  output:{
-      path: resolve('../static'),
+      path: resolve(__dirname,'./static/js'),
       filename: 'bundle.js',
-      publicPath: resolve('../static')
+    //   publicPath: resolve(__dirname,'/static/js')
 },
+mode: 'production',
+
  resolve: {
   extensions: ['.js','.jsx','.css']
  },
  module: {
     rules: [
     {
-     test: /\.jsx?/,
+    test: /\.js$/,
      loader: 'babel-loader',
      exclude: /node_modules/,
-     query:{
-        presets: ['react','es2015']
+     options:{
+        presets: ['@babel/react', '@babel/preset-env']
       }
     },  
-    {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules'
- }]
+]
    }
 };
 module.exports = config;

@@ -1,47 +1,65 @@
 
     {% extends "layout.html" %}
     {% block main %}
-    {% with messages = get_flashed_messages() %} 
+    {% with messages = get_flashed_messages(with_categories=true) %} 
     {% if messages %} 
-        {% for message in messages %}  
+        {% for category, message in messages %}  
             <hr>
-                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top" role="alert">{{ message }}</p> 
+                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top {{category}}" role="alert">{{ message }}</p> 
             <hr> 
         {% endfor %}  
     {% endif %}  
     {% endwith %}  
 
-    <div class="container-fluid">
-        <p class = "login-title gradientcolor"> <a href = "https://atlus.com/atlus-titles/persona5dancing" > Persona 5: Dancing in Starlight </a></p>
-        <span class = "vargamelabels gradientcolor"> Metacritic Rating: </span>
-        <div data-color ="72" class = "vargamerankings">72</div>
-        <hr>
-        <div class = "var-page-main"> 
-                <img class = "var-game-image" src = "https://media.rawg.io/media/games/f58/f583a15f36b201e2d42685c552505bdf.jpg">
-                <div class = "var-user-analytics">
-                    <h6 class = "var-personal-rating analytic"> Your Rating : 
-                    <div data-color = "95" class = "varpersonalrankings var-rating-border">95</div> 
-                    </h6>
-                    <h6 class = "var-status analytic"> Game Status:
-                    <div class = "gradientcolorpinkwhite"> Playing</div>
-                    </h6>
-                    <h6 class = "var-release-date analytic"> Game Release Date:
-                    <div class = "gradientcolorpinkwhite">2018-05-24</div>
-                    </h6>
-                    <h6 class = "var-hours-played analytic"> Game Hours Played:
-                    <div class = "gradientcolorpinkwhite"> 40</div>
-                    </h6>
+    <div class="container-fluid var-page-container" id = "yes">
+        <div class = "var-page-heading"> 
+            <h2 class = "var-game-title gradientcolor"> <a href = "https://atlus.com/atlus-titles/persona5dancing" > Persona 5: Dancing in Starlight </a></h2>
+            <div class = "var-online-rating">
+            <span class = "vargamelabels gradientcolor "> Metacritic Rating: </span>
+            <div data-color ="72" class = "vargamerankings var-online-rating-data">72</div>
+            </div>
+            <h7 data-color ="72" class = "onlinerankdescription">Not Reviewed</h7>  
+            
 
-                </div>
-                <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: Not Yet Stored</h6>
-               <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
-                <input name = "deletedgame" style = "display:none" value = "Persona 5: Dancing in Starlight">
-                <button type = "submit" class="btn btn-danger var-remove-button" id = "Persona 5: Dancing in Starlight" style = "display:block;">Remove from List</button>
-               </form>
-               <button type="button" class="btn btn-success var-add-button" id = "Persona 5: Dancing in Starlight" style =  "display:none;">Add to List</button>
+        </div> 
+        <hr>
+        <form action = "/editgamepage" id = "var-edit-form"  method = "post">
+        <div class = "var-page-main"> 
+            
+                    <img class = "var-game-image" src = "https://media.rawg.io/media/games/f58/f583a15f36b201e2d42685c552505bdf.jpg">
+                    <div class = "var-user-analytics">
+                        <h6 class = "var-personal-rating analytic"> Your Rating : 
+                        <div data-color = "95" class = "var-personal-rating-data varpersonalrankings var-rating-border">95</div> 
+                        </h6>
+                        <h6 class = "var-status analytic"> Game Status:
+                        <div class = "var-status-data gradientcolorpinkwhite "> Playing</div>
+                        </h6>
+                        <h6 class = "var-release-date analytic"> Game Release Date:
+                        <div class = "gradientcolorpinkwhite">2018-05-24</div>
+                        </h6>
+                        <h6 class = "var-hours-played analytic"> Game Hours Played:
+                        <div class = "var-hours-played-data gradientcolorpinkwhite"> 40</div>
+                        </h6>
+
+                    </div>
+                    <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: Not Yet Stored</h6>
+
+                <input name="gamename" value = "Persona 5: Dancing in Starlight" style = "display:none">
+                <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
+                
+                <button type="button" class="btn btn-success var-add-button var-buttons" id = "Persona 5: Dancing in Starlight" style =  "display:none;">Add to List</button>
+
+            
+            
+               <div class = "var-slug-game" id = "persona-5-dancing-in-starlight" style = "display:none;"></div>
 
 
         </div>
+        </form>
+                <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
+                    <input name = "deletedgame" style = "display:none" value = "Persona 5: Dancing in Starlight">
+                    <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "Persona 5: Dancing in Starlight" style = "display:block;">Remove from List</button>
+                </form>
         
 
     </div>
@@ -50,8 +68,26 @@
         .var-page-main {
             display:grid;
             grid-template-columns: 1fr .5fr 10px;
-            gap: 10px;
+            grid-row-gap: 1%;
             grid-auto-rows: min-content;
+        }
+        .var-page-heading {
+            display:grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap:1%;
+            grid-auto-rows: min-content;
+        }
+        .var-game-title{
+            grid-column: 1/-1;
+            grid-row: 1;
+        }
+        .var-online-rating{
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .onlinerankdescription{
+            grid-column: 2;
+            grid-row: 2;
         }
         .var-game-image {
             grid-column: 2;
@@ -89,13 +125,28 @@
         .var-add-button,.var-remove-button-form{
             grid-column:1/-1;
             grid-row:3;
-            margin:auto;
             width:25%;
+            margin: auto;
 
         }
         .var-remove-button{
             width:100%;
+
             }
+        .var-edit-button{
+            grid-column: 1/-1;
+            grid-row :3;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:2%;
+            margin-bottom:2%;
+            
+            width: 25%;
+        }
+        .var-buttons{
+            font-weight:bolder;
+            font-size: 1vw;
+        }
         
         .analytic {
             border-radius: 50%;
@@ -107,8 +158,18 @@
             grid-column: 1/-1;
             grid-row: 2;
             row-gap:3%;
-            margin:auto;
-
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:2%;
+            margin-bottom:2%
+        }
+        .onlinerankdescription::before {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: grey;
+            right: -9px
         }
 
     </style>

@@ -3,8 +3,23 @@
 
 <div id="list-page-title"> Your Game List</div> 
 
+<!-- <span id ="order-by-options"></span> -->
+<form action="/sortlist" id = "sort-dropdown" method="post"> 
+<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Order By
+  </a>
 
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><span class="dropdown-item sortitem" >Metacritic Ascending</span></li>
+    <li><span class="dropdown-item sortitem" >Metacritic Descending</span></li>
+    <li><span class="dropdown-item sortitem" >Personal Ascending</span></li>
+    <li><span class="dropdown-item sortitem">Personal Descending</span></li>
 
+  </ul>
+</div>
+<input name = "sort-type" id = "sort-input" value ="" style = "display: none;">
+</form>
 <hr>
 
 <div class ="edit-list-search">

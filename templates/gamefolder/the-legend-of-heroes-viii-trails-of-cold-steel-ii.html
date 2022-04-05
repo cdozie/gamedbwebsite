@@ -1,28 +1,65 @@
 
     {% extends "layout.html" %}
     {% block main %}
+    {% with messages = get_flashed_messages(with_categories=true) %} 
+    {% if messages %} 
+        {% for category, message in messages %}  
+            <hr>
+                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top {{category}}" role="alert">{{ message }}</p> 
+            <hr> 
+        {% endfor %}  
+    {% endif %}  
+    {% endwith %}  
 
-    <div class="container-fluid">
-        <p class = "login-title gradientcolor"> <a href = "http://www.falcom.co.jp/sen2/index.html" > The Legend of Heroes VIII: Trails of Cold Steel II </a></p>
-        <span class = "vargamelabels gradientcolor"> Metacritic Rating: </span>
-        <div data-color ="None" class = "vargamerankings">None</div>
+    <div class="container-fluid var-page-container" id = "yes">
+        <div class = "var-page-heading"> 
+            <h2 class = "var-game-title gradientcolor"> <a href = "http://www.falcom.co.jp/sen2/index.html" > The Legend of Heroes VIII: Trails of Cold Steel II </a></h2>
+            <div class = "var-online-rating">
+            <span class = "vargamelabels gradientcolor "> Metacritic Rating: </span>
+            <div data-color ="None" class = "vargamerankings var-online-rating-data">None</div>
+            </div>
+            <h7 data-color ="None" class = "onlinerankdescription">Not Reviewed</h7>  
+            
+
+        </div> 
         <hr>
+        <form action = "/editgamepage" id = "var-edit-form"  method = "post">
         <div class = "var-page-main"> 
-                <img class = "var-game-image" src = "https://media.rawg.io/media/games/2b5/2b55fa9b23ba1324a5ae3998a28edcf2.jpg">
-                <div class = "var-user-analytics">
-                    <h6 class = "var-personal-rating"> Your Rating : 
-                    <div data-color = "_" class = "varpersonalrankings var-rating-border">_</div> 
-                    </h6>
-                    <h6 class = "var-status"> Game Status:
-                    <div class = "gradientcolorpinkwhite"> Wishlist</div>
-                    </h6>
-                    <h6 class = "var-release-date"> Game Release Date:
-                    <div class = "gradientcolorpinkwhite">2014-09-25</div>
-                    </h6>
+            
+                    <img class = "var-game-image" src = "https://media.rawg.io/media/games/2b5/2b55fa9b23ba1324a5ae3998a28edcf2.jpg">
+                    <div class = "var-user-analytics">
+                        <h6 class = "var-personal-rating analytic"> Your Rating : 
+                        <div data-color = "_" class = "var-personal-rating-data varpersonalrankings var-rating-border">_</div> 
+                        </h6>
+                        <h6 class = "var-status analytic"> Game Status:
+                        <div class = "var-status-data gradientcolorpinkwhite "> Wishlist</div>
+                        </h6>
+                        <h6 class = "var-release-date analytic"> Game Release Date:
+                        <div class = "gradientcolorpinkwhite">2014-09-25</div>
+                        </h6>
+                        <h6 class = "var-hours-played analytic"> Game Hours Played:
+                        <div class = "var-hours-played-data gradientcolorpinkwhite"> Never Played</div>
+                        </h6>
 
+                    </div>
+                    <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: Not Yet Stored</h6>
+
+                <input name="gamename" value = "The Legend of Heroes VIII: Trails of Cold Steel II" style = "display:none">
+                <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
                 
-                </div>
+                <button type="button" class="btn btn-success var-add-button var-buttons" id = "The Legend of Heroes VIII: Trails of Cold Steel II" style =  "display:none;">Add to List</button>
+
+            
+            
+               <div class = "var-slug-game" id = "the-legend-of-heroes-trails-of-cold-steel-ii" style = "display:none;"></div>
+
+
         </div>
+        </form>
+                <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
+                    <input name = "deletedgame" style = "display:none" value = "The Legend of Heroes VIII: Trails of Cold Steel II">
+                    <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "The Legend of Heroes VIII: Trails of Cold Steel II" style = "display:block;">Remove from List</button>
+                </form>
         
 
     </div>
@@ -31,14 +68,33 @@
         .var-page-main {
             display:grid;
             grid-template-columns: 1fr .5fr 10px;
-            gap: 10px;
+            grid-row-gap: 1%;
             grid-auto-rows: min-content;
+        }
+        .var-page-heading {
+            display:grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap:1%;
+            grid-auto-rows: min-content;
+        }
+        .var-game-title{
+            grid-column: 1/-1;
+            grid-row: 1;
+        }
+        .var-online-rating{
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .onlinerankdescription{
+            grid-column: 2;
+            grid-row: 2;
         }
         .var-game-image {
             grid-column: 2;
             grid-row: 1;
             max-height:100% !important;
-            
+            height:100%;
+            min-height:100%;
             width: 100% !important;
             border-radius: 20%;
         }
@@ -61,6 +117,59 @@
         .var-release-date{
             grid-column: 1;
             grid-row: 2;
+        }
+        .var-hours-played{
+            grid-column:2;
+            grid-row: 2;
+        }
+        .var-add-button,.var-remove-button-form{
+            grid-column:1/-1;
+            grid-row:3;
+            width:25%;
+            margin: auto;
+
+        }
+        .var-remove-button{
+            width:100%;
+
+            }
+        .var-edit-button{
+            grid-column: 1/-1;
+            grid-row :3;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:2%;
+            margin-bottom:2%;
+            
+            width: 25%;
+        }
+        .var-buttons{
+            font-weight:bolder;
+            font-size: 1vw;
+        }
+        
+        .analytic {
+            border-radius: 50%;
+            padding: 2.5vw 2.5vw;
+            background-color: rgba(105,105,105,0.5);
+        }
+
+        .var-platforms{
+            grid-column: 1/-1;
+            grid-row: 2;
+            row-gap:3%;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:2%;
+            margin-bottom:2%
+        }
+        .onlinerankdescription::before {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: grey;
+            right: -9px
         }
 
     </style>

@@ -1,113 +1,68 @@
 
     {% extends "layout.html" %}
     {% block main %}
-    {% with messages = get_flashed_messages() %} 
+    {% with messages = get_flashed_messages(with_categories=true) %} 
     {% if messages %} 
-        {% for message in messages %}  
+        {% for category, message in messages %}  
             <hr>
-                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top" role="alert">{{ message }}</p> 
+                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top {{category}}" role="alert">{{ message }}</p> 
             <hr> 
         {% endfor %}  
     {% endif %}  
     {% endwith %}  
 
-    <div class="container-fluid">
-        <p class = "login-title gradientcolor"> <a href = "" > Tokyo Mirage Sessions #FE Encore </a></p>
-        <span class = "vargamelabels gradientcolor"> Metacritic Rating: </span>
-        <div data-color ="None" class = "vargamerankings">None</div>
-        <hr>
-        <div class = "var-page-main"> 
-                <img class = "var-game-image" src = "https://media.rawg.io/media/games/911/9116aa161959b26d738a1414a3a110af.jpg">
-                <div class = "var-user-analytics">
-                    <h6 class = "var-personal-rating analytic"> Your Rating : 
-                    <div data-color = "_" class = "varpersonalrankings var-rating-border">_</div> 
-                    </h6>
-                    <h6 class = "var-status analytic"> Game Status:
-                    <div class = "gradientcolorpinkwhite"> Plan to Play</div>
-                    </h6>
-                    <h6 class = "var-release-date analytic"> Game Release Date:
-                    <div class = "gradientcolorpinkwhite">2020-01-17</div>
-                    </h6>
-                    <h6 class = "var-hours-played analytic"> Game Hours Played:
-                    <div class = "gradientcolorpinkwhite"> Never Played</div>
-                    </h6>
+    <div class="container-fluid var-page-container" id = "yes">
+        <div class = "var-page-heading"> 
+            <h2 class = "var-game-title gradientcolor"> <a href = "" > Tokyo Mirage Sessions #FE Encore </a></h2>
+            <div class = "var-online-rating">
+            <span class = "vargamelabels gradientcolor "> Metacritic Rating: </span>
+            <div data-color ="_" class = "vargamerankings var-online-rating-data">_</div>
+            </div>
+            <h7 data-color ="_" class = "onlinerankdescription">Not Reviewed</h7>  
+            
 
-                </div>
-               <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
-                <input name = "deletedgame" style = "display:none" value = "Tokyo Mirage Sessions #FE Encore">
-                <button type = "submit" class="btn btn-danger var-remove-button" id = "Tokyo Mirage Sessions #FE Encore" style = "display:block;">Remove from List</button>
-               </form>
-               <button type="button" class="btn btn-success var-add-button" id = "Tokyo Mirage Sessions #FE Encore" style =  "display:none;">Add to List</button>
+        </div> 
+        <hr>
+        <form action = "/editgamepage" id = "var-edit-form"  method = "post">
+        <div class = "var-page-main"> 
+            
+                    <img class = "var-game-image" src = "https://media.rawg.io/media/games/911/9116aa161959b26d738a1414a3a110af.jpg">
+                    <div class = "var-user-analytics">
+                        <h6 class = "var-personal-rating analytic"> Your Rating : 
+                        <div data-color = "_" class = "var-personal-rating-data varpersonalrankings var-rating-border">_</div> 
+                        </h6>
+                        <h6 class = "var-status analytic"> Game Status:
+                        <div class = "var-status-data gradientcolorpinkwhite "> Plan to Play</div>
+                        </h6>
+                        <h6 class = "var-release-date analytic"> Game Release Date:
+                        <div class = "gradientcolorpinkwhite">2020-01-17</div>
+                        </h6>
+                        <h6 class = "var-hours-played analytic"> Game Hours Played:
+                        <div class = "var-hours-played-data gradientcolorpinkwhite"> Never Played</div>
+                        </h6>
+
+                    </div>
+                    <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: Nintendo Switch</h6>
+
+                <input name="gamename" value = "Tokyo Mirage Sessions ♯FE Encore" style = "display:none">
+                <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
+                
+                <button type="button" class="btn btn-success var-add-button var-buttons" id = "Tokyo Mirage Sessions #FE Encore" style =  "display:none;">Add to List</button>
+
+            
+            
+               <div class = "var-slug-game" id = "tokyo-mirage-sessions-fe-encore" style = "display:none;"></div>
 
 
         </div>
+        </form>
+                <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
+                    <input name = "deletedgame" style = "display:none" value = "Tokyo Mirage Sessions #FE Encore">
+                    <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "Tokyo Mirage Sessions #FE Encore" style = "display:block;">Remove from List</button>
+                </form>
         
 
     </div>
-
-    <style> 
-        .var-page-main {
-            display:grid;
-            grid-template-columns: 1fr .5fr 10px;
-            gap: 10px;
-            grid-auto-rows: min-content;
-        }
-        .var-game-image {
-            grid-column: 2;
-            grid-row: 1;
-            max-height:100% !important;
-            height:100%;
-            min-height:100%;
-            width: 100% !important;
-            border-radius: 20%;
-        }
-
-        .var-personal-rating {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        .var-user-analytics {
-            grid-column: 1;
-            display: grid;
-            row-gap:20px;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: min-content;
-        }
-        .var-status {
-            grid-column: 2;
-            grid-row: 1;
-        }
-        .var-release-date{
-            grid-column: 1;
-            grid-row: 2;
-        }
-        .var-hours-played{
-            grid-column:2;
-            grid-row: 2;
-        }
-        .var-add-button,.var-remove-button-form{
-            grid-column:1/-1;
-            grid-row:2;
-            margin:auto;
-            width:25%;
-
-        }
-        .var-remove-button{
-            width:100%;
-            }
-        
-        .analytic {
-            border-radius: 50%;
-            padding: 2vw 2vw;
-            background-color: rgba(105,105,105,0.5);
-        }
-
-    </style>
-
-
-    
-
-
     {% endblock %}
 
     

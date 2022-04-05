@@ -3,7 +3,7 @@ import sqlite3
 from sqlite3 import Error
 import random
 from random import randint
-
+import os 
 def create_connection(path):
     connection = None
     try:
@@ -14,7 +14,11 @@ def create_connection(path):
         print(f"The error '{e}' occurred")
 
     return connection
+cur_path = os.path.dirname(os.path.abspath(__file__))
 
+#names db2 since always call it after a database change 
+db2 = create_connection(cur_path + "\\gamestorage.db")
+db = db2.cursor()
 def execute_read_query(connection, query):
     cursor = connection.cursor()
     result = None
@@ -40,20 +44,6 @@ import urllib.parse
 from flask import redirect, render_template, request, session
 from functools import wraps
 
-
-def apology(message, code=400):
-    """Render message as an apology to user."""
-    def escape(s):
-        """
-        Escape special characters.
-
-        https://github.com/jacebrowning/memegen#special-characters
-        """
-        for old, new in [("-", "--"), (" ", "-"), ("_", "__"), ("?", "~q"),
-                         ("%", "~p"), ("#", "~h"), ("/", "~s"), ("\"", "''")]:
-            s = s.replace(old, new)
-        return s
-    return render_template("apology.html", top=code, bottom=escape(message)), code
 
 
 def login_required(f):
@@ -90,7 +80,7 @@ def lookup(game):
             platformlist.append(uniquedata["platforms"][i]["platform"]["name"])
         
         metacriticrating = uniquedata["metacritic"]
-        print(metacriticrating)
+        # print(metacriticrating)
         return {
             "slug": uniquedata["slug"],
             "name": uniquedata["name"],
@@ -121,16 +111,19 @@ def lookuplist(gamesearch):
     try:
         namelistdata = response2.json()
         gamelist = []
+        sluglist = []
         metacriticlist= []
         backgroundimage = []
         for i in range (len(namelistdata["results"])):  
             gamelist.append(namelistdata["results"][i]["name"])   
+            sluglist.append(namelistdata["results"][i]["slug"])   
             metacriticlist.append(namelistdata["results"][i]["metacritic"])
             backgroundimage.append(namelistdata["results"][i]["background_image"])
         return {
             "gamelist": gamelist,
             "metacritic":metacriticlist,
-            "backgroundimage":backgroundimage
+            "backgroundimage":backgroundimage,
+            "slugs":sluglist
             
         }
     except (KeyError, TypeError, ValueError):
@@ -141,7 +134,6 @@ def sluglookuplist(gamesearch):
 
     # Contact API
     try:
-        pagenumber=randint(1,40)
         api_key = "bbd0f6e116b145bd81a72ee35824f71f"
         url2 = f"https://api.rawg.io/api/games?key={api_key}&page_size=10&search={gamesearch}" 
 
@@ -170,3 +162,85 @@ def sluglookuplist(gamesearch):
         }
     except (KeyError, TypeError, ValueError):
         return None
+
+def ratingfilter(rating):
+    for i in range (len(rating)):
+        if rating[i] == None or rating[i] == "":
+            rating[i] ="_"
+    return (None)
+def getgamelistdata(*args):
+    usergamelist = db.execute ("SELECT * FROM gamelist where userid = ?;", [session["user_id"]])
+    semigamelist = [list(i) for i in usergamelist.fetchall()]
+    # print(json.dumps(semigamelist)[0])
+    realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist = ([] for i in range(8))
+    for i in range (len(semigamelist)):
+        realgamelist.append(semigamelist[i][0])
+        personalgameratinglist.append(semigamelist[i][1])
+        onlinegameratinglist.append(semigamelist[i][2])
+        statuslist.append(semigamelist[i][4])
+        hoursplayedlist.append(semigamelist[i][5])
+        releasedatelist.append(semigamelist[i][7])
+        websitelist.append(semigamelist[i][8])
+        backgroundimagelist.append(semigamelist[i][10])
+        
+    gamedatadict = {'name': realgamelist, 'personalrating' : personalgameratinglist, 'onlinerating': onlinegameratinglist, 
+    'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist}
+    personalratings = gamedatadict['personalrating']
+    metacriticratings = gamedatadict['onlinerating']
+    ratingfilter(personalratings)
+    ratingfilter(metacriticratings)
+    return (gamedatadict)
+def getgamelistdatasort(ordertype, column):
+    #Get rid of the repeat present right here.
+    usergamelist = db.execute (f"SELECT * FROM gamelist where userid = ? ORDER BY {column} {ordertype};", [session["user_id"]])
+    semigamelist = [list(i) for i in usergamelist.fetchall()]
+    # print(json.dumps(semigamelist)[0])
+    realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist = ([] for i in range(8))
+    for i in range (len(semigamelist)):
+        realgamelist.append(semigamelist[i][0])
+        personalgameratinglist.append(semigamelist[i][1])
+        onlinegameratinglist.append(semigamelist[i][2])
+        statuslist.append(semigamelist[i][4])
+        hoursplayedlist.append(semigamelist[i][5])
+        releasedatelist.append(semigamelist[i][7])
+        websitelist.append(semigamelist[i][8])
+        backgroundimagelist.append(semigamelist[i][10])
+        
+    gamedatadict = {'name': realgamelist, 'personalrating' : personalgameratinglist, 'onlinerating': onlinegameratinglist, 
+    'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist}
+    personalratings = gamedatadict['personalrating']
+    metacriticratings = gamedatadict['onlinerating']
+    ratingfilter(personalratings)
+    ratingfilter(metacriticratings)
+    
+    return (gamedatadict)
+def getgamedatabasedata():
+    usergamelist = db.execute ("SELECT * FROM gamedatabase")
+    semigamelist = [list(i) for i in usergamelist.fetchall()]
+    realgamelist, gameidlist, slugnamelist, onlinegameratinglist, backgroundimagelist, websitelist, releasedatelist,platformlist = ([] for i in range(8))
+    for i in range (len(semigamelist)):
+        realgamelist.append(semigamelist[i][0])
+        gameidlist.append(semigamelist[i][1])
+        slugnamelist.append(semigamelist[i][2])
+        onlinegameratinglist.append(semigamelist[i][3])
+        backgroundimagelist.append(semigamelist[i][4])
+        releasedatelist.append(semigamelist[i][5])
+        websitelist.append(semigamelist[i][6])
+        platformlist.append(semigamelist[i][7])
+    gamedbdict = {'name': realgamelist, 'gameid' : gameidlist, 'slugname': slugnamelist, 
+    'onlinerating' : onlinegameratinglist, 'backgroundimages' :backgroundimagelist , 'releasedate' : releasedatelist , 'website' :websitelist, 'platforms' : platformlist}
+    metacriticratings = gamedbdict['onlinerating']
+    ratingfilter(metacriticratings)
+    return (gamedbdict)
+
+def listToString(s): 
+    
+    # initialize an empty string
+    str1 = "" 
+    
+    # traverse in the string  
+    for ele in s: 
+        str1 += ele + ","+ " "  
+    str1 = str1[:-2]
+    # return string  
+    return str1 

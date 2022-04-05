@@ -19,25 +19,26 @@
         <div class = "var-page-main"> 
                 <img class = "var-game-image" src = "https://media.rawg.io/media/games/995/9951d9d55323d08967640f7b9ab3e342.jpg">
                 <div class = "var-user-analytics">
-                    <h6 class = "var-personal-rating"> Your Rating : 
+                    <h6 class = "var-personal-rating analytic"> Your Rating : 
                     <div data-color = "_" class = "varpersonalrankings var-rating-border">_</div> 
                     </h6>
-                    <h6 class = "var-status"> Game Status:
-                    <div class = "gradientcolorpinkwhite"> Plan to Play</div>
+                    <h6 class = "var-status analytic"> Game Status:
+                    <div class = "gradientcolorpinkwhite"> Not in List</div>
                     </h6>
-                    <h6 class = "var-release-date"> Game Release Date:
+                    <h6 class = "var-release-date analytic"> Game Release Date:
                     <div class = "gradientcolorpinkwhite">2010-10-19</div>
                     </h6>
-                    <h6 class = "var-hours-played"> Game Hours Played:
-                    <div class = "gradientcolorpinkwhite"> Never Played</div>
+                    <h6 class = "var-hours-played analytic"> Game Hours Played:
+                    <div class = "gradientcolorpinkwhite"> Not in List</div>
                     </h6>
 
                 </div>
+                <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: Not Yet Stored</h6>
                <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
                 <input name = "deletedgame" style = "display:none" value = "Fallout: New Vegas">
-                <button type = "submit" class="btn btn-danger var-remove-button" id = "Fallout: New Vegas" style = "display:block;">Remove from List</button>
+                <button type = "submit" class="btn btn-danger var-remove-button" id = "Fallout: New Vegas" style = "display:none;">Remove from List</button>
                </form>
-               <button type="button" class="btn btn-success var-add-button" id = "Fallout: New Vegas" style =  "display:none;">Add to List</button>
+               <button type="button" class="btn btn-success var-add-button" id = "Fallout: New Vegas" style =  "display:block;">Add to List</button>
 
 
         </div>
@@ -87,7 +88,7 @@
         }
         .var-add-button,.var-remove-button-form{
             grid-column:1/-1;
-            grid-row:2;
+            grid-row:3;
             margin:auto;
             width:25%;
 
@@ -95,6 +96,20 @@
         .var-remove-button{
             width:100%;
             }
+        
+        .analytic {
+            border-radius: 50%;
+            padding: 2.5vw 2.5vw;
+            background-color: rgba(105,105,105,0.5);
+        }
+
+        .var-platforms{
+            grid-column: 1/-1;
+            grid-row: 2;
+            row-gap:3%;
+            margin:auto;
+
+        }
 
     </style>
 

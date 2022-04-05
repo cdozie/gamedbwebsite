@@ -43,6 +43,15 @@
   display: grid;
   
 }
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+/* footer {
+  bottom: 0;
+  width: 100%;
+} */
 body {
     
     font-family: 'Courier New', Courier, monospace;
@@ -102,10 +111,19 @@ html::before {
   h2,#Highest-Heading {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
-    text-align: left !important;  
+    /* text-align: left !important;   */
     margin-left: 10px;
     font-size: 3vw;
     color:var(--fontcolor)
+  }
+  h7{
+    font-size : 3vw;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+  }
+
+  .left-align{
+    text-align: left !important;  
   }
 
   h3{
@@ -139,7 +157,7 @@ html::before {
 
 
   }
-  a:hover{
+  a:hover, .form-link:hover {
     transition: color 1s;
     /* transition: background-image 1s ; */
     color:blue; 
@@ -152,7 +170,7 @@ html::before {
     -webkit-text-fill-color: transparent; 
     -moz-text-fill-color: transparent; */
     transition: 1s; 
-
+    cursor: pointer;
     text-decoration: underline white;
     text-decoration-thickness: 5%;
     text-underline-offset: 20%;
@@ -182,9 +200,9 @@ header>div>div.row {
     display: inline-block;
     /* color: var(--bgs); */
     text-align: center;
-    padding: 14px 16px;
+    padding: 1vw 1.2vw;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 1vw;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     text-transform: uppercase;
@@ -284,8 +302,8 @@ button{
     font-weight: bold !important;
     color: white !important;
     font-size: 2vw !important;
-    margin: 3.5%;
-    padding: 6px 12px;
+    margin: 3%;
+    padding: 1vw 2vw;
     background-color: var(--red);
     line-height: 1.5;
     border-radius: 40%;
@@ -296,7 +314,7 @@ button{
   
   .game-image-items { 
     display: inline-block;
-    height: 400px !important;
+    height: 25vw !important;
     width: 80% !important;
     object-fit: fill;
     margin-left: auto;
@@ -306,7 +324,7 @@ button{
   }
 
   .add-list-images{
-    height: 400px !important;
+    height: 25vw !important;
     width: 80% !important;
     object-fit: fill;
     margin-left: auto;
@@ -325,7 +343,7 @@ button{
   .login-title {
     text-align: center;
     font-weight: bolder;
-    font-size: 240%
+    font-size: 4vw;
 
   }
 
@@ -335,7 +353,7 @@ button{
   }
 
   .container-fluid {
-   padding: 0px;
+   padding: .25%;
 }
 .add-warning {
   display: grid;
@@ -368,7 +386,19 @@ ul {
   margin-bottom: calc(-.25 * var(--gutter));
   
 }
-
+@media (max-width: 480px){ 
+  .hs {
+    display: grid;
+    gap: calc(var(--gutter) / 2);
+    grid-template-columns: 10px repeat(var(--total), calc(50% - var(--gutter) * 2)) 10px;
+    grid-template-rows: minmax(150px, 1fr);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: calc(.75 * var(--gutter));
+    margin-bottom: calc(-.25 * var(--gutter));
+    
+  }
+}
 
 .hs:before,
 .hs:after {
@@ -473,10 +503,7 @@ a{
 }
 
 input {
-  font-size: 18px;
-  padding: 5px;
-  height: 35px;
-  width: 350px;
+
   border: 1px solid blue;
   outline: none;
   border-radius: 5px;
@@ -585,29 +612,88 @@ td{
 tr:hover:not(td){
   background: linear-gradient(45deg,var(--gradcolor2),var(--gradcolor1)) !important;
 }
-
-div.green:not(.tablerating) {
+/* Ranking Colors */
+li>div.green:not(.tablerating), .account-mcr.green, .accountranks.green, .var-online-rating-data.green {
+  color:limegreen;
   background-color: limegreen !important;
   border-color: limegreen !important;
 
 }
-div.orange:not(.tablerating) {
+li>div.orange:not(.tablerating), .account-mcr.orange, .accountranks.orange, .var-online-rating-data.orange {
+  color:darkorange;
   background-color:darkorange!important;
   border-color: darkorange !important;
 
 }
-div.red:not(.tablerating) {
+li>div.red:not(.tablerating), .account-mcr.red, .accountranks.red, .var-online-rating-data.red{
+  color:red;
   background-color:red !important;
   border-color: red !important;
   
 }
 
-div.gold:not(.tablerating) {
-  background-color:gold!important;
+li>div.gold:not(.tablerating), .account-mcr.gold, .accountranks.gold, .var-online-rating-data.gold{
+  color:gold;
+
+  background-color:gold;
   border-color: gold !important;
   
 }
 
+
+.var-personal-rating-data.gold{
+  color:gold;
+  border-color: gold !important;
+}
+
+.var-personal-rating-data.red{
+  color:red;
+  border-color: red !important;
+}
+.var-personal-rating-data.orange{
+  color:darkorange;
+  border-color: darkorange !important;
+}
+
+.var-personal-rating-data.green{
+  color:limegreen;
+  border-color: limegreen !important;
+}
+
+
+
+/* .var-online-rating-data.green{
+  background-color: limegreen !important;
+  border-color: limegreen !important;
+
+}
+.var-online-rating-data.red{
+  background-color:red !important;
+  border-color: red !important;
+
+}
+.var-online-rating-data.orange{
+  background-color:darkorange!important;
+  border-color: darkorange !important;
+
+}
+.var-online-rating-data.gold{
+  background-color:gold !important;
+  border-color: gold !important;
+} */
+
+h7.green {
+  color: limegreen
+}
+h7.red {
+  color: red
+}
+h7.orange {
+  color: orange
+}
+h7.gold {
+  color: gold
+}
 .website{
   margin: 3.5%;
 }
@@ -622,6 +708,16 @@ div.gold:not(.tablerating) {
   border-style: outset;
   border-color: var(--fontcolor);
 }
+.success{
+  background-color: green;
+  color: black
+}
+.error{
+  background-color: darkred;
+  color: black;
+  
+}
+
 
 
 body { 
@@ -649,6 +745,7 @@ th{
   -moz-background-clip: text;
   -webkit-text-fill-color: transparent; 
   -moz-text-fill-color: transparent;
+  margin-top: 3%;
 }
 
 
@@ -779,8 +876,8 @@ background-size: 100%;
 background-clip: text;
 -webkit-background-clip: text;
 -moz-background-clip: text;
--webkit-text-fill-color: transparent; 
--moz-text-fill-color: transparent;
+/* -webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent; */
 }
 /* Metacritic Rating */
 .account-mcr{
@@ -804,10 +901,10 @@ background-clip: text;
 div.rankings2{
 font-style: normal !important;
 font-weight: bold !important;
-color: white !important;
+color: white;
 font-size: 1.5vw !important;
 
-padding: 6px 6px;
+padding: 1vw 1vw;
 background-color: var(--red);
 line-height: 1.5;
 border-radius: 40%;
@@ -883,7 +980,7 @@ font-weight: bolder;
   font-weight: bold !important;
   color: white !important;
   font-size: 2vw !important;
-  margin-top: 3.5%;
+  margin-top: 3%;
   margin: auto;
   padding: 6px 6px;
   background-color: var(--red);
@@ -904,16 +1001,16 @@ width: 50%;
 /* width: 25%; */
 
 margin: auto;
-margin-top: 3.5%;
-margin-bottom: 3.5%;
+margin-top: 3%;
+margin-bottom: 3%;
 text-align: center;
 
 background-size: 100%;
 background-clip: text;
 -webkit-background-clip: text;
 -moz-background-clip: text;
--webkit-text-fill-color: transparent; 
--moz-text-fill-color: transparent;
+/* -webkit-text-fill-color: transparent; 
+-moz-text-fill-color: transparent; */
 }
 
 h6{
@@ -957,7 +1054,160 @@ h6{
   margin-bottom: 0%;
   margin-left: 1%;
 }
+/* .about-main{
+} */
 
 hr.about-title-separator{
   border:10px;
+}
+
+.onlinerankdescription{
+  margin-top: 3% 
+}
+
+.about-page{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 2%;
+  /* grid-row-gap: 1%; */
+  grid-auto-rows: min-content;
+}
+.about-page img{
+  grid-column: 2;
+  max-height:100% !important;
+  height:30vw;
+  /* min-height:100%; */
+  width: 30vw !important;
+  border-radius: 20%;
+  margin:auto;
+
+}
+.about-title{
+  grid-column: 1/-1;
+  margin-bottom: 3%;
+  text-align: center;
+}
+.about-page h4, .about-page h6 {
+  grid-column:1;
+} 
+.about-page h4{
+  font-size: 2vw;
+}
+.about-text{
+  margin-left:2%;
+}
+
+.about-page hr{
+  grid-column:1/-1
+}
+
+
+
+
+/* -----------------------------------------------------------The Game Web Page Styling-------------------------------------------------------------- */
+.var-page-main {
+  display:grid;
+  grid-template-columns: 1fr .5fr 10px;
+  grid-row-gap: 1%;
+  grid-auto-rows: min-content;
+}
+.var-page-heading {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:1%;
+  grid-auto-rows: min-content;
+}
+.var-game-title{
+  grid-column: 1/-1;
+  grid-row: 1;
+}
+.var-online-rating{
+  grid-column: 1;
+  grid-row: 2;
+}
+.onlinerankdescription{
+  grid-column: 2;
+  grid-row: 2;
+}
+.var-game-image {
+  grid-column: 2;
+  grid-row: 1;
+  max-height:100% !important;
+  height:100%;
+  min-height:100%;
+  width: 100% !important;
+  border-radius: 20%;
+}
+
+.var-personal-rating {
+  grid-column: 1;
+  grid-row: 1;
+}
+.var-user-analytics {
+  grid-column: 1;
+  display: grid;
+  row-gap:20px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: min-content;
+}
+.var-status {
+  grid-column: 2;
+  grid-row: 1;
+}
+.var-release-date{
+  grid-column: 1;
+  grid-row: 2;
+}
+.var-hours-played{
+  grid-column:2;
+  grid-row: 2;
+}
+.var-add-button,.var-remove-button-form{
+  grid-column:1/-1;
+  grid-row:3;
+  width:25%;
+  margin: auto;
+
+}
+.var-remove-button{
+  width:100%;
+
+  }
+.var-edit-button{
+  grid-column: 1/-1;
+  grid-row :3;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:2%;
+  margin-bottom:2%;
+  
+  width: 25%;
+}
+.var-buttons{
+  font-weight:bolder;
+  font-size: 1vw;
+}
+
+.analytic {
+  border-radius: 50%;
+  padding: 2.5vw 2.5vw;
+  background-color: rgba(105,105,105,0.5);
+}
+
+.var-platforms{
+  grid-column: 1/-1;
+  grid-row: 2;
+  row-gap:3%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:2%;
+  margin-bottom:2%
+}
+.onlinerankdescription::before {
+  position: absolute;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  background: grey;
+  right: -9px
 }

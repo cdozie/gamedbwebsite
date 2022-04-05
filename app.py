@@ -1,13 +1,24 @@
-from flask import Flask, flash, redirect, render_template, request, session, url_for, g
+from asyncio.windows_events import NULL
+from flask import Flask, flash, redirect, render_template, request, session, url_for, g, jsonify
 from flask_session import Session
 from urllib.request import Request, urlopen
+import json
 
+from flask_sqlalchemy import SQLAlchemy
+from celery import Celery
+
+# from sqlalchemy.ext.automap import automap_base
+
+# from sqlalchemy import create_engine, MetaData, Column, String, Table, Integer,Sequence
+# from sqlalchemy.ext.declarative import declarative_base
+# import sqlalchemy.orm
+# from sqlalchemy.orm import scoped_session, sessionmaker, Query
 from slugify import slugify
 import requests
 from sqlite3 import Error, SQLITE_PRAGMA
 
 from zmq import PROTOCOL_ERROR_ZMTP_UNEXPECTED_COMMAND
-from SQL import execute_query, execute_read_query, create_connection,login_required, lookup, lookuplist, sluglookuplist
+from SQL import create_connection,login_required, lookup, lookuplist, sluglookuplist
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
@@ -17,6 +28,7 @@ import pyotp
 from itsdangerous import URLSafeTimedSerializer
 import unidecode
 import random as rand
+import schedule
 
 # import os
 
@@ -36,7 +48,12 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.static_folder = 'static'
-
+app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
+app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
+celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
+celery.conf.update(app.config)
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'cdozcodeprojects@gmail.com'
@@ -44,74 +61,102 @@ app.config['MAIL_PASSWORD'] = 'chimchid8912'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-Session(app)
 
-db2 = create_connection("C:\\sqlite\\gamestorage.db")
+session1 = Session(app)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gamestorage.db'
+# db3 = SQLAlchemy(app)
+# Base = declarative_base()
+# Base.metadata.reflect(db3.engine)
+# class Games(Base):
+#     __table__ = Base.metadata.tables['gamedatabase']
 
+# print(db3.engine.table_names())
+# print(Games.query.all())
+# engine = create_engine('sqlite:///gamestorage.db')
+# # db_session = scoped_session(sessionmaker(autocommit=False,
+# #                                          autoflush=False,
+# #                                          bind=engine))
+# metadata = MetaData(bind=engine)
+# metadata.reflect(engine)
+# GAMEDB = metadata.tables['gamedatabase']
+# print(GAMEDB.columns)
 
+# execution = sqlalchemy.select([
+#     GAMEDB.c.backgroundimage,
+
+# ])    
+
+# result = engine.execute(execution).fetchall()
+# print(result)
+# Base = automap_base()
+# # Base.query = db_session.query_property()
+# Base.prepare(engine, reflect=True)
+# GameDb = Base.classes.gamedatabase
+# session = sqlalchemy.orm.Session(engine)
+# res=session.query(GameDb).all()
+# print (res)
+
+# def init_db():
+#     # import all modules here that might define models so that
+#     # they will be registered properly on the metadata.  Otherwise
+#     # you will have to import them first before calling init_db()
+#     import yourapplication.models
+#     Base.metadata.create_all(bind=engine)
+
+cur_path = os.path.dirname(os.path.abspath(__file__))
+
+#names db2 since always call it after a database change 
+db2 = create_connection(cur_path + "\\gamestorage.db")
 db = db2.cursor()
 
+# Base = automap_base()
+# conn_str = 'sqlite:///gamestorage.db'    
+# class User(db3.Model):
+#     id = db3.Column(db3.Integer, primary_key=True)
+#     name = db3.Column(db3.String)
+#     email = db3.Column(db3.String)
+from SQL import getgamelistdata, getgamelistdatasort,getgamedatabasedata, listToString, ratingfilter
 
 
-def getgamelistdata():
-    usergamelist = db.execute ("SELECT * FROM gamelist where userid = ?;", [session["user_id"]])
-    semigamelist = [list(i) for i in usergamelist.fetchall()]
-    realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist = ([] for i in range(8))
-    for i in range (len(semigamelist)):
-        realgamelist.append(semigamelist[i][0])
-        personalgameratinglist.append(semigamelist[i][1])
-        onlinegameratinglist.append(semigamelist[i][2])
-        statuslist.append(semigamelist[i][4])
-        hoursplayedlist.append(semigamelist[i][5])
-        releasedatelist.append(semigamelist[i][7])
-        websitelist.append(semigamelist[i][8])
-        backgroundimagelist.append(semigamelist[i][10])
-        
-    gamedatadict = {'name': realgamelist, 'personalrating' : personalgameratinglist, 'onlinerating': onlinegameratinglist, 
-    'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist}
-    personalratings = gamedatadict['personalrating']
-    for i in range (len(personalratings)):
-        if personalratings[i] == "":
-            personalratings[i] ="_"
-    
-    return (gamedatadict)
-def getgamedatabasedata():
-    usergamelist = db.execute ("SELECT * FROM gamedatabase")
-    semigamelist = [list(i) for i in usergamelist.fetchall()]
-    realgamelist, gameidlist, slugnamelist, onlinegameratinglist, backgroundimagelist, websitelist, releasedatelist,platformlist = ([] for i in range(8))
-    for i in range (len(semigamelist)):
-        realgamelist.append(semigamelist[i][0])
-        gameidlist.append(semigamelist[i][1])
-        slugnamelist.append(semigamelist[i][2])
-        onlinegameratinglist.append(semigamelist[i][3])
-        backgroundimagelist.append(semigamelist[i][4])
-        releasedatelist.append(semigamelist[i][5])
-        websitelist.append(semigamelist[i][6])
-        platformlist.append(semigamelist[i][7])
-    gamedbdict = {'name': realgamelist, 'gameid' : gameidlist, 'slugname': slugnamelist, 
-    'onlinerating' : onlinegameratinglist, 'backgroundimages' :backgroundimagelist , 'releasedate' : releasedatelist , 'website' :websitelist, 'platforms' : platformlist}
-    return (gamedbdict)
-def listToString(s): 
-    
-    # initialize an empty string
-    str1 = "" 
-    
-    # traverse in the string  
-    for ele in s: 
-        str1 += ele + ","+ " "  
-    str1 = str1[:-2]
-    # return string  
-    return str1 
 # individualpagelinks = getgamelistdata()
 
 # for i in individualpagelinks["name"]:
 #     print (i)
+@celery.task
+def updatedatabase():
+    print("running")
+    gamedbdata=getgamedatabasedata()
+    gamelistdata=getgamelistdata()
+    slugsdb = gamedbdata["slugname"]
+    dbnames = gamedbdata["name"]
+    gamenamelist = gamelistdata["name"]
+    names = gamedbdata["slugname"]
+    for i in slugsdb:
+        gamedata=lookup(i)
+        platforms = listToString(gamedata["platform"])
 
+        db.execute("UPDATE gamedatabase set gamename = ?, slugname = ?, metacriticrating = ?, backgroundimage = ?, releasedate = ?, websites = ?, platforms = ? WHERE slugname = ? ",
+        (gamedata["name"], gamedata["slug"],gamedata["metacriticrating"],gamedata["backgroundimage"] , gamedata["releasedate"] , gamedata["website"], platforms, i))
+    
+    # db2.commit()
+    for i in gamenamelist:
+        if i in dbnames:
+            index = dbnames.index(i)
+            gameslug = slugsdb[index]
+            gamedata2 = lookup(gameslug)
+            db.execute("UPDATE gamelist set game = ?, slugs = ?, onlinerating = ?, backgroundimage = ? , releasedate = ? WHERE game = ?",
+            (gamedata2["name"], gamedata2["slug"],gamedata2["metacriticrating"],gamedata2["backgroundimage"] , gamedata2["releasedate"], i))
+    db2.commit()
+
+
+    
 @app.route("/")
 @login_required
 def game_data():
-    global userdata,userid,username,userhash, gamedatadict,acabrev
+    task = updatedatabase.delay()
 
+    global userdata,userid,username,userhash, gamedatadict,acabrev
+    
     users = db.execute("SELECT * FROM users WHERE id = ?", [session["user_id"]])
     rawuserdata=users.fetchall()
     userdata = [list(i) for i in rawuserdata]
@@ -137,29 +182,36 @@ def game_data():
         if randomlist["metacritic"][i-1]==None:  
             randomlist["metacritic"][i-1]==0
     # print(randomlist["metacritic"])
-    game2 = {'name': randomlist["gamelist"], 'rank' : ranklist,  'rating' : randomlist["metacritic"], 
-    'backgroundimage' : randomlist["backgroundimage"] }
-
+    randgamedict = {'name': randomlist["gamelist"], 'rank' : ranklist,  'rating' : randomlist["metacritic"], 
+    'backgroundimage' : randomlist["backgroundimage"], 'slug':randomlist["slugs"] }
+    randomlistmcr = randomlist["metacritic"]
+    # print(randomlistmcr)
+    for i in range(len(randomlistmcr)):
+        # print (i)
+        if randomlistmcr[i] == None:
+            randomlistmcr[i] = "_"
     gamedatadict=getgamelistdata()
     gamedatadictname = gamedatadict["name"]
     gamedatalen = len(gamedatadictname)
     if gamedatalen < 10 :
-        while len(randlist) != gamedatalen:
-
+        while len(randlist) <= gamedatalen:
+            #print(len(randlist))
             randnumb=rand.randint(0,len(gamedatadictname)-1)
             if randnumb not in randlist: 
                 randlist.append(randnumb)
     else:
-        while len(randlist) != gamedatalen:
-
+        #print(len(randlist))
+        while len(randlist) <= 10:
+            # print(len(randlist))
             randnumb=rand.randint(0,len(gamedatadictname)-1)
             if randnumb not in randlist: 
                 randlist.append(randnumb)
 
 
     #print (gamedatadict['personalrating'])
+    # updatedatabase()
 
-    return render_template('index.html', gamedatameta=game2,gamedataserver=gamedatadict,numblist = randlist)
+    return render_template('index.html', gamedatameta=randgamedict,gamedataserver=gamedatadict,numblist = randlist)
 
 
 
@@ -170,14 +222,27 @@ def game_data():
 
 @app.route('/game/<variable>', methods=["GET", "POST"])
 def displaypage (variable):
+    #Allows for displaying in HTML
+    
     variable3 =unidecode.unidecode(variable)
+    # variable3 = variable3.replace('“','"').replace('”','"').replace("’","'").replace("‘","'")
+    
+    # variable = variable.replace('“','"').replace('”','"').replace("’","'").replace("‘","'")
 
-    try: 
+    
+    vargamedata=getgamelistdata()
+    vargamedatanames = vargamedata["name"]
+    if variable in vargamedatanames:
+
         vargamedata=getgamelistdata()
+        vargamedatadb = getgamedatabasedata()
         vargamedatanames = vargamedata["name"]
         gamedataindex=vargamedatanames.index(variable)
         varonlinerating = vargamedata["onlinerating"][gamedataindex]
         varpersonalrating = vargamedata["personalrating"][gamedataindex]
+        print (varpersonalrating)
+        if varpersonalrating == None:
+            varpersonalrating = "_"
         varbackgroundimage = vargamedata["backgroundimages"][gamedataindex]
         varstatus = vargamedata["status"][gamedataindex]
         varwebsite = vargamedata["website"][gamedataindex]
@@ -185,20 +250,33 @@ def displaypage (variable):
         varhoursplayed = vargamedata["hoursplayed"][gamedataindex]
         displayadd = "none"
         displayremove = "block"
-        vargamedata2 = getgamedatabasedata()
-        databasenames = vargamedata2["name"]
+        
+        databasenames = vargamedatadb["name"]
+        #for determining if the editing features provided via javascript should be active
+        liststatus = "yes"
         if variable in databasenames:
 
-            platformindex = databasenames.index(variable)
-            varplatform = vargamedata2["platforms"][platformindex]
+            dbgameindex = databasenames.index(variable)
+            varplatform = vargamedatadb["platforms"][dbgameindex]
+            
+            varslugs = vargamedatadb["slugname"][dbgameindex]
+            varonlinerating = vargamedatadb["onlinerating"][dbgameindex]
+            varbackgroundimage = vargamedatadb["backgroundimages"][dbgameindex]
+            varwebsite = vargamedatadb["website"][dbgameindex]  
+            varreleasedate = vargamedatadb["releasedate"][dbgameindex]
+
+            if varslugs == None:
+                varslugs = variable
             if varplatform == None:
                 varplatform = "Not Yet Stored"
 
         else:
+            varslugs = variable
             varplatform = "Not Yet Stored"
 
         print (varhoursplayed)
-    except:
+     
+    else:
         vargamedata = getgamedatabasedata()
         vargamedatanames = vargamedata["name"]
         gamedataindex=vargamedatanames.index(variable)
@@ -209,6 +287,8 @@ def displaypage (variable):
         varwebsite = vargamedata["website"][gamedataindex]
         varreleasedate = vargamedata["releasedate"][gamedataindex]
         varplatform = vargamedata["platforms"][gamedataindex]
+        # for storing game slug id to use for when search for game from redirect as will use the id in the search
+        varslugs = vargamedata["slugname"][gamedataindex]
         if varplatform == None:
             varplatform = "Not Yet Stored"
 
@@ -216,6 +296,8 @@ def displaypage (variable):
         varhoursplayed = "Not in List"
         displayadd = "block"
         displayremove = "none"
+        
+        liststatus = "not"
 
     if varhoursplayed == 0 or varhoursplayed =="": 
         varhoursplayed = "Never Played"
@@ -223,122 +305,68 @@ def displaypage (variable):
     filedata= f"""
     {{% extends "layout.html" %}}
     {{% block main %}}
-    {{% with messages = get_flashed_messages() %}} 
+    {{% with messages = get_flashed_messages(with_categories=true) %}} 
     {{% if messages %}} 
-        {{% for message in messages %}}  
+        {{% for category, message in messages %}}  
             <hr>
-                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top" role="alert">{{{{ message }}}}</p> 
+                    <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top {{{{category}}}}" role="alert">{{{{ message }}}}</p> 
             <hr> 
         {{% endfor %}}  
     {{% endif %}}  
     {{% endwith %}}  
 
-    <div class="container-fluid">
-        <p class = "login-title gradientcolor"> <a href = "{varwebsite}" > {variable3} </a></p>
-        <span class = "vargamelabels gradientcolor"> Metacritic Rating: </span>
-        <div data-color ="{varonlinerating}" class = "vargamerankings">{varonlinerating}</div>
-        <hr>
-        <div class = "var-page-main"> 
-                <img class = "var-game-image" src = "{varbackgroundimage}">
-                <div class = "var-user-analytics">
-                    <h6 class = "var-personal-rating analytic"> Your Rating : 
-                    <div data-color = "{varpersonalrating}" class = "varpersonalrankings var-rating-border">{varpersonalrating}</div> 
-                    </h6>
-                    <h6 class = "var-status analytic"> Game Status:
-                    <div class = "gradientcolorpinkwhite"> {varstatus}</div>
-                    </h6>
-                    <h6 class = "var-release-date analytic"> Game Release Date:
-                    <div class = "gradientcolorpinkwhite">{varreleasedate}</div>
-                    </h6>
-                    <h6 class = "var-hours-played analytic"> Game Hours Played:
-                    <div class = "gradientcolorpinkwhite"> {varhoursplayed}</div>
-                    </h6>
+    <div class="container-fluid var-page-container" id = "{liststatus}">
+        <div class = "var-page-heading"> 
+            <h2 class = "var-game-title gradientcolor"> <a href = "{varwebsite}" > {variable3} </a></h2>
+            <div class = "var-online-rating">
+            <span class = "vargamelabels gradientcolor "> Metacritic Rating: </span>
+            <div data-color ="{varonlinerating}" class = "vargamerankings var-online-rating-data">{varonlinerating}</div>
+            </div>
+            <h7 data-color ="{varonlinerating}" class = "onlinerankdescription">Not Reviewed</h7>  
+            
 
-                </div>
-                <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: {varplatform}</h6>
-               <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
-                <input name = "deletedgame" style = "display:none" value = "{variable3}">
-                <button type = "submit" class="btn btn-danger var-remove-button" id = "{variable3}" style = "display:{displayremove};">Remove from List</button>
-               </form>
-               <button type="button" class="btn btn-success var-add-button" id = "{variable3}" style =  "display:{displayadd};">Add to List</button>
+        </div> 
+        <hr>
+        <form action = "/editgamepage" id = "var-edit-form"  method = "post">
+        <div class = "var-page-main"> 
+            
+                    <img class = "var-game-image" src = "{varbackgroundimage}">
+                    <div class = "var-user-analytics">
+                        <h6 class = "var-personal-rating analytic"> Your Rating : 
+                        <div data-color = "{varpersonalrating}" class = "var-personal-rating-data varpersonalrankings var-rating-border">{varpersonalrating}</div> 
+                        </h6>
+                        <h6 class = "var-status analytic"> Game Status:
+                        <div class = "var-status-data gradientcolorpinkwhite "> {varstatus}</div>
+                        </h6>
+                        <h6 class = "var-release-date analytic"> Game Release Date:
+                        <div class = "gradientcolorpinkwhite">{varreleasedate}</div>
+                        </h6>
+                        <h6 class = "var-hours-played analytic"> Game Hours Played:
+                        <div class = "var-hours-played-data gradientcolorpinkwhite"> {varhoursplayed}</div>
+                        </h6>
+
+                    </div>
+                    <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: {varplatform}</h6>
+
+                <input name="gamename" value = "{variable}" style = "display:none">
+                <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
+                
+                <button type="button" class="btn btn-success var-add-button var-buttons" id = "{variable3}" style =  "display:{displayadd};">Add to List</button>
+
+            
+            
+               <div class = "var-slug-game" id = "{varslugs}" style = "display:none;"></div>
 
 
         </div>
+        </form>
+                <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
+                    <input name = "deletedgame" style = "display:none" value = "{variable3}">
+                    <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "{variable3}" style = "display:{displayremove};">Remove from List</button>
+                </form>
         
 
     </div>
-
-    <style> 
-        .var-page-main {{
-            display:grid;
-            grid-template-columns: 1fr .5fr 10px;
-            gap: 10px;
-            grid-auto-rows: min-content;
-        }}
-        .var-game-image {{
-            grid-column: 2;
-            grid-row: 1;
-            max-height:100% !important;
-            height:100%;
-            min-height:100%;
-            width: 100% !important;
-            border-radius: 20%;
-        }}
-
-        .var-personal-rating {{
-            grid-column: 1;
-            grid-row: 1;
-        }}
-        .var-user-analytics {{
-            grid-column: 1;
-            display: grid;
-            row-gap:20px;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: min-content;
-        }}
-        .var-status {{
-            grid-column: 2;
-            grid-row: 1;
-        }}
-        .var-release-date{{
-            grid-column: 1;
-            grid-row: 2;
-        }}
-        .var-hours-played{{
-            grid-column:2;
-            grid-row: 2;
-        }}
-        .var-add-button,.var-remove-button-form{{
-            grid-column:1/-1;
-            grid-row:3;
-            margin:auto;
-            width:25%;
-
-        }}
-        .var-remove-button{{
-            width:100%;
-            }}
-        
-        .analytic {{
-            border-radius: 50%;
-            padding: 2.5vw 2.5vw;
-            background-color: rgba(105,105,105,0.5);
-        }}
-
-        .var-platforms{{
-            grid-column: 1/-1;
-            grid-row: 2;
-            row-gap:3%;
-            margin:auto;
-
-        }}
-
-    </style>
-
-
-    
-
-
     {{% endblock %}}
 
     """
@@ -347,7 +375,7 @@ def displaypage (variable):
     variable2=slugify(variable,regex_pattern=pattern)
 
     cur_path = os.path.dirname(os.path.abspath(__file__))
-
+    filedata= filedata.encode("utf-8")
     # cur_path = os.path.dirname(os.path.abspath(__file__))
     print (cur_path)
     new_path = cur_path + f'\\templates\\gamefolder\\{variable2}.html'
@@ -356,7 +384,7 @@ def displaypage (variable):
     # if not os.path.exists('c:/your/full/path'):
     #     os.makedirs('c:/your/full/path')
     # f = open(filepath, "a")
-    file = open(new_path,"w")
+    file = open(new_path,"wb")
     file.write(filedata)
     file.close()
 
@@ -601,7 +629,34 @@ def mylist():
     return render_template("mylist.html", gamedata = gamedatadict)
 
 
+@app.route("/sortlist", methods=["GET", "POST"])
+@login_required
+def sortlist():
+    if request.method =="POST":
+        sorttype = request.form.get("sort-type")
+        sorttype = sorttype.strip()
+        print(sorttype)
+        if sorttype == "Metacritic Descending":
+            gamedatadict = getgamelistdatasort("DESC","onlinerating")
+        elif sorttype == "Metacritic Ascending":
+            gamedatadict = getgamelistdatasort("ASC","onlinerating")
+        elif sorttype == "Personal Descending":
+            gamedatadict = getgamelistdatasort("DESC","personalrating")
 
+        elif sorttype == "Personal Ascending":
+            gamedatadict = getgamelistdatasort("ASC","personalrating")
+    
+        return render_template("mylist.html",gamedata=gamedatadict)
+    else:
+        print(sorttype)
+        gamedatadict=getgamelistdata()
+        return render_template("mylist.html",gamedata=gamedatadict)
+
+
+            
+        
+
+    
 def rendereditlist(message):
     gamedatadict=getgamelistdata()
     hoursplayedls = gamedatadict['hoursplayed']
@@ -611,74 +666,106 @@ def rendereditlist(message):
        
 
     return render_template("editlist.html", gamedata = gamedatadict, warning = message)
-@app.route("/editlist", methods=["GET", "POST"])
-@login_required
-def editlist():
+def editing():
     tabledata = db.execute('PRAGMA table_info(gamelist)')
     tabledata = tabledata.fetchall()
     gamedatadict=getgamelistdata()
-    if request.method == "POST":
-        changedgamename = request.form.get("gamename")
-        changedrating=request.form.get("rating")
-        changedhours = request.form.get("hoursplayed")
-        changedstatus = request.form.get("status")
-        #print(changedgamename)
-        #print(changedrating)
-        #print(changedstatus)
-        gamecheck=db.execute("SELECT * FROM gamelist where game = ?",[changedgamename])
-        gamecheck2=db.execute("SELECT * FROM gamelist where userid = ?",[session["user_id"]])
-        #gamecheckdata = [list(i) for i in gamecheck2]
-        #print(gamecheckdata[0][0])
-        #print(str(changedgamename.rstrip())==str(gamecheckdata[0][0]))
-        if changedrating:
-            if changedrating.isdigit() or type(changedrating) == float:
 
-                if int(changedrating) < 0  or int(changedrating) > 100:
-                    return rendereditlist( "Choose Any Real Number Between 0 and 100")
-            else:
-                    return rendereditlist("Please Only Submit Numbers")
-        
-        
-        print(session["user_id"])
-        if (changedrating != None):
-            db.execute("UPDATE gamelist SET personalrating = ? WHERE userid = ? AND game = ?", (str(changedrating), session["user_id"], changedgamename.strip()))
-            db2.commit()
-        elif (changedhours != None):
-            db.execute("UPDATE gamelist SET hoursplayed = ? WHERE userid = ? AND game = ?", (str(changedhours), session["user_id"], changedgamename.strip()))
-            db2.commit()
-        elif(changedstatus != None):
-            db.execute("UPDATE gamelist SET status = ? WHERE userid = ? AND game = ?", (str(changedstatus), session["user_id"], changedgamename.strip()))
-            db2.commit()
-        
+    changedgamename = request.form.get("gamename")
+    changedrating=request.form.get("rating")
+    changedhours = request.form.get("hoursplayed")
+    changedstatus = request.form.get("status")
+    #print(changedgamename)
+    #print(changedrating)
+    #print(changedstatus)
+    gamecheck=db.execute("SELECT * FROM gamelist where game = ?",[changedgamename])
+    gamecheck2=db.execute("SELECT * FROM gamelist where userid = ?",[session["user_id"]])
+    #gamecheckdata = [list(i) for i in gamecheck2]
+    #print(gamecheckdata[0][0])
+    #print(str(changedgamename.rstrip())==str(gamecheckdata[0][0]))
+    if changedrating:
+        if changedrating.isdigit() or type(changedrating) == float:
+
+            if int(changedrating) < 0  or int(changedrating) > 100:
+                return rendereditlist( "Choose Any Real Number Between 0 and 100")
+        else:
+                return rendereditlist("Please Only Submit Numbers")
+    
+    
+    print(session["user_id"])
+    if (changedrating != None):
+        if changedrating =="":
+            changedrating = None
+        db.execute("UPDATE gamelist SET personalrating = ? WHERE userid = ? AND game = ?", ((changedrating), session["user_id"], changedgamename.strip()))
+        db2.commit()
+    elif (changedhours != None):
+        db.execute("UPDATE gamelist SET hoursplayed = ? WHERE userid = ? AND game = ?", (str(changedhours), session["user_id"], changedgamename.strip()))
+        db2.commit()
+    elif(changedstatus != None):
+        db.execute("UPDATE gamelist SET status = ? WHERE userid = ? AND game = ?", (str(changedstatus), session["user_id"], changedgamename.strip()))
+        db2.commit()
+    return(changedgamename)
+@app.route("/editlist", methods=["GET", "POST"])
+@login_required
+def editlist():
+    if request.method =="POST":
+        changedgamename = editing()
+
         return redirect(f"/editlist#{changedgamename.strip()}")
         #rendereditlist("")
 
     else:
         return rendereditlist("")
-def renderaddlist(warning):
+@app.route("/editgamepage", methods=["GET", "POST"])
+@login_required
+def editgamepage():
+    if request.method =="POST":
+        changedgamename = editing()
+
+        return redirect(f"/game/{changedgamename.strip()}")
+        #rendereditlist("")
+
+    else:
+        return rendereditlist("")
+def getrandomgamelist():
     gamedatadict=getgamelistdata()
     randlist =[]
     gamedatadictname = gamedatadict["name"]
     gamedatalen = len(gamedatadictname)
     if gamedatalen < 10 :
-        while len(randlist) != gamedatalen:
-
+        while len(randlist) <= gamedatalen:
+            print(len(randlist))
             randnumb=rand.randint(0,len(gamedatadictname)-1)
             if randnumb not in randlist: 
                 randlist.append(randnumb)
     else:
-        while len(randlist) != 10:
+        while len(randlist) <= 10:
 
             randnumb=rand.randint(0,len(gamedatadictname)-1)
             if randnumb not in randlist: 
                 randlist.append(randnumb)
+    return(randlist)
+def renderaddlist(warning):
+    gamedatadict=getgamelistdata()
+    randlist = getrandomgamelist()
     
     return render_template("addlist.html", addwarning= warning , gamedata =  gamedatadict, numblist = randlist)
 
 @app.route("/aboutsite", methods=["GET", "POST"])
 @login_required
 def aboutsite():
-    return render_template("aboutsite.html")
+    bgimgdict = {"sitebgimgs":[]}
+    gamedatadict=getgamelistdata()
+    randlist = getrandomgamelist()
+    # for i in randlist:
+    #     bgimg = gamedatadict["backgroundimages"][i]
+    #     bgimgdict["sitebgimgs"].append(bgimg)
+
+    # print(bgimgdict)
+
+    # return bgimgdict
+
+    return render_template("aboutsite.html", gamedata = gamedatadict, numblist = randlist)
 
 @app.route("/addlist", methods=["GET", "POST"])
 @login_required
@@ -690,9 +777,12 @@ def addlist():
     if request.method == "POST":
         gamename= request.form.get("sluggame")
         gamename2 =  request.form.get("game")
-        print(gamename2)
+        print(gamename)
         gamestatus = request.form.get("status")
         gamerating = request.form.get("rating")
+        if gamerating.strip() == "":
+            gamerating = None
+
         hoursplayed = request.form.get("hoursplayed")
         gamerows = db.execute( "SELECT * FROM gamelist WHERE game = ? AND userid = ?;", (gamename2, session["user_id"]))
         games=gamename
@@ -713,36 +803,44 @@ def addlist():
                 #print(sluggame) 
                 gameresult = lookup(sluggame)
             else:
-                return renderaddlist("That Game Does Not Exist")
+                flash("That Game Does Not Exist", "error")
+                return renderaddlist("")
         else:
             gameresult = lookup(games)
 
         #print(gameresult)
         if not gamename or not gamename2 or not gamestatus:
-            return renderaddlist("Need a Game Name and Status")
+            flash("Need a Game Name and Status", "error")
+            return renderaddlist("")
         elif gameresult == None:
-            return renderaddlist("That Game Does Not Exist" )
+            flash("That Game Does Not Exist", "error")
+            return renderaddlist("")
         elif len(list(gamerows)) != 0:
-            return renderaddlist("That Game Is Already In Your List")
+            flash("That Game is Already in Your List", "error")
+            return renderaddlist("")
         
         if gamerating:
             if gamerating.isdigit() or type(gamerating) == float:
 
                 if int(gamerating) < 0  or int(gamerating) > 100:
-                    return renderaddlist( "Choose Any Real Number Between 0 and 100")
+                    flash ("Choose Any Real Number Between 0 and 100", "error")
+                    return renderaddlist("")
             else:
-                    return renderaddlist("Please Only Submit Numbers")
+                    flash ("Please Only Submit Numbers", "error")
+                    return renderaddlist("")
 
 
 
         if hoursplayed:
             if int(hoursplayed) < 0:
-                return renderaddlist("Only Positive Hours Allowed" )
+                flash ("Only Positive Hours Allowed", "error")
+                return renderaddlist("")
 
         
-        
-        db.execute("INSERT INTO gamelist (userid, game, status, personalrating, onlinerating, releasedate,website, hoursplayed,backgroundimage, dayadded) VALUES (?,?,?,?,?,?,?,?,?,?)",
-        (session["user_id"],gameresult["name"], gamestatus, gamerating, gameresult["metacriticrating"] , gameresult["releasedate"], gameresult["website"], hoursplayed, gameresult["backgroundimage"], datetime.utcnow().strftime("%m-%d-%Y")))
+        truegamename = gameresult["name"]
+        # truegamename = truegamename.replace('“','"').replace('”','"').replace("’","'").replace("‘","'")
+        db.execute("INSERT INTO gamelist (userid, game, status, personalrating, onlinerating, releasedate,website, hoursplayed,backgroundimage, dayadded,slugs) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+        (session["user_id"],truegamename, gamestatus, gamerating, gameresult["metacriticrating"] , gameresult["releasedate"], gameresult["website"], hoursplayed, gameresult["backgroundimage"], datetime.utcnow().strftime("%m-%d-%Y"), gameresult["slug"]))
         db2.commit()
         gamecheck=db.execute("SELECT * FROM gamedatabase where gamename = ?",[gameresult["name"]])
         # print (gameresult["platform"])
@@ -750,9 +848,10 @@ def addlist():
         # print(platforms)
         if len(list(gamecheck)) == 0:
             db.execute ("INSERT INTO gamedatabase(gamename,metacriticrating,slugname,backgroundimage,releasedate,websites,platforms) VALUES(?,?,?,?,?,?,?)",(
-                gameresult["name"],gameresult["metacriticrating"],gameresult["slug"],gameresult["backgroundimage"],gameresult["releasedate"], gameresult["website"], platforms))
+                truegamename,gameresult["metacriticrating"],gameresult["slug"],gameresult["backgroundimage"],gameresult["releasedate"], gameresult["website"], platforms))
             db2.commit()
-        return renderaddlist( "Game Successfully Added")
+        flash ("Game Successfully Added", "success")
+        return renderaddlist( "")
     else:
         return renderaddlist("")
 
@@ -765,7 +864,7 @@ def removelist():
         deletedgame= request.form.get("deletedgame")
         db.execute("DELETE from gamelist WHERE userid = ? AND game = ?;", (session["user_id"], deletedgame))
         db2.commit()
-        flash("Game Has Been Removed From List")
+        flash("Game Has Been Removed From List","success")
         return (redirect(f"/game/{deletedgame}"))
 
     
@@ -776,8 +875,11 @@ def search():
     #print(tabledata)
 
     if request.method == "POST":
-        gamename = request.form.get("headersluggame")
-        gamename2= request.form.get("headersearchresult")
+        if request.form.get("headersluggame"):
+            gamename = request.form.get("headersluggame")
+        else:
+            gamename = request.form.get("rand-game-slug")
+        # gamename2= request.form.get("headersearchresult")
 
         print (gamename)
         # gamerows = db.execute( "SELECT * FROM gamelist WHERE game = ? AND userid = ?;", (gamename2, session["user_id"]))
@@ -806,10 +908,12 @@ def search():
 
         # print (gameresult["platform"])
         platforms = listToString(gameresult["platform"])
+        truegamename = gameresult["name"]
+        # truegamename = truegamename.replace('“','"').replace('”','"').replace("’","'").replace("‘","'")
         # print(platforms)
         if len(list(gamecheck)) == 0:
             db.execute ("INSERT INTO gamedatabase(gamename,metacriticrating,slugname,backgroundimage,releasedate,websites,platforms) VALUES(?,?,?,?,?,?,?)",(
-                gameresult["name"],gameresult["metacriticrating"],gameresult["slug"],gameresult["backgroundimage"],gameresult["releasedate"], gameresult["website"], platforms))
+                truegamename,gameresult["metacriticrating"],gameresult["slug"],gameresult["backgroundimage"],gameresult["releasedate"], gameresult["website"], platforms))
             db2.commit()
         return redirect(f'/game/{gameresult["name"]}')
 

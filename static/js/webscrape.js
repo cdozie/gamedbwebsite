@@ -1,11 +1,18 @@
 'use strict'
 
 
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import Zoom from 'react-reveal/Zoom';
+import About from './aboutpage';
+import DropdownOption from './orderddown';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 //@ts-check
 
-function myFunc(vars) {
-    return vars
-}
+
 /*
 const scroller = document.querySelector('.scroll-menu');
 
@@ -119,14 +126,15 @@ $('#gameSearch, #gameSearch3').on('input',function(){
 
         if (empty) {
             $('#game-submit-button').attr('disabled', 'disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
-        } else {
-          if  ($("#gamedropdown").css('display') == 'none'){
+        } 
+        //If the dropdown display is not being shown, meaning the user is not searching for a game
+        else if ($("#gamedropdown").css('display') == 'none'){
             $('#game-submit-button').removeAttr('disabled'); // updated according to http://stackoverflow.com/questions/7637790/how-to-remove-disabled-attribute-with-jquery-ie
         }
         else {
           $('#game-submit-button').attr('disabled', 'disabled')
         }}
-    });
+    );
 })();
 var addsubmission
 var submissionindex
@@ -135,7 +143,9 @@ var gameid
 
 
 $('.gamedboptions').on('click', function() {
-  gameid=$(this).attr('id') //using the game id to get the slug by finding the index of the game and extracting the slug
+  //using the game id to get the slug by finding the index of the game in the generated search list and extracting the slug as
+  //the slug has the same index number
+  gameid=$(this).attr('id') 
   var last = gameid.charAt(gameid.length-1)
   submissionindex = parseInt(last) -1 
   // addsubmission = $('#gameSearch').val()
@@ -147,9 +157,10 @@ $('.gamedboptions').on('click', function() {
   submissionslug = slugs[submissionindex]
   // console.log(alert(slugs))
   localStorage.setItem("submissionslug", submissionslug);
-  console.log(alert(localStorage.getItem("submissionslug")))
+  // console.log(alert(localStorage.getItem("submissionslug")))
   $('#realgameSearch, #realgameSearch3').val(localStorage.getItem("submissionslug"))
 
+//Name
 $('#gameSearch').on('input', function(){
   $('#realgameSearch').val($('#gameSearch').val())
 
@@ -170,7 +181,19 @@ $('#gameSearch3').on('input', function(){
   // }
 })
 
+$(".rand-name-forms").on('click', function () {
+  //In the random list on the index, using the id of the games to determine what for (each element is a form)
+  //gets submitted to the backend
+  var randgameid = $(this).attr("id")
+  var last = randgameid.charAt(randgameid.length-1)
+  var randgameidnumb = parseInt(last) 
+  $(`#rand-game-list-form${randgameidnumb}`).trigger("submit")
+} )
 
+
+function between(x, min, max) {
+  return x >= min && x <= max;
+}
 $(function(){
   
     var mc = {
@@ -179,13 +202,7 @@ $(function(){
       '80-99'   : 'green',
       '100-100'     : 'gold'
     };
-    
-  function between(x, min, max) {
-    return x >= min && x <= max;
-  }
-    
-  
-    
+
     var dc;
     var first; 
     var second;
@@ -200,12 +217,13 @@ $(function(){
       
         $.each(mc, function(name, value){
           
-          
+          //Getting The Range For The Certain Color To Add For A Rating
           first = parseInt(name.split('-')[0],10);
           second = parseInt(name.split('-')[1],10);
           
           // console.log(between(dc, first, second));
           
+          //If in range of the numbers, adds that class to apply color to the padding around the ratings or the fonts of them.
           if( between(dc, first, second) ){
             th.addClass(value);
             // console.log(value)
@@ -220,11 +238,62 @@ $(function(){
 
   });
 
+$(function() {
 
+//For the Assigning of Descriptions to the Metacritic Ratings
+  var mc = {
+    '0-59'     : 'Poor',
+    '60-79'    : 'Decent',
+    '80-89'   : 'Amazing',
+    '90-99'   : 'Universally Acclaimed',
+    '100-100'     : 'Perfection'
+  };
+  var cmc = {
+    '0-59'     : 'red',
+    '60-79'    : 'orange',
+    '80-99'   : 'green',
+    '100-100'     : 'gold'
+  };
+
+  var description = $('.onlinerankdescription')
+  // var classcolors = ["red","orange", "green"]
+  var dattr = parseInt(description.attr('data-color'),10)
+
+  $.each(mc, function(name, descriptext){
+          
+          
+    var first = parseInt(name.split('-')[0],10);
+    var second = parseInt(name.split('-')[1],10);
+    
+    // console.log(between(dc, first, second));
+    
+    if( between(dattr, first, second) ){
+      description.text(descriptext)
+
+      // console.log(value)
+      // $('.rating-border').css({'border-color': name})
+    }
+    // else{
+    //   description.text("Not Reviewed")
+    // }
+
+  })
+  //Assigning the colors
+  $.each(cmc, function (name, color){
+    var first = parseInt(name.split('-')[0],10);
+    var second = parseInt(name.split('-')[1],10);
+
+    if ( between(dattr, first, second) ){
+      
+      description.addClass(color)
+  }
+})
+})
 $('img').map(function(){
     // console.log(this.src)
     $(this).attr('onerror',"this.onerror=null;this.src='https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';")
-    if(this.src > "s"){
+  
+    if($(this).attr('src') == "None"){
         $(this).attr('src',"https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg")
     }
 });
@@ -234,7 +303,87 @@ function isEmpty(str) {
     return !str.trim().length;
 }
 var classundefined = 1
+// var firstclass
+// var editbutton
+// var editform
+$(function () {
+  //the id is yes only if the item is in the user's game list
+  //Can then modify the data for the game
+  if ($(".var-page-container").attr('id') == "yes") {
+  $('.var-personal-rating-data, .var-status-data, .var-hours-played-data').on('click', function(){
+    var th = $(this)
+    var formerdata = $(this).text()
+    var modiefiedlements = $('.modifying')
+    var gradientclass = "gradientcolorpinkwhite"
+    globalThis.firstclass = th.attr('class').split(' ')[0]
+    console.log(firstclass)
+    globalThis.editbutton = $(".var-edit-button")
+    globalThis.editform = $('#var-edit-form')
+    
+    // Writing HTML in JavaScript. Can be better Here
+    $(".var-edit-button").css("display","block")
+    if(modiefiedlements.length == 0 && firstclass == "var-personal-rating-data"){
+      th.html('<input type = "number" class = "mx-auto w-auto change" id=  "var-personal-rating-change"  name = "rating"  min = "0" max = "100">')
+      th.removeClass("varpersonalrankings")
+      th.addClass('modifying')
+      $('.modifying > #var-personal-rating-change').val(formerdata)
+      globalThis.varclass = th.attr ('class')
+    }
+     
+    else if (modiefiedlements.length == 0 && firstclass == "var-status-data"){
+      th.html('<select name="status" id = "var-edit-status" autocomplete="off"  class = "form-select form-control mx-auto w-100 game-form game-highlight "  placeholder = "Choose Status:" required> ' + 
+      '<option disable selected value>Choose Status:</option>'
+      +'<option>Plan to Play</option>'
+      +'<option>Dropped</option>'
+      +'<option>Playing</option>'
+      +'<option>On Hold</option>'
+      +'<option>Completed</option>'
+      + '<option>Wishlist</option>'
+  +'</select>')
+  // Removing Classes With Background Overlays For Colors As Interferes with Visibility of Text In The Form
+  th.removeClass(gradientclass)
 
+  th.addClass('modifying')
+  $('.modifying > #var-edit-status').val(formerdata)
+
+  globalThis.varclass = th.attr ('class')
+  } 
+  else if (modiefiedlements.length == 0 && firstclass == "var-hours-played-data"){
+    th.html('<input type = "number" class = "mx-auto w-100" name = "hoursplayed" id = "var-edit-hours-played" " min="0">')
+    th.removeClass(gradientclass)
+
+    th.addClass('modifying')
+    $('.modifying> #var-edit-hours-played').val(formerdata)
+
+    globalThis.varclass = th.attr ('class')
+  }
+   
+  })
+  $(".var-edit-button").on("click", function() {
+    if (firstclass = "var-personal-rating-data"){
+      let input = $('.modifying').val()
+
+      if (input==="" || !isNaN(input)){
+        $('#var-edit-form').trigger("submit")
+        $(".modifying").html("_")
+        $(".modifying").removeClass("modifying")
+
+      }
+      else {
+        $(".modifying").html("_")
+        $(".modifying").removeClass("modifying")
+      }
+    }
+    else {
+      $('#var-edit-form').trigger("submit")
+      $(".modifying").html("_")
+      $(".modifying").removeClass("modifying")
+
+    }
+  })
+
+  }
+})
 $(function(){
 //  $('.personalratingchange').on('click',function(){
 //     $(this).trigger('focus')
@@ -302,15 +451,7 @@ $(document).on ('dblclick', function(e){
      $('#personalratingchange').trigger('blur');
      var personalratingchange = $('#personalratingchange').val()
      $('.game-name-submit').val(editgamename)
-     //$('#personalratingchange').on('focusout',function(){
-        //$('.personalratingchange').each (function(){
-            // console.log($('.modifying > #personalratingchange').val())
-            // console.log($('.modifying > #personalratingchange').val() == "" || $('.modifying > #personalratingchange').val() == undefined)
-            // console.log(isNaN($('.modifying > #personalratingchange').val()))
 
-            // if  ($('.modifying > #personalratingchange').val() === "" || $('.modifying > #personalratingchange').val() == undefined){
-            //     $('.modifying > #personalratingchange').html("_") 
-            // }
             var inputranking = $('.modifying > #personalratingchange').val()
             if (inputranking==="") {
                 $("#edit-form").trigger('submit')
@@ -402,6 +543,7 @@ $(document).on ('dblclick', function(e){
 // db.run(`UPDATE gamestorage SET personalrating = ? where id = ? AND game = ?`,$(this).text()
 
   //console.log($('.editgamelistoptions'))
+  //Custom Search Bar With JavaScript to allow for customization that is not in datalist.
   $( "#add-form" ).on('submit', function() {
     var gamechoice = $("#gameSearch2, #gameSearch , #gameSearch3" ).val();
     var gameindex = names.indexOf(gamechoice);
@@ -424,7 +566,7 @@ $(document).on ('dblclick', function(e){
       $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius","5px");  
     }
 )});
-  
+
   $('#gameSearch2, #gameSearch, #gameSearch3').on('input',function() {
     currentFocus = -1;
     var text = $(this).val().toUpperCase()
@@ -496,9 +638,12 @@ $(document).on ('dblclick', function(e){
     //    }
     //  })
     var presearch
+    var redirectsubmissionslug
      $('.var-add-button').on('click', function(){
       presearch = String($('.var-add-button').attr('id'))
+      redirectsubmissionslug = String ($('.var-slug-game').attr('id'))
       localStorage.setItem("presearchgame", presearch);
+      localStorage.setItem("redirectsubmissionslug", redirectsubmissionslug);
       window.location.href='/addlist#varredirect';
 
 
@@ -512,66 +657,42 @@ $(function () {
     // console.log(alert(presearch))
     // console.log(presearch)
   $('#gameSearch').val(presearch)
-  $('#realgameSearch').val(localStorage.getItem("submissionslug"))
+  
+  $('#realgameSearch').val(localStorage.getItem("redirectsubmissionslug"))
 
 }
 })
 
-
-// var observer = new IntersectionObserver(function(seekedelement) {
-//   if(seekedelement[0].isIntersecting === true)
-//     console.log("The Element is Visible");
-
-//   },{threshold:[0]});
-
-  
-// observer.observe(document.querySelector(".main-page-game-list"))
-
-// const e = React.createElement;
-
-// class LikeButton extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { liked: false };
-//   }
-
-//   render() {
-//     if (this.state.liked) {
-//       return 'You liked this.';
-//     }
-
-//     return e(
-//       'button',
-//       { onClick: () => this.setState({ liked: true }) },
-//       'Like'
-//     );
-//   }
-// }
-
-
-// const domContainer = document.querySelector('#like_button_container');
-// ReactDOM.render(e(LikeButton), domContainer);
-
-
-// // comp = React.Component
-
-// class ShoppingList extends React.Component {
-//   render(){
-//     return (
-//       <div className="shopping-list">
-//         <h1>Shopping List for {this.props.name}</h1>
-//         <ul>
-//           <li>Instagram</li>
-//           <li>WhatsApp</li>
-//           <li>Oculus</li>
-//         </ul>
-//       </div>
-//     );
-//   }
-// }
+$("#add-form").on("submit", function() {
+  // localStorage.clear()
+});
 
 
 
-// import Zoom from 'react-reveal/Zoom';
 
+// ReactDOM.render(
+//   <About />,
+//   document.getElementById('test-react-component')
+// );
+
+$(".sortitem").on("click",function() {
+  var sortval = $(this).text();
+  // alert(sortval)
+  $("#sort-input").val(sortval);
+  $("#sort-dropdown").trigger("submit")
+});
+
+
+//Rendering React Components if on the Page.
+const aboutreact = document.getElementById('test-react-component');
+if (aboutreact){
+  ReactDOM.render(<About />, aboutreact)
+};
+
+const ddownbtn = document.getElementById('order-by-options');
+if (ddownbtn){
+ReactDOM.render(
+  <DropdownOption />,
+  ddownbtn
+)};
 
