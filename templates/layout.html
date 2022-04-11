@@ -64,8 +64,9 @@
         </div>
     </header>
         <h1> <a href = "/"> UG Database </a></h1> 
+        {% if session["user_id"] %}
         <hr>
-        {% if session["user_id"] %}   
+           
         <form action="/search" id = "headingsearch" method="post">
             
             <h3 class ="gradientcolorpinkwhite">Search Database:</h3>
@@ -103,6 +104,7 @@
         <hr>
         <h4 class = "gradientcolorpinkwhite">Creator: Chidozie Nwabuebo</h4>
         <h4 class = "gradientcolorpinkwhite">Email:<a href="mailto:dozie128@gmail.com">dozie128@gmail.com</a></h4>
+        <h4 class = "gradientcolor">All Game Data from <a href = "https://rawg.io/">RAWG API</a></h4>
     </footer>  
 </div>
 

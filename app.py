@@ -18,7 +18,7 @@ import requests
 from sqlite3 import Error, SQLITE_PRAGMA
 
 from zmq import PROTOCOL_ERROR_ZMTP_UNEXPECTED_COMMAND
-from SQL import create_connection,login_required, lookup, lookuplist, sluglookuplist
+from SQL import *
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
@@ -29,6 +29,10 @@ from itsdangerous import URLSafeTimedSerializer
 import unidecode
 import random as rand
 import schedule
+import sqlite3
+from statistics import mean
+from collections import Counter
+
 
 # import os
 
@@ -39,21 +43,45 @@ import os
 
 
 import re
+# def make_celery(app):
+#     celery = Celery(
+#         app.import_name,
+#         backend=app.config['CELERY_RESULT_BACKEND'],
+#         broker=app.config['CELERY_BROKER_URL']
+#     )
+#     celery.conf.update(app.config)
 
+#     class ContextTask(celery.Task):
+#         def __call__(self, *args, **kwargs):
+#             with app.app_context():
+#                 return self.run(*args, **kwargs)
+
+#     celery.Task = ContextTask
+#     return celery
 pattern = re.compile(r'[^-a-zA-Z0-9.]+')
 
+os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
 
 app = Flask(__name__,template_folder='templates',static_folder='static')
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.static_folder = 'static'
-app.config['CELERY_BROKER_URL'] = 'redis://localhost:6379/0'
-app.config['CELERY_RESULT_BACKEND'] = 'redis://localhost:6379/0'
-celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
-celery.conf.update(app.config)
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend=app.config['CELERY_RESULT_BACKEND'],
+        broker=app.config['CELERY_BROKER_URL']
+    )
+    # celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+
+    celery.Task = ContextTask
+    return celery
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'cdozcodeprojects@gmail.com'
@@ -61,47 +89,12 @@ app.config['MAIL_PASSWORD'] = 'chimchid8912'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
+from celery.utils.log import get_task_logger
+
+# logger = get_task_logger(__name__)
 
 session1 = Session(app)
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gamestorage.db'
-# db3 = SQLAlchemy(app)
-# Base = declarative_base()
-# Base.metadata.reflect(db3.engine)
-# class Games(Base):
-#     __table__ = Base.metadata.tables['gamedatabase']
 
-# print(db3.engine.table_names())
-# print(Games.query.all())
-# engine = create_engine('sqlite:///gamestorage.db')
-# # db_session = scoped_session(sessionmaker(autocommit=False,
-# #                                          autoflush=False,
-# #                                          bind=engine))
-# metadata = MetaData(bind=engine)
-# metadata.reflect(engine)
-# GAMEDB = metadata.tables['gamedatabase']
-# print(GAMEDB.columns)
-
-# execution = sqlalchemy.select([
-#     GAMEDB.c.backgroundimage,
-
-# ])    
-
-# result = engine.execute(execution).fetchall()
-# print(result)
-# Base = automap_base()
-# # Base.query = db_session.query_property()
-# Base.prepare(engine, reflect=True)
-# GameDb = Base.classes.gamedatabase
-# session = sqlalchemy.orm.Session(engine)
-# res=session.query(GameDb).all()
-# print (res)
-
-# def init_db():
-#     # import all modules here that might define models so that
-#     # they will be registered properly on the metadata.  Otherwise
-#     # you will have to import them first before calling init_db()
-#     import yourapplication.models
-#     Base.metadata.create_all(bind=engine)
 
 cur_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -109,56 +102,126 @@ cur_path = os.path.dirname(os.path.abspath(__file__))
 db2 = create_connection(cur_path + "\\gamestorage.db")
 db = db2.cursor()
 
-# Base = automap_base()
-# conn_str = 'sqlite:///gamestorage.db'    
-# class User(db3.Model):
-#     id = db3.Column(db3.Integer, primary_key=True)
-#     name = db3.Column(db3.String)
-#     email = db3.Column(db3.String)
-from SQL import getgamelistdata, getgamelistdatasort,getgamedatabasedata, listToString, ratingfilter
+# from SQL import getgamelistdata, getgamelistdata2, getgamelistdatasort,getgamedatabasedata, listToString, ratingfilter
 
 
 # individualpagelinks = getgamelistdata()
 
 # for i in individualpagelinks["name"]:
 #     print (i)
-@celery.task
+app.config.update(
+    CELERY_BROKER_URL='redis://localhost:6379',
+    CELERY_RESULT_BACKEND='redis://localhost:6379'
+)
+celery = make_celery(app)
+
+# def getusersjson():
+#         db2.row_factory = sqlite3.Row # This enables column access by name: row['column_name'] 
+#         usergamelist2 = db.execute ("SELECT * FROM users") 
+#         # where id = ?;", [session["user_id"]]).fetchall()
+#         # db2.commit()
+#         print("go")
+#         # semigamelist = [dict(i) for i in usergamelist2]
+#         yes = json.dumps(usergamelist2)
+#         return (yes)
+prepreviousgameinfo = db.execute("SELECT * from gamedatabase where slugname = ?;", ["persona-5"]).fetchall()
+# print(previousgameinfo)
+prepreviousgameinfols = [list(j) for j in prepreviousgameinfo]
+
+previousgameinfo = prepreviousgameinfols[0]
+# print(previousgameinfo)
+
+# previousgameinfo = list.sort(previousgameinfo)
+# print(previousgameinfo)
+@celery.task()
 def updatedatabase():
-    print("running")
     gamedbdata=getgamedatabasedata()
-    gamelistdata=getgamelistdata()
+    gamelistdata=getgamelistdata2()
     slugsdb = gamedbdata["slugname"]
     dbnames = gamedbdata["name"]
     gamenamelist = gamelistdata["name"]
     names = gamedbdata["slugname"]
+    # metacriticlist = [] 
     for i in slugsdb:
         gamedata=lookup(i)
+        print("doing")
+        prepreviousgameinfo = db.execute("SELECT gamename,slugname,metacriticrating,backgroundimage,releasedate,websites,platforms from gamedatabase where slugname = ?;", [i]).fetchall()
+        prepreviousgameinfols = [list(j) for j in prepreviousgameinfo]
+        previousgameinfo = prepreviousgameinfols[0]
+        for a in range (len(previousgameinfo)):
+            previousgameinfo[a] = str(previousgameinfo[a])
+        previousgameinfo = Counter(previousgameinfo)
+
+        # newname = gamedata["name"]
+        # newslug=gamedata["slug"]
+        # newmr = gamedata["metacriticrating"]
+        # newbi = gamedata["backgroundimage"]
+        # newrd = gamedata["releasedate"]
+        # newweb = gamedata["website"]
+
+        # metacriticlist.append(gamedata["metacriticrating"])
         platforms = listToString(gamedata["platform"])
 
-        db.execute("UPDATE gamedatabase set gamename = ?, slugname = ?, metacriticrating = ?, backgroundimage = ?, releasedate = ?, websites = ?, platforms = ? WHERE slugname = ? ",
-        (gamedata["name"], gamedata["slug"],gamedata["metacriticrating"],gamedata["backgroundimage"] , gamedata["releasedate"] , gamedata["website"], platforms, i))
-    
-    # db2.commit()
+        newlist = [gamedata["name"], gamedata["slug"],gamedata["metacriticrating"],gamedata["backgroundimage"] , gamedata["releasedate"] , gamedata["website"],platforms]
+        for j in range(len(newlist)):
+            element = str(newlist[j])
+            newlist[j] = element.strip()
+        
+        newdata = newlist
+        # print(previousgameinfo)
+        
+        newdata = Counter(newdata)
+        # print(newdata)
+        # print(previousgameinfo != newdata)
+        if previousgameinfo != newdata:
+            db.execute("UPDATE gamedatabase set gamename = ?, slugname = ?, metacriticrating = ?, backgroundimage = ?, releasedate = ?, websites = ?, platforms = ? WHERE slugname = ? ",
+            (gamedata["name"], gamedata["slug"],gamedata["metacriticrating"],gamedata["backgroundimage"] , gamedata["releasedate"] , gamedata["website"], platforms, i))
+            db2.commit()
     for i in gamenamelist:
         if i in dbnames:
+            i = str(i)
+            ppgminfo = db.execute("SELECT gamename,slugname,metacriticrating,backgroundimage,releasedate,websites,platforms from gamedatabase where gamename = ?;", [i.strip()]).fetchall()
+            ppgmlsinfo =  prepreviousgameinfols = [list(j) for j in ppgminfo]
+            pgmlsinfo = ppgmlsinfo[0]
+            pgmlsinfo = Counter(pgmlsinfo)
+
             index = dbnames.index(i)
             gameslug = slugsdb[index]
             gamedata2 = lookup(gameslug)
-            db.execute("UPDATE gamelist set game = ?, slugs = ?, onlinerating = ?, backgroundimage = ? , releasedate = ? WHERE game = ?",
-            (gamedata2["name"], gamedata2["slug"],gamedata2["metacriticrating"],gamedata2["backgroundimage"] , gamedata2["releasedate"], i))
-    db2.commit()
-
-
-    
+            newlist2 = [gamedata2["name"], gamedata2["slug"],gamedata2["metacriticrating"],gamedata2["backgroundimage"] , gamedata2["releasedate"]]
+            for j in range(len(newlist2)):
+                element2 = str(newlist2[j])
+                newlist2[j] = element2.strip()
+            
+            newdata2 = Counter(newlist2)
+            if pgmlsinfo != newdata2:
+                db.execute("UPDATE gamelist set game = ?, slugs = ?, onlinerating = ?, backgroundimage = ? , releasedate = ? WHERE game = ?",
+                (gamedata2["name"], gamedata2["slug"],gamedata2["metacriticrating"],gamedata2["backgroundimage"] , gamedata2["releasedate"], i))
+                db2.commit()
 @app.route("/")
 @login_required
 def game_data():
-    task = updatedatabase.delay()
+    global gamedatadict2
+    global gamedatadict2filter
+    gamedatadict2 = getgamelistdata()
+    global sorteddict 
+    sorteddict = None
+    gamedatadict2filter = None
+
 
     global userdata,userid,username,userhash, gamedatadict,acabrev
-    
+ 
     users = db.execute("SELECT * FROM users WHERE id = ?", [session["user_id"]])
+    db2.commit()
+    #Updates the database with new data if changed but with the API Limits of the free plan
+    # task = updatedatabase.delay()
+    # schedule.every().wednesday.at("14:15").do(updatedatabase.delay)
+    schedule.every().monday.do(updatedatabase.delay)
+    # schedule.run_all(updatedatabase.delay)
+    # task.wait()
+    # db2.close()
     rawuserdata=users.fetchall()
+
     userdata = [list(i) for i in rawuserdata]
     # print(userdata)
     userid = session["user_id"]
@@ -169,10 +232,6 @@ def game_data():
     lastchar = usercharacters[len(usercharacters)-1]
     acabrev=firstchar+lastchar
     randlist=[]
-
-
-
-    
     randomlist = lookuplist("")
     ranklist = []
     # print(randomlist["metacritic"])
@@ -210,7 +269,7 @@ def game_data():
 
     #print (gamedatadict['personalrating'])
     # updatedatabase()
-
+    # task.wait()
     return render_template('index.html', gamedatameta=randgamedict,gamedataserver=gamedatadict,numblist = randlist)
 
 
@@ -408,20 +467,19 @@ def login():
     #global userdata
     # Forget the user id
     session.clear()
-
+    allusers =db.execute("SELECT * FROM users").fetchall()
+    jsondata = json.dumps(allusers)
+    print(jsondata)
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-
+        
         # Checks the database for the username
         username = request.form.get("username")
-        users = db.execute("SELECT * FROM users WHERE username = ?", [username])
+        users = db.execute("SELECT * FROM users WHERE username = ?", [username]).fetchall()
         password = request.form.get("password")
-        rawuserdata=users.fetchall()
-        userdata = [list(i) for i in rawuserdata]
-        #print (userdata[0])
-        #print(userdata[0][3])
-        #print(password)
-        #print(list(users.fetchone()))
+        rawuserdata=users
+
+        userdata = [list(i) for i in users]
   
         if not username:
             return render_template("login.html", warning = "No Username")
@@ -439,13 +497,13 @@ def login():
 
         session["user_id"] = userdata[0][3]
 
-
+        gamedatadict = getgamelistdata()
         # Redirect user to index page
         return redirect("/")
 
     # Takes to login page if used anything but POST to get to page
     else:
-        return render_template("login.html", warning = "")
+        return render_template("login.html", warning = "" , jsondata=jsondata)
 def renderregister(warning):
     return render_template("register.html", warning= warning)
 
@@ -463,9 +521,6 @@ def register ():
         
        # db2.commit()
        # db2.commit()
-
-        
-
 
         password = request.form.get("password")
         confirmingpassword = request.form.get("confirmation")
@@ -621,42 +676,241 @@ def forgotpassword():
 @app.route("/mylist", methods=["GET", "POST"])
 @login_required
 def mylist():
+    global sorteddict
+    global gamedatadict2
+    sorteddict = None 
     changedrating = request.form.get("rating")
     tabledata = db.execute('PRAGMA table_info(gamelist)')
     tabledata=tabledata.fetchall()
     gamedatadict=getgamelistdata()
+    gamedatadict2 = getgamelistdata()
+    # mylistfeed(gamedatadict)
 
-    return render_template("mylist.html", gamedata = gamedatadict)
+    return (render_template("mylist.html", gamedata = gamedatadict))
 
 
+def sort_mc_asc (type):
+    if isint(type["GOR"]):
+        return type["GOR"]
+    else:
+        return 0 
+def sort_mc_desc (type):
+    if isint(type["GOR"]):
+        return -type["GOR"]
+    else:
+        return 0 
+def sort_pr_asc (type):
+    if isint(type["GPR"]):
+        return type["GPR"]
+    else:
+        return 0 
+def sort_pr_desc (type):
+    if isint(type["GPR"]):
+        return -type["GPR"]
+    else:
+        return 0
+def sort_hp_asc (type):
+    if isint(type["GHP"]):
+        return type["GHP"]
+    else:
+        return 0
+def sort_hp_desc (type):
+    if isint(type["GHP"]):
+        return -type["GHP"]
+    else:
+        return 0
+
+@app.route("/mylistfeeder", methods=["GET", "POST"])
+@login_required
+def mylistfeeder():
+    global gamedatadict2
+    global sorteddict
+
+    global gamedatadict2filter
+    # print(gamedatadict2)
+
+    if request.method == "POST":
+        mcrmin = request.form.get("fmetamin")
+        mcrmax = request.form.get("fmetamax")
+        permin=request.form.get("fpermin")
+        permax = request.form.get("fpermax")
+        sorttype = request.form.get("sorttype")
+    
+        status = request.form.get("status")
+        hoursplayed = request.form.get("hoursplayed")
+        try: 
+            if (hoursplayed.strip() == ""):
+                hoursplayed = "Nah"
+        except:
+            hoursplayed
+        personalrating = request.form.get("personalrating")
+        
+
+        if mcrmin or mcrmax or permin or permax:
+            sorteddict = None
+            gamedatadict2 = getgamelistdatafilter(mcrmin,mcrmax,permin,permax)
+            return (jsonify (gamedatadict2))
+        elif sorttype:
+            gd2 = gamedatadict2
+            gdlsdict =[]
+            name = gd2["name"]
+            bgimgs = gd2["backgroundimages"]
+            ghp= gd2["hoursplayed"]
+            gor= gd2["onlinerating"]
+            gpr=gd2["personalrating"]
+            grd= gd2["releasedate"]
+            gst = gd2["status"]
+            gwb = gd2["website"]
+            for i in range (len(gamedatadict2["name"])):
+                gdlsdict.append({"Number": [i],"Name": name[i], "BGimg": bgimgs[i], 
+                "GHP": ghp[i], "GOR": gor[i], "GPR": gpr[i], "GRD": grd[i],
+                "GST": gst[i], "GWB": gwb[i]})
+            
+            unsortedgdlsdict= gdlsdict
+            sorttype = sorttype.strip()
+            # print(sorttype)
+            if sorttype =="MCD":
+                gdlsdict.sort(key = sort_mc_desc)
+                sorteddict = gdlsdict
+            elif sorttype == "MCA":
+                gdlsdict.sort(key = sort_mc_asc)
+                sorteddict = gdlsdict
+
+            elif sorttype == "PRD":
+                gdlsdict.sort(key = sort_pr_desc)
+                sorteddict = gdlsdict
+
+            elif sorttype == "PRA":
+                gdlsdict.sort(key = sort_pr_asc)
+                sorteddict = gdlsdict
+            elif sorttype == "NS/TA":  
+                sorteddict = unsortedgdlsdict
+            elif sorttype == "HPD":
+                gdlsdict.sort(key= sort_hp_desc)
+                sorteddict = gdlsdict
+            elif sorttype == "HPA":
+                gdlsdict.sort(key = sort_hp_asc)
+                sorteddict = gdlsdict
+            else:
+                sorteddict = unsortedgdlsdict
+            return (jsonify(sorteddict))
+        elif status:
+            status = status.strip()
+            print(status)
+            gamename = (request.form.get("gamename")).strip()
+            print(gamename)
+            db.execute("UPDATE gamelist SET status = ? WHERE userid = ? AND game = ?", ((status), session["user_id"], gamename))
+            gd2 = gamedatadict2
+            names = gamedatadict2["name"]
+            if gamename in names:
+                nmindex = names.index(gamename)
+                gamedatadict2["status"][nmindex] = status 
+
+        elif hoursplayed:
+            gamename = (request.form.get("gamename")).strip()
+            print(gamename)
+            if isint(hoursplayed):
+                print(hoursplayed)
+                db.execute("UPDATE gamelist SET hoursplayed = ? where userid = ? AND game = ?", ((hoursplayed,session["user_id"], gamename)))
+                names = gamedatadict2["name"]
+                if gamename in names:
+                    nmindex = names.index(gamename)
+                    gamedatadict2["hoursplayed"][nmindex] = int(hoursplayed) 
+            
+            else:
+                db.execute("UPDATE gamelist SET hoursplayed = ? where userid = ? AND game = ?", ((None,session["user_id"], gamename))) 
+                names = gamedatadict2["name"]
+                if gamename in names:
+                    nmindex = names.index(gamename)
+                    gamedatadict2["hoursplayed"][nmindex] = "_"
+        elif personalrating:
+            gamename = (request.form.get("gamename")).strip()
+            print(gamename)
+
+            if isint(personalrating):
+                db.execute("UPDATE gamelist SET personalrating = ? where userid = ? AND game = ?", ((personalrating,session["user_id"], gamename)))
+                names = gamedatadict2["name"]
+                if gamename in names:
+                    nmindex = names.index(gamename)
+                    gamedatadict2["personalrating"][nmindex] = int(personalrating) 
+            else:
+                db.execute("UPDATE gamelist SET personalrating = ? where userid = ? AND game = ?", ((None,session["user_id"], gamename)))
+
+                names = gamedatadict2["name"]
+                if gamename in names:
+                    nmindex = names.index(gamename)
+                    gamedatadict2["personalrating"][nmindex] = "_"
+        db2.commit()
+
+            # for i in ra
+        return(jsonify(gamedatadict2))
+
+
+    else:   
+            print(sorteddict)
+            if (sorteddict):
+
+                # tabledata = db.execute('PRAGMA table_info(gamelist)')
+                # tabledata=tabledata.fetchall()
+                # gamedatadict2 = getgamelistdata()
+
+                return (jsonify(sorteddict))
+            # elif (gamedatadict2filter):
+            #     return (jsonify(gamedatadict2filter))
+            elif (gamedatadict2):
+                return (jsonify(gamedatadict2))
 @app.route("/sortlist", methods=["GET", "POST"])
 @login_required
 def sortlist():
+    global gamedatadict2
     if request.method =="POST":
         sorttype = request.form.get("sort-type")
         sorttype = sorttype.strip()
         print(sorttype)
         if sorttype == "Metacritic Descending":
-            gamedatadict = getgamelistdatasort("DESC","onlinerating")
+            gamedatadict2 = getgamelistdatasort("DESC","onlinerating")
         elif sorttype == "Metacritic Ascending":
-            gamedatadict = getgamelistdatasort("ASC","onlinerating")
+            gamedatadict2 = getgamelistdatasort("ASC","onlinerating")
         elif sorttype == "Personal Descending":
-            gamedatadict = getgamelistdatasort("DESC","personalrating")
+            gamedatadict2 = getgamelistdatasort("DESC","personalrating")
 
         elif sorttype == "Personal Ascending":
-            gamedatadict = getgamelistdatasort("ASC","personalrating")
+            gamedatadict2 = getgamelistdatasort("ASC","personalrating")
+        elif sorttype == "Normal/Time Added":
+            gamedatadict2 = getgamelistdata()
+        else:
+            gamedatadict2 = getgamelistdatasort("ASC","onlinerating")
+
     
         return render_template("mylist.html",gamedata=gamedatadict)
     else:
-        print(sorttype)
+        # print(sorttype)
+        gamedatadict=getgamelistdata()
+        return jsonify (gamedatadict2)
+
+# @app.route("/sortfetch",methods=["GET"])
+# def fetchsortlist():
+@app.route("/filterlist", methods=["GET", "POST"])
+@login_required
+def filterlist():
+    global gamedatadict2
+
+    if request.method =="POST":
+        mcrmin = request.form.get("fmetamin")
+        mcrmax = request.form.get("fmetamax")
+
+        permin=request.form.get("fpermin")
+        permax = request.form.get("fpermax")
+
+        gamedatadict = getgamelistdatafilter(mcrmin,mcrmax,permin,permax)
+        gamedatadict2 = getgamelistdatafilter(mcrmin,mcrmax,permin,permax)
+
+
+        # mylistfeed(gamedatadict)
+        return render_template("mylist.html",gamedata=gamedatadict)
+    else:
         gamedatadict=getgamelistdata()
         return render_template("mylist.html",gamedata=gamedatadict)
-
-
-            
-        
-
-    
 def rendereditlist(message):
     gamedatadict=getgamelistdata()
     hoursplayedls = gamedatadict['hoursplayed']
@@ -690,8 +944,7 @@ def editing():
                 return rendereditlist( "Choose Any Real Number Between 0 and 100")
         else:
                 return rendereditlist("Please Only Submit Numbers")
-    
-    
+
     print(session["user_id"])
     if (changedrating != None):
         if changedrating =="":
@@ -740,7 +993,6 @@ def getrandomgamelist():
                 randlist.append(randnumb)
     else:
         while len(randlist) <= 10:
-
             randnumb=rand.randint(0,len(gamedatadictname)-1)
             if randnumb not in randlist: 
                 randlist.append(randnumb)
@@ -923,8 +1175,6 @@ def renderpasschange(warning):
 @login_required
 def password_change():
     global userdata
-
-    
     """Let user change the password"""
     oldpassword = request.form.get("oldpassword")
     password = request.form.get("password")
@@ -998,7 +1248,60 @@ def wishlistpage():
     names = wishdatadict['name']
 
     return render_template("wishlist.html", username=username, iconchars = acabrev, gamedata = wishdatadict, onlynames = names)
+@app.route("/account/details", methods=["GET", "POST"])
+def accountdetails():
+    users = db.execute("SELECT * FROM users WHERE id = ?", [session["user_id"]])
+    rawuserdata=users.fetchall()
+    userdata = [list(i) for i in rawuserdata]
+    # print(userdata)
+    # userid = session["user_id"]
+    username = userdata[0][0]
+    email = userdata[0][4]
 
+    gametotalquery= db.execute("SELECT * FROM gamelist where userid = ?", [session["user_id"]]).fetchall()
+    usergames = [list(i) for i in gametotalquery]
+    # print(usergames)
+    gametotal = len(usergames)
+    print(gametotal)
+    personalratings, high90,high80,unrated,metacriticratings,metacritichigh90,averagemetacriticlist,averagepersonalist = ([] for i in range(8))
+
+    for i in range(gametotal):
+        personalratings.append(usergames[i][1])
+        metacriticratings.append(usergames[i][2])
+
+    
+    for i in personalratings:
+        if isinstance(i, int) :
+            if i >= 90:
+                high90.append(i)
+            
+            if i >= 80:
+                high80.append(i)
+            
+            averagepersonalist.append(i)
+        elif  i== None or i == "":
+            unrated.append(i)
+    for i in metacriticratings:
+        if isinstance(i, int) :
+            if i >= 90:
+                metacritichigh90.append(i)
+            averagemetacriticlist.append(i)
+    
+    averagepersonalrating = round (mean(averagepersonalist),2)
+    averagemetacriticrating = round (mean(averagemetacriticlist),2)
+
+    totals = [len(high90), len(high80),len(unrated)]
+
+    total90 = len(high90)
+    total80 = len(high80)
+    totalunrated = len(unrated)
+
+    totalmeta90  = len(metacritichigh90)
+    
+
+    return render_template("accountdetails.html", 
+    username = username, iconchars = acabrev,  email = email, gametotal = gametotal, totals = totals, total90=total90, total80 = total80, totalunrated = totalunrated,
+    totalmeta90 = totalmeta90, averagepersonalrating = averagepersonalrating, averagemetacriticrating = averagemetacriticrating)
 @app.route("/logout")
 def logout():
     """Log user out"""
@@ -1038,4 +1341,5 @@ if __name__ == '__main__':
     print(userdata)
     userid = session["user_id"]
     username = userdata[0][0]
+    app.debug = True
     app.run(debug=True)

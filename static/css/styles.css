@@ -660,27 +660,22 @@ li>div.gold:not(.tablerating), .account-mcr.gold, .accountranks.gold, .var-onlin
   border-color: limegreen !important;
 }
 
-
-
-/* .var-online-rating-data.green{
-  background-color: limegreen !important;
-  border-color: limegreen !important;
+.nobgred{
+  color:red;
+}
+.nobggreen{
+  color:limegreen
+}
+.nobggold{
+  color:gold;
+}
+.nobgorange{
+  color:darkorange;
+}
+.table-hours-played:hover, .table-personal-rating:hover, .table-status:hover {
+  cursor: pointer;
 
 }
-.var-online-rating-data.red{
-  background-color:red !important;
-  border-color: red !important;
-
-}
-.var-online-rating-data.orange{
-  background-color:darkorange!important;
-  border-color: darkorange !important;
-
-}
-.var-online-rating-data.gold{
-  background-color:gold !important;
-  border-color: gold !important;
-} */
 
 h7.green {
   color: limegreen

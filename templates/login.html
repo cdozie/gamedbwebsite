@@ -12,8 +12,9 @@
 {% endwith %}  
 <div class="container-fluid">
     <p class = login-title> LOGIN </p>
-        <form action="/login" method="post">
-            <!-- Proper Spacing With Auto Sizing For Boxes -->
+        <!-- <form action="/login" method="post">
+             Proper Spacing With Auto Sizing For Boxes 
+            <label for="username">Username</label>
             <div class="mb-3">
                 <input autocomplete="off" autofocus class="form-control mx-auto w-auto login-form" id="username" name="username" placeholder="Username" type="text" required >
             </div>
@@ -24,12 +25,19 @@
             <hr>
             <h4><a class="login-alternatives" href="/register">New around here? Register</a> </h4>
             <h4><a class="login-alternatives" href="/forgotpasswordemail">Forgot password?</a></h4>
-            <hr>
-        </form>
+        </form> -->
+        <div id = "react-login-form"></div>
+        <hr>
+        <h4><a class="login-alternatives" href="/register">New around here? Register</a> </h4>
+        <h4><a class="login-alternatives" href="/forgotpasswordemail">Forgot password?</a></h4>
+        <hr>
 
-        </div>
+
+
 </div>
+        
 
+<!-- </div> -->
     <p class = "add-warning"> {{warning}}</p>
     <span></span>
 {% endblock %}

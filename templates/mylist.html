@@ -2,9 +2,11 @@
 {% block main %}
 
 <div id="list-page-title"> Your Game List</div> 
-
+<div id ="list-page"></div>
 <!-- <span id ="order-by-options"></span> -->
-<form action="/sortlist" id = "sort-dropdown" method="post"> 
+<!-- <div id= "react-filter-form"></div> -->
+<!-- <hr> -->
+<!-- <form action="/sortlist" id = "sort-dropdown" method="post"> 
 <div class="dropdown">
   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
     Order By
@@ -15,14 +17,19 @@
     <li><span class="dropdown-item sortitem" >Metacritic Descending</span></li>
     <li><span class="dropdown-item sortitem" >Personal Ascending</span></li>
     <li><span class="dropdown-item sortitem">Personal Descending</span></li>
+    <li><span class="dropdown-item sortitem">Normal/Time Added</span></li>
+
 
   </ul>
 </div>
 <input name = "sort-type" id = "sort-input" value ="" style = "display: none;">
-</form>
-<hr>
+</form> -->
+<!-- <div id = "react-sort-dropdown"></div> -->
 
-<div class ="edit-list-search">
+
+<!-- <hr> -->
+
+<!-- <div class ="edit-list-search">
   <label for="game">Find the Game You Want To View:</label>
   <input type = "text"  autocomplete = "off"  list = "" autofocus class="form-control mx-auto w-25 game-form game-highlight" 
   id="gameSearch2" name = "game" placeholder="Search Game:" required title="Search for a  Game In Your List" >
@@ -31,16 +38,12 @@
     {% for i in range(gamedata.name|length)%} 
      <div class = "fullsearchresults">
       <a class = "editgamelistoptions" href="#{{gamedata.name[i]}}"> {{gamedata.name[i]}}</a> 
-      <!-- <img class = "editlistsearchimages" id= "{{gamedata.backgroundimages[i]}}" src = "{{gamedata.backgroundimages[i]}}"> -->
     </div>
    
     {% endfor %}
   </datalist>
 
   <hr>
-<div class="edit-list-heading"><div id="edit-list-word">Edit: </div>  <div class ="edit-list-choices"><a id="add-list-my-list-link" href="/addlist">+</a> 
-    <a id ="remove-element-list" href="/">-</a> <a id ="modify-element-list" href="/editlist">Modify</a></div>
-</div> 
 <table class="table table-hover  my-list">
     <caption>Your List</caption>
     <thead>
@@ -56,9 +59,7 @@
       </tr>
     </thead>
     {% for i in range(gamedata.name|length)%}
-    <!-- {% if (i % 25 == 0) and (i != 0 ) %}
-    <tbody class = "actualtablesection{{(i/25)|int + 1}}" style = "display:none">
-    {% endif %} -->
+
       <tr id = "{{gamedata.name[i]}}">
         <th scope="row">{{i+1}}</th>
         <td><img class ="my-list-images" src = "{{gamedata.backgroundimages[i]}}"></td>
@@ -69,15 +70,13 @@
         <td>{{gamedata.status[i]}}</td>
         <td><a class = "list-table-websites" href = "{{gamedata.website[i]}}">{{gamedata.website[i]}}</a></td>
       </tr>
-    <!-- {% if (i % 25 == 24) and (i != 24) %}
-    </tbody>
-    {% endif %} -->
-    {% endfor %}
+
+    {% endfor %} -->
 
   </table>
 
   <style>
-    th, td:not(.tablerating) {
+    th, td:not(.tablerating, #editHP, #editST, #editPR) {
     background-color: #f3ec78;
     background-image: linear-gradient(45deg, purple, aqua);
     background-size: 100%;

@@ -11,7 +11,7 @@
     {% endif %}  
     {% endwith %}  
 
-    <div class="container-fluid var-page-container" id = "not">
+    <div class="container-fluid var-page-container" id = "yes">
         <div class = "var-page-heading"> 
             <h2 class = "var-game-title gradientcolor"> <a href = "https://www.suckerpunch.com/category/games/ghost-of-tsushima/" > Ghost of Tsushima </a></h2>
             <div class = "var-online-rating">
@@ -29,16 +29,16 @@
                     <img class = "var-game-image" src = "https://media.rawg.io/media/games/f24/f2493ea338fe7bd3c7d73750a85a0959.jpeg">
                     <div class = "var-user-analytics">
                         <h6 class = "var-personal-rating analytic"> Your Rating : 
-                        <div data-color = "_" class = "var-personal-rating-data varpersonalrankings var-rating-border">_</div> 
+                        <div data-color = "90" class = "var-personal-rating-data varpersonalrankings var-rating-border">90</div> 
                         </h6>
                         <h6 class = "var-status analytic"> Game Status:
-                        <div class = "var-status-data gradientcolorpinkwhite "> Not in List</div>
+                        <div class = "var-status-data gradientcolorpinkwhite "> Playing</div>
                         </h6>
                         <h6 class = "var-release-date analytic"> Game Release Date:
                         <div class = "gradientcolorpinkwhite">2020-07-17</div>
                         </h6>
                         <h6 class = "var-hours-played analytic"> Game Hours Played:
-                        <div class = "var-hours-played-data gradientcolorpinkwhite"> Not in List</div>
+                        <div class = "var-hours-played-data gradientcolorpinkwhite"> 71</div>
                         </h6>
 
                     </div>
@@ -47,7 +47,7 @@
                 <input name="gamename" value = "Ghost of Tsushima" style = "display:none">
                 <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
                 
-                <button type="button" class="btn btn-success var-add-button var-buttons" id = "Ghost of Tsushima" style =  "display:block;">Add to List</button>
+                <button type="button" class="btn btn-success var-add-button var-buttons" id = "Ghost of Tsushima" style =  "display:none;">Add to List</button>
 
             
             
@@ -58,126 +58,11 @@
         </form>
                 <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
                     <input name = "deletedgame" style = "display:none" value = "Ghost of Tsushima">
-                    <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "Ghost of Tsushima" style = "display:none;">Remove from List</button>
+                    <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "Ghost of Tsushima" style = "display:block;">Remove from List</button>
                 </form>
         
 
     </div>
-
-    <style> 
-        .var-page-main {
-            display:grid;
-            grid-template-columns: 1fr .5fr 10px;
-            grid-row-gap: 1%;
-            grid-auto-rows: min-content;
-        }
-        .var-page-heading {
-            display:grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap:1%;
-            grid-auto-rows: min-content;
-        }
-        .var-game-title{
-            grid-column: 1/-1;
-            grid-row: 1;
-        }
-        .var-online-rating{
-            grid-column: 1;
-            grid-row: 2;
-        }
-        .onlinerankdescription{
-            grid-column: 2;
-            grid-row: 2;
-        }
-        .var-game-image {
-            grid-column: 2;
-            grid-row: 1;
-            max-height:100% !important;
-            height:100%;
-            min-height:100%;
-            width: 100% !important;
-            border-radius: 20%;
-        }
-
-        .var-personal-rating {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        .var-user-analytics {
-            grid-column: 1;
-            display: grid;
-            row-gap:20px;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: min-content;
-        }
-        .var-status {
-            grid-column: 2;
-            grid-row: 1;
-        }
-        .var-release-date{
-            grid-column: 1;
-            grid-row: 2;
-        }
-        .var-hours-played{
-            grid-column:2;
-            grid-row: 2;
-        }
-        .var-add-button,.var-remove-button-form{
-            grid-column:1/-1;
-            grid-row:3;
-            width:25%;
-            margin: auto;
-
-        }
-        .var-remove-button{
-            width:100%;
-
-            }
-        .var-edit-button{
-            grid-column: 1/-1;
-            grid-row :3;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:2%;
-            margin-bottom:2%;
-            
-            width: 25%;
-        }
-        .var-buttons{
-            font-weight:bolder;
-            font-size: 1vw;
-        }
-        
-        .analytic {
-            border-radius: 50%;
-            padding: 2.5vw 2.5vw;
-            background-color: rgba(105,105,105,0.5);
-        }
-
-        .var-platforms{
-            grid-column: 1/-1;
-            grid-row: 2;
-            row-gap:3%;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:2%;
-            margin-bottom:2%
-        }
-        .onlinerankdescription::before {
-            position: absolute;
-            left: 50%;
-            width: 2px;
-            height: 100%;
-            background: grey;
-            right: -9px
-        }
-
-    </style>
-
-
-    
-
-
     {% endblock %}
 
     

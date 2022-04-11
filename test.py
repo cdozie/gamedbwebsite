@@ -5,7 +5,7 @@ import math
 from flask import redirect, render_template, request, session
 from functools import wraps
 import pyotp
-
+import json
 api_key = "bbd0f6e116b145bd81a72ee35824f71f"
 game="final-fantasy-10"
 game2 = "persona-5"
@@ -59,15 +59,15 @@ print (namelistdata["results"][3]["slug"])
 # of pivot
  
  
-totp = pyotp.TOTP("base32secret3232")
-print(totp.now())
+# totp = pyotp.TOTP("base32secret3232")
+# print(totp.now())
 
-totp = pyotp.TOTP("base32secret3232")
-print(totp.verify("492039"))
+# totp = pyotp.TOTP("base32secret3232")
+# print(totp.verify("492039"))
 
-secret = pyotp.random_base32()
-print (secret)
+# secret = pyotp.random_base32()
+# print (secret)
 
-import pyotp
-totp = pyotp.TOTP("JBSWY3DPEHPK3PXP")
-print("Current OTP:", totp.now())
+# import pyotp
+# totp = pyotp.TOTP("JBSWY3DPEHPK3PXP")
+# print("Current OTP:", totp.now())

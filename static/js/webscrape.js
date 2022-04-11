@@ -7,7 +7,11 @@ import ReactDOM from 'react-dom';
 
 import Zoom from 'react-reveal/Zoom';
 import About from './aboutpage';
-import DropdownOption from './orderddown';
+import DropdownFilter from './sortdropdown';
+import LoginForm from './loginform';
+import FilterForm from './filterform';
+import MyList from './mylist';
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 //@ts-check
@@ -323,7 +327,7 @@ $(function () {
     // Writing HTML in JavaScript. Can be better Here
     $(".var-edit-button").css("display","block")
     if(modiefiedlements.length == 0 && firstclass == "var-personal-rating-data"){
-      th.html('<input type = "number" class = "mx-auto w-auto change" id=  "var-personal-rating-change"  name = "rating"  min = "0" max = "100">')
+      th.html('<input type = "number" class = "form-control mx-auto w-auto change" id=  "var-personal-rating-change"  name = "rating"  min = "0" max = "100">')
       th.removeClass("varpersonalrankings")
       th.addClass('modifying')
       $('.modifying > #var-personal-rating-change').val(formerdata)
@@ -349,7 +353,7 @@ $(function () {
   globalThis.varclass = th.attr ('class')
   } 
   else if (modiefiedlements.length == 0 && firstclass == "var-hours-played-data"){
-    th.html('<input type = "number" class = "mx-auto w-100" name = "hoursplayed" id = "var-edit-hours-played" " min="0">')
+    th.html('<input type = "number" class = "form-control mx-auto w-100" name = "hoursplayed" id = "var-edit-hours-played" " min="0">')
     th.removeClass(gradientclass)
 
     th.addClass('modifying')
@@ -444,7 +448,7 @@ $(document).on ('dblclick', function(e){
             e.stopPropagation();
         
     }
-    if (classundefined == 0){// if (classname) { }
+    if (classundefined == 0){
     if (classname == "table-personal-rating modifying"){
 
     //$("#url-displayname").html($(this).val())
@@ -669,30 +673,50 @@ $("#add-form").on("submit", function() {
 
 
 
-
-// ReactDOM.render(
-//   <About />,
-//   document.getElementById('test-react-component')
-// );
-
-$(".sortitem").on("click",function() {
-  var sortval = $(this).text();
-  // alert(sortval)
-  $("#sort-input").val(sortval);
-  $("#sort-dropdown").trigger("submit")
-});
+// $(".sortitem").on("click",function() {
+//   var sortval = $(this).text();
+//   // alert(sortval)
+//   $("#sort-input").val(sortval);
+//   $("#sort-dropdown").trigger("submit")
+// });
 
 
-//Rendering React Components if on the Page.
+// Rendering React Components if on the Page.
+
+
+// const rfilterform = document.getElementById('react-filter-form');
+// if (rfilterform){
+  
+//   ReactDOM.render(<FilterForm />, rfilterform)
+// ;
+// }
+
+// const rsortdropdown = document.getElementById('react-sort-dropdown');
+// if (rsortdropdown){
+  
+//   ReactDOM.render(<DropdownFilter />, rsortdropdown)
+// ;
+// }
+
 const aboutreact = document.getElementById('test-react-component');
 if (aboutreact){
   ReactDOM.render(<About />, aboutreact)
 };
 
-const ddownbtn = document.getElementById('order-by-options');
-if (ddownbtn){
-ReactDOM.render(
-  <DropdownOption />,
-  ddownbtn
-)};
+
+const rloginform = document.getElementById('react-login-form');
+if (rloginform){
+  ReactDOM.render(
+    <LoginForm />,
+    rloginform
+  )
+};
+
+const mylistid = document.getElementById('list-page');
+if (mylistid){
+  ReactDOM.render(
+    <MyList />,
+    mylistid
+  )
+}
 

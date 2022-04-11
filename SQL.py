@@ -4,6 +4,8 @@ from sqlite3 import Error
 import random
 from random import randint
 import os 
+import json
+import app
 def create_connection(path):
     connection = None
     try:
@@ -17,8 +19,8 @@ def create_connection(path):
 cur_path = os.path.dirname(os.path.abspath(__file__))
 
 #names db2 since always call it after a database change 
-db2 = create_connection(cur_path + "\\gamestorage.db")
-db = db2.cursor()
+# db2 = create_connection(cur_path + "\\gamestorage.db")
+# db = db2.cursor()
 def execute_read_query(connection, query):
     cursor = connection.cursor()
     result = None
@@ -168,10 +170,22 @@ def ratingfilter(rating):
         if rating[i] == None or rating[i] == "":
             rating[i] ="_"
     return (None)
-def getgamelistdata(*args):
-    usergamelist = db.execute ("SELECT * FROM gamelist where userid = ?;", [session["user_id"]])
+def getusersjson(json_str = False):
+        app.db2.row_factory = sqlite3.Row # This enables column access by name: row['column_name'] 
+        usergamelist = app.db.execute ("SELECT * FROM gamelist where userid = ?;", [session["user_id"]])
+        
+        app.db2.commit()
+        app.db2.close()
+        semigamelist = [dict(i) for i in usergamelist.fetchall()]
+        if json_str:
+            return json.dumps(semigamelist)
+
+        return usergamelist
+
+
+
+def gd_dict_creation(usergamelist):
     semigamelist = [list(i) for i in usergamelist.fetchall()]
-    # print(json.dumps(semigamelist)[0])
     realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist = ([] for i in range(8))
     for i in range (len(semigamelist)):
         realgamelist.append(semigamelist[i][0])
@@ -182,40 +196,66 @@ def getgamelistdata(*args):
         releasedatelist.append(semigamelist[i][7])
         websitelist.append(semigamelist[i][8])
         backgroundimagelist.append(semigamelist[i][10])
+
         
     gamedatadict = {'name': realgamelist, 'personalrating' : personalgameratinglist, 'onlinerating': onlinegameratinglist, 
     'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist}
     personalratings = gamedatadict['personalrating']
     metacriticratings = gamedatadict['onlinerating']
+    hoursplayed = gamedatadict['hoursplayed']
     ratingfilter(personalratings)
     ratingfilter(metacriticratings)
+    ratingfilter(hoursplayed)
+    return (gamedatadict)
+
+def getgamelistdata(*args):
+    usergamelist = app.db.execute ("SELECT * FROM gamelist where userid = ?;", [session["user_id"]])
+    # print(json.dumps(semigamelist)[0])
+    gamedatadict = gd_dict_creation(usergamelist)
+    return (gamedatadict)
+def getgamelistdata2():
+    usergamelist = app.db.execute ("SELECT * FROM gamelist")
+    gamedatadict = gd_dict_creation(usergamelist)
+
     return (gamedatadict)
 def getgamelistdatasort(ordertype, column):
     #Get rid of the repeat present right here.
-    usergamelist = db.execute (f"SELECT * FROM gamelist where userid = ? ORDER BY {column} {ordertype};", [session["user_id"]])
-    semigamelist = [list(i) for i in usergamelist.fetchall()]
-    # print(json.dumps(semigamelist)[0])
-    realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist = ([] for i in range(8))
-    for i in range (len(semigamelist)):
-        realgamelist.append(semigamelist[i][0])
-        personalgameratinglist.append(semigamelist[i][1])
-        onlinegameratinglist.append(semigamelist[i][2])
-        statuslist.append(semigamelist[i][4])
-        hoursplayedlist.append(semigamelist[i][5])
-        releasedatelist.append(semigamelist[i][7])
-        websitelist.append(semigamelist[i][8])
-        backgroundimagelist.append(semigamelist[i][10])
-        
-    gamedatadict = {'name': realgamelist, 'personalrating' : personalgameratinglist, 'onlinerating': onlinegameratinglist, 
-    'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist}
-    personalratings = gamedatadict['personalrating']
-    metacriticratings = gamedatadict['onlinerating']
-    ratingfilter(personalratings)
-    ratingfilter(metacriticratings)
+    usergamelist = app.db.execute (f"SELECT * FROM gamelist where userid = ? ORDER BY {column} {ordertype};", [session["user_id"]])
+    gamedatadict = gd_dict_creation(usergamelist)
+
     
     return (gamedatadict)
+def isint(value):
+    try:
+        value = int(value)
+
+        return True
+    except ValueError:
+         return False
+
+def getgamelistdatafilter (mcrmin,mcrmax,permin,permax):
+    if not isint(mcrmin):
+        mcrmin = 0
+    if not isint(mcrmax):
+        mcrmax = 100
+    if not isint(permin):
+        permin = 0
+    if not isint(permax):
+        permax = 100
+    mcrmin = int(mcrmin)
+    mcrmax = int(mcrmax)
+    if mcrmin > mcrmax:
+        mcrmin = 0
+    if permin > permax:
+        permin = 0
+
+    usergamelist = app.db.execute (f"SELECT * FROM gamelist where userid = ? AND onlinerating BETWEEN {mcrmin} AND {mcrmax} AND personalrating BETWEEN {permin} AND {permax};", [session["user_id"]])
+    gamedatadict = gd_dict_creation(usergamelist)
+
+    return (gamedatadict)
+
 def getgamedatabasedata():
-    usergamelist = db.execute ("SELECT * FROM gamedatabase")
+    usergamelist = app.db.execute ("SELECT * FROM gamedatabase")
     semigamelist = [list(i) for i in usergamelist.fetchall()]
     realgamelist, gameidlist, slugnamelist, onlinegameratinglist, backgroundimagelist, websitelist, releasedatelist,platformlist = ([] for i in range(8))
     for i in range (len(semigamelist)):
