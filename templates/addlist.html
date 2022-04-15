@@ -30,10 +30,12 @@ function slugConversion() {
     <datalist id= "gamedropdown">
         {% for i in range (1,11)%}
         <div class = "fullsearchresults">
+          <div class = "search-result-block">
+            <img class = "gameoptionimages" id= "game{{i}}images" src ="">
           <option class = "item-text gamedboptions" id ="game{{i}}"> </option> 
-          <img class = "gameoptionimages" id= "game{{i}}images" src ="">
+          </div>
+
         </div>
-        <hr>
         {% endfor %}
 
     <input id = "realgameSearch" name = "sluggame" value="" style = "display: none;">
@@ -90,7 +92,7 @@ function slugConversion() {
   {% set j = numblist[i] %}
         
           <li class = "item"> 
-          <div class = "item-text" ><a href = "/game/{{gamedata.name[j]}}" >{{gamedata.name[j]}} </a> </div>
+          <div class = "item-text" ><a href = "/game/{{gamedata.slug[j]}}" >{{gamedata.name[j]}} </a> </div>
             <img class = "add-list-images" alt = "{{gamedata.name[j]}} Image" src = "{{gamedata.backgroundimages[j]}}"> 
             
             <div class = "item-text">Your Rating:</div>          

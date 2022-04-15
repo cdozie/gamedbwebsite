@@ -3,77 +3,8 @@
 
 <div id="list-page-title"> Your Game List</div> 
 <div id ="list-page"></div>
-<!-- <span id ="order-by-options"></span> -->
-<!-- <div id= "react-filter-form"></div> -->
-<!-- <hr> -->
-<!-- <form action="/sortlist" id = "sort-dropdown" method="post"> 
-<div class="dropdown">
-  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-    Order By
-  </a>
-
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <li><span class="dropdown-item sortitem" >Metacritic Ascending</span></li>
-    <li><span class="dropdown-item sortitem" >Metacritic Descending</span></li>
-    <li><span class="dropdown-item sortitem" >Personal Ascending</span></li>
-    <li><span class="dropdown-item sortitem">Personal Descending</span></li>
-    <li><span class="dropdown-item sortitem">Normal/Time Added</span></li>
 
 
-  </ul>
-</div>
-<input name = "sort-type" id = "sort-input" value ="" style = "display: none;">
-</form> -->
-<!-- <div id = "react-sort-dropdown"></div> -->
-
-
-<!-- <hr> -->
-
-<!-- <div class ="edit-list-search">
-  <label for="game">Find the Game You Want To View:</label>
-  <input type = "text"  autocomplete = "off"  list = "" autofocus class="form-control mx-auto w-25 game-form game-highlight" 
-  id="gameSearch2" name = "game" placeholder="Search Game:" required title="Search for a  Game In Your List" >
-  </div> 
-  <datalist class = "searchlistdropdown" id= "gamedropdown">
-    {% for i in range(gamedata.name|length)%} 
-     <div class = "fullsearchresults">
-      <a class = "editgamelistoptions" href="#{{gamedata.name[i]}}"> {{gamedata.name[i]}}</a> 
-    </div>
-   
-    {% endfor %}
-  </datalist>
-
-  <hr>
-<table class="table table-hover  my-list">
-    <caption>Your List</caption>
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Image</th>
-        <th scope="col">Name</th>
-        <th scope="col">Your Rating</th>
-        <th scope="col">Metacritic Rating</th>
-        <th scope="col">Hours Played</th>
-        <th scope="col">Status</th>
-        <th scope="col">Website</th>
-      </tr>
-    </thead>
-    {% for i in range(gamedata.name|length)%}
-
-      <tr id = "{{gamedata.name[i]}}">
-        <th scope="row">{{i+1}}</th>
-        <td><img class ="my-list-images" src = "{{gamedata.backgroundimages[i]}}"></td>
-        <td><a href ="/game/{{gamedata.name[i]}}">{{gamedata.name[i]}}</a></td>
-        <td data-color = "{{gamedata.personalrating[i]}}" class = "tablerating">{{gamedata.personalrating[i]}}</td>
-        <td data-color = "{{gamedata.onlinerating[i]}}" class = "tablerating">{{gamedata.onlinerating[i]}}</td>
-        <td>{{gamedata.hoursplayed[i]}}</td>
-        <td>{{gamedata.status[i]}}</td>
-        <td><a class = "list-table-websites" href = "{{gamedata.website[i]}}">{{gamedata.website[i]}}</a></td>
-      </tr>
-
-    {% endfor %} -->
-
-  </table>
 
   <style>
     th, td:not(.tablerating, #editHP, #editST, #editPR) {

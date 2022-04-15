@@ -17,45 +17,7 @@ UG DATABASE
 {% endif %}  
 {% endwith %}  
 
-        <h2 id = "Highest-Heading" class = "left-align"> RANDOM GAMES TO TRY</h2> 
-        <hr>
-        <ul class="hs full">
-            {%for i in range(0, 10)%}
-            
-            <form action="/search" class = "rand-game-list-form" id = "rand-game-list-form{{i}}" method = "post">
-                <li class = "item"> <div class = "rand-name-forms item-text form-link" id = "rand-game-name{{i}}"> {{gamedatameta.rank[i]}}. {{gamedatameta.name[i]}} </div>
-                    <input name = "rand-game-slug" style="display: none;" value="{{gamedatameta.slug[i]}}">
-                    <img class = "game-image-items" src = "{{gamedatameta.backgroundimage[i]}}" onerror="this.src='thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';" /> 
-                    
-                    <div class = "item-text">Metacritic Rating:</div> 
-                    <div data-color ="{{gamedatameta['rating'][i]}}" class = "rankings inlinemarker">{{gamedatameta['rating'][i]}}</div>
-                </li> 
-            </form>
-            {%endfor%}
-            </ul>
-            <hr>
-            <h2 id="add-list-label" class = "left-align"><a href ="/mylist" id="index-my-list-link">Your Games</a></h2> 
-            <hr>
-            <ul class = "hs full main-page-game-list">
-                <!-- {% set counter = 0 %} -->
-
-
-
-                    {% for i in range(numblist|length) %}
-                    {% set j = numblist[i] %}
-                        <li class = "item"> 
-                        <div class = "item-text" ><a href = "/game/{{gamedataserver.name[j]}}">{{gamedataserver.name[j]}} </a> </div>
-                        <img class = "add-list-images" alt = "{{gamedataserver.name[j]}} Image" src = "{{gamedataserver.backgroundimages[j]}}" onerror>          
-                        <div class = "item-text">Your Rating:</div> 
-                        <div data-color = "{{gamedataserver.personalrating[j]}}" class = "rankings">{{gamedataserver.personalrating[j]}}</div>
-
-                        <div class = "status item-text"> {{gamedataserver.status[j]}}</div> 
-                    </li>
-                    <!-- {% set counter = counter + 1 %} -->
-
-                    {% endfor  %}
-
-</ul>
+<div id = "react-hmpg"></div>
                     
 
 <!-- <div id="like_button_container"></div> -->
@@ -64,6 +26,14 @@ UG DATABASE
     .inlinemarker{
         display:inline;
     }
+
+.rnd-hmpg-button {
+background:none;
+border:none;
+margin:0;
+padding:0;
+width:100%
+}
 </style>
 
 {% endblock %}

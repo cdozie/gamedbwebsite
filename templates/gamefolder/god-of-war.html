@@ -38,11 +38,11 @@
                         <div class = "gradientcolorpinkwhite">2018-04-20</div>
                         </h6>
                         <h6 class = "var-hours-played analytic"> Game Hours Played:
-                        <div class = "var-hours-played-data gradientcolorpinkwhite"> Never Played</div>
+                        <div class = "var-hours-played-data gradientcolorpinkwhite"> _</div>
                         </h6>
 
                     </div>
-                    <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: Not Yet Stored</h6>
+                    <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: PlayStation 5, PlayStation 4, PC</h6>
 
                 <input name="gamename" value = "God of War" style = "display:none">
                 <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
@@ -63,121 +63,6 @@
         
 
     </div>
-
-    <style> 
-        .var-page-main {
-            display:grid;
-            grid-template-columns: 1fr .5fr 10px;
-            grid-row-gap: 1%;
-            grid-auto-rows: min-content;
-        }
-        .var-page-heading {
-            display:grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap:1%;
-            grid-auto-rows: min-content;
-        }
-        .var-game-title{
-            grid-column: 1/-1;
-            grid-row: 1;
-        }
-        .var-online-rating{
-            grid-column: 1;
-            grid-row: 2;
-        }
-        .onlinerankdescription{
-            grid-column: 2;
-            grid-row: 2;
-        }
-        .var-game-image {
-            grid-column: 2;
-            grid-row: 1;
-            max-height:100% !important;
-            height:100%;
-            min-height:100%;
-            width: 100% !important;
-            border-radius: 20%;
-        }
-
-        .var-personal-rating {
-            grid-column: 1;
-            grid-row: 1;
-        }
-        .var-user-analytics {
-            grid-column: 1;
-            display: grid;
-            row-gap:20px;
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: min-content;
-        }
-        .var-status {
-            grid-column: 2;
-            grid-row: 1;
-        }
-        .var-release-date{
-            grid-column: 1;
-            grid-row: 2;
-        }
-        .var-hours-played{
-            grid-column:2;
-            grid-row: 2;
-        }
-        .var-add-button,.var-remove-button-form{
-            grid-column:1/-1;
-            grid-row:3;
-            width:25%;
-            margin: auto;
-
-        }
-        .var-remove-button{
-            width:100%;
-
-            }
-        .var-edit-button{
-            grid-column: 1/-1;
-            grid-row :3;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:2%;
-            margin-bottom:2%;
-            
-            width: 25%;
-        }
-        .var-buttons{
-            font-weight:bolder;
-            font-size: 1vw;
-        }
-        
-        .analytic {
-            border-radius: 50%;
-            padding: 2.5vw 2.5vw;
-            background-color: rgba(105,105,105,0.5);
-        }
-
-        .var-platforms{
-            grid-column: 1/-1;
-            grid-row: 2;
-            row-gap:3%;
-            margin-left:auto;
-            margin-right:auto;
-            margin-top:2%;
-            margin-bottom:2%
-        }
-        .onlinerankdescription::before {
-            position: absolute;
-            left: 50%;
-            width: 2px;
-            height: 100%;
-            background: grey;
-            right: -9px
-        }
-
-    </style>
-
-
-    
-
-
     {% endblock %}
 
     

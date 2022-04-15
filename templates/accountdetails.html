@@ -10,75 +10,9 @@
       {% endfor %}  
 {% endif %}  
 {% endwith %}  
-<div class = "accountdetails ">
-<h6 id = "detailsusername" class = "gradientcolor analytic"><div>Your Username: </div>{{username}}</h6> 
-<h6 id = "detailsemail" class = "gradientcolor analytic"> <div>Your Email: </div>{{email}}</h6> 
-<h6 id = "detailstotalgames" class ="gradientcolorpinkwhite analytic"><div>Total Games: </div>{{gametotal}}</h6>
-<h6 id = "detailsover90" class ="gradientcolorpinkwhite analytic"><div>Total Games You Rated Over 90: </div>{{total90}}</h6>
-<h6 id = "detailsover80" class ="gradientcolorpinkwhite analytic"><div>Total Games You Rated Over 80: </div>{{total80}}</h6>
-<h6 id = "detailsunrated" class ="gradientcolor analytic"><div>Unrated Games: </div>{{totalunrated}}</h6>
-<h6 id = "detailsmeta90" class ="gradientcolor analytic"><div>Metacritic Ratings over 90: </div>{{totalmeta90}}</h6>
-<h6 id = "detailsaveragemeta" class ="gradientcolor analytic"><div>Average Metacritic Rating: </div>{{averagemetacriticrating}}</h6>
-<h6 id = "detailsaveragepersonal" class ="gradientcolor analytic"><div>Average Personal Rating: </div>{{averagepersonalrating}}</h6>
 
-
+<div id = "react-account-details"></div>
 
 <!-- Can Add Metacritc Totals As Well -->
 
-</div>
-<style>
-.accountdetails{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    grid-auto-rows:min-content;
-    row-gap: 1.5%;
-}
-#detailsusername{
-    grid-column: 1;
-    grid-row:1;
-    text-align: center;
-}
-
-#detailsemail{
-    grid-column: 2;
-    grid-row:1;
-    text-align: center;
-}
-
-#detailsover80 {
-    grid-column:1;
-    grid-row:2;
-    margin: auto;
-}
-#detailsover90{
-    grid-column:2;
-    grid-row:2;
-    margin: auto;
-
-}
-#detailsunrated{
-    grid-column:1;
-    grid-row: 3;
-    margin: auto;
-}
-#detailsmeta90{
-    grid-column: 2;
-    grid-row: 3;
-}
-#detailsaveragemeta{
-    grid-column: 1;
-    grid-row:4;
-}
-
-#detailsaveragepersonal{
-    grid-column: 2;
-    grid-row:4;
-}
-#detailstotalgames{
-    grid-column: 1/-1;
-    grid-row:5;
-    text-align: center;
-}
-
-</style>
 {% endblock %}

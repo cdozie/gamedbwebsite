@@ -4,14 +4,18 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import Zoom from 'react-reveal/Zoom';
 import About from './aboutpage';
 import DropdownFilter from './sortdropdown';
 import LoginForm from './loginform';
 import FilterForm from './filterform';
 import MyList from './mylist';
-
+import Details from './accountdetails';
+import Homepage from './homepage';
+import { useEffect, useState, useLayoutEffect } from 'react';
+import { classnames  } from './mylistfunctions';
+import { Routes, Route, useParams, useNavigate, BrowserRouter } from "react-router-dom";
+import GamePage from './varinlistgamepage';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 //@ts-check
@@ -302,6 +306,14 @@ $('img').map(function(){
     }
 });
 
+$(function(){
+  $('a').each(function() {
+    if ($(this).prop('href') == window.location.href) {
+      $(this).addClass('current');
+    }
+  });
+});
+
 
 function isEmpty(str) {
     return !str.trim().length;
@@ -388,160 +400,7 @@ $(function () {
 
   }
 })
-$(function(){
-//  $('.personalratingchange').on('click',function(){
-//     $(this).trigger('focus')
-//  })
-$('.table-personal-rating, .table-hours-played, .table-status').on('click', function(){
-     var formerrating = $(this).text()
-    var modifyingelements = document.getElementsByClassName('modifying')
-    classundefined = 0
-    console.log($(this).attr('class'))
-     if(modifyingelements.length == 0 && $(this).attr('class') =="table-personal-rating"){
-        $(this).html('<input type = "number" class = "mx-auto w-auto blah " id=  "personalratingchange"  name = "rating"  min = "0" max = "100">')
-        $(this).addClass('modifying')
-        globalThis.classname = $(this).attr('class')
-        
-        $('.modifying > #personalratingchange').val(formerrating)
-         globalThis.editgamename = ($(this).closest( "tr" ).find('.editgamenames').text())
-         console.log(editgamename)
-     }
 
-     if(modifyingelements.length == 0 && $(this).attr('class') =="table-status"){
-        $(this).html('<select name="status" id = "edit-select-status" autocomplete="off"  class = "form-select form-control mx-auto w-100 game-form game-highlight "  placeholder = "Choose Status:" required> ' + 
-        '<option disable selected value>Choose Status:</option>'
-        +'<option>Plan to Play</option>'
-        +'<option>Dropped</option>'
-        +'<option>Playing</option>'
-        +'<option>On Hold</option>'
-        +'<option>Completed</option>'
-        + '<option>Wishlist</option>'
-    +'</select>')
-        $(this).addClass('modifying')
-        globalThis.classname = $(this).attr('class')
-        //var conceptName = $('#aioConceptName').find(":selected").text();
-        $('.modifying > #edit-select-status').val(formerrating)
-         globalThis.editgamename = ($(this).closest( "tr" ).find('.editgamenames').text())
-         console.log(editgamename)
-     }
-
-     if(modifyingelements.length == 0 && $(this).attr('class') =="table-hours-played"){
-        $(this).html('<input type = "number" class = "form-control mx-auto w-100 game-highlight" name = "hoursplayed" id = "hoursplayed" " min="0">')
-        $(this).addClass('modifying')
-        globalThis.classname = $(this).attr('class')
-        $('.modifying > #hoursplayed').val(formerrating)
-         globalThis.editgamename = ($(this).closest( "tr" ).find('.editgamenames').text())
-         console.log(editgamename)
-     }
-     
-     
-     //$('.table-personal-rating').off("click")
-     //$(this).val(formerrating);
-     const ratingchange = $(this).val()
-     console.log(ratingchange)
-    })
-$(document).on ('dblclick', function(e){
-
-    // var container = $(".modifying>");
-    // if (!$(e.target).closest(container).length) {
-        if (classundefined == 1) {
-            e.stopPropagation();
-        
-    }
-    if (classundefined == 0){
-    if (classname == "table-personal-rating modifying"){
-
-    //$("#url-displayname").html($(this).val())
-     $('#personalratingchange').trigger('blur');
-     var personalratingchange = $('#personalratingchange').val()
-     $('.game-name-submit').val(editgamename)
-
-            var inputranking = $('.modifying > #personalratingchange').val()
-            if (inputranking==="") {
-                $("#edit-form").trigger('submit')
-                $(".modifying").html("_")
-                $('.game-name-submit').val(editgamename)
-                
-            }
-            else if (!isNaN(inputranking)){
-
-                
-                $("#edit-form").trigger('submit')
-                $(".modifying").html(inputranking)
-                $('.game-name-submit').val(editgamename)
-                
-            }
-            
-            else{
-                
-                $(".modifying").html("_")
-            }
-            //$("#edit-form").trigger('submit')
-            $('.table-personal-rating').removeClass("modifying")
-
-        }
-        if (classname == "table-hours-played modifying"){
-
-            $('.game-name-submit').val(editgamename)
-
-                   var inputplayed = $('.modifying > #hoursplayed').val()
-                   if (inputplayed==="") {
-                       $("#edit-form").trigger('submit')
-                       $(".modifying").html("_")
-                       $('.game-name-submit').val(editgamename)
-                       
-                   }
-                   else if (!isNaN(inputplayed)){
-       
-                       
-                       $("#edit-form").trigger('submit')
-                       $(".modifying").html(inputplayed)
-                       $('.game-name-submit').val(editgamename)
-                       
-                   }
-                   
-                   else{
-                       
-                       $(".modifying").html("_")
-                   }
-                   //$("#edit-form").trigger('submit')
-                   $('.table-hours-played').removeClass("modifying")
-        }
-        if (classname == "table-status modifying"){
-
-            $('.game-name-submit').val(editgamename)
-
-                   var inputstatus = $('.modifying > #edit-select-status').find(":selected").text();
-                   if (inputstatus==="") {
-                       $(".modifying").html("_")
-                       $('.game-name-submit').val(editgamename)
-                       
-                   }
-                   else if (isNaN(inputstatus)){
-       
-                       
-                       $("#edit-form").trigger('submit')
-                       $(".modifying").html(inputstatus)
-                       $('.game-name-submit').val(editgamename)
-                       
-                   }
-                   
-                   else{
-                       
-                       $(".modifying").html("_")
-                   }
-                   //$("#edit-form").trigger('submit')
-                   $('.table-hours-played').removeClass("modifying")
-        }
-    }
-        // }
-       // })
-    // })
-
-})
-
-
-});
 
 // let db = new sqlite3.Database('C:/sqlite/gamestorage.db')
 // db.run(`UPDATE gamestorage SET personalrating = ? where id = ? AND game = ?`,$(this).text()
@@ -558,9 +417,17 @@ $(document).on ('dblclick', function(e){
     return true;
   });
   
-  $('#gameSearch2, #gameSearch, #gameSearch3').on('keypress',function () {
-    $("#gamedropdown").css("display","block");
+  $('#gameSearch2, #gameSearch, #gameSearch3').on('keyup',function () {
+    $("#gamedropdown").fadeIn(1000);
     $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius","5px 5px 0 0");  
+  });
+
+  $(document).on("click", function(event) { 
+    var $target = $(event.target);
+    if(!$target.closest('#gameSearch2, #gameSearch, #gameSearch3, #gamedropdown').length && 
+    $('#gamedropdown').is(":visible")) {
+      $('#gamedropdown').fadeOut(1000);
+    }        
   });
   $('.editgamelistoptions, .gamedboptions').each(function(){
     $(this).on('click',function () {
@@ -578,7 +445,7 @@ $(document).on ('dblclick', function(e){
     $('.editgamelistoptions').each(function(){
       
       if($(this).text().toUpperCase().indexOf(text) > -1){
-        $(this).css('display', 'block');
+        $(this).css('display', 'inline-block');
     }else{
       $(this).css('display', 'none');
       }
@@ -586,7 +453,7 @@ $(document).on ('dblclick', function(e){
     $('.gamedboptions').each(function(){
            
       if($(this).text().toUpperCase().indexOf(text) > -3){
-        $(this).css('display', 'block');
+        $(this).css('display', 'inline-block');
     }else{
       $(this).css('display', 'none');
       }
@@ -673,30 +540,6 @@ $("#add-form").on("submit", function() {
 
 
 
-// $(".sortitem").on("click",function() {
-//   var sortval = $(this).text();
-//   // alert(sortval)
-//   $("#sort-input").val(sortval);
-//   $("#sort-dropdown").trigger("submit")
-// });
-
-
-// Rendering React Components if on the Page.
-
-
-// const rfilterform = document.getElementById('react-filter-form');
-// if (rfilterform){
-  
-//   ReactDOM.render(<FilterForm />, rfilterform)
-// ;
-// }
-
-// const rsortdropdown = document.getElementById('react-sort-dropdown');
-// if (rsortdropdown){
-  
-//   ReactDOM.render(<DropdownFilter />, rsortdropdown)
-// ;
-// }
 
 const aboutreact = document.getElementById('test-react-component');
 if (aboutreact){
@@ -720,3 +563,30 @@ if (mylistid){
   )
 }
 
+const acctdetails  = document.getElementById('react-account-details');
+if (acctdetails){
+  ReactDOM.render(
+    <Details />,
+    acctdetails
+  )
+}
+
+// const hmpg = document.getElementById('react-hmpg')
+// if (hmpg){
+//   ReactDOM.render(
+//     <Homepage />,hmpg
+//   )
+// }
+const rootElement = document.getElementById("react-hmpg");
+
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Homepage />} ></Route>
+      <Route path="game/:game" element={<GamePage />} />
+      <Route path ="About" element = {<About />} />
+    </Routes>
+  </BrowserRouter>,
+  rootElement
+);

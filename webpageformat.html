@@ -1,0 +1,85 @@
+#AutoGenerating HTML PAGES
+# filedata= f"""
+# {{% extends "layout.html" %}}
+# {{% block main %}}
+# {{% with messages = get_flashed_messages(with_categories=true) %}} 
+# {{% if messages %}} 
+#     {{% for category, message in messages %}}  
+#         <hr>
+#                 <p class="alert alert-secondary border text-center w-25 m-auto font-weight-bolder password-alert sticky-top {{{{category}}}}" role="alert">{{{{ message }}}}</p> 
+#         <hr> 
+#     {{% endfor %}}  
+# {{% endif %}}  
+# {{% endwith %}}  
+
+# <div class="container-fluid var-page-container" id = "{liststatus}">
+#     <div class = "var-page-heading"> 
+#         <h2 class = "var-game-title gradientcolor"> <a href = "{varwebsite}" > {varnames} </a></h2>
+#         <div class = "var-online-rating">
+#         <span class = "vargamelabels gradientcolor "> Metacritic Rating: </span>
+#         <div data-color ="{varonlinerating}" class = "vargamerankings var-online-rating-data">{varonlinerating}</div>
+#         </div>
+#         <h7 data-color ="{varonlinerating}" class = "onlinerankdescription">Not Reviewed</h7>  
+        
+
+#     </div> 
+#     <hr>
+#     <form action = "/editgamepage" id = "var-edit-form"  method = "post">
+#     <div class = "var-page-main"> 
+        
+#                 <img class = "var-game-image" src = "{varbackgroundimage}">
+#                 <div class = "var-user-analytics">
+#                     <h6 class = "var-personal-rating analytic"> Your Rating : 
+#                     <div data-color = "{varpersonalrating}" class = "var-personal-rating-data varpersonalrankings var-rating-border">{varpersonalrating}</div> 
+#                     </h6>
+#                     <h6 class = "var-status analytic"> Game Status:
+#                     <div class = "var-status-data gradientcolorpinkwhite "> {varstatus}</div>
+#                     </h6>
+#                     <h6 class = "var-release-date analytic"> Game Release Date:
+#                     <div class = "gradientcolorpinkwhite">{varreleasedate}</div>
+#                     </h6>
+#                     <h6 class = "var-hours-played analytic"> Game Hours Played:
+#                     <div class = "var-hours-played-data gradientcolorpinkwhite"> {varhoursplayed}</div>
+#                     </h6>
+
+#                 </div>
+#                 <h6 class = "var-platforms gradientcolorpinkwhite" > Platforms: {varplatform}</h6>
+
+#             <input name="gamename" value = "{variable}" style = "display:none">
+#             <button type = "button"  class = "btn btn-warning var-edit-button var-buttons" style = "display: none"> Submit Changes </button>  
+            
+#             <button type="button" class="btn btn-success var-add-button var-buttons" id = "{variable3}" style =  "display:{displayadd};">Add to List</button>
+
+        
+        
+#            <div class = "var-slug-game" id = "{varslugs}" style = "display:none;"></div>
+
+
+#     </div>
+#     </form>
+#             <form action = "/removelist" class = "var-remove-button-form" id = "remove-form" method = "post">
+#                 <input name = "deletedgame" style = "display:none" value = "{variable3}">
+#                 <button type = "submit" class="btn btn-danger var-remove-button var-buttons" id = "{variable3}" style = "display:{displayremove};">Remove from List</button>
+#             </form>
+    
+
+# </div>
+<!-- # {{% endblock %}}
+
+# """    # variable= variable.replace(" ", "")
+
+# variable2=slugify(variable,regex_pattern=pattern)
+
+# cur_path = os.path.dirname(os.path.abspath(__file__))
+# filedata= filedata.encode("utf-8")
+# # cur_path = os.path.dirname(os.path.abspath(__file__))
+# print (cur_path)
+# new_path = cur_path + f'\\templates\\gamefolder\\{variable2}.html'
+
+# # filepath = os.path.join(url_for('.index') + , f'{variable}.html')
+# # if not os.path.exists('c:/your/full/path'):
+# #     os.makedirs('c:/your/full/path')
+# # f = open(filepath, "a")
+# file = open(new_path,"wb")
+# file.write(filedata)
+# file.close() -->

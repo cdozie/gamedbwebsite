@@ -216,7 +216,7 @@ $parcel$exportWildcard(module.exports, $dac019021ac61f1f$exports);
 
 
 
-},{"react":227}],9:[function(require,module,exports){
+},{"react":236}],9:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -309,7 +309,7 @@ var _react = require("react");
 function useCallbackRef() {
   return (0, _react.useState)(null);
 }
-},{"react":227}],11:[function(require,module,exports){
+},{"react":236}],11:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -336,7 +336,7 @@ function useCommittedRef(value) {
 
 var _default = useCommittedRef;
 exports.default = _default;
-},{"react":227}],12:[function(require,module,exports){
+},{"react":236}],12:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -354,7 +354,7 @@ function useEventCallback(fn) {
     return ref.current && ref.current.apply(ref, arguments);
   }, [ref]);
 }
-},{"./useCommittedRef":11,"react":227}],13:[function(require,module,exports){
+},{"./useCommittedRef":11,"react":236}],13:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -389,7 +389,7 @@ function useEventListener(eventTarget, event, listener, capture) {
     };
   }, [eventTarget]);
 }
-},{"./useEventCallback":12,"react":227}],14:[function(require,module,exports){
+},{"./useEventCallback":12,"react":236}],14:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -423,7 +423,7 @@ function useForceUpdate() {
 
   return dispatch;
 }
-},{"react":227}],15:[function(require,module,exports){
+},{"react":236}],15:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -459,7 +459,7 @@ function useGlobalListener(event, handler, capture) {
   }, []);
   return (0, _useEventListener.default)(documentTarget, event, handler, capture);
 }
-},{"./useEventListener":13,"react":227}],16:[function(require,module,exports){
+},{"./useEventListener":13,"react":236}],16:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -543,7 +543,7 @@ function useImage(imageOrUrl, crossOrigin) {
   }, [imageOrUrl, crossOrigin]);
   return state;
 }
-},{"react":227}],17:[function(require,module,exports){
+},{"react":236}],17:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -596,7 +596,7 @@ function useInterval(fn, ms, paused, runImmediately) {
 
 var _default = useInterval;
 exports.default = _default;
-},{"./useCommittedRef":11,"react":227}],18:[function(require,module,exports){
+},{"./useCommittedRef":11,"react":236}],18:[function(require,module,exports){
 (function (global){(function (){
 "use strict";
 
@@ -622,7 +622,7 @@ var _default = isDOM || isReactNative ? _react.useLayoutEffect : _react.useEffec
 
 exports.default = _default;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react":227}],19:[function(require,module,exports){
+},{"react":236}],19:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -668,7 +668,7 @@ function useMergeState(initialState) {
   }, [setState]);
   return [state, updater];
 }
-},{"react":227}],20:[function(require,module,exports){
+},{"react":236}],20:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -736,7 +736,7 @@ function useMergedRefs(refA, refB) {
 
 var _default = useMergedRefs;
 exports.default = _default;
-},{"react":227}],22:[function(require,module,exports){
+},{"react":236}],22:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -777,7 +777,7 @@ function useMounted() {
   }, []);
   return isMounted.current;
 }
-},{"react":227}],23:[function(require,module,exports){
+},{"react":236}],23:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -809,7 +809,7 @@ function usePrevious(value) {
   });
   return ref.current;
 }
-},{"react":227}],24:[function(require,module,exports){
+},{"react":236}],24:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -857,7 +857,7 @@ function useRafInterval(fn, ms, paused) {
 
 var _default = useRafInterval;
 exports.default = _default;
-},{"./useCommittedRef":11,"react":227}],25:[function(require,module,exports){
+},{"./useCommittedRef":11,"react":236}],25:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -919,7 +919,7 @@ function useResizeObserver(element) {
   }, [element]);
   return rect;
 }
-},{"./useIsomorphicEffect":18,"react":227}],26:[function(require,module,exports){
+},{"./useIsomorphicEffect":18,"react":236}],26:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -941,7 +941,7 @@ function useSafeState(state) {
 
 var _default = useSafeState;
 exports.default = _default;
-},{"./useMounted":22,"react":227}],27:[function(require,module,exports){
+},{"./useMounted":22,"react":236}],27:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1003,7 +1003,7 @@ const Anchor = /*#__PURE__*/React.forwardRef((_ref, ref) => {
 Anchor.displayName = 'Anchor';
 var _default = Anchor;
 exports.default = _default;
-},{"./Button":28,"@restart/hooks":9,"react":227,"react/jsx-runtime":228}],28:[function(require,module,exports){
+},{"./Button":28,"@restart/hooks":9,"react":236,"react/jsx-runtime":237}],28:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1120,7 +1120,7 @@ const Button = /*#__PURE__*/React.forwardRef((_ref, ref) => {
 Button.displayName = 'Button';
 var _default = Button;
 exports.default = _default;
-},{"react":227,"react/jsx-runtime":228}],29:[function(require,module,exports){
+},{"react":236,"react/jsx-runtime":237}],29:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1383,7 +1383,7 @@ Dropdown.Toggle = _DropdownToggle.default;
 Dropdown.Item = _DropdownItem.default;
 var _default = Dropdown;
 exports.default = _default;
-},{"./DataKey":29,"./DropdownContext":31,"./DropdownItem":32,"./DropdownMenu":33,"./DropdownToggle":34,"./SelectableContext":36,"./useWindow":42,"@restart/hooks/useEventCallback":12,"@restart/hooks/useEventListener":13,"@restart/hooks/useForceUpdate":14,"@restart/hooks/usePrevious":23,"dom-helpers/addEventListener":102,"dom-helpers/querySelectorAll":108,"react":227,"react/jsx-runtime":228,"uncontrollable":236}],31:[function(require,module,exports){
+},{"./DataKey":29,"./DropdownContext":31,"./DropdownItem":32,"./DropdownMenu":33,"./DropdownToggle":34,"./SelectableContext":36,"./useWindow":42,"@restart/hooks/useEventCallback":12,"@restart/hooks/useEventListener":13,"@restart/hooks/useForceUpdate":14,"@restart/hooks/usePrevious":23,"dom-helpers/addEventListener":102,"dom-helpers/querySelectorAll":108,"react":236,"react/jsx-runtime":237,"uncontrollable":245}],31:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1398,7 +1398,7 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 const DropdownContext = /*#__PURE__*/React.createContext(null);
 var _default = DropdownContext;
 exports.default = _default;
-},{"react":227}],32:[function(require,module,exports){
+},{"react":236}],32:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1489,7 +1489,7 @@ const DropdownItem = /*#__PURE__*/React.forwardRef((_ref, ref) => {
 DropdownItem.displayName = 'DropdownItem';
 var _default = DropdownItem;
 exports.default = _default;
-},{"./Button":28,"./DataKey":29,"./NavContext":35,"./SelectableContext":36,"@restart/hooks/useEventCallback":12,"react":227,"react/jsx-runtime":228}],33:[function(require,module,exports){
+},{"./Button":28,"./DataKey":29,"./NavContext":35,"./SelectableContext":36,"@restart/hooks/useEventCallback":12,"react":236,"react/jsx-runtime":237}],33:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1626,7 +1626,7 @@ DropdownMenu.defaultProps = defaultProps;
 
 var _default = DropdownMenu;
 exports.default = _default;
-},{"./DropdownContext":31,"./mergeOptionsWithPopperConfig":37,"./useClickOutside":40,"./usePopper":41,"@restart/hooks/useCallbackRef":10,"react":227,"react/jsx-runtime":228}],34:[function(require,module,exports){
+},{"./DropdownContext":31,"./mergeOptionsWithPopperConfig":37,"./useClickOutside":40,"./usePopper":41,"@restart/hooks/useCallbackRef":10,"react":236,"react/jsx-runtime":237}],34:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1714,7 +1714,7 @@ DropdownToggle.displayName = 'DropdownToggle';
 
 var _default = DropdownToggle;
 exports.default = _default;
-},{"./DropdownContext":31,"./ssr":39,"react":227,"react/jsx-runtime":228}],35:[function(require,module,exports){
+},{"./DropdownContext":31,"./ssr":39,"react":236,"react/jsx-runtime":237}],35:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1730,7 +1730,7 @@ const NavContext = /*#__PURE__*/React.createContext(null);
 NavContext.displayName = 'NavContext';
 var _default = NavContext;
 exports.default = _default;
-},{"react":227}],36:[function(require,module,exports){
+},{"react":236}],36:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -1752,7 +1752,7 @@ const makeEventKey = (eventKey, href = null) => {
 exports.makeEventKey = makeEventKey;
 var _default = SelectableContext;
 exports.default = _default;
-},{"react":227}],37:[function(require,module,exports){
+},{"react":236}],37:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3677,7 +3677,7 @@ exports.createPopper = createPopper;
 exports.placements = placements;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169}],39:[function(require,module,exports){
+},{"_process":172}],39:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3802,7 +3802,7 @@ function useClickOutside(ref, onClickOutside = noop, {
 
 var _default = useClickOutside;
 exports.default = _default;
-},{"@restart/hooks/useEventCallback":12,"dom-helpers/contains":105,"dom-helpers/listen":106,"dom-helpers/ownerDocument":107,"react":227,"warning":239}],41:[function(require,module,exports){
+},{"@restart/hooks/useEventCallback":12,"dom-helpers/contains":105,"dom-helpers/listen":106,"dom-helpers/ownerDocument":107,"react":236,"warning":248}],41:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -3984,7 +3984,7 @@ function usePopper(referenceElement, popperElement, _ref = {}) {
 
 var _default = usePopper;
 exports.default = _default;
-},{"./popper":38,"@restart/hooks/useSafeState":26,"dequal":97,"react":227}],42:[function(require,module,exports){
+},{"./popper":38,"@restart/hooks/useSafeState":26,"dequal":97,"react":236}],42:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -4011,7 +4011,7 @@ exports.WindowProvider = WindowProvider;
 function useWindow() {
   return (0, _react.useContext)(Context);
 }
-},{"dom-helpers/canUseDOM":104,"react":227}],43:[function(require,module,exports){
+},{"dom-helpers/canUseDOM":104,"react":236}],43:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4314,7 +4314,7 @@ function betweenValidator(options) {
   return (0, _wrapValidator["default"])(validator, 'between', options);
 }
 
-},{"./helpers/wrapValidator":61,"./shape":80,"./valuesOf":85,"object.entries":162}],45:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"./shape":80,"./valuesOf":85,"object.entries":165}],45:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4384,7 +4384,7 @@ function booleanSomeValidator() {
   return (0, _wrapValidator["default"])(validator, "booleanSome: ".concat(propsList), notAllPropsFalse);
 }
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],46:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],46:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4438,7 +4438,7 @@ function childrenHavePropXorChildren(prop) {
   return (0, _wrapValidator["default"])(validator, "childrenHavePropXorChildrenWithProp:".concat(prop), prop);
 }
 
-},{"./helpers/wrapValidator":61,"react":227}],47:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"react":236}],47:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4787,7 +4787,7 @@ function componentWithName(name) {
   return (0, _wrapValidator["default"])(componentWithNameValidator, "componentWithName:".concat(name), name);
 }
 
-},{"./helpers/getComponentName":55,"./helpers/wrapValidator":61,"array.prototype.find":89,"is-regex":147,"react":227}],51:[function(require,module,exports){
+},{"./helpers/getComponentName":55,"./helpers/wrapValidator":61,"array.prototype.find":89,"is-regex":150,"react":236}],51:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4928,7 +4928,7 @@ function elementTypeValidator(Type) {
   return (0, _wrapValidator["default"])((0, _and["default"])([_propTypes.element, elementType], validatorName), validatorName, Type);
 }
 
-},{"./and":43,"./helpers/getComponentName":55,"./helpers/wrapValidator":61,"prop-types":175,"react-is":215}],53:[function(require,module,exports){
+},{"./and":43,"./helpers/getComponentName":55,"./helpers/wrapValidator":61,"prop-types":178,"react-is":218}],53:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4963,7 +4963,7 @@ var _default = function _default() {
 
 exports["default"] = _default;
 
-},{"./explicitNull":54,"./helpers/wrapValidator":61,"./or":73,"./withShape":86,"prop-types":175}],54:[function(require,module,exports){
+},{"./explicitNull":54,"./helpers/wrapValidator":61,"./or":73,"./withShape":86,"prop-types":178}],54:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5036,7 +5036,7 @@ function getComponentName(Component) {
   return null;
 }
 
-},{"function.prototype.name":135,"react-is":215}],56:[function(require,module,exports){
+},{"function.prototype.name":135,"react-is":218}],56:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5069,7 +5069,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var _default = _isPlainObject["default"];
 exports["default"] = _default;
 
-},{"prop-types-exact/build/helpers/isPlainObject":170}],58:[function(require,module,exports){
+},{"prop-types-exact/build/helpers/isPlainObject":173}],58:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5101,7 +5101,7 @@ function renderableChildren(childrenProp) {
   });
 }
 
-},{"react":227}],60:[function(require,module,exports){
+},{"react":236}],60:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5135,7 +5135,7 @@ function typeOf(child) {
   return child;
 }
 
-},{"react":227}],61:[function(require,module,exports){
+},{"react":236}],61:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5160,7 +5160,7 @@ function wrapValidator(validator, typeName) {
   });
 }
 
-},{"object.assign":158}],62:[function(require,module,exports){
+},{"object.assign":161}],62:[function(require,module,exports){
 "use strict";
 
 var _propTypesExact = _interopRequireDefault(require("prop-types-exact"));
@@ -5276,7 +5276,7 @@ module.exports = {
   withShape: _withShape["default"]
 };
 
-},{"./and":43,"./between":44,"./booleanSome":45,"./childrenHavePropXorChildren":46,"./childrenOf":47,"./childrenOfType":48,"./childrenSequenceOf":49,"./componentWithName":50,"./disallowedIf":51,"./elementType":52,"./empty":53,"./explicitNull":54,"./integer":63,"./keysOf":64,"./mutuallyExclusiveProps":66,"./mutuallyExclusiveTrueProps":67,"./nChildren":68,"./nonNegativeInteger":69,"./nonNegativeNumber":70,"./numericString":71,"./object":72,"./or":73,"./predicate":74,"./range":75,"./ref":76,"./requiredBy":77,"./restrictedProp":78,"./sequenceOf":79,"./shape":80,"./stringEndsWith":81,"./stringStartsWith":82,"./uniqueArray":83,"./uniqueArrayOf":84,"./valuesOf":85,"./withShape":86,"prop-types-exact":171}],63:[function(require,module,exports){
+},{"./and":43,"./between":44,"./booleanSome":45,"./childrenHavePropXorChildren":46,"./childrenOf":47,"./childrenOfType":48,"./childrenSequenceOf":49,"./componentWithName":50,"./disallowedIf":51,"./elementType":52,"./empty":53,"./explicitNull":54,"./integer":63,"./keysOf":64,"./mutuallyExclusiveProps":66,"./mutuallyExclusiveTrueProps":67,"./nChildren":68,"./nonNegativeInteger":69,"./nonNegativeNumber":70,"./numericString":71,"./object":72,"./or":73,"./predicate":74,"./range":75,"./ref":76,"./requiredBy":77,"./restrictedProp":78,"./sequenceOf":79,"./shape":80,"./stringEndsWith":81,"./stringStartsWith":82,"./uniqueArray":83,"./uniqueArrayOf":84,"./valuesOf":85,"./withShape":86,"prop-types-exact":174}],63:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5578,7 +5578,7 @@ function mutuallyExclusiveTrue() {
   return (0, _wrapValidator["default"])(validator, "mutuallyExclusiveTrueProps: ".concat(propsList), exclusiveProps);
 }
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],68:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],68:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5625,7 +5625,7 @@ function nChildren(n) {
   return (0, _wrapValidator["default"])(validator, "nChildren:".concat(n), n);
 }
 
-},{"./helpers/wrapValidator":61,"prop-types":175,"react":227}],69:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178,"react":236}],69:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5691,7 +5691,7 @@ var _default = function _default() {
 
 exports["default"] = _default;
 
-},{"./helpers/wrapValidator":61,"object-is":151}],71:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"object-is":154}],71:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5750,7 +5750,7 @@ var _default = function _default() {
 
 exports["default"] = _default;
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],72:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],72:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5901,7 +5901,7 @@ function or(validators) {
   return (0, _wrapValidator["default"])(validator, name, validators);
 }
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],74:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],74:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6059,7 +6059,7 @@ var _default = function _default() {
 
 exports["default"] = _default;
 
-},{"./helpers/isPlainObject":57,"./helpers/wrapValidator":61,"react":227}],77:[function(require,module,exports){
+},{"./helpers/isPlainObject":57,"./helpers/wrapValidator":61,"react":236}],77:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6109,7 +6109,7 @@ function getRequiredBy(requiredByPropName, propType) {
   return (0, _wrapValidator["default"])(requiredBy, "requiredBy \u201C".concat(requiredByPropName, "\u201D"), [requiredByPropName, defaultValue]);
 }
 
-},{"./helpers/wrapValidator":61,"object-is":151}],78:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"object-is":154}],78:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6375,7 +6375,7 @@ function sequenceOfValidator() {
   return (0, _wrapValidator["default"])(validator, 'sequenceOf', specifiers);
 }
 
-},{"./and":43,"./between":44,"./helpers/typeOf":60,"./helpers/wrapValidator":61,"./nonNegativeInteger":69,"./object":72,"./withShape":86,"prop-types":175}],80:[function(require,module,exports){
+},{"./and":43,"./between":44,"./helpers/typeOf":60,"./helpers/wrapValidator":61,"./nonNegativeInteger":69,"./object":72,"./withShape":86,"prop-types":178}],80:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6495,7 +6495,7 @@ function stringEndsWithValidator(end) {
   return (0, _wrapValidator["default"])(validator, "stringEndsWith: ".concat(end));
 }
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],82:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],82:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6551,7 +6551,7 @@ function stringStartsWithValidator(start) {
   return (0, _wrapValidator["default"])(validator, "stringStartsWith: ".concat(start));
 }
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],83:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],83:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6628,7 +6628,7 @@ var _default = function _default() {
 
 exports["default"] = _default;
 
-},{"./helpers/wrapValidator":61,"prop-types":175}],84:[function(require,module,exports){
+},{"./helpers/wrapValidator":61,"prop-types":178}],84:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6720,7 +6720,7 @@ function uniqueArrayOfTypeValidator(type) {
   return validator;
 }
 
-},{"./and":43,"./uniqueArray":83,"prop-types":175}],85:[function(require,module,exports){
+},{"./and":43,"./uniqueArray":83,"prop-types":178}],85:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6805,7 +6805,7 @@ module.exports = process.env.NODE_ENV === 'production' ? require('./build/mocks'
 
 
 }).call(this)}).call(this,require('_process'))
-},{"./build":62,"./build/mocks":65,"_process":169}],88:[function(require,module,exports){
+},{"./build":62,"./build/mocks":65,"_process":172}],88:[function(require,module,exports){
 'use strict';
 
 var ToObject = require('es-abstract/2021/ToObject');
@@ -7296,7 +7296,7 @@ defineProperties.supportsDescriptors = !!supportsDescriptors;
 
 module.exports = defineProperties;
 
-},{"object-keys":155}],97:[function(require,module,exports){
+},{"object-keys":158}],97:[function(require,module,exports){
 var has = Object.prototype.hasOwnProperty;
 
 function find(iter, tar, key) {
@@ -7678,7 +7678,7 @@ module.exports = exports["default"];
 
 module.exports = require('is-callable');
 
-},{"is-callable":145}],111:[function(require,module,exports){
+},{"is-callable":148}],111:[function(require,module,exports){
 'use strict';
 
 module.exports = require('../5/CheckObjectCoercible');
@@ -8027,7 +8027,7 @@ module.exports = function ToPrimitive(input) {
 	return ordinaryToPrimitive(input, hint === 'default' ? 'number' : hint);
 };
 
-},{"./helpers/isPrimitive":131,"is-callable":145,"is-date-object":146,"is-symbol":148}],130:[function(require,module,exports){
+},{"./helpers/isPrimitive":131,"is-callable":148,"is-date-object":149,"is-symbol":151}],130:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -8074,7 +8074,7 @@ module.exports = function ToPrimitive(input) {
 	return ES5internalSlots['[[DefaultValue]]'](input);
 };
 
-},{"./helpers/isPrimitive":131,"is-callable":145}],131:[function(require,module,exports){
+},{"./helpers/isPrimitive":131,"is-callable":148}],131:[function(require,module,exports){
 arguments[4][125][0].apply(exports,arguments)
 },{"dup":125}],132:[function(require,module,exports){
 'use strict';
@@ -8686,6 +8686,850 @@ module.exports = bind.call(Function.call, Object.prototype.hasOwnProperty);
 
 },{"function-bind":133}],144:[function(require,module,exports){
 (function (process){(function (){
+'use strict';
+
+/* eslint-env node */
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = require('./umd/history.production.min.js');
+} else {
+  module.exports = require('./umd/history.development.js');
+}
+
+}).call(this)}).call(this,require('_process'))
+},{"./umd/history.development.js":145,"./umd/history.production.min.js":146,"_process":172}],145:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.HistoryLibrary = {}));
+}(this, (function (exports) { 'use strict';
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  /**
+   * Actions represent the type of change to a location value.
+   *
+   * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#action
+   */
+  exports.Action = void 0;
+
+  (function (Action) {
+    /**
+     * A POP indicates a change to an arbitrary index in the history stack, such
+     * as a back or forward navigation. It does not describe the direction of the
+     * navigation, only that the current index changed.
+     *
+     * Note: This is the default action for newly created history objects.
+     */
+    Action["Pop"] = "POP";
+    /**
+     * A PUSH indicates a new entry being added to the history stack, such as when
+     * a link is clicked and a new page loads. When this happens, all subsequent
+     * entries in the stack are lost.
+     */
+
+    Action["Push"] = "PUSH";
+    /**
+     * A REPLACE indicates the entry at the current index in the history stack
+     * being replaced by a new one.
+     */
+
+    Action["Replace"] = "REPLACE";
+  })(exports.Action || (exports.Action = {}));
+
+  var readOnly = function (obj) {
+    return Object.freeze(obj);
+  } ;
+
+  function warning(cond, message) {
+    if (!cond) {
+      // eslint-disable-next-line no-console
+      if (typeof console !== 'undefined') console.warn(message);
+
+      try {
+        // Welcome to debugging history!
+        //
+        // This error is thrown as a convenience so you can more easily
+        // find the source for a warning that appears in the console by
+        // enabling "pause on exceptions" in your JavaScript debugger.
+        throw new Error(message); // eslint-disable-next-line no-empty
+      } catch (e) {}
+    }
+  }
+
+  var BeforeUnloadEventType = 'beforeunload';
+  var HashChangeEventType = 'hashchange';
+  var PopStateEventType = 'popstate';
+  /**
+   * Browser history stores the location in regular URLs. This is the standard for
+   * most web apps, but it requires some configuration on the server to ensure you
+   * serve the same app at multiple URLs.
+   *
+   * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createbrowserhistory
+   */
+
+  function createBrowserHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+
+    var _options = options,
+        _options$window = _options.window,
+        window = _options$window === void 0 ? document.defaultView : _options$window;
+    var globalHistory = window.history;
+
+    function getIndexAndLocation() {
+      var _window$location = window.location,
+          pathname = _window$location.pathname,
+          search = _window$location.search,
+          hash = _window$location.hash;
+      var state = globalHistory.state || {};
+      return [state.idx, readOnly({
+        pathname: pathname,
+        search: search,
+        hash: hash,
+        state: state.usr || null,
+        key: state.key || 'default'
+      })];
+    }
+
+    var blockedPopTx = null;
+
+    function handlePop() {
+      if (blockedPopTx) {
+        blockers.call(blockedPopTx);
+        blockedPopTx = null;
+      } else {
+        var nextAction = exports.Action.Pop;
+
+        var _getIndexAndLocation = getIndexAndLocation(),
+            nextIndex = _getIndexAndLocation[0],
+            nextLocation = _getIndexAndLocation[1];
+
+        if (blockers.length) {
+          if (nextIndex != null) {
+            var delta = index - nextIndex;
+
+            if (delta) {
+              // Revert the POP
+              blockedPopTx = {
+                action: nextAction,
+                location: nextLocation,
+                retry: function retry() {
+                  go(delta * -1);
+                }
+              };
+              go(delta);
+            }
+          } else {
+            // Trying to POP to a location with no index. We did not create
+            // this location, so we can't effectively block the navigation.
+            warning(false, // TODO: Write up a doc that explains our blocking strategy in
+            // detail and link to it here so people can understand better what
+            // is going on and how to avoid it.
+            "You are trying to block a POP navigation to a location that was not " + "created by the history library. The block will fail silently in " + "production, but in general you should do all navigation with the " + "history library (instead of using window.history.pushState directly) " + "to avoid this situation.") ;
+          }
+        } else {
+          applyTx(nextAction);
+        }
+      }
+    }
+
+    window.addEventListener(PopStateEventType, handlePop);
+    var action = exports.Action.Pop;
+
+    var _getIndexAndLocation2 = getIndexAndLocation(),
+        index = _getIndexAndLocation2[0],
+        location = _getIndexAndLocation2[1];
+
+    var listeners = createEvents();
+    var blockers = createEvents();
+
+    if (index == null) {
+      index = 0;
+      globalHistory.replaceState(_extends({}, globalHistory.state, {
+        idx: index
+      }), '');
+    }
+
+    function createHref(to) {
+      return typeof to === 'string' ? to : createPath(to);
+    } // state defaults to `null` because `window.history.state` does
+
+
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+
+      return readOnly(_extends({
+        pathname: location.pathname,
+        hash: '',
+        search: ''
+      }, typeof to === 'string' ? parsePath(to) : to, {
+        state: state,
+        key: createKey()
+      }));
+    }
+
+    function getHistoryStateAndUrl(nextLocation, index) {
+      return [{
+        usr: nextLocation.state,
+        key: nextLocation.key,
+        idx: index
+      }, createHref(nextLocation)];
+    }
+
+    function allowTx(action, location, retry) {
+      return !blockers.length || (blockers.call({
+        action: action,
+        location: location,
+        retry: retry
+      }), false);
+    }
+
+    function applyTx(nextAction) {
+      action = nextAction;
+
+      var _getIndexAndLocation3 = getIndexAndLocation();
+
+      index = _getIndexAndLocation3[0];
+      location = _getIndexAndLocation3[1];
+      listeners.call({
+        action: action,
+        location: location
+      });
+    }
+
+    function push(to, state) {
+      var nextAction = exports.Action.Push;
+      var nextLocation = getNextLocation(to, state);
+
+      function retry() {
+        push(to, state);
+      }
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr = getHistoryStateAndUrl(nextLocation, index + 1),
+            historyState = _getHistoryStateAndUr[0],
+            url = _getHistoryStateAndUr[1]; // TODO: Support forced reloading
+        // try...catch because iOS limits us to 100 pushState calls :/
+
+
+        try {
+          globalHistory.pushState(historyState, '', url);
+        } catch (error) {
+          // They are going to lose state here, but there is no real
+          // way to warn them about it since the page will refresh...
+          window.location.assign(url);
+        }
+
+        applyTx(nextAction);
+      }
+    }
+
+    function replace(to, state) {
+      var nextAction = exports.Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+
+      function retry() {
+        replace(to, state);
+      }
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr2 = getHistoryStateAndUrl(nextLocation, index),
+            historyState = _getHistoryStateAndUr2[0],
+            url = _getHistoryStateAndUr2[1]; // TODO: Support forced reloading
+
+
+        globalHistory.replaceState(historyState, '', url);
+        applyTx(nextAction);
+      }
+    }
+
+    function go(delta) {
+      globalHistory.go(delta);
+    }
+
+    var history = {
+      get action() {
+        return action;
+      },
+
+      get location() {
+        return location;
+      },
+
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        var unblock = blockers.push(blocker);
+
+        if (blockers.length === 1) {
+          window.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+
+        return function () {
+          unblock(); // Remove the beforeunload listener so the document may
+          // still be salvageable in the pagehide event.
+          // See https://html.spec.whatwg.org/#unloading-documents
+
+          if (!blockers.length) {
+            window.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+          }
+        };
+      }
+    };
+    return history;
+  }
+  /**
+   * Hash history stores the location in window.location.hash. This makes it ideal
+   * for situations where you don't want to send the location to the server for
+   * some reason, either because you do cannot configure it or the URL space is
+   * reserved for something else.
+   *
+   * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createhashhistory
+   */
+
+  function createHashHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+
+    var _options2 = options,
+        _options2$window = _options2.window,
+        window = _options2$window === void 0 ? document.defaultView : _options2$window;
+    var globalHistory = window.history;
+
+    function getIndexAndLocation() {
+      var _parsePath = parsePath(window.location.hash.substr(1)),
+          _parsePath$pathname = _parsePath.pathname,
+          pathname = _parsePath$pathname === void 0 ? '/' : _parsePath$pathname,
+          _parsePath$search = _parsePath.search,
+          search = _parsePath$search === void 0 ? '' : _parsePath$search,
+          _parsePath$hash = _parsePath.hash,
+          hash = _parsePath$hash === void 0 ? '' : _parsePath$hash;
+
+      var state = globalHistory.state || {};
+      return [state.idx, readOnly({
+        pathname: pathname,
+        search: search,
+        hash: hash,
+        state: state.usr || null,
+        key: state.key || 'default'
+      })];
+    }
+
+    var blockedPopTx = null;
+
+    function handlePop() {
+      if (blockedPopTx) {
+        blockers.call(blockedPopTx);
+        blockedPopTx = null;
+      } else {
+        var nextAction = exports.Action.Pop;
+
+        var _getIndexAndLocation4 = getIndexAndLocation(),
+            nextIndex = _getIndexAndLocation4[0],
+            nextLocation = _getIndexAndLocation4[1];
+
+        if (blockers.length) {
+          if (nextIndex != null) {
+            var delta = index - nextIndex;
+
+            if (delta) {
+              // Revert the POP
+              blockedPopTx = {
+                action: nextAction,
+                location: nextLocation,
+                retry: function retry() {
+                  go(delta * -1);
+                }
+              };
+              go(delta);
+            }
+          } else {
+            // Trying to POP to a location with no index. We did not create
+            // this location, so we can't effectively block the navigation.
+            warning(false, // TODO: Write up a doc that explains our blocking strategy in
+            // detail and link to it here so people can understand better
+            // what is going on and how to avoid it.
+            "You are trying to block a POP navigation to a location that was not " + "created by the history library. The block will fail silently in " + "production, but in general you should do all navigation with the " + "history library (instead of using window.history.pushState directly) " + "to avoid this situation.") ;
+          }
+        } else {
+          applyTx(nextAction);
+        }
+      }
+    }
+
+    window.addEventListener(PopStateEventType, handlePop); // popstate does not fire on hashchange in IE 11 and old (trident) Edge
+    // https://developer.mozilla.org/de/docs/Web/API/Window/popstate_event
+
+    window.addEventListener(HashChangeEventType, function () {
+      var _getIndexAndLocation5 = getIndexAndLocation(),
+          nextLocation = _getIndexAndLocation5[1]; // Ignore extraneous hashchange events.
+
+
+      if (createPath(nextLocation) !== createPath(location)) {
+        handlePop();
+      }
+    });
+    var action = exports.Action.Pop;
+
+    var _getIndexAndLocation6 = getIndexAndLocation(),
+        index = _getIndexAndLocation6[0],
+        location = _getIndexAndLocation6[1];
+
+    var listeners = createEvents();
+    var blockers = createEvents();
+
+    if (index == null) {
+      index = 0;
+      globalHistory.replaceState(_extends({}, globalHistory.state, {
+        idx: index
+      }), '');
+    }
+
+    function getBaseHref() {
+      var base = document.querySelector('base');
+      var href = '';
+
+      if (base && base.getAttribute('href')) {
+        var url = window.location.href;
+        var hashIndex = url.indexOf('#');
+        href = hashIndex === -1 ? url : url.slice(0, hashIndex);
+      }
+
+      return href;
+    }
+
+    function createHref(to) {
+      return getBaseHref() + '#' + (typeof to === 'string' ? to : createPath(to));
+    }
+
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+
+      return readOnly(_extends({
+        pathname: location.pathname,
+        hash: '',
+        search: ''
+      }, typeof to === 'string' ? parsePath(to) : to, {
+        state: state,
+        key: createKey()
+      }));
+    }
+
+    function getHistoryStateAndUrl(nextLocation, index) {
+      return [{
+        usr: nextLocation.state,
+        key: nextLocation.key,
+        idx: index
+      }, createHref(nextLocation)];
+    }
+
+    function allowTx(action, location, retry) {
+      return !blockers.length || (blockers.call({
+        action: action,
+        location: location,
+        retry: retry
+      }), false);
+    }
+
+    function applyTx(nextAction) {
+      action = nextAction;
+
+      var _getIndexAndLocation7 = getIndexAndLocation();
+
+      index = _getIndexAndLocation7[0];
+      location = _getIndexAndLocation7[1];
+      listeners.call({
+        action: action,
+        location: location
+      });
+    }
+
+    function push(to, state) {
+      var nextAction = exports.Action.Push;
+      var nextLocation = getNextLocation(to, state);
+
+      function retry() {
+        push(to, state);
+      }
+
+      warning(nextLocation.pathname.charAt(0) === '/', "Relative pathnames are not supported in hash history.push(" + JSON.stringify(to) + ")") ;
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr3 = getHistoryStateAndUrl(nextLocation, index + 1),
+            historyState = _getHistoryStateAndUr3[0],
+            url = _getHistoryStateAndUr3[1]; // TODO: Support forced reloading
+        // try...catch because iOS limits us to 100 pushState calls :/
+
+
+        try {
+          globalHistory.pushState(historyState, '', url);
+        } catch (error) {
+          // They are going to lose state here, but there is no real
+          // way to warn them about it since the page will refresh...
+          window.location.assign(url);
+        }
+
+        applyTx(nextAction);
+      }
+    }
+
+    function replace(to, state) {
+      var nextAction = exports.Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+
+      function retry() {
+        replace(to, state);
+      }
+
+      warning(nextLocation.pathname.charAt(0) === '/', "Relative pathnames are not supported in hash history.replace(" + JSON.stringify(to) + ")") ;
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr4 = getHistoryStateAndUrl(nextLocation, index),
+            historyState = _getHistoryStateAndUr4[0],
+            url = _getHistoryStateAndUr4[1]; // TODO: Support forced reloading
+
+
+        globalHistory.replaceState(historyState, '', url);
+        applyTx(nextAction);
+      }
+    }
+
+    function go(delta) {
+      globalHistory.go(delta);
+    }
+
+    var history = {
+      get action() {
+        return action;
+      },
+
+      get location() {
+        return location;
+      },
+
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        var unblock = blockers.push(blocker);
+
+        if (blockers.length === 1) {
+          window.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+
+        return function () {
+          unblock(); // Remove the beforeunload listener so the document may
+          // still be salvageable in the pagehide event.
+          // See https://html.spec.whatwg.org/#unloading-documents
+
+          if (!blockers.length) {
+            window.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+          }
+        };
+      }
+    };
+    return history;
+  }
+  /**
+   * Memory history stores the current location in memory. It is designed for use
+   * in stateful non-browser environments like tests and React Native.
+   *
+   * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#creatememoryhistory
+   */
+
+  function createMemoryHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+
+    var _options3 = options,
+        _options3$initialEntr = _options3.initialEntries,
+        initialEntries = _options3$initialEntr === void 0 ? ['/'] : _options3$initialEntr,
+        initialIndex = _options3.initialIndex;
+    var entries = initialEntries.map(function (entry) {
+      var location = readOnly(_extends({
+        pathname: '/',
+        search: '',
+        hash: '',
+        state: null,
+        key: createKey()
+      }, typeof entry === 'string' ? parsePath(entry) : entry));
+      warning(location.pathname.charAt(0) === '/', "Relative pathnames are not supported in createMemoryHistory({ initialEntries }) (invalid entry: " + JSON.stringify(entry) + ")") ;
+      return location;
+    });
+    var index = clamp(initialIndex == null ? entries.length - 1 : initialIndex, 0, entries.length - 1);
+    var action = exports.Action.Pop;
+    var location = entries[index];
+    var listeners = createEvents();
+    var blockers = createEvents();
+
+    function createHref(to) {
+      return typeof to === 'string' ? to : createPath(to);
+    }
+
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+
+      return readOnly(_extends({
+        pathname: location.pathname,
+        search: '',
+        hash: ''
+      }, typeof to === 'string' ? parsePath(to) : to, {
+        state: state,
+        key: createKey()
+      }));
+    }
+
+    function allowTx(action, location, retry) {
+      return !blockers.length || (blockers.call({
+        action: action,
+        location: location,
+        retry: retry
+      }), false);
+    }
+
+    function applyTx(nextAction, nextLocation) {
+      action = nextAction;
+      location = nextLocation;
+      listeners.call({
+        action: action,
+        location: location
+      });
+    }
+
+    function push(to, state) {
+      var nextAction = exports.Action.Push;
+      var nextLocation = getNextLocation(to, state);
+
+      function retry() {
+        push(to, state);
+      }
+
+      warning(location.pathname.charAt(0) === '/', "Relative pathnames are not supported in memory history.push(" + JSON.stringify(to) + ")") ;
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        index += 1;
+        entries.splice(index, entries.length, nextLocation);
+        applyTx(nextAction, nextLocation);
+      }
+    }
+
+    function replace(to, state) {
+      var nextAction = exports.Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+
+      function retry() {
+        replace(to, state);
+      }
+
+      warning(location.pathname.charAt(0) === '/', "Relative pathnames are not supported in memory history.replace(" + JSON.stringify(to) + ")") ;
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        entries[index] = nextLocation;
+        applyTx(nextAction, nextLocation);
+      }
+    }
+
+    function go(delta) {
+      var nextIndex = clamp(index + delta, 0, entries.length - 1);
+      var nextAction = exports.Action.Pop;
+      var nextLocation = entries[nextIndex];
+
+      function retry() {
+        go(delta);
+      }
+
+      if (allowTx(nextAction, nextLocation, retry)) {
+        index = nextIndex;
+        applyTx(nextAction, nextLocation);
+      }
+    }
+
+    var history = {
+      get index() {
+        return index;
+      },
+
+      get action() {
+        return action;
+      },
+
+      get location() {
+        return location;
+      },
+
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        return blockers.push(blocker);
+      }
+    };
+    return history;
+  } ////////////////////////////////////////////////////////////////////////////////
+  // UTILS
+  ////////////////////////////////////////////////////////////////////////////////
+
+  function clamp(n, lowerBound, upperBound) {
+    return Math.min(Math.max(n, lowerBound), upperBound);
+  }
+
+  function promptBeforeUnload(event) {
+    // Cancel the event.
+    event.preventDefault(); // Chrome (and legacy IE) requires returnValue to be set.
+
+    event.returnValue = '';
+  }
+
+  function createEvents() {
+    var handlers = [];
+    return {
+      get length() {
+        return handlers.length;
+      },
+
+      push: function push(fn) {
+        handlers.push(fn);
+        return function () {
+          handlers = handlers.filter(function (handler) {
+            return handler !== fn;
+          });
+        };
+      },
+      call: function call(arg) {
+        handlers.forEach(function (fn) {
+          return fn && fn(arg);
+        });
+      }
+    };
+  }
+
+  function createKey() {
+    return Math.random().toString(36).substr(2, 8);
+  }
+  /**
+   * Creates a string URL path from the given pathname, search, and hash components.
+   *
+   * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createpath
+   */
+
+
+  function createPath(_ref) {
+    var _ref$pathname = _ref.pathname,
+        pathname = _ref$pathname === void 0 ? '/' : _ref$pathname,
+        _ref$search = _ref.search,
+        search = _ref$search === void 0 ? '' : _ref$search,
+        _ref$hash = _ref.hash,
+        hash = _ref$hash === void 0 ? '' : _ref$hash;
+    if (search && search !== '?') pathname += search.charAt(0) === '?' ? search : '?' + search;
+    if (hash && hash !== '#') pathname += hash.charAt(0) === '#' ? hash : '#' + hash;
+    return pathname;
+  }
+  /**
+   * Parses a string URL path into its separate pathname, search, and hash components.
+   *
+   * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#parsepath
+   */
+
+  function parsePath(path) {
+    var parsedPath = {};
+
+    if (path) {
+      var hashIndex = path.indexOf('#');
+
+      if (hashIndex >= 0) {
+        parsedPath.hash = path.substr(hashIndex);
+        path = path.substr(0, hashIndex);
+      }
+
+      var searchIndex = path.indexOf('?');
+
+      if (searchIndex >= 0) {
+        parsedPath.search = path.substr(searchIndex);
+        path = path.substr(0, searchIndex);
+      }
+
+      if (path) {
+        parsedPath.pathname = path;
+      }
+    }
+
+    return parsedPath;
+  }
+
+  exports.createBrowserHistory = createBrowserHistory;
+  exports.createHashHistory = createHashHistory;
+  exports.createMemoryHistory = createMemoryHistory;
+  exports.createPath = createPath;
+  exports.parsePath = parsePath;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+
+},{}],146:[function(require,module,exports){
+!function(t,n){"object"==typeof exports&&"undefined"!=typeof module?n(exports):"function"==typeof define&&define.amd?define(["exports"],n):n((t="undefined"!=typeof globalThis?globalThis:t||self).HistoryLibrary={})}(this,(function(t){"use strict";function n(){return(n=Object.assign||function(t){for(var n=1;n<arguments.length;n++){var e=arguments[n];for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&(t[r]=e[r])}return t}).apply(this,arguments)}var e;t.Action=void 0,(e=t.Action||(t.Action={})).Pop="POP",e.Push="PUSH",e.Replace="REPLACE";var r="beforeunload",o="popstate";function a(t,n,e){return Math.min(Math.max(t,n),e)}function i(t){t.preventDefault(),t.returnValue=""}function c(){var t=[];return{get length(){return t.length},push:function(n){return t.push(n),function(){t=t.filter((function(t){return t!==n}))}},call:function(n){t.forEach((function(t){return t&&t(n)}))}}}function u(){return Math.random().toString(36).substr(2,8)}function l(t){var n=t.pathname,e=void 0===n?"/":n,r=t.search,o=void 0===r?"":r,a=t.hash,i=void 0===a?"":a;return o&&"?"!==o&&(e+="?"===o.charAt(0)?o:"?"+o),i&&"#"!==i&&(e+="#"===i.charAt(0)?i:"#"+i),e}function f(t){var n={};if(t){var e=t.indexOf("#");e>=0&&(n.hash=t.substr(e),t=t.substr(0,e));var r=t.indexOf("?");r>=0&&(n.search=t.substr(r),t=t.substr(0,r)),t&&(n.pathname=t)}return n}t.createBrowserHistory=function(e){void 0===e&&(e={});var a=e.window,s=void 0===a?document.defaultView:a,h=s.history;function p(){var t=s.location,n=t.pathname,e=t.search,r=t.hash,o=h.state||{};return[o.idx,{pathname:n,search:e,hash:r,state:o.usr||null,key:o.key||"default"}]}var v=null;s.addEventListener(o,(function(){if(v)A.call(v),v=null;else{var n=t.Action.Pop,e=p(),r=e[0],o=e[1];if(A.length){if(null!=r){var a=y-r;a&&(v={action:n,location:o,retry:function(){H(-1*a)}},H(a))}}else E(n)}}));var d=t.Action.Pop,g=p(),y=g[0],m=g[1],b=c(),A=c();function P(t){return"string"==typeof t?t:l(t)}function k(t,e){return void 0===e&&(e=null),n({pathname:m.pathname,hash:"",search:""},"string"==typeof t?f(t):t,{state:e,key:u()})}function x(t,n){return[{usr:t.state,key:t.key,idx:n},P(t)]}function w(t,n,e){return!A.length||(A.call({action:t,location:n,retry:e}),!1)}function E(t){d=t;var n=p();y=n[0],m=n[1],b.call({action:d,location:m})}function H(t){h.go(t)}return null==y&&(y=0,h.replaceState(n({},h.state,{idx:y}),"")),{get action(){return d},get location(){return m},createHref:P,push:function n(e,r){var o=t.Action.Push,a=k(e,r);if(w(o,a,(function(){n(e,r)}))){var i=x(a,y+1),c=i[0],u=i[1];try{h.pushState(c,"",u)}catch(t){s.location.assign(u)}E(o)}},replace:function n(e,r){var o=t.Action.Replace,a=k(e,r);if(w(o,a,(function(){n(e,r)}))){var i=x(a,y),c=i[0],u=i[1];h.replaceState(c,"",u),E(o)}},go:H,back:function(){H(-1)},forward:function(){H(1)},listen:function(t){return b.push(t)},block:function(t){var n=A.push(t);return 1===A.length&&s.addEventListener(r,i),function(){n(),A.length||s.removeEventListener(r,i)}}}},t.createHashHistory=function(e){void 0===e&&(e={});var a=e.window,s=void 0===a?document.defaultView:a,h=s.history;function p(){var t=f(s.location.hash.substr(1)),n=t.pathname,e=void 0===n?"/":n,r=t.search,o=void 0===r?"":r,a=t.hash,i=void 0===a?"":a,c=h.state||{};return[c.idx,{pathname:e,search:o,hash:i,state:c.usr||null,key:c.key||"default"}]}var v=null;function d(){if(v)P.call(v),v=null;else{var n=t.Action.Pop,e=p(),r=e[0],o=e[1];if(P.length){if(null!=r){var a=m-r;a&&(v={action:n,location:o,retry:function(){L(-1*a)}},L(a))}}else H(n)}}s.addEventListener(o,d),s.addEventListener("hashchange",(function(){l(p()[1])!==l(b)&&d()}));var g=t.Action.Pop,y=p(),m=y[0],b=y[1],A=c(),P=c();function k(t){return function(){var t=document.querySelector("base"),n="";if(t&&t.getAttribute("href")){var e=s.location.href,r=e.indexOf("#");n=-1===r?e:e.slice(0,r)}return n}()+"#"+("string"==typeof t?t:l(t))}function x(t,e){return void 0===e&&(e=null),n({pathname:b.pathname,hash:"",search:""},"string"==typeof t?f(t):t,{state:e,key:u()})}function w(t,n){return[{usr:t.state,key:t.key,idx:n},k(t)]}function E(t,n,e){return!P.length||(P.call({action:t,location:n,retry:e}),!1)}function H(t){g=t;var n=p();m=n[0],b=n[1],A.call({action:g,location:b})}function L(t){h.go(t)}return null==m&&(m=0,h.replaceState(n({},h.state,{idx:m}),"")),{get action(){return g},get location(){return b},createHref:k,push:function n(e,r){var o=t.Action.Push,a=x(e,r);if(E(o,a,(function(){n(e,r)}))){var i=w(a,m+1),c=i[0],u=i[1];try{h.pushState(c,"",u)}catch(t){s.location.assign(u)}H(o)}},replace:function n(e,r){var o=t.Action.Replace,a=x(e,r);if(E(o,a,(function(){n(e,r)}))){var i=w(a,m),c=i[0],u=i[1];h.replaceState(c,"",u),H(o)}},go:L,back:function(){L(-1)},forward:function(){L(1)},listen:function(t){return A.push(t)},block:function(t){var n=P.push(t);return 1===P.length&&s.addEventListener(r,i),function(){n(),P.length||s.removeEventListener(r,i)}}}},t.createMemoryHistory=function(e){void 0===e&&(e={});var r=e,o=r.initialEntries,i=void 0===o?["/"]:o,s=r.initialIndex,h=i.map((function(t){return n({pathname:"/",search:"",hash:"",state:null,key:u()},"string"==typeof t?f(t):t)})),p=a(null==s?h.length-1:s,0,h.length-1),v=t.Action.Pop,d=h[p],g=c(),y=c();function m(t,e){return void 0===e&&(e=null),n({pathname:d.pathname,search:"",hash:""},"string"==typeof t?f(t):t,{state:e,key:u()})}function b(t,n,e){return!y.length||(y.call({action:t,location:n,retry:e}),!1)}function A(t,n){v=t,d=n,g.call({action:v,location:d})}function P(n){var e=a(p+n,0,h.length-1),r=t.Action.Pop,o=h[e];b(r,o,(function(){P(n)}))&&(p=e,A(r,o))}return{get index(){return p},get action(){return v},get location(){return d},createHref:function(t){return"string"==typeof t?t:l(t)},push:function n(e,r){var o=t.Action.Push,a=m(e,r);b(o,a,(function(){n(e,r)}))&&(p+=1,h.splice(p,h.length,a),A(o,a))},replace:function n(e,r){var o=t.Action.Replace,a=m(e,r);b(o,a,(function(){n(e,r)}))&&(h[p]=a,A(o,a))},go:P,back:function(){P(-1)},forward:function(){P(1)},listen:function(t){return g.push(t)},block:function(t){return y.push(t)}}},t.createPath=l,t.parsePath=f,Object.defineProperty(t,"__esModule",{value:!0})}));
+
+
+},{}],147:[function(require,module,exports){
+(function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -8737,7 +9581,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169}],145:[function(require,module,exports){
+},{"_process":172}],148:[function(require,module,exports){
 'use strict';
 
 var fnToStr = Function.prototype.toString;
@@ -8813,7 +9657,7 @@ module.exports = reflectApply
 		return strClass === fnClass || strClass === genClass;
 	};
 
-},{}],146:[function(require,module,exports){
+},{}],149:[function(require,module,exports){
 'use strict';
 
 var getDay = Date.prototype.getDay;
@@ -8837,7 +9681,7 @@ module.exports = function isDateObject(value) {
 	return hasToStringTag ? tryDateObject(value) : toStr.call(value) === dateClass;
 };
 
-},{"has-tostringtag/shams":142}],147:[function(require,module,exports){
+},{"has-tostringtag/shams":142}],150:[function(require,module,exports){
 'use strict';
 
 var callBound = require('call-bind/callBound');
@@ -8897,7 +9741,7 @@ module.exports = hasToStringTag
 		return $toString(value) === regexClass;
 	};
 
-},{"call-bind/callBound":92,"has-tostringtag/shams":142}],148:[function(require,module,exports){
+},{"call-bind/callBound":92,"has-tostringtag/shams":142}],151:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -8934,7 +9778,7 @@ if (hasSymbols) {
 	};
 }
 
-},{"has-symbols":140}],149:[function(require,module,exports){
+},{"has-symbols":140}],152:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -9026,7 +9870,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],150:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 'use strict';
 
 var numberIsNaN = function (value) {
@@ -9047,7 +9891,7 @@ module.exports = function is(a, b) {
 };
 
 
-},{}],151:[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 'use strict';
 
 var define = require('define-properties');
@@ -9067,7 +9911,7 @@ define(polyfill, {
 
 module.exports = polyfill;
 
-},{"./implementation":150,"./polyfill":152,"./shim":153,"call-bind":93,"define-properties":96}],152:[function(require,module,exports){
+},{"./implementation":153,"./polyfill":155,"./shim":156,"call-bind":93,"define-properties":96}],155:[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
@@ -9076,7 +9920,7 @@ module.exports = function getPolyfill() {
 	return typeof Object.is === 'function' ? Object.is : implementation;
 };
 
-},{"./implementation":150}],153:[function(require,module,exports){
+},{"./implementation":153}],156:[function(require,module,exports){
 'use strict';
 
 var getPolyfill = require('./polyfill');
@@ -9092,7 +9936,7 @@ module.exports = function shimObjectIs() {
 	return polyfill;
 };
 
-},{"./polyfill":152,"define-properties":96}],154:[function(require,module,exports){
+},{"./polyfill":155,"define-properties":96}],157:[function(require,module,exports){
 'use strict';
 
 var keysShim;
@@ -9216,7 +10060,7 @@ if (!Object.keys) {
 }
 module.exports = keysShim;
 
-},{"./isArguments":156}],155:[function(require,module,exports){
+},{"./isArguments":159}],158:[function(require,module,exports){
 'use strict';
 
 var slice = Array.prototype.slice;
@@ -9250,7 +10094,7 @@ keysShim.shim = function shimObjectKeys() {
 
 module.exports = keysShim;
 
-},{"./implementation":154,"./isArguments":156}],156:[function(require,module,exports){
+},{"./implementation":157,"./isArguments":159}],159:[function(require,module,exports){
 'use strict';
 
 var toStr = Object.prototype.toString;
@@ -9269,7 +10113,7 @@ module.exports = function isArguments(value) {
 	return isArgs;
 };
 
-},{}],157:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 'use strict';
 
 // modified from https://github.com/es-shims/es6-shim
@@ -9313,7 +10157,7 @@ module.exports = function assign(target, source1) {
 	return objTarget;
 };
 
-},{"call-bind/callBound":92,"has-symbols/shams":141,"object-keys":155}],158:[function(require,module,exports){
+},{"call-bind/callBound":92,"has-symbols/shams":141,"object-keys":158}],161:[function(require,module,exports){
 'use strict';
 
 var defineProperties = require('define-properties');
@@ -9337,7 +10181,7 @@ defineProperties(bound, {
 
 module.exports = bound;
 
-},{"./implementation":157,"./polyfill":159,"./shim":160,"call-bind":93,"define-properties":96}],159:[function(require,module,exports){
+},{"./implementation":160,"./polyfill":162,"./shim":163,"call-bind":93,"define-properties":96}],162:[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
@@ -9394,7 +10238,7 @@ module.exports = function getPolyfill() {
 	return Object.assign;
 };
 
-},{"./implementation":157}],160:[function(require,module,exports){
+},{"./implementation":160}],163:[function(require,module,exports){
 'use strict';
 
 var define = require('define-properties');
@@ -9410,7 +10254,7 @@ module.exports = function shimAssign() {
 	return polyfill;
 };
 
-},{"./polyfill":159,"define-properties":96}],161:[function(require,module,exports){
+},{"./polyfill":162,"define-properties":96}],164:[function(require,module,exports){
 'use strict';
 
 var RequireObjectCoercible = require('es-abstract/2021/RequireObjectCoercible');
@@ -9429,9 +10273,9 @@ module.exports = function entries(O) {
 	return entrys;
 };
 
-},{"call-bind/callBound":92,"es-abstract/2021/RequireObjectCoercible":111}],162:[function(require,module,exports){
-arguments[4][151][0].apply(exports,arguments)
-},{"./implementation":161,"./polyfill":163,"./shim":164,"call-bind":93,"define-properties":96,"dup":151}],163:[function(require,module,exports){
+},{"call-bind/callBound":92,"es-abstract/2021/RequireObjectCoercible":111}],165:[function(require,module,exports){
+arguments[4][154][0].apply(exports,arguments)
+},{"./implementation":164,"./polyfill":166,"./shim":167,"call-bind":93,"define-properties":96,"dup":154}],166:[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
@@ -9440,7 +10284,7 @@ module.exports = function getPolyfill() {
 	return typeof Object.entries === 'function' ? Object.entries : implementation;
 };
 
-},{"./implementation":161}],164:[function(require,module,exports){
+},{"./implementation":164}],167:[function(require,module,exports){
 'use strict';
 
 var getPolyfill = require('./polyfill');
@@ -9456,7 +10300,7 @@ module.exports = function shimEntries() {
 	return polyfill;
 };
 
-},{"./polyfill":163,"define-properties":96}],165:[function(require,module,exports){
+},{"./polyfill":166,"define-properties":96}],168:[function(require,module,exports){
 'use strict';
 
 var RequireObjectCoercible = require('es-abstract/2021/RequireObjectCoercible');
@@ -9476,9 +10320,9 @@ module.exports = function values(O) {
 	return vals;
 };
 
-},{"call-bind/callBound":92,"es-abstract/2021/RequireObjectCoercible":111}],166:[function(require,module,exports){
-arguments[4][151][0].apply(exports,arguments)
-},{"./implementation":165,"./polyfill":167,"./shim":168,"call-bind":93,"define-properties":96,"dup":151}],167:[function(require,module,exports){
+},{"call-bind/callBound":92,"es-abstract/2021/RequireObjectCoercible":111}],169:[function(require,module,exports){
+arguments[4][154][0].apply(exports,arguments)
+},{"./implementation":168,"./polyfill":170,"./shim":171,"call-bind":93,"define-properties":96,"dup":154}],170:[function(require,module,exports){
 'use strict';
 
 var implementation = require('./implementation');
@@ -9487,7 +10331,7 @@ module.exports = function getPolyfill() {
 	return typeof Object.values === 'function' ? Object.values : implementation;
 };
 
-},{"./implementation":165}],168:[function(require,module,exports){
+},{"./implementation":168}],171:[function(require,module,exports){
 'use strict';
 
 var getPolyfill = require('./polyfill');
@@ -9503,7 +10347,7 @@ module.exports = function shimValues() {
 	return polyfill;
 };
 
-},{"./polyfill":167,"define-properties":96}],169:[function(require,module,exports){
+},{"./polyfill":170,"define-properties":96}],172:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -9689,7 +10533,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],170:[function(require,module,exports){
+},{}],173:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -9702,7 +10546,7 @@ function isPlainObject(x) {
 }
 module.exports = exports['default'];
 
-},{}],171:[function(require,module,exports){
+},{}],174:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -9760,7 +10604,7 @@ function forbidExtraProps(propTypes) {
 }
 module.exports = exports['default'];
 
-},{"./helpers/isPlainObject":170,"has":143,"object.assign":158}],172:[function(require,module,exports){
+},{"./helpers/isPlainObject":173,"has":143,"object.assign":161}],175:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -9867,7 +10711,7 @@ checkPropTypes.resetWarningCache = function() {
 module.exports = checkPropTypes;
 
 }).call(this)}).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":176,"./lib/has":177,"_process":169}],173:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":179,"./lib/has":180,"_process":172}],176:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -9934,7 +10778,7 @@ module.exports = function() {
   return ReactPropTypes;
 };
 
-},{"./lib/ReactPropTypesSecret":176}],174:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":179}],177:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -10548,7 +11392,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 };
 
 }).call(this)}).call(this,require('_process'))
-},{"./checkPropTypes":172,"./lib/ReactPropTypesSecret":176,"./lib/has":177,"_process":169,"object-assign":149,"react-is":215}],175:[function(require,module,exports){
+},{"./checkPropTypes":175,"./lib/ReactPropTypesSecret":179,"./lib/has":180,"_process":172,"object-assign":152,"react-is":218}],178:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -10571,7 +11415,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./factoryWithThrowingShims":173,"./factoryWithTypeCheckers":174,"_process":169,"react-is":215}],176:[function(require,module,exports){
+},{"./factoryWithThrowingShims":176,"./factoryWithTypeCheckers":177,"_process":172,"react-is":218}],179:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -10585,10 +11429,10 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],177:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 module.exports = Function.call.bind(Object.prototype.hasOwnProperty);
 
-},{}],178:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10643,7 +11487,7 @@ Button.defaultProps = defaultProps;
 var _default = Button;
 exports.default = _default;
 module.exports = exports.default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/ui/Button":28,"classnames":94,"react":227,"react/jsx-runtime":228}],179:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/ui/Button":28,"classnames":94,"react":236,"react/jsx-runtime":237}],182:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10723,7 +11567,7 @@ const Col = /*#__PURE__*/React.forwardRef( // Need to define the default "as" du
 Col.displayName = 'Col';
 var _default = Col;
 exports.default = _default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],180:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],183:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10855,7 +11699,7 @@ var _default = Object.assign(Dropdown, {
 
 exports.default = _default;
 module.exports = exports.default;
-},{"./DropdownContext":182,"./DropdownItem":183,"./DropdownMenu":184,"./DropdownToggle":185,"./InputGroupContext":201,"./ThemeProvider":206,"./createWithBsPrefix":207,"./types":208,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useEventCallback":12,"@restart/ui/Dropdown":30,"classnames":94,"react":227,"react/jsx-runtime":228,"uncontrollable":236}],181:[function(require,module,exports){
+},{"./DropdownContext":185,"./DropdownItem":186,"./DropdownMenu":187,"./DropdownToggle":188,"./InputGroupContext":204,"./ThemeProvider":209,"./createWithBsPrefix":210,"./types":211,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useEventCallback":12,"@restart/ui/Dropdown":30,"classnames":94,"react":236,"react/jsx-runtime":237,"uncontrollable":245}],184:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -10986,7 +11830,7 @@ DropdownButton.propTypes = propTypes;
 var _default = DropdownButton;
 exports.default = _default;
 module.exports = exports.default;
-},{"./Dropdown":180,"./DropdownMenu":184,"./DropdownToggle":185,"./types":208,"@babel/runtime/helpers/interopRequireDefault":3,"prop-types":175,"react":227,"react/jsx-runtime":228}],182:[function(require,module,exports){
+},{"./Dropdown":183,"./DropdownMenu":187,"./DropdownToggle":188,"./types":211,"@babel/runtime/helpers/interopRequireDefault":3,"prop-types":178,"react":236,"react/jsx-runtime":237}],185:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -11003,7 +11847,7 @@ DropdownContext.displayName = 'DropdownContext';
 var _default = DropdownContext;
 exports.default = _default;
 module.exports = exports.default;
-},{"react":227}],183:[function(require,module,exports){
+},{"react":236}],186:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11055,7 +11899,7 @@ DropdownItem.displayName = 'DropdownItem';
 var _default = DropdownItem;
 exports.default = _default;
 module.exports = exports.default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/ui/Anchor":27,"@restart/ui/DropdownItem":32,"classnames":94,"react":227,"react/jsx-runtime":228}],184:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/ui/Anchor":27,"@restart/ui/DropdownItem":32,"classnames":94,"react":236,"react/jsx-runtime":237}],187:[function(require,module,exports){
 (function (process){(function (){
 "use strict";
 
@@ -11214,7 +12058,7 @@ DropdownMenu.defaultProps = defaultProps;
 var _default = DropdownMenu;
 exports.default = _default;
 }).call(this)}).call(this,require('_process'))
-},{"./DropdownContext":182,"./InputGroupContext":201,"./NavbarContext":202,"./ThemeProvider":206,"./types":208,"./useWrappedRefWithWarning":209,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useIsomorphicEffect":18,"@restart/hooks/useMergedRefs":21,"@restart/ui/DropdownMenu":33,"_process":169,"classnames":94,"react":227,"react/jsx-runtime":228,"warning":239}],185:[function(require,module,exports){
+},{"./DropdownContext":185,"./InputGroupContext":204,"./NavbarContext":205,"./ThemeProvider":209,"./types":211,"./useWrappedRefWithWarning":212,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useIsomorphicEffect":18,"@restart/hooks/useMergedRefs":21,"@restart/ui/DropdownMenu":33,"_process":172,"classnames":94,"react":236,"react/jsx-runtime":237,"warning":248}],188:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11277,7 +12121,7 @@ DropdownToggle.displayName = 'DropdownToggle';
 var _default = DropdownToggle;
 exports.default = _default;
 module.exports = exports.default;
-},{"./Button":178,"./InputGroupContext":201,"./ThemeProvider":206,"./useWrappedRefWithWarning":209,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useMergedRefs":21,"@restart/ui/DropdownContext":31,"@restart/ui/DropdownToggle":34,"classnames":94,"react":227,"react/jsx-runtime":228}],186:[function(require,module,exports){
+},{"./Button":181,"./InputGroupContext":204,"./ThemeProvider":209,"./useWrappedRefWithWarning":212,"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useMergedRefs":21,"@restart/ui/DropdownContext":31,"@restart/ui/DropdownToggle":34,"classnames":94,"react":236,"react/jsx-runtime":237}],189:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -11326,7 +12170,7 @@ function forEach(children, func) {
 function hasChildOfType(children, type) {
   return React.Children.toArray(children).some(child => /*#__PURE__*/React.isValidElement(child) && child.type === type);
 }
-},{"react":227}],187:[function(require,module,exports){
+},{"react":236}],190:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11374,7 +12218,7 @@ Feedback.propTypes = propTypes;
 var _default = Feedback;
 exports.default = _default;
 module.exports = exports.default;
-},{"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"prop-types":175,"react":227,"react/jsx-runtime":228}],188:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"prop-types":178,"react":236,"react/jsx-runtime":237}],191:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11420,7 +12264,7 @@ FloatingLabel.displayName = 'FloatingLabel';
 var _default = FloatingLabel;
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormGroup":196,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],189:[function(require,module,exports){
+},{"./FormGroup":199,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],192:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11506,7 +12350,7 @@ var _default = Object.assign(Form, {
 
 exports.default = _default;
 module.exports = exports.default;
-},{"./FloatingLabel":188,"./FormCheck":190,"./FormControl":194,"./FormFloating":195,"./FormGroup":196,"./FormLabel":197,"./FormRange":198,"./FormSelect":199,"./FormText":200,"./Switch":204,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"prop-types":175,"react":227,"react/jsx-runtime":228}],190:[function(require,module,exports){
+},{"./FloatingLabel":191,"./FormCheck":193,"./FormControl":197,"./FormFloating":198,"./FormGroup":199,"./FormLabel":200,"./FormRange":201,"./FormSelect":202,"./FormText":203,"./Switch":207,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"prop-types":178,"react":236,"react/jsx-runtime":237}],193:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11601,7 +12445,7 @@ var _default = Object.assign(FormCheck, {
 
 exports.default = _default;
 module.exports = exports.default;
-},{"./ElementChildren":186,"./Feedback":187,"./FormCheckInput":191,"./FormCheckLabel":192,"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],191:[function(require,module,exports){
+},{"./ElementChildren":189,"./Feedback":190,"./FormCheckInput":194,"./FormCheckLabel":195,"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],194:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11649,7 +12493,7 @@ FormCheckInput.displayName = 'FormCheckInput';
 var _default = FormCheckInput;
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],192:[function(require,module,exports){
+},{"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],195:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11691,7 +12535,7 @@ FormCheckLabel.displayName = 'FormCheckLabel';
 var _default = FormCheckLabel;
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],193:[function(require,module,exports){
+},{"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],196:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -11707,7 +12551,7 @@ const FormContext = /*#__PURE__*/React.createContext({});
 var _default = FormContext;
 exports.default = _default;
 module.exports = exports.default;
-},{"react":227}],194:[function(require,module,exports){
+},{"react":236}],197:[function(require,module,exports){
 (function (process){(function (){
 "use strict";
 
@@ -11785,7 +12629,7 @@ var _default = Object.assign(FormControl, {
 exports.default = _default;
 module.exports = exports.default;
 }).call(this)}).call(this,require('_process'))
-},{"./Feedback":187,"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"_process":169,"classnames":94,"react":227,"react/jsx-runtime":228,"warning":239}],195:[function(require,module,exports){
+},{"./Feedback":190,"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"_process":172,"classnames":94,"react":236,"react/jsx-runtime":237,"warning":248}],198:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11799,7 +12643,7 @@ var _default = (0, _createWithBsPrefix.default)('form-floating');
 
 exports.default = _default;
 module.exports = exports.default;
-},{"./createWithBsPrefix":207,"@babel/runtime/helpers/interopRequireDefault":3}],196:[function(require,module,exports){
+},{"./createWithBsPrefix":210,"@babel/runtime/helpers/interopRequireDefault":3}],199:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11837,7 +12681,7 @@ FormGroup.displayName = 'FormGroup';
 var _default = FormGroup;
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormContext":193,"@babel/runtime/helpers/interopRequireDefault":3,"react":227,"react/jsx-runtime":228}],197:[function(require,module,exports){
+},{"./FormContext":196,"@babel/runtime/helpers/interopRequireDefault":3,"react":236,"react/jsx-runtime":237}],200:[function(require,module,exports){
 (function (process){(function (){
 "use strict";
 
@@ -11911,7 +12755,7 @@ var _default = FormLabel;
 exports.default = _default;
 module.exports = exports.default;
 }).call(this)}).call(this,require('_process'))
-},{"./Col":179,"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"_process":169,"classnames":94,"react":227,"react/jsx-runtime":228,"warning":239}],198:[function(require,module,exports){
+},{"./Col":182,"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"_process":172,"classnames":94,"react":236,"react/jsx-runtime":237,"warning":248}],201:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -11954,7 +12798,7 @@ FormRange.displayName = 'FormRange';
 var _default = FormRange;
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],199:[function(require,module,exports){
+},{"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],202:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12001,7 +12845,7 @@ FormSelect.displayName = 'FormSelect';
 var _default = FormSelect;
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormContext":193,"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],200:[function(require,module,exports){
+},{"./FormContext":196,"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],203:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12039,7 +12883,7 @@ FormText.displayName = 'FormText';
 var _default = FormText;
 exports.default = _default;
 module.exports = exports.default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],201:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],204:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -12056,7 +12900,7 @@ context.displayName = 'InputGroupContext';
 var _default = context;
 exports.default = _default;
 module.exports = exports.default;
-},{"react":227}],202:[function(require,module,exports){
+},{"react":236}],205:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -12073,7 +12917,7 @@ context.displayName = 'NavbarContext';
 var _default = context;
 exports.default = _default;
 module.exports = exports.default;
-},{"react":227}],203:[function(require,module,exports){
+},{"react":236}],206:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12130,7 +12974,7 @@ Row.displayName = 'Row';
 var _default = Row;
 exports.default = _default;
 module.exports = exports.default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],204:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],207:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12161,7 +13005,7 @@ var _default = Object.assign(Switch, {
 
 exports.default = _default;
 module.exports = exports.default;
-},{"./FormCheck":190,"@babel/runtime/helpers/interopRequireDefault":3,"react":227,"react/jsx-runtime":228}],205:[function(require,module,exports){
+},{"./FormCheck":193,"@babel/runtime/helpers/interopRequireDefault":3,"react":236,"react/jsx-runtime":237}],208:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12218,7 +13062,7 @@ const Table = /*#__PURE__*/React.forwardRef(({
 var _default = Table;
 exports.default = _default;
 module.exports = exports.default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":227,"react/jsx-runtime":228}],206:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"react":236,"react/jsx-runtime":237}],209:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -12312,7 +13156,7 @@ function createBootstrapComponent(Component, opts) {
 
 var _default = ThemeProvider;
 exports.default = _default;
-},{"react":227,"react/jsx-runtime":228}],207:[function(require,module,exports){
+},{"react":236,"react/jsx-runtime":237}],210:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12361,7 +13205,7 @@ function createWithBsPrefix(prefix, {
 }
 
 module.exports = exports.default;
-},{"./ThemeProvider":206,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"dom-helpers/camelize":103,"react":227,"react/jsx-runtime":228}],208:[function(require,module,exports){
+},{"./ThemeProvider":209,"@babel/runtime/helpers/interopRequireDefault":3,"classnames":94,"dom-helpers/camelize":103,"react":236,"react/jsx-runtime":237}],211:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -12386,7 +13230,7 @@ const alignPropType = _propTypes.default.oneOfType([alignDirection, _propTypes.d
 }), _propTypes.default.object]);
 
 exports.alignPropType = alignPropType;
-},{"@babel/runtime/helpers/interopRequireDefault":3,"prop-types":175}],209:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"prop-types":178}],212:[function(require,module,exports){
 (function (process){(function (){
 "use strict";
 
@@ -12414,7 +13258,7 @@ function useWrappedRefWithWarning(ref, componentName) {
 
 module.exports = exports.default;
 }).call(this)}).call(this,require('_process'))
-},{"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useMergedRefs":21,"_process":169,"invariant":144,"react":227}],210:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"@restart/hooks/useMergedRefs":21,"_process":172,"invariant":147,"react":236}],213:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react-dom.development.js
@@ -38680,7 +39524,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169,"object-assign":149,"react":227,"scheduler":233,"scheduler/tracing":234}],211:[function(require,module,exports){
+},{"_process":172,"object-assign":152,"react":236,"scheduler":242,"scheduler/tracing":243}],214:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -38979,7 +39823,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":149,"react":227,"scheduler":233}],212:[function(require,module,exports){
+},{"object-assign":152,"react":236,"scheduler":242}],215:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -39021,7 +39865,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":210,"./cjs/react-dom.production.min.js":211,"_process":169}],213:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":213,"./cjs/react-dom.production.min.js":214,"_process":172}],216:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v16.13.1
  * react-is.development.js
@@ -39206,7 +40050,7 @@ exports.typeOf = typeOf;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169}],214:[function(require,module,exports){
+},{"_process":172}],217:[function(require,module,exports){
 /** @license React v16.13.1
  * react-is.production.min.js
  *
@@ -39223,7 +40067,7 @@ exports.Profiler=g;exports.StrictMode=f;exports.Suspense=p;exports.isAsyncMode=f
 exports.isMemo=function(a){return z(a)===r};exports.isPortal=function(a){return z(a)===d};exports.isProfiler=function(a){return z(a)===g};exports.isStrictMode=function(a){return z(a)===f};exports.isSuspense=function(a){return z(a)===p};
 exports.isValidElementType=function(a){return"string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};exports.typeOf=z;
 
-},{}],215:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -39234,7 +40078,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-is.development.js":213,"./cjs/react-is.production.min.js":214,"_process":169}],216:[function(require,module,exports){
+},{"./cjs/react-is.development.js":216,"./cjs/react-is.production.min.js":217,"_process":172}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -39398,7 +40242,7 @@ function polyfill(Component) {
 
 exports.polyfill = polyfill;
 
-},{}],217:[function(require,module,exports){
+},{}],220:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -39631,19 +40475,1643 @@ exports['default'] = OutsideClickHandler;
 
 OutsideClickHandler.propTypes = propTypes;
 OutsideClickHandler.defaultProps = defaultProps;
-},{"airbnb-prop-types":87,"consolidated-events":95,"document.contains":99,"object.values":166,"prop-types":175,"react":227}],218:[function(require,module,exports){
+},{"airbnb-prop-types":87,"consolidated-events":95,"document.contains":99,"object.values":169,"prop-types":178,"react":236}],221:[function(require,module,exports){
 // eslint-disable-next-line import/no-unresolved
 module.exports = require('./build/OutsideClickHandler');
 
-},{"./build/OutsideClickHandler":217}],219:[function(require,module,exports){
+},{"./build/OutsideClickHandler":220}],222:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function _defineProperty(e,t,i){return t in e?Object.defineProperty(e,t,{value:i,enumerable:!0,configurable:!0,writable:!0}):e[t]=i,e}function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _possibleConstructorReturn(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function _inherits(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(exports,"__esModule",{value:!0});var _typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},_slicedToArray=function(){function e(e,t){var i=[],s=!0,o=!1,n=void 0;try{for(var r,a=e[Symbol.iterator]();!(s=(r=a.next()).done)&&(i.push(r.value),!t||i.length!==t);s=!0);}catch(e){o=!0,n=e}finally{try{!s&&a.return&&a.return()}finally{if(o)throw n}}return i}return function(t,i){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,i);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var i=arguments[t];for(var s in i)Object.prototype.hasOwnProperty.call(i,s)&&(e[s]=i[s])}return e},_createClass=function(){function e(e,t){for(var i=0;i<t.length;i++){var s=t[i];s.enumerable=s.enumerable||!1,s.configurable=!0,"value"in s&&(s.writable=!0),Object.defineProperty(e,s.key,s)}}return function(t,i,s){return i&&e(t.prototype,i),s&&e(t,s),t}}(),_react=require("react"),_react2=_interopRequireDefault(_react),_propTypes=require("prop-types"),_globals=require("./globals"),inOut=(0,_propTypes.shape)({make:_propTypes.func,duration:_propTypes.number.isRequired,delay:_propTypes.number.isRequired,forever:_propTypes.bool,count:_propTypes.number.isRequired,style:_propTypes.object.isRequired,reverse:_propTypes.bool}),propTypes={collapse:_propTypes.bool,collapseEl:_propTypes.element,cascade:_propTypes.bool,wait:_propTypes.number,force:_propTypes.bool,disabled:_propTypes.bool,appear:_propTypes.bool,enter:_propTypes.bool,exit:_propTypes.bool,fraction:_propTypes.number,refProp:_propTypes.string,innerRef:_propTypes.func,onReveal:_propTypes.func,unmountOnExit:_propTypes.bool,mountOnEnter:_propTypes.bool,inEffect:inOut.isRequired,outEffect:(0,_propTypes.oneOfType)([inOut,(0,_propTypes.oneOf)([!1])]).isRequired,ssrReveal:_propTypes.bool,collapseOnly:_propTypes.bool,ssrFadeout:_propTypes.bool},defaultProps={fraction:.2,refProp:"ref"},contextTypes={transitionGroup:_propTypes.object},RevealBase=function(e){function t(e,i){_classCallCheck(this,t);var s=_possibleConstructorReturn(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e,i));return s.isOn=void 0===e.when||!!e.when,s.state={collapse:e.collapse?t.getInitialCollapseStyle(e):void 0,style:{opacity:s.isOn&&!e.ssrReveal||!e.outEffect?void 0:0}},s.savedChild=!1,s.isShown=!1,_globals.observerMode?s.handleObserve=s.handleObserve.bind(s):(s.revealHandler=s.makeHandler(s.reveal),s.resizeHandler=s.makeHandler(s.resize)),s.saveRef=s.saveRef.bind(s),s}return _inherits(t,e),_createClass(t,[{key:"saveRef",value:function(e){this.childRef&&this.childRef(e),this.props.innerRef&&this.props.innerRef(e),this.el!==e&&(this.el=e&&"offsetHeight"in e?e:void 0,this.observe(this.props,!0))}},{key:"invisible",value:function(){this&&this.el&&(this.savedChild=!1,this.isShown||(this.setState({hasExited:!0,collapse:this.props.collapse?_extends({},this.state.collapse,{visibility:"hidden"}):null,style:{opacity:0}}),!_globals.observerMode&&this.props.collapse&&window.document.dispatchEvent(_globals.collapseend)))}},{key:"animationEnd",value:function(e,t,i){var s=this,o=i.forever,n=i.count,r=i.delay,a=i.duration;if(!o){var l=function(){s&&s.el&&(s.animationEndTimeout=void 0,e.call(s))};this.animationEndTimeout=window.setTimeout(l,r+(a+(t?a:0)*n))}}},{key:"getDimensionValue",value:function(){return this.el.offsetHeight+parseInt(window.getComputedStyle(this.el,null).getPropertyValue("margin-top"),10)+parseInt(window.getComputedStyle(this.el,null).getPropertyValue("margin-bottom"),10)}},{key:"collapse",value:function(e,t,i){var s=i.duration+(t.cascade?i.duration:0),o=this.isOn?this.getDimensionValue():0,n=void 0,r=void 0;if(t.collapseOnly)n=i.duration/3,r=i.delay;else{var a=s>>2,l=a>>1;n=a,r=i.delay+(this.isOn?0:s-a-l),e.style.animationDuration=s-a+(this.isOn?l:-l)+"ms",e.style.animationDelay=i.delay+(this.isOn?a-l:0)+"ms"}return e.collapse={height:o,transition:"height "+n+"ms ease "+r+"ms",overflow:t.collapseOnly?"hidden":void 0},e}},{key:"animate",value:function(e){if(this&&this.el&&(this.unlisten(),this.isShown!==this.isOn)){this.isShown=this.isOn;var t=!this.isOn&&e.outEffect,i=e[t?"outEffect":"inEffect"],s="style"in i&&i.style.animationName||void 0,o=void 0;e.collapseOnly?o={hasAppeared:!0,hasExited:!1,style:{opacity:1}}:((e.outEffect||this.isOn)&&i.make&&(s=i.make),o={hasAppeared:!0,hasExited:!1,collapse:void 0,style:_extends({},i.style,{animationDuration:i.duration+"ms",animationDelay:i.delay+"ms",animationIterationCount:i.forever?"infinite":i.count,opacity:1,animationName:s}),className:i.className}),this.setState(e.collapse?this.collapse(o,e,i):o),t?(this.savedChild=_react2.default.cloneElement(this.getChild()),this.animationEnd(this.invisible,e.cascade,i)):this.savedChild=!1,this.onReveal(e)}}},{key:"onReveal",value:function(e){e.onReveal&&this.isOn&&(this.onRevealTimeout&&(this.onRevealTimeout=window.clearTimeout(this.onRevealTimeout)),e.wait?this.onRevealTimeout=window.setTimeout(e.onReveal,e.wait):e.onReveal())}},{key:"componentWillUnmount",value:function(){this.unlisten(),_globals.ssr&&(0,_globals.disableSsr)()}},{key:"handleObserve",value:function(e,t){_slicedToArray(e,1)[0].intersectionRatio>0&&(t.disconnect(),this.observer=null,this.reveal(this.props,!0))}},{key:"observe",value:function(e){var t=arguments.length>1&&void 0!==arguments[1]&&arguments[1];if(this.el&&_globals.observerMode){if(this.observer){if(!t)return;this.observer.disconnect()}else if(t)return;this.observer=new IntersectionObserver(this.handleObserve,{threshold:e.fraction}),this.observer.observe(this.el)}}},{key:"reveal",value:function(e){var t=this,i=arguments.length>1&&void 0!==arguments[1]&&arguments[1];_globals.globalHide||(0,_globals.hideAll)(),this&&this.el&&(e||(e=this.props),_globals.ssr&&(0,_globals.disableSsr)(),this.isOn&&this.isShown&&void 0!==e.spy?(this.isShown=!1,this.setState({style:{}}),window.setTimeout(function(){return t.reveal(e)},200)):i||this.inViewport(e)||e.force?this.animate(e):_globals.observerMode?this.observe(e):this.listen())}},{key:"componentDidMount",value:function(){var e=this;if(this.el&&!this.props.disabled){this.props.collapseOnly||("make"in this.props.inEffect&&this.props.inEffect.make(!1,this.props),void 0!==this.props.when&&this.props.outEffect&&"make"in this.props.outEffect&&this.props.outEffect.make(!0,this.props));var i=this.context.transitionGroup,s=i&&!i.isMounting?!("enter"in this.props&&!1===this.props.enter):this.props.appear;return this.isOn&&((void 0!==this.props.when||void 0!==this.props.spy)&&!s||_globals.ssr&&!_globals.fadeOutEnabled&&!this.props.ssrFadeout&&this.props.outEffect&&!this.props.ssrReveal&&t.getTop(this.el)<window.pageYOffset+window.innerHeight)?(this.isShown=!0,this.setState({hasAppeared:!0,collapse:this.props.collapse?{height:this.getDimensionValue()}:this.state.collapse,style:{opacity:1}}),void this.onReveal(this.props)):_globals.ssr&&(_globals.fadeOutEnabled||this.props.ssrFadeout)&&this.props.outEffect&&t.getTop(this.el)<window.pageYOffset+window.innerHeight?(this.setState({style:{opacity:0,transition:"opacity 1000ms 1000ms"}}),void window.setTimeout(function(){return e.reveal(e.props,!0)},2e3)):void(this.isOn&&(this.props.force?this.animate(this.props):this.reveal(this.props)))}}},{key:"cascade",value:function(e){var t=this,i=void 0;i="string"==typeof e?e.split("").map(function(e,t){return _react2.default.createElement("span",{key:t,style:{display:"inline-block",whiteSpace:"pre"}},e)}):_react2.default.Children.toArray(e);var s=this.props[this.isOn||!this.props.outEffect?"inEffect":"outEffect"],o=s.duration,n=s.reverse,r=i.length,a=2*o;this.props.collapse&&(a=parseInt(this.state.style.animationDuration,10),o=a/2);var l=n?r:0;return i=i.map(function(e){return"object"===(void 0===e?"undefined":_typeof(e))&&e?_react2.default.cloneElement(e,{style:_extends({},e.props.style,t.state.style,{animationDuration:Math.round((0,_globals.cascade)(n?l--:l++,0,r,o,a))+"ms"})}):e})}},{key:"componentWillReceiveProps",value:function(e){if(void 0!==e.when&&(this.isOn=!!e.when),e.fraction!==this.props.fraction&&this.observe(e,!0),!this.isOn&&e.onExited&&"exit"in e&&!1===e.exit)return void e.onExited();e.disabled||(e.collapse&&!this.props.collapse&&(this.setState({style:{},collapse:t.getInitialCollapseStyle(e)}),this.isShown=!1),e.when===this.props.when&&e.spy===this.props.spy||this.reveal(e),this.onRevealTimeout&&!this.isOn&&(this.onRevealTimeout=window.clearTimeout(this.onRevealTimeout)))}},{key:"getChild",value:function(){if(this.savedChild&&!this.props.disabled)return this.savedChild;if("object"===_typeof(this.props.children)){var e=_react2.default.Children.only(this.props.children);return"type"in e&&"string"==typeof e.type||"ref"!==this.props.refProp?e:_react2.default.createElement("div",null,e)}return _react2.default.createElement("div",null,this.props.children)}},{key:"render",value:function(){var e=void 0;e=this.state.hasAppeared?!this.props.unmountOnExit||!this.state.hasExited||this.isOn:!this.props.mountOnEnter||this.isOn;var t=this.getChild();"function"==typeof t.ref&&(this.childRef=t.ref);var i=!1,s=t.props,o=s.style,n=s.className,r=s.children,a=this.props.disabled?n:(this.props.outEffect?_globals.namespace:"")+(this.state.className?" "+this.state.className:"")+(n?" "+n:"")||void 0,l=void 0;"function"==typeof this.state.style.animationName&&(this.state.style.animationName=this.state.style.animationName(!this.isOn,this.props)),this.props.cascade&&!this.props.disabled&&r&&this.state.style.animationName?(i=this.cascade(r),l=_extends({},o,{opacity:1})):l=this.props.disabled?o:_extends({},o,this.state.style);var p=_extends({},this.props.props,_defineProperty({className:a,style:l},this.props.refProp,this.saveRef)),h=_react2.default.cloneElement(t,p,e?i||r:void 0);return void 0!==this.props.collapse?this.props.collapseEl?_react2.default.cloneElement(this.props.collapseEl,{style:_extends({},this.props.collapseEl.style,this.props.disabled?void 0:this.state.collapse),children:h}):_react2.default.createElement("div",{style:this.props.disabled?void 0:this.state.collapse,children:h}):h}},{key:"makeHandler",value:function(e){var t=this,i=function(){e.call(t,t.props),t.ticking=!1};return function(){t.ticking||((0,_globals.raf)(i),t.ticking=!0)}}},{key:"inViewport",value:function(e){if(!this.el||window.document.hidden)return!1;var i=this.el.offsetHeight,s=window.pageYOffset-t.getTop(this.el),o=Math.min(i,window.innerHeight)*(_globals.globalHide?e.fraction:0);return s>o-window.innerHeight&&s<i-o}},{key:"resize",value:function(e){this&&this.el&&this.isOn&&this.inViewport(e)&&(this.unlisten(),this.isShown=this.isOn,this.setState({hasExited:!this.isOn,hasAppeared:!0,collapse:void 0,style:{opacity:this.isOn||!e.outEffect?1:0}}),this.onReveal(e))}},{key:"listen",value:function(){_globals.observerMode||this.isListener||(this.isListener=!0,window.addEventListener("scroll",this.revealHandler,{passive:!0}),window.addEventListener("orientationchange",this.revealHandler,{passive:!0}),window.document.addEventListener("visibilitychange",this.revealHandler,{passive:!0}),window.document.addEventListener("collapseend",this.revealHandler,{passive:!0}),window.addEventListener("resize",this.resizeHandler,{passive:!0}))}},{key:"unlisten",value:function(){!_globals.observerMode&&this.isListener&&(window.removeEventListener("scroll",this.revealHandler,{passive:!0}),window.removeEventListener("orientationchange",this.revealHandler,{passive:!0}),window.document.removeEventListener("visibilitychange",this.revealHandler,{passive:!0}),window.document.removeEventListener("collapseend",this.revealHandler,{passive:!0}),window.removeEventListener("resize",this.resizeHandler,{passive:!0}),this.isListener=!1),this.onRevealTimeout&&(this.onRevealTimeout=window.clearTimeout(this.onRevealTimeout)),this.animationEndTimeout&&(this.animationEndTimeout=window.clearTimeout(this.animationEndTimeout))}}],[{key:"getInitialCollapseStyle",value:function(e){return{height:0,visibility:e.when?void 0:"hidden"}}},{key:"getTop",value:function(e){for(;void 0===e.offsetTop;)e=e.parentNode;for(var t=e.offsetTop;e.offsetParent;t+=e.offsetTop)e=e.offsetParent;return t}}]),t}(_react2.default.Component);RevealBase.propTypes=propTypes,RevealBase.defaultProps=defaultProps,RevealBase.contextTypes=contextTypes,RevealBase.displayName="RevealBase",exports.default=RevealBase,module.exports=exports.default;
-},{"./globals":221,"prop-types":175,"react":227}],220:[function(require,module,exports){
+},{"./globals":224,"prop-types":178,"react":236}],223:[function(require,module,exports){
 "use strict";function _interopRequireDefault(o){return o&&o.__esModule?o:{default:o}}function _objectWithoutProperties(o,e){var r={};for(var t in o)e.indexOf(t)>=0||Object.prototype.hasOwnProperty.call(o,t)&&(r[t]=o[t]);return r}function make(o,e){var r=e.left,t=e.right,p=e.up,n=e.down,a=e.top,i=e.bottom,l=e.mirror,u=e.opposite,s=(r?1:0)|(t?2:0)|(a||n?4:0)|(i||p?8:0)|(l?16:0)|(u?32:0)|(o?64:0);if(lookup.hasOwnProperty(s))return lookup[s];if(!l!=!(o&&u)){var d=[t,r,i,a,n,p];r=d[0],t=d[1],a=d[2],i=d[3],p=d[4],n=d[5]}var f=r||t,c=a||i||p||n,m=f||c,y=void 0,b=void 0,_=void 0,v=void 0,T=void 0;return m?o?(b=f?(r?"":"-")+"42px":"0",_=c?(n||a?"-":"")+"60px":"0",v=f?(t?"":"-")+"2000px":"0",T=c?(p||i?"":"-")+"2000px":"0",y="40% {\n          opacity: 1;\n          transform: scale3d(.475, .475, .475) translate3d("+b+", "+_+", 0);\n        }\n        to {\n          opacity: 0;\n          transform: scale(.1) translate3d("+v+", "+T+", 0);\n          transform-origin: "+(c?"center bottom":(r?"left":"right")+" center")+";\n        }"):(b=f?(r?"-":"")+"1000px":"0",_=c?(n||a?"-":"")+"1000px":"0",v=f?(t?"-":"")+"10px":"0",T=c?(p||i?"-":"")+"60px":"0",y="from {\n          opacity: 0;\n          transform: scale3d(.1, .1, .1) translate3d("+b+", "+_+", 0);\n          animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);\n        }\n        60% {\n          opacity: 1;\n          transform: scale3d(.475, .475, .475) translate3d("+v+", "+T+", 0);\n          animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);\n        }"):y=(o?"to":"from")+" {opacity: 0; transform: scale3d(.1, .1, .1);} "+(o?"from":"to")+" { opacity: 1; transform: none;}",lookup[s]=(0,_globals.animation)(y),lookup[s]}function Zoom(){var o=arguments.length>0&&void 0!==arguments[0]?arguments[0]:_globals.defaults,e=o.children,r=(o.out,o.forever),t=o.timeout,p=o.duration,n=void 0===p?_globals.defaults.duration:p,a=o.delay,i=void 0===a?_globals.defaults.delay:a,l=o.count,u=void 0===l?_globals.defaults.count:l,s=_objectWithoutProperties(o,["children","out","forever","timeout","duration","delay","count"]),d={make:make,duration:void 0===t?n:t,delay:i,forever:r,count:u,style:{animationFillMode:"both"},reverse:s.left};return(0,_wrap2.default)(s,d,d,e)}Object.defineProperty(exports,"__esModule",{value:!0});var _propTypes=require("prop-types"),_wrap=require("./wrap"),_wrap2=_interopRequireDefault(_wrap),_globals=require("./globals"),propTypes={out:_propTypes.bool,left:_propTypes.bool,right:_propTypes.bool,top:_propTypes.bool,bottom:_propTypes.bool,mirror:_propTypes.bool,opposite:_propTypes.bool,duration:_propTypes.number,timeout:_propTypes.number,delay:_propTypes.number,count:_propTypes.number,forever:_propTypes.bool},lookup={};Zoom.propTypes=propTypes,exports.default=Zoom,module.exports=exports.default;
-},{"./globals":221,"./wrap":222,"prop-types":175}],221:[function(require,module,exports){
+},{"./globals":224,"./wrap":225,"prop-types":178}],224:[function(require,module,exports){
 "use strict";function insertRule(e){try{return sheet.insertRule(e,sheet.cssRules.length)}catch(e){console.warn("react-reveal - animation failed")}}function cascade(e,n,t,o,r){var s=Math.log(o),i=Math.log(r),a=(i-s)/(t-n);return Math.exp(s+a*(e-n))}function animation(e){if(!sheet)return"";var n="@keyframes "+(name+counter)+"{"+e+"}",t=effectMap[e];return t?""+name+t:(sheet.insertRule(n,sheet.cssRules.length),effectMap[e]=counter,""+name+counter++)}function hideAll(){globalHide||(exports.globalHide=globalHide=!0,window.removeEventListener("scroll",hideAll,!0),insertRule("."+namespace+" { opacity: 0; }"),window.removeEventListener("orientationchange",hideAll,!0),window.document.removeEventListener("visibilitychange",hideAll))}function config(e){var n=e.ssrFadeout;exports.fadeOutEnabled=fadeOutEnabled=n}Object.defineProperty(exports,"__esModule",{value:!0}),exports.insertRule=insertRule,exports.cascade=cascade,exports.animation=animation,exports.hideAll=hideAll,exports.default=config;var namespace=exports.namespace="react-reveal",defaults=exports.defaults={duration:1e3,delay:0,count:1},ssr=exports.ssr=!0,observerMode=exports.observerMode=!1,raf=exports.raf=function(e){return window.setTimeout(e,66)},disableSsr=exports.disableSsr=function(){return exports.ssr=ssr=!1},fadeOutEnabled=exports.fadeOutEnabled=!1,ssrFadeout=exports.ssrFadeout=function(){var e=arguments.length>0&&void 0!==arguments[0]&&arguments[0];return exports.fadeOutEnabled=fadeOutEnabled=e},globalHide=exports.globalHide=!1,ie10=exports.ie10=!1,collapseend=exports.collapseend=void 0,counter=1,effectMap={},sheet=!1,name=namespace+"-"+Math.floor(1e15*Math.random())+"-";if("undefined"!=typeof window&&"nodejs"!==window.name&&window.document&&"undefined"!=typeof navigator){exports.observerMode=observerMode="IntersectionObserver"in window&&"IntersectionObserverEntry"in window&&"intersectionRatio"in window.IntersectionObserverEntry.prototype&&/\{\s*\[native code\]\s*\}/.test(""+IntersectionObserver),exports.raf=raf=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||raf,exports.ssr=ssr=window.document.querySelectorAll("div[data-reactroot]").length>0,-1!==navigator.appVersion.indexOf("MSIE 10")&&(exports.ie10=ie10=!0),ssr&&"performance"in window&&"timing"in window.performance&&"domContentLoadedEventEnd"in window.performance.timing&&window.performance.timing.domLoading&&Date.now()-window.performance.timing.domLoading<300&&(exports.ssr=ssr=!1),ssr&&window.setTimeout(disableSsr,1500),observerMode||(exports.collapseend=collapseend=document.createEvent("Event"),collapseend.initEvent("collapseend",!0,!0));var element=document.createElement("style");document.head.appendChild(element),element.sheet&&element.sheet.cssRules&&element.sheet.insertRule&&(sheet=element.sheet,window.addEventListener("scroll",hideAll,!0),window.addEventListener("orientationchange",hideAll,!0),window.document.addEventListener("visibilitychange",hideAll))}
-},{}],222:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 "use strict";function _interopRequireDefault(e){return e&&e.__esModule?e:{default:e}}function wrap(e,t,a,r){return"in"in e&&(e.when=e.in),_react2.default.Children.count(r)<2?_react2.default.createElement(_RevealBase2.default,_extends({},e,{inEffect:t,outEffect:a,children:r})):(r=_react2.default.Children.map(r,function(r){return _react2.default.createElement(_RevealBase2.default,_extends({},e,{inEffect:t,outEffect:a,children:r}))}),"Fragment"in _react2.default?_react2.default.createElement(_react2.default.Fragment,null,r):_react2.default.createElement("span",null,r))}Object.defineProperty(exports,"__esModule",{value:!0});var _extends=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var a=arguments[t];for(var r in a)Object.prototype.hasOwnProperty.call(a,r)&&(e[r]=a[r])}return e};exports.default=wrap;var _react=require("react"),_react2=_interopRequireDefault(_react),_RevealBase=require("./RevealBase"),_RevealBase2=_interopRequireDefault(_RevealBase);module.exports=exports.default;
-},{"./RevealBase":219,"react":227}],223:[function(require,module,exports){
+},{"./RevealBase":222,"react":236}],226:[function(require,module,exports){
+(function (process){(function (){
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+'use strict';
+
+/* eslint-env node */
+
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./umd/react-router-dom.production.min.js");
+} else {
+  module.exports = require("./umd/react-router-dom.development.js");
+}
+
+}).call(this)}).call(this,require('_process'))
+},{"./umd/react-router-dom.development.js":227,"./umd/react-router-dom.production.min.js":228,"_process":172}],227:[function(require,module,exports){
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('history'), require('react-router')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react', 'history', 'react-router'], factory) :
+  (global = global || self, factory(global.ReactRouterDOM = {}, global.React, global.HistoryLibrary, global.ReactRouter));
+}(this, (function (exports, React, history, reactRouter) { 'use strict';
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+
+    return target;
+  }
+
+  const _excluded = ["onClick", "reloadDocument", "replace", "state", "target", "to"],
+        _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"];
+
+  function warning(cond, message) {
+    if (!cond) {
+      // eslint-disable-next-line no-console
+      if (typeof console !== "undefined") console.warn(message);
+
+      try {
+        // Welcome to debugging React Router!
+        //
+        // This error is thrown as a convenience so you can more easily
+        // find the source for a warning that appears in the console by
+        // enabling "pause on exceptions" in your JavaScript debugger.
+        throw new Error(message); // eslint-disable-next-line no-empty
+      } catch (e) {}
+    }
+  } ////////////////////////////////////////////////////////////////////////////////
+  // COMPONENTS
+  ////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * A `<Router>` for use in web browsers. Provides the cleanest URLs.
+   */
+  function BrowserRouter(_ref) {
+    let {
+      basename,
+      children,
+      window
+    } = _ref;
+    let historyRef = React.useRef();
+
+    if (historyRef.current == null) {
+      historyRef.current = history.createBrowserHistory({
+        window
+      });
+    }
+
+    let history$1 = historyRef.current;
+    let [state, setState] = React.useState({
+      action: history$1.action,
+      location: history$1.location
+    });
+    React.useLayoutEffect(() => history$1.listen(setState), [history$1]);
+    return /*#__PURE__*/React.createElement(reactRouter.Router, {
+      basename: basename,
+      children: children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history$1
+    });
+  }
+
+  /**
+   * A `<Router>` for use in web browsers. Stores the location in the hash
+   * portion of the URL so it is not sent to the server.
+   */
+  function HashRouter(_ref2) {
+    let {
+      basename,
+      children,
+      window
+    } = _ref2;
+    let historyRef = React.useRef();
+
+    if (historyRef.current == null) {
+      historyRef.current = history.createHashHistory({
+        window
+      });
+    }
+
+    let history$1 = historyRef.current;
+    let [state, setState] = React.useState({
+      action: history$1.action,
+      location: history$1.location
+    });
+    React.useLayoutEffect(() => history$1.listen(setState), [history$1]);
+    return /*#__PURE__*/React.createElement(reactRouter.Router, {
+      basename: basename,
+      children: children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history$1
+    });
+  }
+
+  /**
+   * A `<Router>` that accepts a pre-instantiated history object. It's important
+   * to note that using your own history object is highly discouraged and may add
+   * two versions of the history library to your bundles unless you use the same
+   * version of the history library that React Router uses internally.
+   */
+  function HistoryRouter(_ref3) {
+    let {
+      basename,
+      children,
+      history
+    } = _ref3;
+    const [state, setState] = React.useState({
+      action: history.action,
+      location: history.location
+    });
+    React.useLayoutEffect(() => history.listen(setState), [history]);
+    return /*#__PURE__*/React.createElement(reactRouter.Router, {
+      basename: basename,
+      children: children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history
+    });
+  }
+
+  {
+    HistoryRouter.displayName = "unstable_HistoryRouter";
+  }
+
+  function isModifiedEvent(event) {
+    return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+  }
+
+  /**
+   * The public API for rendering a history-aware <a>.
+   */
+  const Link = /*#__PURE__*/React.forwardRef(function LinkWithRef(_ref4, ref) {
+    let {
+      onClick,
+      reloadDocument,
+      replace = false,
+      state,
+      target,
+      to
+    } = _ref4,
+        rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
+
+    let href = reactRouter.useHref(to);
+    let internalOnClick = useLinkClickHandler(to, {
+      replace,
+      state,
+      target
+    });
+
+    function handleClick(event) {
+      if (onClick) onClick(event);
+
+      if (!event.defaultPrevented && !reloadDocument) {
+        internalOnClick(event);
+      }
+    }
+
+    return (
+      /*#__PURE__*/
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      React.createElement("a", _extends({}, rest, {
+        href: href,
+        onClick: handleClick,
+        ref: ref,
+        target: target
+      }))
+    );
+  });
+
+  {
+    Link.displayName = "Link";
+  }
+
+  /**
+   * A <Link> wrapper that knows if it's "active" or not.
+   */
+  const NavLink = /*#__PURE__*/React.forwardRef(function NavLinkWithRef(_ref5, ref) {
+    let {
+      "aria-current": ariaCurrentProp = "page",
+      caseSensitive = false,
+      className: classNameProp = "",
+      end = false,
+      style: styleProp,
+      to,
+      children
+    } = _ref5,
+        rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
+
+    let location = reactRouter.useLocation();
+    let path = reactRouter.useResolvedPath(to);
+    let locationPathname = location.pathname;
+    let toPathname = path.pathname;
+
+    if (!caseSensitive) {
+      locationPathname = locationPathname.toLowerCase();
+      toPathname = toPathname.toLowerCase();
+    }
+
+    let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
+    let ariaCurrent = isActive ? ariaCurrentProp : undefined;
+    let className;
+
+    if (typeof classNameProp === "function") {
+      className = classNameProp({
+        isActive
+      });
+    } else {
+      // If the className prop is not a function, we use a default `active`
+      // class for <NavLink />s that are active. In v5 `active` was the default
+      // value for `activeClassName`, but we are removing that API and can still
+      // use the old default behavior for a cleaner upgrade path and keep the
+      // simple styling rules working as they currently do.
+      className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+    }
+
+    let style = typeof styleProp === "function" ? styleProp({
+      isActive
+    }) : styleProp;
+    return /*#__PURE__*/React.createElement(Link, _extends({}, rest, {
+      "aria-current": ariaCurrent,
+      className: className,
+      ref: ref,
+      style: style,
+      to: to
+    }), typeof children === "function" ? children({
+      isActive
+    }) : children);
+  });
+
+  {
+    NavLink.displayName = "NavLink";
+  } ////////////////////////////////////////////////////////////////////////////////
+  // HOOKS
+  ////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Handles the click behavior for router `<Link>` components. This is useful if
+   * you need to create custom `<Link>` components with the same click behavior we
+   * use in our exported `<Link>`.
+   */
+
+
+  function useLinkClickHandler(to, _temp) {
+    let {
+      target,
+      replace: replaceProp,
+      state
+    } = _temp === void 0 ? {} : _temp;
+    let navigate = reactRouter.useNavigate();
+    let location = reactRouter.useLocation();
+    let path = reactRouter.useResolvedPath(to);
+    return React.useCallback(event => {
+      if (event.button === 0 && ( // Ignore everything but left clicks
+      !target || target === "_self") && // Let browser handle "target=_blank" etc.
+      !isModifiedEvent(event) // Ignore clicks with modifier keys
+      ) {
+        event.preventDefault(); // If the URL hasn't changed, a regular <a> will do a replace instead of
+        // a push, so do the same here.
+
+        let replace = !!replaceProp || reactRouter.createPath(location) === reactRouter.createPath(path);
+        navigate(to, {
+          replace,
+          state
+        });
+      }
+    }, [location, navigate, path, replaceProp, state, target, to]);
+  }
+  /**
+   * A convenient wrapper for reading and writing search parameters via the
+   * URLSearchParams interface.
+   */
+
+  function useSearchParams(defaultInit) {
+     warning(typeof URLSearchParams !== "undefined", "You cannot use the `useSearchParams` hook in a browser that does not " + "support the URLSearchParams API. If you need to support Internet " + "Explorer 11, we recommend you load a polyfill such as " + "https://github.com/ungap/url-search-params\n\n" + "If you're unsure how to load polyfills, we recommend you check out " + "https://polyfill.io/v3/ which provides some recommendations about how " + "to load polyfills only for users that need them, instead of for every " + "user.") ;
+    let defaultSearchParamsRef = React.useRef(createSearchParams(defaultInit));
+    let location = reactRouter.useLocation();
+    let searchParams = React.useMemo(() => {
+      let searchParams = createSearchParams(location.search);
+
+      for (let key of defaultSearchParamsRef.current.keys()) {
+        if (!searchParams.has(key)) {
+          defaultSearchParamsRef.current.getAll(key).forEach(value => {
+            searchParams.append(key, value);
+          });
+        }
+      }
+
+      return searchParams;
+    }, [location.search]);
+    let navigate = reactRouter.useNavigate();
+    let setSearchParams = React.useCallback((nextInit, navigateOptions) => {
+      navigate("?" + createSearchParams(nextInit), navigateOptions);
+    }, [navigate]);
+    return [searchParams, setSearchParams];
+  }
+
+  /**
+   * Creates a URLSearchParams object using the given initializer.
+   *
+   * This is identical to `new URLSearchParams(init)` except it also
+   * supports arrays as values in the object form of the initializer
+   * instead of just strings. This is convenient when you need multiple
+   * values for a given key, but don't want to use an array initializer.
+   *
+   * For example, instead of:
+   *
+   *   let searchParams = new URLSearchParams([
+   *     ['sort', 'name'],
+   *     ['sort', 'price']
+   *   ]);
+   *
+   * you can do:
+   *
+   *   let searchParams = createSearchParams({
+   *     sort: ['name', 'price']
+   *   });
+   */
+  function createSearchParams(init) {
+    if (init === void 0) {
+      init = "";
+    }
+
+    return new URLSearchParams(typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo, key) => {
+      let value = init[key];
+      return memo.concat(Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]);
+    }, []));
+  }
+
+  Object.defineProperty(exports, 'MemoryRouter', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.MemoryRouter;
+    }
+  });
+  Object.defineProperty(exports, 'Navigate', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Navigate;
+    }
+  });
+  Object.defineProperty(exports, 'NavigationType', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.NavigationType;
+    }
+  });
+  Object.defineProperty(exports, 'Outlet', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Outlet;
+    }
+  });
+  Object.defineProperty(exports, 'Route', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Route;
+    }
+  });
+  Object.defineProperty(exports, 'Router', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Router;
+    }
+  });
+  Object.defineProperty(exports, 'Routes', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Routes;
+    }
+  });
+  Object.defineProperty(exports, 'UNSAFE_LocationContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.UNSAFE_LocationContext;
+    }
+  });
+  Object.defineProperty(exports, 'UNSAFE_NavigationContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.UNSAFE_NavigationContext;
+    }
+  });
+  Object.defineProperty(exports, 'UNSAFE_RouteContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.UNSAFE_RouteContext;
+    }
+  });
+  Object.defineProperty(exports, 'createPath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.createPath;
+    }
+  });
+  Object.defineProperty(exports, 'createRoutesFromChildren', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.createRoutesFromChildren;
+    }
+  });
+  Object.defineProperty(exports, 'generatePath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.generatePath;
+    }
+  });
+  Object.defineProperty(exports, 'matchPath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.matchPath;
+    }
+  });
+  Object.defineProperty(exports, 'matchRoutes', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.matchRoutes;
+    }
+  });
+  Object.defineProperty(exports, 'parsePath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.parsePath;
+    }
+  });
+  Object.defineProperty(exports, 'renderMatches', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.renderMatches;
+    }
+  });
+  Object.defineProperty(exports, 'resolvePath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.resolvePath;
+    }
+  });
+  Object.defineProperty(exports, 'useHref', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useHref;
+    }
+  });
+  Object.defineProperty(exports, 'useInRouterContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useInRouterContext;
+    }
+  });
+  Object.defineProperty(exports, 'useLocation', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useLocation;
+    }
+  });
+  Object.defineProperty(exports, 'useMatch', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useMatch;
+    }
+  });
+  Object.defineProperty(exports, 'useNavigate', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useNavigate;
+    }
+  });
+  Object.defineProperty(exports, 'useNavigationType', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useNavigationType;
+    }
+  });
+  Object.defineProperty(exports, 'useOutlet', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useOutlet;
+    }
+  });
+  Object.defineProperty(exports, 'useOutletContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useOutletContext;
+    }
+  });
+  Object.defineProperty(exports, 'useParams', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useParams;
+    }
+  });
+  Object.defineProperty(exports, 'useResolvedPath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useResolvedPath;
+    }
+  });
+  Object.defineProperty(exports, 'useRoutes', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useRoutes;
+    }
+  });
+  exports.BrowserRouter = BrowserRouter;
+  exports.HashRouter = HashRouter;
+  exports.Link = Link;
+  exports.NavLink = NavLink;
+  exports.createSearchParams = createSearchParams;
+  exports.unstable_HistoryRouter = HistoryRouter;
+  exports.useLinkClickHandler = useLinkClickHandler;
+  exports.useSearchParams = useSearchParams;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+
+},{"history":144,"react":236,"react-router":229}],228:[function(require,module,exports){
+/**
+ * React Router DOM v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports,require("react"),require("history"),require("react-router")):"function"==typeof define&&define.amd?define(["exports","react","history","react-router"],t):t((e=e||self).ReactRouterDOM={},e.React,e.HistoryLibrary,e.ReactRouter)}(this,(function(e,t,r,n){"use strict";function a(){return a=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var r=arguments[t];for(var n in r)Object.prototype.hasOwnProperty.call(r,n)&&(e[n]=r[n])}return e},a.apply(this,arguments)}function o(e,t){if(null==e)return{};var r,n,a={},o=Object.keys(e);for(n=0;n<o.length;n++)r=o[n],t.indexOf(r)>=0||(a[r]=e[r]);return a}const u=["onClick","reloadDocument","replace","state","target","to"],i=["aria-current","caseSensitive","className","end","style","to","children"];const c=t.forwardRef((function(e,r){let{onClick:i,reloadDocument:c,replace:s=!1,state:f,target:b,to:y}=e,d=o(e,u),m=n.useHref(y),p=l(y,{replace:s,state:f,target:b});return t.createElement("a",a({},d,{href:m,onClick:function(e){i&&i(e),e.defaultPrevented||c||p(e)},ref:r,target:b}))})),s=t.forwardRef((function(e,r){let{"aria-current":u="page",caseSensitive:s=!1,className:l="",end:f=!1,style:b,to:y,children:d}=e,m=o(e,i),p=n.useLocation(),g=n.useResolvedPath(y),h=p.pathname,P=g.pathname;s||(h=h.toLowerCase(),P=P.toLowerCase());let O,v=h===P||!f&&h.startsWith(P)&&"/"===h.charAt(P.length),R=v?u:void 0;O="function"==typeof l?l({isActive:v}):[l,v?"active":null].filter(Boolean).join(" ");let j="function"==typeof b?b({isActive:v}):b;return t.createElement(c,a({},m,{"aria-current":R,className:O,ref:r,style:j,to:y}),"function"==typeof d?d({isActive:v}):d)}));function l(e,r){let{target:a,replace:o,state:u}=void 0===r?{}:r,i=n.useNavigate(),c=n.useLocation(),s=n.useResolvedPath(e);return t.useCallback((t=>{if(!(0!==t.button||a&&"_self"!==a||function(e){return!!(e.metaKey||e.altKey||e.ctrlKey||e.shiftKey)}(t))){t.preventDefault();let r=!!o||n.createPath(c)===n.createPath(s);i(e,{replace:r,state:u})}}),[c,i,s,o,u,a,e])}function f(e){return void 0===e&&(e=""),new URLSearchParams("string"==typeof e||Array.isArray(e)||e instanceof URLSearchParams?e:Object.keys(e).reduce(((t,r)=>{let n=e[r];return t.concat(Array.isArray(n)?n.map((e=>[r,e])):[[r,n]])}),[]))}Object.defineProperty(e,"MemoryRouter",{enumerable:!0,get:function(){return n.MemoryRouter}}),Object.defineProperty(e,"Navigate",{enumerable:!0,get:function(){return n.Navigate}}),Object.defineProperty(e,"NavigationType",{enumerable:!0,get:function(){return n.NavigationType}}),Object.defineProperty(e,"Outlet",{enumerable:!0,get:function(){return n.Outlet}}),Object.defineProperty(e,"Route",{enumerable:!0,get:function(){return n.Route}}),Object.defineProperty(e,"Router",{enumerable:!0,get:function(){return n.Router}}),Object.defineProperty(e,"Routes",{enumerable:!0,get:function(){return n.Routes}}),Object.defineProperty(e,"UNSAFE_LocationContext",{enumerable:!0,get:function(){return n.UNSAFE_LocationContext}}),Object.defineProperty(e,"UNSAFE_NavigationContext",{enumerable:!0,get:function(){return n.UNSAFE_NavigationContext}}),Object.defineProperty(e,"UNSAFE_RouteContext",{enumerable:!0,get:function(){return n.UNSAFE_RouteContext}}),Object.defineProperty(e,"createPath",{enumerable:!0,get:function(){return n.createPath}}),Object.defineProperty(e,"createRoutesFromChildren",{enumerable:!0,get:function(){return n.createRoutesFromChildren}}),Object.defineProperty(e,"generatePath",{enumerable:!0,get:function(){return n.generatePath}}),Object.defineProperty(e,"matchPath",{enumerable:!0,get:function(){return n.matchPath}}),Object.defineProperty(e,"matchRoutes",{enumerable:!0,get:function(){return n.matchRoutes}}),Object.defineProperty(e,"parsePath",{enumerable:!0,get:function(){return n.parsePath}}),Object.defineProperty(e,"renderMatches",{enumerable:!0,get:function(){return n.renderMatches}}),Object.defineProperty(e,"resolvePath",{enumerable:!0,get:function(){return n.resolvePath}}),Object.defineProperty(e,"useHref",{enumerable:!0,get:function(){return n.useHref}}),Object.defineProperty(e,"useInRouterContext",{enumerable:!0,get:function(){return n.useInRouterContext}}),Object.defineProperty(e,"useLocation",{enumerable:!0,get:function(){return n.useLocation}}),Object.defineProperty(e,"useMatch",{enumerable:!0,get:function(){return n.useMatch}}),Object.defineProperty(e,"useNavigate",{enumerable:!0,get:function(){return n.useNavigate}}),Object.defineProperty(e,"useNavigationType",{enumerable:!0,get:function(){return n.useNavigationType}}),Object.defineProperty(e,"useOutlet",{enumerable:!0,get:function(){return n.useOutlet}}),Object.defineProperty(e,"useOutletContext",{enumerable:!0,get:function(){return n.useOutletContext}}),Object.defineProperty(e,"useParams",{enumerable:!0,get:function(){return n.useParams}}),Object.defineProperty(e,"useResolvedPath",{enumerable:!0,get:function(){return n.useResolvedPath}}),Object.defineProperty(e,"useRoutes",{enumerable:!0,get:function(){return n.useRoutes}}),e.BrowserRouter=function(e){let{basename:a,children:o,window:u}=e,i=t.useRef();null==i.current&&(i.current=r.createBrowserHistory({window:u}));let c=i.current,[s,l]=t.useState({action:c.action,location:c.location});return t.useLayoutEffect((()=>c.listen(l)),[c]),t.createElement(n.Router,{basename:a,children:o,location:s.location,navigationType:s.action,navigator:c})},e.HashRouter=function(e){let{basename:a,children:o,window:u}=e,i=t.useRef();null==i.current&&(i.current=r.createHashHistory({window:u}));let c=i.current,[s,l]=t.useState({action:c.action,location:c.location});return t.useLayoutEffect((()=>c.listen(l)),[c]),t.createElement(n.Router,{basename:a,children:o,location:s.location,navigationType:s.action,navigator:c})},e.Link=c,e.NavLink=s,e.createSearchParams=f,e.unstable_HistoryRouter=function(e){let{basename:r,children:a,history:o}=e;const[u,i]=t.useState({action:o.action,location:o.location});return t.useLayoutEffect((()=>o.listen(i)),[o]),t.createElement(n.Router,{basename:r,children:a,location:u.location,navigationType:u.action,navigator:o})},e.useLinkClickHandler=l,e.useSearchParams=function(e){let r=t.useRef(f(e)),a=n.useLocation(),o=t.useMemo((()=>{let e=f(a.search);for(let t of r.current.keys())e.has(t)||r.current.getAll(t).forEach((r=>{e.append(t,r)}));return e}),[a.search]),u=n.useNavigate();return[o,t.useCallback(((e,t)=>{u("?"+f(e),t)}),[u])]},Object.defineProperty(e,"__esModule",{value:!0})}));
+
+
+},{"history":144,"react":236,"react-router":229}],229:[function(require,module,exports){
+(function (process){(function (){
+/**
+ * React Router v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+'use strict';
+
+/* eslint-env node */
+
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./umd/react-router.production.min.js");
+} else {
+  module.exports = require("./umd/react-router.development.js");
+}
+
+}).call(this)}).call(this,require('_process'))
+},{"./umd/react-router.development.js":230,"./umd/react-router.production.min.js":231,"_process":172}],230:[function(require,module,exports){
+/**
+ * React Router v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('history'), require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'history', 'react'], factory) :
+  (global = global || self, factory(global.ReactRouter = {}, global.HistoryLibrary, global.React));
+}(this, (function (exports, history, React) { 'use strict';
+
+  const NavigationContext = /*#__PURE__*/React.createContext(null);
+
+  {
+    NavigationContext.displayName = "Navigation";
+  }
+
+  const LocationContext = /*#__PURE__*/React.createContext(null);
+
+  {
+    LocationContext.displayName = "Location";
+  }
+
+  const RouteContext = /*#__PURE__*/React.createContext({
+    outlet: null,
+    matches: []
+  });
+
+  {
+    RouteContext.displayName = "Route";
+  }
+
+  function invariant(cond, message) {
+    if (!cond) throw new Error(message);
+  }
+  function warning(cond, message) {
+    if (!cond) {
+      // eslint-disable-next-line no-console
+      if (typeof console !== "undefined") console.warn(message);
+
+      try {
+        // Welcome to debugging React Router!
+        //
+        // This error is thrown as a convenience so you can more easily
+        // find the source for a warning that appears in the console by
+        // enabling "pause on exceptions" in your JavaScript debugger.
+        throw new Error(message); // eslint-disable-next-line no-empty
+      } catch (e) {}
+    }
+  }
+  const alreadyWarned = {};
+  function warningOnce(key, cond, message) {
+    if (!cond && !alreadyWarned[key]) {
+      alreadyWarned[key] = true;
+       warning(false, message) ;
+    }
+  }
+
+  /**
+   * Returns a path with params interpolated.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#generatepath
+   */
+  function generatePath(path, params) {
+    if (params === void 0) {
+      params = {};
+    }
+
+    return path.replace(/:(\w+)/g, (_, key) => {
+      !(params[key] != null) ?  invariant(false, "Missing \":" + key + "\" param")  : void 0;
+      return params[key];
+    }).replace(/\/*\*$/, _ => params["*"] == null ? "" : params["*"].replace(/^\/*/, "/"));
+  }
+  /**
+   * A RouteMatch contains info about how a route matched a URL.
+   */
+
+  /**
+   * Matches the given routes to a location and returns the match data.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#matchroutes
+   */
+  function matchRoutes(routes, locationArg, basename) {
+    if (basename === void 0) {
+      basename = "/";
+    }
+
+    let location = typeof locationArg === "string" ? history.parsePath(locationArg) : locationArg;
+    let pathname = stripBasename(location.pathname || "/", basename);
+
+    if (pathname == null) {
+      return null;
+    }
+
+    let branches = flattenRoutes(routes);
+    rankRouteBranches(branches);
+    let matches = null;
+
+    for (let i = 0; matches == null && i < branches.length; ++i) {
+      matches = matchRouteBranch(branches[i], pathname);
+    }
+
+    return matches;
+  }
+
+  function flattenRoutes(routes, branches, parentsMeta, parentPath) {
+    if (branches === void 0) {
+      branches = [];
+    }
+
+    if (parentsMeta === void 0) {
+      parentsMeta = [];
+    }
+
+    if (parentPath === void 0) {
+      parentPath = "";
+    }
+
+    routes.forEach((route, index) => {
+      let meta = {
+        relativePath: route.path || "",
+        caseSensitive: route.caseSensitive === true,
+        childrenIndex: index,
+        route
+      };
+
+      if (meta.relativePath.startsWith("/")) {
+        !meta.relativePath.startsWith(parentPath) ?  invariant(false, "Absolute route path \"" + meta.relativePath + "\" nested under path " + ("\"" + parentPath + "\" is not valid. An absolute child route path ") + "must start with the combined path of all its parent routes.")  : void 0;
+        meta.relativePath = meta.relativePath.slice(parentPath.length);
+      }
+
+      let path = joinPaths([parentPath, meta.relativePath]);
+      let routesMeta = parentsMeta.concat(meta); // Add the children before adding this route to the array so we traverse the
+      // route tree depth-first and child routes appear before their parents in
+      // the "flattened" version.
+
+      if (route.children && route.children.length > 0) {
+        !(route.index !== true) ?  invariant(false, "Index routes must not have child routes. Please remove " + ("all child routes from route path \"" + path + "\"."))  : void 0;
+        flattenRoutes(route.children, branches, routesMeta, path);
+      } // Routes without a path shouldn't ever match by themselves unless they are
+      // index routes, so don't add them to the list of possible branches.
+
+
+      if (route.path == null && !route.index) {
+        return;
+      }
+
+      branches.push({
+        path,
+        score: computeScore(path, route.index),
+        routesMeta
+      });
+    });
+    return branches;
+  }
+
+  function rankRouteBranches(branches) {
+    branches.sort((a, b) => a.score !== b.score ? b.score - a.score // Higher score first
+    : compareIndexes(a.routesMeta.map(meta => meta.childrenIndex), b.routesMeta.map(meta => meta.childrenIndex)));
+  }
+
+  const paramRe = /^:\w+$/;
+  const dynamicSegmentValue = 3;
+  const indexRouteValue = 2;
+  const emptySegmentValue = 1;
+  const staticSegmentValue = 10;
+  const splatPenalty = -2;
+
+  const isSplat = s => s === "*";
+
+  function computeScore(path, index) {
+    let segments = path.split("/");
+    let initialScore = segments.length;
+
+    if (segments.some(isSplat)) {
+      initialScore += splatPenalty;
+    }
+
+    if (index) {
+      initialScore += indexRouteValue;
+    }
+
+    return segments.filter(s => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+  }
+
+  function compareIndexes(a, b) {
+    let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+    return siblings ? // If two routes are siblings, we should try to match the earlier sibling
+    // first. This allows people to have fine-grained control over the matching
+    // behavior by simply putting routes with identical paths in the order they
+    // want them tried.
+    a[a.length - 1] - b[b.length - 1] : // Otherwise, it doesn't really make sense to rank non-siblings by index,
+    // so they sort equally.
+    0;
+  }
+
+  function matchRouteBranch(branch, pathname) {
+    let {
+      routesMeta
+    } = branch;
+    let matchedParams = {};
+    let matchedPathname = "/";
+    let matches = [];
+
+    for (let i = 0; i < routesMeta.length; ++i) {
+      let meta = routesMeta[i];
+      let end = i === routesMeta.length - 1;
+      let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+      let match = matchPath({
+        path: meta.relativePath,
+        caseSensitive: meta.caseSensitive,
+        end
+      }, remainingPathname);
+      if (!match) return null;
+      Object.assign(matchedParams, match.params);
+      let route = meta.route;
+      matches.push({
+        params: matchedParams,
+        pathname: joinPaths([matchedPathname, match.pathname]),
+        pathnameBase: normalizePathname(joinPaths([matchedPathname, match.pathnameBase])),
+        route
+      });
+
+      if (match.pathnameBase !== "/") {
+        matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+      }
+    }
+
+    return matches;
+  }
+  /**
+   * A PathPattern is used to match on some portion of a URL pathname.
+   */
+
+
+  /**
+   * Performs pattern matching on a URL pathname and returns information about
+   * the match.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#matchpath
+   */
+  function matchPath(pattern, pathname) {
+    if (typeof pattern === "string") {
+      pattern = {
+        path: pattern,
+        caseSensitive: false,
+        end: true
+      };
+    }
+
+    let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+    let match = pathname.match(matcher);
+    if (!match) return null;
+    let matchedPathname = match[0];
+    let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+    let captureGroups = match.slice(1);
+    let params = paramNames.reduce((memo, paramName, index) => {
+      // We need to compute the pathnameBase here using the raw splat value
+      // instead of using params["*"] later because it will be decoded then
+      if (paramName === "*") {
+        let splatValue = captureGroups[index] || "";
+        pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+      }
+
+      memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "", paramName);
+      return memo;
+    }, {});
+    return {
+      params,
+      pathname: matchedPathname,
+      pathnameBase,
+      pattern
+    };
+  }
+
+  function compilePath(path, caseSensitive, end) {
+    if (caseSensitive === void 0) {
+      caseSensitive = false;
+    }
+
+    if (end === void 0) {
+      end = true;
+    }
+
+     warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), "Route path \"" + path + "\" will be treated as if it were " + ("\"" + path.replace(/\*$/, "/*") + "\" because the `*` character must ") + "always follow a `/` in the pattern. To get rid of this warning, " + ("please change the route path to \"" + path.replace(/\*$/, "/*") + "\".")) ;
+    let paramNames = [];
+    let regexpSource = "^" + path.replace(/\/*\*?$/, "") // Ignore trailing / and /*, we'll handle it below
+    .replace(/^\/*/, "/") // Make sure it has a leading /
+    .replace(/[\\.*+^$?{}|()[\]]/g, "\\$&") // Escape special regex chars
+    .replace(/:(\w+)/g, (_, paramName) => {
+      paramNames.push(paramName);
+      return "([^\\/]+)";
+    });
+
+    if (path.endsWith("*")) {
+      paramNames.push("*");
+      regexpSource += path === "*" || path === "/*" ? "(.*)$" // Already matched the initial /, just match the rest
+      : "(?:\\/(.+)|\\/*)$"; // Don't include the / in params["*"]
+    } else {
+      regexpSource += end ? "\\/*$" // When matching to the end, ignore trailing slashes
+      : // Otherwise, match a word boundary or a proceeding /. The word boundary restricts
+      // parent routes to matching only their own words and nothing more, e.g. parent
+      // route "/home" should not match "/home2".
+      // Additionally, allow paths starting with `.`, `-`, `~`, and url-encoded entities,
+      // but do not consume the character in the matched path so they can match against
+      // nested paths.
+      "(?:(?=[.~-]|%[0-9A-F]{2})|\\b|\\/|$)";
+    }
+
+    let matcher = new RegExp(regexpSource, caseSensitive ? undefined : "i");
+    return [matcher, paramNames];
+  }
+
+  function safelyDecodeURIComponent(value, paramName) {
+    try {
+      return decodeURIComponent(value);
+    } catch (error) {
+       warning(false, "The value for the URL param \"" + paramName + "\" will not be decoded because" + (" the string \"" + value + "\" is a malformed URL segment. This is probably") + (" due to a bad percent encoding (" + error + ").")) ;
+      return value;
+    }
+  }
+  /**
+   * Returns a resolved path object relative to the given pathname.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#resolvepath
+   */
+
+
+  function resolvePath(to, fromPathname) {
+    if (fromPathname === void 0) {
+      fromPathname = "/";
+    }
+
+    let {
+      pathname: toPathname,
+      search = "",
+      hash = ""
+    } = typeof to === "string" ? history.parsePath(to) : to;
+    let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+    return {
+      pathname,
+      search: normalizeSearch(search),
+      hash: normalizeHash(hash)
+    };
+  }
+
+  function resolvePathname(relativePath, fromPathname) {
+    let segments = fromPathname.replace(/\/+$/, "").split("/");
+    let relativeSegments = relativePath.split("/");
+    relativeSegments.forEach(segment => {
+      if (segment === "..") {
+        // Keep the root "" segment so the pathname starts at /
+        if (segments.length > 1) segments.pop();
+      } else if (segment !== ".") {
+        segments.push(segment);
+      }
+    });
+    return segments.length > 1 ? segments.join("/") : "/";
+  }
+
+  function resolveTo(toArg, routePathnames, locationPathname) {
+    let to = typeof toArg === "string" ? history.parsePath(toArg) : toArg;
+    let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname; // If a pathname is explicitly provided in `to`, it should be relative to the
+    // route context. This is explained in `Note on `<Link to>` values` in our
+    // migration guide from v5 as a means of disambiguation between `to` values
+    // that begin with `/` and those that do not. However, this is problematic for
+    // `to` values that do not provide a pathname. `to` can simply be a search or
+    // hash string, in which case we should assume that the navigation is relative
+    // to the current location's pathname and *not* the route pathname.
+
+    let from;
+
+    if (toPathname == null) {
+      from = locationPathname;
+    } else {
+      let routePathnameIndex = routePathnames.length - 1;
+
+      if (toPathname.startsWith("..")) {
+        let toSegments = toPathname.split("/"); // Each leading .. segment means "go up one route" instead of "go up one
+        // URL segment".  This is a key difference from how <a href> works and a
+        // major reason we call this a "to" value instead of a "href".
+
+        while (toSegments[0] === "..") {
+          toSegments.shift();
+          routePathnameIndex -= 1;
+        }
+
+        to.pathname = toSegments.join("/");
+      } // If there are more ".." segments than parent routes, resolve relative to
+      // the root / URL.
+
+
+      from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+    }
+
+    let path = resolvePath(to, from); // Ensure the pathname has a trailing slash if the original to value had one.
+
+    if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+      path.pathname += "/";
+    }
+
+    return path;
+  }
+  function getToPathname(to) {
+    // Empty strings should be treated the same as / paths
+    return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? history.parsePath(to).pathname : to.pathname;
+  }
+  function stripBasename(pathname, basename) {
+    if (basename === "/") return pathname;
+
+    if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+      return null;
+    }
+
+    let nextChar = pathname.charAt(basename.length);
+
+    if (nextChar && nextChar !== "/") {
+      // pathname does not start with basename/
+      return null;
+    }
+
+    return pathname.slice(basename.length) || "/";
+  }
+  const joinPaths = paths => paths.join("/").replace(/\/\/+/g, "/");
+  const normalizePathname = pathname => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+
+  const normalizeSearch = search => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+
+  const normalizeHash = hash => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+
+  /**
+   * Returns the full href for the given "to" value. This is useful for building
+   * custom links that are also accessible and preserve right-click behavior.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#usehref
+   */
+
+  function useHref(to) {
+    !useInRouterContext() ?  invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useHref() may be used only in the context of a <Router> component.")  : void 0;
+    let {
+      basename,
+      navigator
+    } = React.useContext(NavigationContext);
+    let {
+      hash,
+      pathname,
+      search
+    } = useResolvedPath(to);
+    let joinedPathname = pathname;
+
+    if (basename !== "/") {
+      let toPathname = getToPathname(to);
+      let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+      joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+    }
+
+    return navigator.createHref({
+      pathname: joinedPathname,
+      search,
+      hash
+    });
+  }
+  /**
+   * Returns true if this component is a descendant of a <Router>.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#useinroutercontext
+   */
+
+  function useInRouterContext() {
+    return React.useContext(LocationContext) != null;
+  }
+  /**
+   * Returns the current location object, which represents the current URL in web
+   * browsers.
+   *
+   * Note: If you're using this it may mean you're doing some of your own
+   * "routing" in your app, and we'd like to know what your use case is. We may
+   * be able to provide something higher-level to better suit your needs.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#uselocation
+   */
+
+  function useLocation() {
+    !useInRouterContext() ?  invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useLocation() may be used only in the context of a <Router> component.")  : void 0;
+    return React.useContext(LocationContext).location;
+  }
+  /**
+   * Returns the current navigation action which describes how the router came to
+   * the current location, either by a pop, push, or replace on the history stack.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#usenavigationtype
+   */
+
+  function useNavigationType() {
+    return React.useContext(LocationContext).navigationType;
+  }
+  /**
+   * Returns true if the URL for the given "to" value matches the current URL.
+   * This is useful for components that need to know "active" state, e.g.
+   * <NavLink>.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#usematch
+   */
+
+  function useMatch(pattern) {
+    !useInRouterContext() ?  invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useMatch() may be used only in the context of a <Router> component.")  : void 0;
+    let {
+      pathname
+    } = useLocation();
+    return React.useMemo(() => matchPath(pattern, pathname), [pathname, pattern]);
+  }
+  /**
+   * The interface for the navigate() function returned from useNavigate().
+   */
+
+  /**
+   * Returns an imperative method for changing the location. Used by <Link>s, but
+   * may also be used by other elements to change the location.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#usenavigate
+   */
+  function useNavigate() {
+    !useInRouterContext() ?  invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useNavigate() may be used only in the context of a <Router> component.")  : void 0;
+    let {
+      basename,
+      navigator
+    } = React.useContext(NavigationContext);
+    let {
+      matches
+    } = React.useContext(RouteContext);
+    let {
+      pathname: locationPathname
+    } = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map(match => match.pathnameBase));
+    let activeRef = React.useRef(false);
+    React.useEffect(() => {
+      activeRef.current = true;
+    });
+    let navigate = React.useCallback(function (to, options) {
+      if (options === void 0) {
+        options = {};
+      }
+
+       warning(activeRef.current, "You should call navigate() in a React.useEffect(), not when " + "your component is first rendered.") ;
+      if (!activeRef.current) return;
+
+      if (typeof to === "number") {
+        navigator.go(to);
+        return;
+      }
+
+      let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+
+      if (basename !== "/") {
+        path.pathname = joinPaths([basename, path.pathname]);
+      }
+
+      (!!options.replace ? navigator.replace : navigator.push)(path, options.state);
+    }, [basename, navigator, routePathnamesJson, locationPathname]);
+    return navigate;
+  }
+  const OutletContext = /*#__PURE__*/React.createContext(null);
+  /**
+   * Returns the context (if provided) for the child route at this level of the route
+   * hierarchy.
+   * @see https://reactrouter.com/docs/en/v6/api#useoutletcontext
+   */
+
+  function useOutletContext() {
+    return React.useContext(OutletContext);
+  }
+  /**
+   * Returns the element for the child route at this level of the route
+   * hierarchy. Used internally by <Outlet> to render child routes.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#useoutlet
+   */
+
+  function useOutlet(context) {
+    let outlet = React.useContext(RouteContext).outlet;
+
+    if (outlet) {
+      return /*#__PURE__*/React.createElement(OutletContext.Provider, {
+        value: context
+      }, outlet);
+    }
+
+    return outlet;
+  }
+  /**
+   * Returns an object of key/value pairs of the dynamic params from the current
+   * URL that were matched by the route path.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#useparams
+   */
+
+  function useParams() {
+    let {
+      matches
+    } = React.useContext(RouteContext);
+    let routeMatch = matches[matches.length - 1];
+    return routeMatch ? routeMatch.params : {};
+  }
+  /**
+   * Resolves the pathname of the given `to` value against the current location.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#useresolvedpath
+   */
+
+  function useResolvedPath(to) {
+    let {
+      matches
+    } = React.useContext(RouteContext);
+    let {
+      pathname: locationPathname
+    } = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map(match => match.pathnameBase));
+    return React.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+  }
+  /**
+   * Returns the element of the route that matched the current location, prepared
+   * with the correct context to render the remainder of the route tree. Route
+   * elements in the tree must render an <Outlet> to render their child route's
+   * element.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#useroutes
+   */
+
+  function useRoutes(routes, locationArg) {
+    !useInRouterContext() ?  invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useRoutes() may be used only in the context of a <Router> component.")  : void 0;
+    let {
+      matches: parentMatches
+    } = React.useContext(RouteContext);
+    let routeMatch = parentMatches[parentMatches.length - 1];
+    let parentParams = routeMatch ? routeMatch.params : {};
+    let parentPathname = routeMatch ? routeMatch.pathname : "/";
+    let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+    let parentRoute = routeMatch && routeMatch.route;
+
+    {
+      // You won't get a warning about 2 different <Routes> under a <Route>
+      // without a trailing *, but this is a best-effort warning anyway since we
+      // cannot even give the warning unless they land at the parent route.
+      //
+      // Example:
+      //
+      // <Routes>
+      //   {/* This route path MUST end with /* because otherwise
+      //       it will never match /blog/post/123 */}
+      //   <Route path="blog" element={<Blog />} />
+      //   <Route path="blog/feed" element={<BlogFeed />} />
+      // </Routes>
+      //
+      // function Blog() {
+      //   return (
+      //     <Routes>
+      //       <Route path="post/:id" element={<Post />} />
+      //     </Routes>
+      //   );
+      // }
+      let parentPath = parentRoute && parentRoute.path || "";
+      warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ("\"" + parentPathname + "\" (under <Route path=\"" + parentPath + "\">) but the ") + "parent route path has no trailing \"*\". This means if you navigate " + "deeper, the parent won't match anymore and therefore the child " + "routes will never render.\n\n" + ("Please change the parent <Route path=\"" + parentPath + "\"> to <Route ") + ("path=\"" + (parentPath === "/" ? "*" : parentPath + "/*") + "\">."));
+    }
+
+    let locationFromContext = useLocation();
+    let location;
+
+    if (locationArg) {
+      var _parsedLocationArg$pa;
+
+      let parsedLocationArg = typeof locationArg === "string" ? history.parsePath(locationArg) : locationArg;
+      !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ?  invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, " + "the location pathname must begin with the portion of the URL pathname that was " + ("matched by all parent routes. The current pathname base is \"" + parentPathnameBase + "\" ") + ("but pathname \"" + parsedLocationArg.pathname + "\" was given in the `location` prop."))  : void 0;
+      location = parsedLocationArg;
+    } else {
+      location = locationFromContext;
+    }
+
+    let pathname = location.pathname || "/";
+    let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+    let matches = matchRoutes(routes, {
+      pathname: remainingPathname
+    });
+
+    {
+       warning(parentRoute || matches != null, "No routes matched location \"" + location.pathname + location.search + location.hash + "\" ") ;
+       warning(matches == null || matches[matches.length - 1].route.element !== undefined, "Matched leaf route at location \"" + location.pathname + location.search + location.hash + "\" does not have an element. " + "This means it will render an <Outlet /> with a null value by default resulting in an \"empty\" page.") ;
+    }
+
+    return _renderMatches(matches && matches.map(match => Object.assign({}, match, {
+      params: Object.assign({}, parentParams, match.params),
+      pathname: joinPaths([parentPathnameBase, match.pathname]),
+      pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+    })), parentMatches);
+  }
+  function _renderMatches(matches, parentMatches) {
+    if (parentMatches === void 0) {
+      parentMatches = [];
+    }
+
+    if (matches == null) return null;
+    return matches.reduceRight((outlet, match, index) => {
+      return /*#__PURE__*/React.createElement(RouteContext.Provider, {
+        children: match.route.element !== undefined ? match.route.element : outlet,
+        value: {
+          outlet,
+          matches: parentMatches.concat(matches.slice(0, index + 1))
+        }
+      });
+    }, null);
+  }
+
+  /**
+   * A <Router> that stores all entries in memory.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#memoryrouter
+   */
+  function MemoryRouter(_ref) {
+    let {
+      basename,
+      children,
+      initialEntries,
+      initialIndex
+    } = _ref;
+    let historyRef = React.useRef();
+
+    if (historyRef.current == null) {
+      historyRef.current = history.createMemoryHistory({
+        initialEntries,
+        initialIndex
+      });
+    }
+
+    let history$1 = historyRef.current;
+    let [state, setState] = React.useState({
+      action: history$1.action,
+      location: history$1.location
+    });
+    React.useLayoutEffect(() => history$1.listen(setState), [history$1]);
+    return /*#__PURE__*/React.createElement(Router, {
+      basename: basename,
+      children: children,
+      location: state.location,
+      navigationType: state.action,
+      navigator: history$1
+    });
+  }
+
+  /**
+   * Changes the current location.
+   *
+   * Note: This API is mostly useful in React.Component subclasses that are not
+   * able to use hooks. In functional components, we recommend you use the
+   * `useNavigate` hook instead.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#navigate
+   */
+  function Navigate(_ref2) {
+    let {
+      to,
+      replace,
+      state
+    } = _ref2;
+    !useInRouterContext() ?  invariant(false, // TODO: This error is probably because they somehow have 2 versions of
+    // the router loaded. We can help them understand how to avoid that.
+    "<Navigate> may be used only in the context of a <Router> component.")  : void 0;
+     warning(!React.useContext(NavigationContext).static, "<Navigate> must not be used on the initial render in a <StaticRouter>. " + "This is a no-op, but you should modify your code so the <Navigate> is " + "only ever rendered in response to some user interaction or state change.") ;
+    let navigate = useNavigate();
+    React.useEffect(() => {
+      navigate(to, {
+        replace,
+        state
+      });
+    });
+    return null;
+  }
+
+  /**
+   * Renders the child route's element, if there is one.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#outlet
+   */
+  function Outlet(props) {
+    return useOutlet(props.context);
+  }
+
+  /**
+   * Declares an element that should be rendered at a certain URL path.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#route
+   */
+  function Route(_props) {
+      invariant(false, "A <Route> is only ever to be used as the child of <Routes> element, " + "never rendered directly. Please wrap your <Route> in a <Routes>.")  ;
+  }
+
+  /**
+   * Provides location context for the rest of the app.
+   *
+   * Note: You usually won't render a <Router> directly. Instead, you'll render a
+   * router that is more specific to your environment such as a <BrowserRouter>
+   * in web browsers or a <StaticRouter> for server rendering.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#router
+   */
+  function Router(_ref3) {
+    let {
+      basename: basenameProp = "/",
+      children = null,
+      location: locationProp,
+      navigationType = history.Action.Pop,
+      navigator,
+      static: staticProp = false
+    } = _ref3;
+    !!useInRouterContext() ?  invariant(false, "You cannot render a <Router> inside another <Router>." + " You should never have more than one in your app.")  : void 0;
+    let basename = normalizePathname(basenameProp);
+    let navigationContext = React.useMemo(() => ({
+      basename,
+      navigator,
+      static: staticProp
+    }), [basename, navigator, staticProp]);
+
+    if (typeof locationProp === "string") {
+      locationProp = history.parsePath(locationProp);
+    }
+
+    let {
+      pathname = "/",
+      search = "",
+      hash = "",
+      state = null,
+      key = "default"
+    } = locationProp;
+    let location = React.useMemo(() => {
+      let trailingPathname = stripBasename(pathname, basename);
+
+      if (trailingPathname == null) {
+        return null;
+      }
+
+      return {
+        pathname: trailingPathname,
+        search,
+        hash,
+        state,
+        key
+      };
+    }, [basename, pathname, search, hash, state, key]);
+     warning(location != null, "<Router basename=\"" + basename + "\"> is not able to match the URL " + ("\"" + pathname + search + hash + "\" because it does not start with the ") + "basename, so the <Router> won't render anything.") ;
+
+    if (location == null) {
+      return null;
+    }
+
+    return /*#__PURE__*/React.createElement(NavigationContext.Provider, {
+      value: navigationContext
+    }, /*#__PURE__*/React.createElement(LocationContext.Provider, {
+      children: children,
+      value: {
+        location,
+        navigationType
+      }
+    }));
+  }
+
+  /**
+   * A container for a nested tree of <Route> elements that renders the branch
+   * that best matches the current location.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#routes
+   */
+  function Routes(_ref4) {
+    let {
+      children,
+      location
+    } = _ref4;
+    return useRoutes(createRoutesFromChildren(children), location);
+  } ///////////////////////////////////////////////////////////////////////////////
+  // UTILS
+  ///////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * Creates a route config from a React "children" object, which is usually
+   * either a `<Route>` element or an array of them. Used internally by
+   * `<Routes>` to create a route config from its children.
+   *
+   * @see https://reactrouter.com/docs/en/v6/api#createroutesfromchildren
+   */
+
+  function createRoutesFromChildren(children) {
+    let routes = [];
+    React.Children.forEach(children, element => {
+      if (! /*#__PURE__*/React.isValidElement(element)) {
+        // Ignore non-elements. This allows people to more easily inline
+        // conditionals in their route config.
+        return;
+      }
+
+      if (element.type === React.Fragment) {
+        // Transparently support React.Fragment and its children.
+        routes.push.apply(routes, createRoutesFromChildren(element.props.children));
+        return;
+      }
+
+      !(element.type === Route) ?  invariant(false, "[" + (typeof element.type === "string" ? element.type : element.type.name) + "] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>")  : void 0;
+      let route = {
+        caseSensitive: element.props.caseSensitive,
+        element: element.props.element,
+        index: element.props.index,
+        path: element.props.path
+      };
+
+      if (element.props.children) {
+        route.children = createRoutesFromChildren(element.props.children);
+      }
+
+      routes.push(route);
+    });
+    return routes;
+  }
+  /**
+   * Renders the result of `matchRoutes()` into a React element.
+   */
+
+  function renderMatches(matches) {
+    return _renderMatches(matches);
+  }
+
+  Object.defineProperty(exports, 'NavigationType', {
+    enumerable: true,
+    get: function () {
+      return history.Action;
+    }
+  });
+  Object.defineProperty(exports, 'createPath', {
+    enumerable: true,
+    get: function () {
+      return history.createPath;
+    }
+  });
+  Object.defineProperty(exports, 'parsePath', {
+    enumerable: true,
+    get: function () {
+      return history.parsePath;
+    }
+  });
+  exports.MemoryRouter = MemoryRouter;
+  exports.Navigate = Navigate;
+  exports.Outlet = Outlet;
+  exports.Route = Route;
+  exports.Router = Router;
+  exports.Routes = Routes;
+  exports.UNSAFE_LocationContext = LocationContext;
+  exports.UNSAFE_NavigationContext = NavigationContext;
+  exports.UNSAFE_RouteContext = RouteContext;
+  exports.createRoutesFromChildren = createRoutesFromChildren;
+  exports.generatePath = generatePath;
+  exports.matchPath = matchPath;
+  exports.matchRoutes = matchRoutes;
+  exports.renderMatches = renderMatches;
+  exports.resolvePath = resolvePath;
+  exports.useHref = useHref;
+  exports.useInRouterContext = useInRouterContext;
+  exports.useLocation = useLocation;
+  exports.useMatch = useMatch;
+  exports.useNavigate = useNavigate;
+  exports.useNavigationType = useNavigationType;
+  exports.useOutlet = useOutlet;
+  exports.useOutletContext = useOutletContext;
+  exports.useParams = useParams;
+  exports.useResolvedPath = useResolvedPath;
+  exports.useRoutes = useRoutes;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+
+
+},{"history":144,"react":236}],231:[function(require,module,exports){
+/**
+ * React Router v6.3.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports,require("history"),require("react")):"function"==typeof define&&define.amd?define(["exports","history","react"],t):t((e=e||self).ReactRouter={},e.HistoryLibrary,e.React)}(this,(function(e,t,n){"use strict";const a=n.createContext(null),r=n.createContext(null),i=n.createContext({outlet:null,matches:[]});function l(e,t){if(!e)throw new Error(t)}function o(e,n,a){void 0===a&&(a="/");let r=g(("string"==typeof n?t.parsePath(n):n).pathname||"/",a);if(null==r)return null;let i=s(e);!function(e){e.sort(((e,t)=>e.score!==t.score?t.score-e.score:function(e,t){return e.length===t.length&&e.slice(0,-1).every(((e,n)=>e===t[n]))?e[e.length-1]-t[t.length-1]:0}(e.routesMeta.map((e=>e.childrenIndex)),t.routesMeta.map((e=>e.childrenIndex)))))}(i);let l=null;for(let e=0;null==l&&e<i.length;++e)l=p(i[e],r);return l}function s(e,t,n,a){return void 0===t&&(t=[]),void 0===n&&(n=[]),void 0===a&&(a=""),e.forEach(((e,r)=>{let i={relativePath:e.path||"",caseSensitive:!0===e.caseSensitive,childrenIndex:r,route:e};i.relativePath.startsWith("/")&&(i.relativePath.startsWith(a)||l(!1),i.relativePath=i.relativePath.slice(a.length));let o=v([a,i.relativePath]),u=n.concat(i);e.children&&e.children.length>0&&(!0===e.index&&l(!1),s(e.children,t,u,o)),(null!=e.path||e.index)&&t.push({path:o,score:h(o,e.index),routesMeta:u})})),t}const u=/^:\w+$/,c=e=>"*"===e;function h(e,t){let n=e.split("/"),a=n.length;return n.some(c)&&(a+=-2),t&&(a+=2),n.filter((e=>!c(e))).reduce(((e,t)=>e+(u.test(t)?3:""===t?1:10)),a)}function p(e,t){let{routesMeta:n}=e,a={},r="/",i=[];for(let e=0;e<n.length;++e){let l=n[e],o=e===n.length-1,s="/"===r?t:t.slice(r.length)||"/",u=f({path:l.relativePath,caseSensitive:l.caseSensitive,end:o},s);if(!u)return null;Object.assign(a,u.params);let c=l.route;i.push({params:a,pathname:v([r,u.pathname]),pathnameBase:y(v([r,u.pathnameBase])),route:c}),"/"!==u.pathnameBase&&(r=v([r,u.pathnameBase]))}return i}function f(e,t){"string"==typeof e&&(e={path:e,caseSensitive:!1,end:!0});let[n,a]=function(e,t,n){void 0===t&&(t=!1);void 0===n&&(n=!0);let a=[],r="^"+e.replace(/\/*\*?$/,"").replace(/^\/*/,"/").replace(/[\\.*+^$?{}|()[\]]/g,"\\$&").replace(/:(\w+)/g,((e,t)=>(a.push(t),"([^\\/]+)")));e.endsWith("*")?(a.push("*"),r+="*"===e||"/*"===e?"(.*)$":"(?:\\/(.+)|\\/*)$"):r+=n?"\\/*$":"(?:(?=[.~-]|%[0-9A-F]{2})|\\b|\\/|$)";return[new RegExp(r,t?void 0:"i"),a]}(e.path,e.caseSensitive,e.end),r=t.match(n);if(!r)return null;let i=r[0],l=i.replace(/(.)\/+$/,"$1"),o=r.slice(1);return{params:a.reduce(((e,t,n)=>{if("*"===t){let e=o[n]||"";l=i.slice(0,i.length-e.length).replace(/(.)\/+$/,"$1")}return e[t]=function(e,t){try{return decodeURIComponent(e)}catch(t){return e}}(o[n]||""),e}),{}),pathname:i,pathnameBase:l,pattern:e}}function m(e,n){void 0===n&&(n="/");let{pathname:a,search:r="",hash:i=""}="string"==typeof e?t.parsePath(e):e,l=a?a.startsWith("/")?a:function(e,t){let n=t.replace(/\/+$/,"").split("/");return e.split("/").forEach((e=>{".."===e?n.length>1&&n.pop():"."!==e&&n.push(e)})),n.length>1?n.join("/"):"/"}(a,n):n;return{pathname:l,search:x(r),hash:P(i)}}function d(e,n,a){let r,i="string"==typeof e?t.parsePath(e):e,l=""===e||""===i.pathname?"/":i.pathname;if(null==l)r=a;else{let e=n.length-1;if(l.startsWith("..")){let t=l.split("/");for(;".."===t[0];)t.shift(),e-=1;i.pathname=t.join("/")}r=e>=0?n[e]:"/"}let o=m(i,r);return l&&"/"!==l&&l.endsWith("/")&&!o.pathname.endsWith("/")&&(o.pathname+="/"),o}function g(e,t){if("/"===t)return e;if(!e.toLowerCase().startsWith(t.toLowerCase()))return null;let n=e.charAt(t.length);return n&&"/"!==n?null:e.slice(t.length)||"/"}const v=e=>e.join("/").replace(/\/\/+/g,"/"),y=e=>e.replace(/\/+$/,"").replace(/^\/*/,"/"),x=e=>e&&"?"!==e?e.startsWith("?")?e:"?"+e:"",P=e=>e&&"#"!==e?e.startsWith("#")?e:"#"+e:"";function C(){return null!=n.useContext(r)}function b(){return C()||l(!1),n.useContext(r).location}function E(){C()||l(!1);let{basename:e,navigator:t}=n.useContext(a),{matches:r}=n.useContext(i),{pathname:o}=b(),s=JSON.stringify(r.map((e=>e.pathnameBase))),u=n.useRef(!1);return n.useEffect((()=>{u.current=!0})),n.useCallback((function(n,a){if(void 0===a&&(a={}),!u.current)return;if("number"==typeof n)return void t.go(n);let r=d(n,JSON.parse(s),o);"/"!==e&&(r.pathname=v([e,r.pathname])),(a.replace?t.replace:t.push)(r,a.state)}),[e,t,s,o])}const R=n.createContext(null);function S(e){let t=n.useContext(i).outlet;return t?n.createElement(R.Provider,{value:e},t):t}function $(e){let{matches:t}=n.useContext(i),{pathname:a}=b(),r=JSON.stringify(t.map((e=>e.pathnameBase)));return n.useMemo((()=>d(e,JSON.parse(r),a)),[e,r,a])}function O(e,a){C()||l(!1);let r,{matches:s}=n.useContext(i),u=s[s.length-1],c=u?u.params:{},h=(u&&u.pathname,u?u.pathnameBase:"/"),p=(u&&u.route,b());if(a){var f;let e="string"==typeof a?t.parsePath(a):a;"/"===h||(null==(f=e.pathname)?void 0:f.startsWith(h))||l(!1),r=e}else r=p;let m=r.pathname||"/",d=o(e,{pathname:"/"===h?m:m.slice(h.length)||"/"});return M(d&&d.map((e=>Object.assign({},e,{params:Object.assign({},c,e.params),pathname:v([h,e.pathname]),pathnameBase:"/"===e.pathnameBase?h:v([h,e.pathnameBase])}))),s)}function M(e,t){return void 0===t&&(t=[]),null==e?null:e.reduceRight(((a,r,l)=>n.createElement(i.Provider,{children:void 0!==r.route.element?r.route.element:a,value:{outlet:a,matches:t.concat(e.slice(0,l+1))}})),null)}function N(e){l(!1)}function W(e){let{basename:i="/",children:o=null,location:s,navigationType:u=t.Action.Pop,navigator:c,static:h=!1}=e;C()&&l(!1);let p=y(i),f=n.useMemo((()=>({basename:p,navigator:c,static:h})),[p,c,h]);"string"==typeof s&&(s=t.parsePath(s));let{pathname:m="/",search:d="",hash:v="",state:x=null,key:P="default"}=s,b=n.useMemo((()=>{let e=g(m,p);return null==e?null:{pathname:e,search:d,hash:v,state:x,key:P}}),[p,m,d,v,x,P]);return null==b?null:n.createElement(a.Provider,{value:f},n.createElement(r.Provider,{children:o,value:{location:b,navigationType:u}}))}function j(e){let t=[];return n.Children.forEach(e,(e=>{if(!n.isValidElement(e))return;if(e.type===n.Fragment)return void t.push.apply(t,j(e.props.children));e.type!==N&&l(!1);let a={caseSensitive:e.props.caseSensitive,element:e.props.element,index:e.props.index,path:e.props.path};e.props.children&&(a.children=j(e.props.children)),t.push(a)})),t}Object.defineProperty(e,"NavigationType",{enumerable:!0,get:function(){return t.Action}}),Object.defineProperty(e,"createPath",{enumerable:!0,get:function(){return t.createPath}}),Object.defineProperty(e,"parsePath",{enumerable:!0,get:function(){return t.parsePath}}),e.MemoryRouter=function(e){let{basename:a,children:r,initialEntries:i,initialIndex:l}=e,o=n.useRef();null==o.current&&(o.current=t.createMemoryHistory({initialEntries:i,initialIndex:l}));let s=o.current,[u,c]=n.useState({action:s.action,location:s.location});return n.useLayoutEffect((()=>s.listen(c)),[s]),n.createElement(W,{basename:a,children:r,location:u.location,navigationType:u.action,navigator:s})},e.Navigate=function(e){let{to:t,replace:a,state:r}=e;C()||l(!1);let i=E();return n.useEffect((()=>{i(t,{replace:a,state:r})})),null},e.Outlet=function(e){return S(e.context)},e.Route=N,e.Router=W,e.Routes=function(e){let{children:t,location:n}=e;return O(j(t),n)},e.UNSAFE_LocationContext=r,e.UNSAFE_NavigationContext=a,e.UNSAFE_RouteContext=i,e.createRoutesFromChildren=j,e.generatePath=function(e,t){return void 0===t&&(t={}),e.replace(/:(\w+)/g,((e,n)=>(null==t[n]&&l(!1),t[n]))).replace(/\/*\*$/,(e=>null==t["*"]?"":t["*"].replace(/^\/*/,"/")))},e.matchPath=f,e.matchRoutes=o,e.renderMatches=function(e){return M(e)},e.resolvePath=m,e.useHref=function(e){C()||l(!1);let{basename:r,navigator:i}=n.useContext(a),{hash:o,pathname:s,search:u}=$(e),c=s;if("/"!==r){let n=function(e){return""===e||""===e.pathname?"/":"string"==typeof e?t.parsePath(e).pathname:e.pathname}(e),a=null!=n&&n.endsWith("/");c="/"===s?r+(a?"/":""):v([r,s])}return i.createHref({pathname:c,search:u,hash:o})},e.useInRouterContext=C,e.useLocation=b,e.useMatch=function(e){C()||l(!1);let{pathname:t}=b();return n.useMemo((()=>f(e,t)),[t,e])},e.useNavigate=E,e.useNavigationType=function(){return n.useContext(r).navigationType},e.useOutlet=S,e.useOutletContext=function(){return n.useContext(R)},e.useParams=function(){let{matches:e}=n.useContext(i),t=e[e.length-1];return t?t.params:{}},e.useResolvedPath=$,e.useRoutes=O,Object.defineProperty(e,"__esModule",{value:!0})}));
+
+
+},{"history":144,"react":236}],232:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react-jsx-runtime.development.js
@@ -40868,7 +43336,7 @@ exports.jsxs = jsxs;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169,"object-assign":149,"react":227}],224:[function(require,module,exports){
+},{"_process":172,"object-assign":152,"react":236}],233:[function(require,module,exports){
 /** @license React v17.0.2
  * react-jsx-runtime.production.min.js
  *
@@ -40880,7 +43348,7 @@ exports.jsxs = jsxs;
 'use strict';require("object-assign");var f=require("react"),g=60103;exports.Fragment=60107;if("function"===typeof Symbol&&Symbol.for){var h=Symbol.for;g=h("react.element");exports.Fragment=h("react.fragment")}var m=f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,n=Object.prototype.hasOwnProperty,p={key:!0,ref:!0,__self:!0,__source:!0};
 function q(c,a,k){var b,d={},e=null,l=null;void 0!==k&&(e=""+k);void 0!==a.key&&(e=""+a.key);void 0!==a.ref&&(l=a.ref);for(b in a)n.call(a,b)&&!p.hasOwnProperty(b)&&(d[b]=a[b]);if(c&&c.defaultProps)for(b in a=c.defaultProps,a)void 0===d[b]&&(d[b]=a[b]);return{$$typeof:g,type:c,key:e,ref:l,props:d,_owner:m.current}}exports.jsx=q;exports.jsxs=q;
 
-},{"object-assign":149,"react":227}],225:[function(require,module,exports){
+},{"object-assign":152,"react":236}],234:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react.development.js
@@ -43217,7 +45685,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169,"object-assign":149}],226:[function(require,module,exports){
+},{"_process":172,"object-assign":152}],235:[function(require,module,exports){
 /** @license React v17.0.2
  * react.production.min.js
  *
@@ -43242,7 +45710,7 @@ key:d,ref:k,props:e,_owner:h}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:v,_payload:{_status:-1,_result:a},_init:Q}};exports.memo=function(a,b){return{$$typeof:u,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return S().useCallback(a,b)};exports.useContext=function(a,b){return S().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return S().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return S().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return S().useMemo(a,b)};exports.useReducer=function(a,b,c){return S().useReducer(a,b,c)};exports.useRef=function(a){return S().useRef(a)};exports.useState=function(a){return S().useState(a)};exports.version="17.0.2";
 
-},{"object-assign":149}],227:[function(require,module,exports){
+},{"object-assign":152}],236:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43253,7 +45721,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":225,"./cjs/react.production.min.js":226,"_process":169}],228:[function(require,module,exports){
+},{"./cjs/react.development.js":234,"./cjs/react.production.min.js":235,"_process":172}],237:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43264,7 +45732,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-jsx-runtime.development.js":223,"./cjs/react-jsx-runtime.production.min.js":224,"_process":169}],229:[function(require,module,exports){
+},{"./cjs/react-jsx-runtime.development.js":232,"./cjs/react-jsx-runtime.production.min.js":233,"_process":172}],238:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -43615,7 +46083,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169}],230:[function(require,module,exports){
+},{"_process":172}],239:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -43626,7 +46094,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],231:[function(require,module,exports){
+},{}],240:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -44276,7 +46744,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169}],232:[function(require,module,exports){
+},{"_process":172}],241:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -44298,7 +46766,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],233:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -44309,7 +46777,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":231,"./cjs/scheduler.production.min.js":232,"_process":169}],234:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":240,"./cjs/scheduler.production.min.js":241,"_process":172}],243:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -44320,7 +46788,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":229,"./cjs/scheduler-tracing.production.min.js":230,"_process":169}],235:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":238,"./cjs/scheduler-tracing.production.min.js":239,"_process":172}],244:[function(require,module,exports){
 "use strict";
 
 var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
@@ -44390,7 +46858,7 @@ function useUncontrolled(props, config) {
     return (0, _extends3.default)({}, rest, (_extends2 = {}, _extends2[fieldName] = value, _extends2[handlerName] = handler, _extends2));
   }, props);
 }
-},{"./utils":238,"@babel/runtime/helpers/extends":1,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/interopRequireWildcard":4,"@babel/runtime/helpers/objectWithoutPropertiesLoose":5,"react":227}],236:[function(require,module,exports){
+},{"./utils":247,"@babel/runtime/helpers/extends":1,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/interopRequireWildcard":4,"@babel/runtime/helpers/objectWithoutPropertiesLoose":5,"react":236}],245:[function(require,module,exports){
 "use strict";
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
@@ -44408,7 +46876,7 @@ exports.useUncontrolledProp = _hook.useUncontrolledProp;
 var _uncontrollable = _interopRequireDefault(require("./uncontrollable"));
 
 exports.uncontrollable = _uncontrollable.default;
-},{"./hook":235,"./uncontrollable":237,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/interopRequireWildcard":4}],237:[function(require,module,exports){
+},{"./hook":244,"./uncontrollable":246,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/interopRequireWildcard":4}],246:[function(require,module,exports){
 (function (process){(function (){
 "use strict";
 
@@ -44605,7 +47073,7 @@ function uncontrollable(Component, controlledValues, methods) {
 
 module.exports = exports["default"];
 }).call(this)}).call(this,require('_process'))
-},{"./utils":238,"@babel/runtime/helpers/extends":1,"@babel/runtime/helpers/inheritsLoose":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/interopRequireWildcard":4,"@babel/runtime/helpers/objectWithoutPropertiesLoose":5,"_process":169,"invariant":144,"react":227,"react-lifecycles-compat":216}],238:[function(require,module,exports){
+},{"./utils":247,"@babel/runtime/helpers/extends":1,"@babel/runtime/helpers/inheritsLoose":2,"@babel/runtime/helpers/interopRequireDefault":3,"@babel/runtime/helpers/interopRequireWildcard":4,"@babel/runtime/helpers/objectWithoutPropertiesLoose":5,"_process":172,"invariant":147,"react":236,"react-lifecycles-compat":219}],247:[function(require,module,exports){
 (function (process){(function (){
 "use strict";
 
@@ -44667,7 +47135,7 @@ function canAcceptRef(component) {
   return !!component && (typeof component !== 'function' || component.prototype && component.prototype.isReactComponent);
 }
 }).call(this)}).call(this,require('_process'))
-},{"@babel/runtime/helpers/interopRequireDefault":3,"_process":169,"invariant":144}],239:[function(require,module,exports){
+},{"@babel/runtime/helpers/interopRequireDefault":3,"_process":172,"invariant":147}],248:[function(require,module,exports){
 (function (process){(function (){
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -44733,7 +47201,110 @@ if (__DEV__) {
 module.exports = warning;
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":169}],240:[function(require,module,exports){
+},{"_process":172}],249:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = About;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Zoom = _interopRequireDefault(require("react-reveal/Zoom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function AboutDo(props) {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "about-page"
+  }, /*#__PURE__*/_react["default"].createElement("h1", {
+    className: "about-title gradientcolor"
+  }, "About this Website:"), props.abtmodule.map(function (abtmodule) {
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      className: "txt-img-pair",
+      key: abtmodule.Text
+    }, /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
+      left: true
+    }, /*#__PURE__*/_react["default"].createElement("h4", {
+      className: "about-text gradientcolorpinkwhite"
+    }, abtmodule.Text, " ")), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
+      right: true
+    }, /*#__PURE__*/_react["default"].createElement("img", {
+      className: "about-rand-imgs",
+      src: "".concat(abtmodule.Picture)
+    })));
+  }));
+}
+
+function About() {
+  var abouttext = ["This site was created by Chidozie as a way to delve into Web Development and \n    learn more about JavaScript, CSS, HTML, and SQLite. It also acted as a gateway to get into ReactJS as well. This specifc page was made entirely with React\n    as a start to learning how it works", "This website was my first foray into Web Development and I hope to learn more.\n    Especially about React since it is very powerful for creating dynamic UI and this page of the website was my first experience with it before I learned more about it\n    and remade this page", "This Website was first made entirely with plain Javascript and CSS on the Front End as a way to learn the fundamentals, then much of it got implemented in react\n    as a way to eliminate loading screens and have seamless updating.", "Thank You for taking the time to explore this website and seeing the work put in.\n    Your time is appreciated deeply and we hope you enjoy your time on the site and if you are not a gamer, I hope this gets you GAMING."];
+  var txt_pic_dictlst = [];
+
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      gameOptions = _useState2[0],
+      setgameOptions = _useState2[1];
+
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      txtpicmodule = _useState4[0],
+      settxtPicModule = _useState4[1];
+
+  (0, _react.useEffect)(function () {
+    // var pictures = [] 
+    var md_dict_list = [];
+    fetch('http://127.0.0.1:5000/databasefeeder', {
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var gr = response;
+      console.log(gr);
+
+      for (var i = 0; i < gr.length; i++) {
+        md_dict_list.push({
+          Text: abouttext[i],
+          Picture: gr[i]
+        });
+      }
+
+      ;
+      setgameOptions(function () {
+        return md_dict_list;
+      });
+      console.log("hello");
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }, []);
+  return /*#__PURE__*/_react["default"].createElement(AboutDo, {
+    abtmodule: gameOptions
+  });
+}
+
+},{"react":236,"react-reveal/Zoom":223}],250:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -44743,88 +47314,306 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
-var _Zoom = _interopRequireDefault(require("react-reveal/Zoom"));
+var _Table = _interopRequireDefault(require("react-bootstrap/Table"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var DisplayDetails = function DisplayDetails(props) {
+  return /*#__PURE__*/_react["default"].createElement(_Table["default"], {
+    bordered: true,
+    variant: "dark",
+    hover: true
+  }, /*#__PURE__*/_react["default"].createElement("thead", null, /*#__PURE__*/_react["default"].createElement("tr", null, /*#__PURE__*/_react["default"].createElement("th", {
+    scope: "col"
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    className: "gradient-color-blue-black"
+  }, "#")), /*#__PURE__*/_react["default"].createElement("th", {
+    scope: "col"
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    className: "acct-dtl-name gradientcolorpinkwhite"
+  }, "Stat Name")), /*#__PURE__*/_react["default"].createElement("th", {
+    scope: "col"
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    className: "gradientcolor"
+  }, "Stat Value")))), /*#__PURE__*/_react["default"].createElement("tbody", null, props.details.map(function (detail) {
+    return /*#__PURE__*/_react["default"].createElement("tr", {
+      key: "".concat(detail.Name)
+    }, /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("h6", {
+      className: "gradient-color-blue-black"
+    }, detail.Number)), /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("h6", {
+      className: "acct-dtl-name gradientcolorpinkwhite"
+    }, detail.Name)), /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("h6", {
+      className: "acct-dtl-value gradientcolor"
+    }, detail.Value)));
+  })));
+};
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+var Details = function Details() {
+  var _useState = (0, _react.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      Detail_lst = _useState2[0],
+      setDetail_lst = _useState2[1];
 
-var About = /*#__PURE__*/function (_React$Component) {
-  _inherits(About, _React$Component);
+  (0, _react.useEffect)(function () {
+    var md_dict_list = [];
+    fetch('http://127.0.0.1:5000/account/detailsfeeder', {
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var gr = response;
+      console.log(gr);
+      setDetail_lst(function () {
+        return gr;
+      });
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }, []);
+  return /*#__PURE__*/_react["default"].createElement(DisplayDetails, {
+    details: Detail_lst
+  });
+};
 
-  var _super = _createSuper(About);
-
-  function About() {
-    _classCallCheck(this, About);
-
-    return _super.apply(this, arguments);
-  }
-
-  _createClass(About, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/_react["default"].createElement("div", {
-        className: "about-page"
-      }, /*#__PURE__*/_react["default"].createElement("h1", {
-        className: "about-title gradientcolor"
-      }, "About this Website:"), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
-        left: true
-      }, /*#__PURE__*/_react["default"].createElement("h4", {
-        className: "about-text gradientcolorpinkwhite"
-      }, "This site was created by Chidozie as a way to delve into Web Development and learn more about JavaScript, CSS, HTML, and SQLite. It also acted as a gateway to get into ReactJS as well. This specifc page was made entirely with React as a start to learning how it works. ")), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
-        right: true
-      }, /*#__PURE__*/_react["default"].createElement("img", {
-        className: "about-rand-imgs",
-        src: "https://image.api.playstation.com/vulcan/img/cfn/11307vTh2FlNzDQ7NPVKnp-85IJu_DABPWLpREGkkeV3G7xorbickiZATslw2cJ-hLce3Cz-I8an6O_XDWt1nwWyqO09C2K1.png"
-      })), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
-        bottom: true
-      }, /*#__PURE__*/_react["default"].createElement("h4", {
-        className: "about-text gradientcolorpinkwhite"
-      }, "This website was my first foray into Web Development and I hope to learn more. Especially about React because it is very powerful for creating dynamic UI and this page of the website is my first experience with it")), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
-        bottom: true
-      }, /*#__PURE__*/_react["default"].createElement("img", {
-        className: "about-rand-imgs",
-        src: "https://image.api.playstation.com/vulcan/ap/rnd/202009/1813/baR055LeT8domuby7dkqYWeB.png"
-      })), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
-        bottom: true
-      }, /*#__PURE__*/_react["default"].createElement("h4", {
-        className: "about-text gradientcolorpinkwhite"
-      }, "Thank You for taking the time to explore this website and seeing the work put in. Your time is appreciated deeply and we hope you enjoy your time on the site and if you are not a gamer, I hope this gets you GAMING.")), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
-        bottom: true
-      }, /*#__PURE__*/_react["default"].createElement("img", {
-        className: "about-rand-imgs",
-        src: "https://image.api.playstation.com/vulcan/img/rnd/202107/3019/AuNhbP3p92BQpYpJB9QjDRsU.png"
-      })));
-    }
-  }]);
-
-  return About;
-}(_react["default"].Component);
-
-var _default = About;
+var _default = Details;
 exports["default"] = _default;
 
-},{"react":227,"react-reveal/Zoom":220}],241:[function(require,module,exports){
+},{"react":236,"react-bootstrap/Col":182,"react-bootstrap/Row":206,"react-bootstrap/Table":208}],251:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _DropdownButton = _interopRequireDefault(require("react-bootstrap/DropdownButton"));
+
+var _Dropdown = _interopRequireDefault(require("react-bootstrap/Dropdown"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _mylistfunctions = require("./mylistfunctions");
+
+var _generalfuncs = require("./generalfuncs");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var preventval = function preventval(e) {
+  (0, _mylistfunctions.limittyping)(e, e.target.value > 100, 100);
+  (0, _mylistfunctions.limittyping)(e, e.target.value < 0, 0);
+};
+
+var AddList = function AddList(props) {
+  // INITIALIZED STATES
+  var _useState = (0, _react.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      gameInput = _useState2[0],
+      setGameInput = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      prVal = _useState4[0],
+      setPRVal = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      hpVal = _useState6[0],
+      setHPVal = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      invalidData = _useState8[0],
+      setinvalidData = _useState8[1];
+
+  var _useState9 = (0, _react.useState)("Plan to Play"),
+      _useState10 = _slicedToArray(_useState9, 2),
+      STVal = _useState10[0],
+      setSTVal = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(props.status),
+      _useState12 = _slicedToArray(_useState11, 2),
+      show = _useState12[0],
+      setShow = _useState12[1]; // CHANGE FUNCTIONS
+
+
+  var onHPChange = function onHPChange(e) {
+    console.log(parseInt(e.target.value));
+
+    if (parseInt(e.target.value) != NaN) {
+      setHPVal(function () {
+        return (0, _generalfuncs.isNumbCheck)(e.target.value);
+      });
+    } else {
+      setHPVal(function () {
+        return "";
+      });
+    }
+
+    ;
+  };
+
+  var onPRChange = function onPRChange(e) {
+    if (e.target.value) {
+      setPRVal(function () {
+        return (0, _generalfuncs.isNumbCheck)(e.target.value);
+      });
+    } else {
+      setPRVal(function () {
+        return "";
+      });
+    }
+
+    ;
+  };
+
+  var onSTChange = function onSTChange(e) {
+    setSTVal(function () {
+      return e.target.value;
+    });
+  };
+
+  var submitHandler = function submitHandler(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '/addlist',
+      data: {
+        slug: props.slug,
+        status: STVal,
+        rating: prVal,
+        hoursplayed: hpVal
+      },
+      success: function success() {
+        (0, _generalfuncs.fetchgeneral)("gamegetter", props.setgameProps);
+      }
+    });
+    setShow(function () {
+      return false;
+    });
+  }; // RENDER FUNCTIONS
+
+
+  (0, _react.useEffect)(function () {
+    setinvalidData(!STVal);
+  }); // var dropdownlist = ["Plan to Play", "Dropped", "Playing", "On Hold", "Completed", "Wishlist"]
+
+  return /*#__PURE__*/_react["default"].createElement("div", null, show && /*#__PURE__*/_react["default"].createElement("div", {
+    className: "add-list-form"
+  }, /*#__PURE__*/_react["default"].createElement("img", {
+    className: "add-list-picture",
+    src: "".concat(props.bgimg)
+  }), /*#__PURE__*/_react["default"].createElement("h2", {
+    id: "add-list-title"
+  }, " ", props.name), /*#__PURE__*/_react["default"].createElement(_Form["default"].Group, {
+    action: "/addlist",
+    controlId: "add-list-form",
+    className: "mb-3"
+  }, /*#__PURE__*/_react["default"].createElement(_Row["default"], {
+    className: "mb-3"
+  }, /*#__PURE__*/_react["default"].createElement(_Col["default"], null, /*#__PURE__*/_react["default"].createElement("select", {
+    value: STVal,
+    name: "".concat(props.name),
+    autoComplete: "off",
+    className: "form-select form-control mx-auto w-auto center-status",
+    placeholder: "Choose Status:",
+    required: true,
+    onChange: onSTChange
+  }, " ' +", /*#__PURE__*/_react["default"].createElement("option", {
+    disabled: true
+  }, "Choose Status:"), _generalfuncs.dropdownlist.map(function (option) {
+    return /*#__PURE__*/_react["default"].createElement("option", {
+      key: option,
+      id: option,
+      value: option,
+      onClick: onSTChange,
+      onChange: onSTChange
+    }, option);
+  }))), /*#__PURE__*/_react["default"].createElement(_Col["default"], null, /*#__PURE__*/_react["default"].createElement(_Form["default"].Control, {
+    min: "0",
+    type: "number",
+    className: "w-auto mx-auto",
+    onChange: function onChange(e) {
+      (0, _mylistfunctions.limittyping)(e, e.target.value < 0, 0);
+      onHPChange(e);
+    },
+    value: hpVal,
+    placeholder: "Hours Played:"
+  })))), /*#__PURE__*/_react["default"].createElement(_Form["default"].Group, {
+    className: "mb-3"
+  }, /*#__PURE__*/_react["default"].createElement(_Row["default"], null, /*#__PURE__*/_react["default"].createElement(_Form["default"].Control, {
+    min: "0",
+    max: "100",
+    type: "number",
+    className: "w-25 mx-auto",
+    onChange: function onChange(e) {
+      preventval(e);
+      onPRChange(e);
+    },
+    value: prVal,
+    placeholder: "Personal Rating:"
+  }))), /*#__PURE__*/_react["default"].createElement(_Row["default"], null, /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+    variant: "primary",
+    className: "w-auto mx-auto",
+    disabled: invalidData,
+    onClick: submitHandler
+  }, "Add to List"))));
+};
+
+var _default = AddList;
+exports["default"] = _default;
+
+},{"./generalfuncs":253,"./mylistfunctions":257,"react":236,"react-bootstrap/Button":181,"react-bootstrap/Col":182,"react-bootstrap/Dropdown":183,"react-bootstrap/DropdownButton":184,"react-bootstrap/Form":192,"react-bootstrap/Row":206}],252:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -45110,7 +47899,251 @@ function FilterForm(props) {
   }, "Filter"));
 } // export default FilterForm;
 
-},{"react":227,"react-bootstrap/Button":178,"react-bootstrap/Col":179,"react-bootstrap/Form":189,"react-bootstrap/Row":203}],242:[function(require,module,exports){
+},{"react":236,"react-bootstrap/Button":181,"react-bootstrap/Col":182,"react-bootstrap/Form":192,"react-bootstrap/Row":206}],253:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.limittyping = exports.isNumbCheck = exports.fetchgeneral = exports.dropdownlist = void 0;
+
+var fetchgeneral = function fetchgeneral(place, stateChange) {
+  fetch("http://127.0.0.1:5000/".concat(place), {
+    'methods': 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    return response.json();
+  }).then(function (response) {
+    var gr = response;
+    console.log(gr);
+    stateChange(function () {
+      return gr;
+    });
+  })["catch"](function (error) {
+    return console.log(error);
+  });
+};
+
+exports.fetchgeneral = fetchgeneral;
+
+var isNumbCheck = function isNumbCheck(val) {
+  if (val == "" || !val) {
+    return "";
+  } else {
+    var valnumb = parseInt(val);
+
+    if (isNaN(valnumb)) {
+      return 0;
+    } else {
+      return valnumb;
+    }
+  }
+};
+
+exports.isNumbCheck = isNumbCheck;
+var dropdownlist = ["Plan to Play", "Dropped", "Playing", "On Hold", "Completed", "Wishlist"];
+exports.dropdownlist = dropdownlist;
+
+var limittyping = function limittyping(e, bool, _int) {
+  if (bool && e.key !== "Delete" // keycode for delete
+  && e.key !== "Backspace" // keycode for backspace
+  ) {
+    e.preventDefault();
+    e.target.value = _int;
+  }
+};
+
+exports.limittyping = limittyping;
+
+},{}],254:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _mylistfunctions = require("./mylistfunctions");
+
+var _reactRouterDom = require("react-router-dom");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var DisplayRandList = function DisplayRandList(props) {
+  var _useState = (0, _react.useState)(""),
+      _useState2 = _slicedToArray(_useState, 2),
+      formval = _useState2[0],
+      setFormVal = _useState2[1];
+
+  var submithandler = function submithandler(e) {
+    setFormVal(function () {
+      return e.target.id;
+    });
+  };
+
+  var value = function value() {
+    return props;
+  };
+
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "hmpg-rand-list"
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    id: "Highest-Heading",
+    className: "left-align"
+  }, " RANDOM GAMES TO TRY"), /*#__PURE__*/_react["default"].createElement("ul", {
+    className: "hs full"
+  }, props.randmodules.map(function (randmodule) {
+    return /*#__PURE__*/_react["default"].createElement("form", {
+      action: "/search",
+      className: "rand-game-list-form",
+      id: "rand-game-list-form".concat(parseInt(randmodule.Rank) - 1),
+      method: "post",
+      key: "".concat(randmodule.Name)
+    }, /*#__PURE__*/_react["default"].createElement("li", {
+      className: "item"
+    }, " ", /*#__PURE__*/_react["default"].createElement("button", {
+      className: "rnd-hmpg-button"
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      className: "rand-name-forms item-text form-link",
+      onClick: submithandler,
+      id: "".concat(randmodule.Slug)
+    }, " ", randmodule.Rank, ". ", randmodule.Name, " ")), /*#__PURE__*/_react["default"].createElement("input", {
+      name: "rand-game-slug",
+      style: {
+        display: "none"
+      },
+      value: formval,
+      onChange: value
+    }), /*#__PURE__*/_react["default"].createElement("img", {
+      className: "game-image-items",
+      src: randmodule.BGimg
+    }), /*#__PURE__*/_react["default"].createElement("div", {
+      className: "gradientcolor"
+    }, "Metacritic Rating:"), /*#__PURE__*/_react["default"].createElement("div", {
+      "data-color": "".concat(randmodule.GOR),
+      className: "rankings inlinemarker ".concat((0, _mylistfunctions.classnames)(randmodule.GOR))
+    }, randmodule.GOR)));
+  }))));
+};
+
+var DisplayMyList = function DisplayMyList(props) {
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "hmpg-my-list"
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    id: "add-list-label",
+    className: "left-align"
+  }, /*#__PURE__*/_react["default"].createElement("a", {
+    href: "/mylist",
+    id: "index-my-list-link"
+  }, "Your Games")), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("ul", {
+    className: "hs full main-page-game-list"
+  }, props.mylistmodules.map(function (mylistmodule) {
+    return /*#__PURE__*/_react["default"].createElement("li", {
+      className: "item",
+      key: "".concat(mylistmodule.Name)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      className: "item-text"
+    }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: "/game/".concat(mylistmodule.Slug)
+    }, mylistmodule.Name), " "), /*#__PURE__*/_react["default"].createElement("img", {
+      className: "add-list-images",
+      alt: "".concat(mylistmodule.Name, " Image"),
+      src: mylistmodule.BGimg
+    }), /*#__PURE__*/_react["default"].createElement("div", {
+      className: "item-text"
+    }, "Your Rating:"), /*#__PURE__*/_react["default"].createElement("div", {
+      "data-color": "".concat(mylistmodule.GPR),
+      className: "rankings ".concat((0, _mylistfunctions.classnames)(mylistmodule.GPR))
+    }, mylistmodule.GPR), /*#__PURE__*/_react["default"].createElement("div", {
+      className: "status item-text"
+    }, " ", mylistmodule.GST));
+  }))));
+};
+
+var Homepage = function Homepage() {
+  var _useState3 = (0, _react.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      RandList = _useState4[0],
+      setRandList = _useState4[1];
+
+  var _useState5 = (0, _react.useState)([]),
+      _useState6 = _slicedToArray(_useState5, 2),
+      MyList = _useState6[0],
+      setMyList = _useState6[1];
+
+  (0, _react.useEffect)(function () {
+    fetch('http://127.0.0.1:5000/gmlistfeeder', {
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var gr = response;
+      console.log(gr);
+      setMyList(function () {
+        return gr;
+      });
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }, []);
+  (0, _react.useLayoutEffect)(function () {
+    fetch('http://127.0.0.1:5000/rndgamefeeder', {
+      'methods': 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var gr = response;
+      console.log(gr);
+      setRandList(function () {
+        return gr;
+      });
+    })["catch"](function (error) {
+      return console.log(error);
+    });
+  }, []);
+  return (
+    /*#__PURE__*/
+    // <BrowserRouter>
+    _react["default"].createElement("div", null, RandList != [] && MyList != [] && /*#__PURE__*/_react["default"].createElement("div", {
+      className: "hmpg"
+    }, /*#__PURE__*/_react["default"].createElement(DisplayRandList, {
+      randmodules: RandList
+    }), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(DisplayMyList, {
+      mylistmodules: MyList
+    })))
+  );
+};
+
+var _default = Homepage;
+exports["default"] = _default;
+
+},{"./mylistfunctions":257,"react":236,"react-router-dom":226}],255:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -45232,7 +48265,7 @@ var LoginForm = /*#__PURE__*/function (_React$Component) {
 
 exports["default"] = LoginForm;
 
-},{"react":227,"react-bootstrap/Button":178,"react-bootstrap/Form":189}],243:[function(require,module,exports){
+},{"react":236,"react-bootstrap/Button":181,"react-bootstrap/Form":192}],256:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -45364,60 +48397,38 @@ function MyList() {
   }; //Editing Form--------------------------------------------------------------------------------------------------------------
 
 
-  var onStatusClick = function onStatusClick(e) {
+  var setGNameStats = function setGNameStats(status, pr, hp) {
     setGNameST(function () {
-      return e.target.id;
+      return status;
     });
     setGNamePR(function () {
-      return "";
+      return pr;
     });
     setGNameHP(function () {
-      return "";
+      return hp;
     });
+  };
+
+  var onStatusClick = function onStatusClick(e) {
+    setGNameStats(e.target.id, "", "");
     setSTVal(function () {
       return e.target.textContent;
     });
   };
 
   var onHPClick = function onHPClick(e) {
-    // gnamehp = e.target.id
-    setGNameHP(function () {
-      return e.target.id;
-    });
-    gnamest = "";
-    setGNamePR(function () {
-      return "";
-    });
-    console.log(gnamehp);
+    setGNameStats("", "", e.target.id);
     setHPVal(function () {
       return e.target.textContent;
     }); // console.log(gname)
   };
 
   var onGPRClick = function onGPRClick(e) {
-    setGNamePR(function () {
-      return e.target.id;
-    });
-    setGNameHP(function () {
-      return "";
-    });
+    setGNameStats("", e.target.id, "");
     setPRVal(function () {
       return e.target.textContent;
     });
-  }; // const send_table_change = (e, dataname) => {
-  //   $.ajax({
-  //     type:'POST',
-  //     url:'/mylistfeeder',
-  //     data:{
-  //       dataname: e.target.value,
-  //       gamename: e.target.getAttribute('name')
-  //     },
-  //     success:function()
-  //     {
-  //       listfetch(setGameOptions)
-  //     }
-  // })}
-
+  };
 
   var onHoursChange = function onHoursChange(e) {
     console.log(parseInt(e.target.value));
@@ -45428,7 +48439,7 @@ function MyList() {
       });
     } else {
       setHPVal(function () {
-        return "Bruh";
+        return "Nope";
       });
     }
 
@@ -45484,33 +48495,7 @@ function MyList() {
         (0, _mylistfunctions.listfetch)(setGameOptions);
       }
     });
-  }; // function EditHoursPlayed (props){
-  //   // console.log(gname)
-  //   // seteditHPVal(()=> props.GHP)
-  //   if ((gnamehp == `${props.Name}`) ){
-  //     return(
-  //       <td id = "editHP">
-  //       <Form >
-  //         <Form.Control type = "number" min = "0"  value = {HPVal} placeholder="Hours Played"  name = {props.Name} className='w-auto mx-auto' onChange = {e => {limittyping(e, e.target.value <0, 0); onHoursChange(e)}}/>
-  //       </Form>
-  //       </td>
-  //     )
-  //   }
-  //   else{
-  //     console.log(HPVal !== "")
-  //     if (HPVal !== ""){
-  //       return(
-  //       <td value = {HPVal}  id = {`${props.Name}`} onClick = {onHPClick} className ="table-hours-played">{props.GHP}</td>
-  //       )
-  //     }
-  //     else {
-  //       return(
-  //       <td value = {props.GHP}  id = {`${props.Name}`} onClick = {onHPClick} className ="table-hours-played">{props.GHP}</td>
-  //       )
-  //     }
-  //   } 
-  // }
-
+  };
 
   function EditStatus(props) {
     if (GNameST == "".concat(props.Name)) {
@@ -45526,7 +48511,7 @@ function MyList() {
         value: STVal,
         name: "".concat(props.Name),
         autoComplete: "off",
-        className: "form-select form-control mx-auto w-100 game-form game-highlight ",
+        className: "form-select form-control mx-auto w-100 game-form",
         placeholder: "Choose Status:",
         required: true,
         onChange: onSTChange
@@ -45795,8 +48780,8 @@ function MyList() {
     })), /*#__PURE__*/_react["default"].createElement("td", {
       value: game.Name
     }, /*#__PURE__*/_react["default"].createElement("a", {
-      href: "/game/".concat(game.Name)
-    }, game.Name)), GNamePR == "".concat(game.Name) && /*#__PURE__*/_react["default"].createElement("td", {
+      href: "/game/".concat(game.Slug)
+    }, game.Name)), GNamePR == "".concat(game.Name) ? /*#__PURE__*/_react["default"].createElement("td", {
       id: "editPR"
     }, /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
       onOutsideClick: function onOutsideClick() {
@@ -45818,7 +48803,7 @@ function MyList() {
         preventval(e);
         onPRChange(e);
       }
-    })))), GNamePR !== "".concat(game.Name) && /*#__PURE__*/_react["default"].createElement("td", {
+    })))) : /*#__PURE__*/_react["default"].createElement("td", {
       "data-color": game.GPR,
       value: game.GPR,
       onClick: onGPRClick,
@@ -45827,7 +48812,7 @@ function MyList() {
     }, game.GPR), /*#__PURE__*/_react["default"].createElement("td", {
       "data-color": game.GOR,
       className: "tablerating ".concat((0, _mylistfunctions.tableclassnames)(game.GOR))
-    }, game.GOR), GNameHP == "".concat(game.Name) && /*#__PURE__*/_react["default"].createElement("td", {
+    }, game.GOR), GNameHP == "".concat(game.Name) ? /*#__PURE__*/_react["default"].createElement("td", {
       id: "editHP"
     }, /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
       onOutsideClick: function onOutsideClick() {
@@ -45846,7 +48831,7 @@ function MyList() {
         (0, _mylistfunctions.limittyping)(e, e.target.value < 0, 0);
         onHoursChange(e);
       }
-    })))), GNameHP !== "".concat(game.Name) && /*#__PURE__*/_react["default"].createElement("td", {
+    })))) : /*#__PURE__*/_react["default"].createElement("td", {
       value: game.GHP,
       id: "".concat(game.Name),
       onClick: onHPClick,
@@ -45861,13 +48846,15 @@ function MyList() {
   })))));
 }
 
-},{"./mylistfunctions":244,"./sortdropdown":245,"react":227,"react-bootstrap/Button":178,"react-bootstrap/Col":179,"react-bootstrap/Dropdown":180,"react-bootstrap/DropdownButton":181,"react-bootstrap/Form":189,"react-bootstrap/Row":203,"react-bootstrap/Table":205,"react-outside-click-handler":218}],244:[function(require,module,exports){
+},{"./mylistfunctions":257,"./sortdropdown":258,"react":236,"react-bootstrap/Button":181,"react-bootstrap/Col":182,"react-bootstrap/Dropdown":183,"react-bootstrap/DropdownButton":184,"react-bootstrap/Form":192,"react-bootstrap/Row":206,"react-bootstrap/Table":208,"react-outside-click-handler":221}],257:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.tableclassnames = exports.listfetchdictlist = exports.listfetch = exports.limittypingmax = exports.limittyping = exports.isNumbCheck = exports.isBetween = exports.displayerror = void 0;
+exports.displayerror = exports.databasefetch = exports.classnames = void 0;
+exports.getRandomInt = getRandomInt;
+exports.tableclassnames = exports.listfetchdictlist = exports.listfetch = exports.limittypingmax = exports.limittyping = exports.isNumbCheck = exports.isBetween = void 0;
 
 var listfetch = function listfetch(setGameOptions) {
   var sortfunction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "None";
@@ -45903,7 +48890,8 @@ var listfetch = function listfetch(setGameOptions) {
         GPR: gr.personalrating[i],
         GRD: gr.releasedate[i],
         GST: gr.status[i],
-        GWB: gr.website[i]
+        GWB: gr.website[i],
+        Slug: gr.slug[i]
       });
     }
 
@@ -45925,6 +48913,37 @@ var listfetch = function listfetch(setGameOptions) {
 };
 
 exports.listfetch = listfetch;
+
+var databasefetch = function databasefetch(setGameOptions) {
+  var sortfunction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "None";
+  var gamelistdict = [];
+  fetch('http://127.0.0.1:5000/databasefeeder', {
+    'methods': 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    return response.json();
+  }).then(function (response) {
+    var gr = response;
+    console.log(gr); // var vargamedict = {Names: SSgr.gamename, BGimgs: gr.backgroundimage, GOR: gr.metacriticrating, GRD: gr.releasedate, GWB: gr.website, GPL : gr.platforms}
+    // for(let i = 0; i< (gr.name).length; i++){
+    //   gamelistdict.push({Number: [i],Name: gr.name[i], BGimg: gr.backgroundimages[i], GOR: gr.onlinerating[i], GRD: gr.releasedate[i], GWB: gr.website[i],  GPL : gr.platforms})
+    // }
+    // console.log(gamelistdict.map(x=> x))
+    //  setGameDict(()=> vargamedict)
+
+    setGameOptions(function () {
+      return gamelistdict;
+    }); //  console.log(GameOptions);
+
+    console.log("hello"); //  console.log(gamelistdict[1].BGimg);
+  })["catch"](function (error) {
+    return console.log(error);
+  });
+};
+
+exports.databasefetch = databasefetch;
 
 var listfetchdictlist = function listfetchdictlist(setGameOptions) {
   var sortfunction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "None";
@@ -46006,6 +49025,10 @@ var isBetween = function isBetween(x, min, max) {
 
 exports.isBetween = isBetween;
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 var displayerror = function displayerror(min, max, min2, max2, name, message, seterrorMessages) {
   var existencebool = min && max || min2 && max2;
   var comparebool = min > max || min2 > max2;
@@ -46062,7 +49085,31 @@ var tableclassnames = function tableclassnames(val) {
 
 exports.tableclassnames = tableclassnames;
 
-},{}],245:[function(require,module,exports){
+var classnames = function classnames(val) {
+  var mc = {
+    '0-59': 'red',
+    '60-79': 'orange',
+    '80-99': 'green',
+    '100-100': 'gold'
+  };
+  var theclass = "";
+  $.each(mc, function (numbs, classname) {
+    var min = parseInt(numbs.split("-")[0], 10);
+    var max = parseInt(numbs.split("-")[1], 10); // console.log(classname)
+    // console.log(classname)
+
+    var valint = parseInt(val);
+
+    if (isBetween(valint, min, max)) {
+      theclass = classname;
+    }
+  });
+  return theclass;
+};
+
+exports.classnames = classnames;
+
+},{}],258:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -46168,10 +49215,464 @@ function DropDownFilter() {
   }))));
 }
 
-},{"./mylistfunctions":244,"react":227,"react-bootstrap/Dropdown":180,"react-bootstrap/DropdownButton":181,"react-bootstrap/Form":189}],246:[function(require,module,exports){
+},{"./mylistfunctions":257,"react":236,"react-bootstrap/Dropdown":183,"react-bootstrap/DropdownButton":184,"react-bootstrap/Form":192}],259:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.isBetween = exports.fetchgeneral = exports.classnames = void 0;
+
+var isBetween = function isBetween(x, min, max) {
+  return x >= min && x <= max;
+};
+
+exports.isBetween = isBetween;
+
+var classnames = function classnames(val) {
+  var mc = {
+    '0-59': 'red',
+    '60-79': 'orange',
+    '80-99': 'green',
+    '100-100': 'gold'
+  };
+  var theclass = "";
+  $.each(mc, function (numbs, classname) {
+    var min = parseInt(numbs.split("-")[0], 10);
+    var max = parseInt(numbs.split("-")[1], 10); // console.log(classname)
+    // console.log(classname)
+
+    var valint = parseInt(val);
+
+    if (isBetween(valint, min, max)) {
+      theclass = classname;
+    }
+  });
+  return theclass;
+};
+
+exports.classnames = classnames;
+
+var fetchgeneral = function fetchgeneral(place, propChange) {
+  fetch("http://127.0.0.1:5000/".concat(place), {
+    'methods': 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    return response.json();
+  }).then(function (response) {
+    var gr = response;
+    console.log(gr);
+    propChange(function () {
+      return gr;
+    });
+  })["catch"](function (error) {
+    return console.log(error);
+  });
+};
+
+exports.fetchgeneral = fetchgeneral;
+
+},{}],260:[function(require,module,exports){
+"use strict";
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _vargamefuncs = require("./vargamefuncs");
+
+var _generalfuncs = require("./generalfuncs");
+
+var _reactOutsideClickHandler = _interopRequireDefault(require("react-outside-click-handler"));
+
+var _addlist = _interopRequireDefault(require("./addlist"));
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+var GamePage = function GamePage(props) {
+  // FOR DETERMINING WHETHER TO DISPLAY THE EDIT OR NOT
+  var _useState = (0, _react.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      GNameHP = _useState2[0],
+      setGNameHP = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      GNamePR = _useState4[0],
+      setGNamePR = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      GNameST = _useState6[0],
+      setGNameST = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      HPVal = _useState8[0],
+      setHPVal = _useState8[1];
+
+  var _useState9 = (0, _react.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      PRVal = _useState10[0],
+      setPRVal = _useState10[1];
+
+  var _useState11 = (0, _react.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      STVal = _useState12[0],
+      setSTVal = _useState12[1];
+
+  var params = (0, _reactRouterDom.useParams)();
+  console.log(params);
+
+  var _useState13 = (0, _react.useState)({}),
+      _useState14 = _slicedToArray(_useState13, 2),
+      gameProps = _useState14[0],
+      setgameProps = _useState14[1];
+
+  var _useState15 = (0, _react.useState)(false),
+      _useState16 = _slicedToArray(_useState15, 2),
+      showAddList = _useState16[0],
+      setshowAddList = _useState16[1];
+
+  var removeListHandler = function removeListHandler(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: "/removelist",
+      data: {
+        deletedgame: e.target.getAttribute('slug')
+      },
+      success: function success() {
+        $.ajax({
+          type: 'POST',
+          url: "/game/".concat(e.target.getAttribute('slug')),
+          data: {
+            slug: e.target.getAttribute('slug')
+          },
+          success: function success() {
+            (0, _generalfuncs.fetchgeneral)("gamegetter", setgameProps);
+          }
+        });
+      }
+    });
+  };
+
+  var addListHandler = function addListHandler(e) {
+    e.preventDefault();
+    setshowAddList(true);
+  };
+
+  (0, _react.useLayoutEffect)(function () {
+    $.ajax({
+      type: 'POST',
+      url: "/game/".concat(params.game),
+      data: {
+        slug: params.game
+      },
+      success: function success() {
+        (0, _generalfuncs.fetchgeneral)("gamegetter", setgameProps);
+      }
+    });
+  }, []); //Editing Form--------------------------------------------------------------------------------------------------------------
+
+  var preventval = function preventval(e) {
+    (0, _generalfuncs.limittyping)(e, e.target.value > 100, 100);
+    (0, _generalfuncs.limittyping)(e, e.target.value < 0, 0);
+  };
+
+  var setGNameStats = function setGNameStats(status, pr, hp) {
+    setGNameST(function () {
+      return status;
+    });
+    setGNamePR(function () {
+      return pr;
+    });
+    setGNameHP(function () {
+      return hp;
+    });
+  };
+
+  var onHPClick = function onHPClick(e) {
+    setGNameStats(false, false, true);
+    setHPVal(function () {
+      return gameProps.HP;
+    }); // console.log(gname)
+  };
+
+  var onGPRClick = function onGPRClick(e) {
+    setGNameStats(false, true, false);
+    setPRVal(function () {
+      return gameProps.PR;
+    });
+  };
+
+  var onStatusClick = function onStatusClick(e) {
+    setGNameStats(true, false, false);
+    setSTVal(function () {
+      return gameProps.ST;
+    });
+  };
+
+  var onHoursChange = function onHoursChange(e) {
+    console.log(parseInt(e.target.value));
+
+    if (parseInt(e.target.value) != NaN) {
+      setHPVal(function () {
+        return e.target.value;
+      });
+    } else {
+      setHPVal(function () {
+        return "Nope";
+      });
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/mylistfeeder',
+      data: {
+        hoursplayed: e.target.value,
+        gamename: gameProps.Name
+      },
+      success: function success() {
+        (0, _generalfuncs.fetchgeneral)("gamegetter", setgameProps);
+      }
+    });
+  };
+
+  var onPRChange = function onPRChange(e) {
+    if (e.target.value) {
+      setPRVal(function () {
+        return e.target.value;
+      });
+    } else {
+      setPRVal(function () {
+        return "";
+      });
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/mylistfeeder',
+      data: {
+        personalrating: e.target.value,
+        gamename: gameProps.Name
+      },
+      success: function success() {
+        (0, _generalfuncs.fetchgeneral)("gamegetter", setgameProps);
+      }
+    });
+  };
+
+  var onSTChange = function onSTChange(e) {
+    setSTVal(function () {
+      return e.target.value;
+    });
+    $.ajax({
+      type: 'POST',
+      url: '/mylistfeeder',
+      data: {
+        status: e.target.value,
+        gamename: gameProps.Name
+      },
+      success: function success() {
+        (0, _generalfuncs.fetchgeneral)("gamegetter", setgameProps);
+      }
+    });
+  }; // Editing Function
+  // function EditStatus(props){
+  //     return(
+  //     )
+  // }
+
+
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "var-game-page"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "".concat(params.game, "-page")
+  }, /*#__PURE__*/_react["default"].createElement("div", null, gameProps.Name && /*#__PURE__*/_react["default"].createElement("div", {
+    className: "container-fluid var-page-container",
+    id: "{liststatus}"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "var-page-heading"
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    className: "var-game-title gradientcolor"
+  }, " ", /*#__PURE__*/_react["default"].createElement("a", {
+    href: "".concat(gameProps.GWB)
+  }, " ", gameProps.Name, " ")), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "var-online-rating"
+  }, /*#__PURE__*/_react["default"].createElement("span", {
+    className: "vargamelabels gradientcolor "
+  }, " Metacritic Rating: "), /*#__PURE__*/_react["default"].createElement("div", {
+    "data-color": "".concat(gameProps.MCR),
+    className: "vargamerankings var-online-rating-data ".concat((0, _vargamefuncs.classnames)(gameProps.MCR))
+  }, gameProps.MCR)), /*#__PURE__*/_react["default"].createElement("h6", {
+    "data-color": "".concat(gameProps.MCR),
+    className: "onlinerankdescription ".concat((0, _vargamefuncs.classnames)(gameProps.MCR))
+  }, " ", gameProps.MCRWORD)), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("form", {
+    action: "/editgamepage",
+    id: "var-edit-form",
+    method: "post"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "var-page-main"
+  }, /*#__PURE__*/_react["default"].createElement("img", {
+    className: "var-game-image",
+    src: "".concat(gameProps.BGimg)
+  }), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "var-user-analytics"
+  }, /*#__PURE__*/_react["default"].createElement("h6", {
+    className: "var-personal-rating analytic"
+  }, " Your Rating :", GNamePR && gameProps.DisplayRemove == "Yes" ? /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
+    onOutsideClick: function onOutsideClick() {
+      setGNamePR(function () {
+        return "";
+      });
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_Form["default"].Control, {
+    type: "number",
+    min: "0",
+    max: "100",
+    value: PRVal,
+    placeholder: "Personal Rating",
+    className: "w-auto mx-auto",
+    onChange: function onChange(e) {
+      preventval(e);
+      onPRChange(e);
+    }
+  })) : /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: function onClick(e) {
+      setGNamePR(true);
+      onGPRClick(e);
+    },
+    "data-color": "".concat(gameProps.PR),
+    className: "var-personal-rating-data varpersonalrankings var-rating-border ".concat((0, _vargamefuncs.classnames)(gameProps.PR))
+  }, gameProps.PR)), /*#__PURE__*/_react["default"].createElement("h6", {
+    className: "var-status analytic"
+  }, " Game Status:", GNameST && gameProps.DisplayRemove == "Yes" ? /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
+    onOutsideClick: function onOutsideClick() {
+      setGNameST(function () {
+        return false;
+      });
+    }
+  }, /*#__PURE__*/_react["default"].createElement("select", {
+    value: STVal,
+    name: "".concat(props.name),
+    autoComplete: "off",
+    className: "form-select form-control mx-auto w-auto center-status",
+    placeholder: "Choose Status:",
+    required: true,
+    onChange: onSTChange
+  }, " ' +", /*#__PURE__*/_react["default"].createElement("option", {
+    disabled: true
+  }, "Choose Status:"), _generalfuncs.dropdownlist.map(function (option) {
+    return /*#__PURE__*/_react["default"].createElement("option", {
+      key: option,
+      id: option,
+      value: option,
+      onClick: onSTChange,
+      onChange: onSTChange
+    }, option);
+  }))) : /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: onStatusClick,
+    className: "var-status-data gradientcolorpinkwhite "
+  }, " ", gameProps.ST)), /*#__PURE__*/_react["default"].createElement("h6", {
+    className: "var-release-date analytic"
+  }, " Game Release Date:", /*#__PURE__*/_react["default"].createElement("div", {
+    className: "gradientcolorpinkwhite"
+  }, gameProps.RD)), /*#__PURE__*/_react["default"].createElement("h6", {
+    className: "var-hours-played analytic"
+  }, " Game Hours Played:", GNameHP && gameProps.DisplayRemove == "Yes" ? /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
+    onOutsideClick: function onOutsideClick() {
+      setGNameHP(function () {
+        return false;
+      });
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_Form["default"].Control, {
+    type: "number",
+    min: "0",
+    value: HPVal,
+    placeholder: "Hours Played",
+    className: "w-auto mx-auto",
+    onChange: function onChange(e) {
+      (0, _generalfuncs.limittyping)(e, e.target.value < 0, 0);
+      onHoursChange(e);
+    }
+  })) : /*#__PURE__*/_react["default"].createElement("div", {
+    onClick: function onClick(e) {
+      return onHPClick(e);
+    },
+    className: "var-hours-played-data gradientcolorpinkwhite"
+  }, " ", gameProps.HP))), /*#__PURE__*/_react["default"].createElement("h6", {
+    className: "var-platforms gradientcolorpinkwhite"
+  }, " Platforms: ", gameProps.PLT), /*#__PURE__*/_react["default"].createElement("button", {
+    type: "button",
+    className: "btn btn-warning var-edit-button var-buttons",
+    style: {
+      display: "none"
+    }
+  }, " Submit Changes "), gameProps.DisplayAdd == "Yes" && /*#__PURE__*/_react["default"].createElement("button", {
+    type: "button",
+    className: "btn btn-success var-add-button var-buttons",
+    onClick: addListHandler,
+    slug: "".concat(gameProps.Slug)
+  }, "Add to List"), showAddList && /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
+    onOutsideClick: function onOutsideClick() {
+      setshowAddList(function () {
+        return false;
+      });
+    }
+  }, /*#__PURE__*/_react["default"].createElement(_addlist["default"], {
+    slug: gameProps.Slug,
+    status: true,
+    name: gameProps.Name,
+    setgameProps: setgameProps,
+    bgimg: gameProps.BGimg
+  })))), gameProps.DisplayRemove == "Yes" && /*#__PURE__*/_react["default"].createElement("button", {
+    type: "submit",
+    onClick: removeListHandler,
+    className: "btn btn-danger var-remove-button var-buttons",
+    slug: "".concat(gameProps.Slug),
+    style: {
+      display: "".concat(gameProps.DisplayRemove)
+    }
+  }, "Remove from List")))));
+};
+
+var _default = GamePage;
+exports["default"] = _default;
+
+},{"./addlist":251,"./generalfuncs":253,"./vargamefuncs":259,"react":236,"react-bootstrap/Form":192,"react-outside-click-handler":221,"react-router-dom":226}],261:[function(require,module,exports){
 'use strict';
 
-var _react = _interopRequireDefault(require("react"));
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
@@ -46187,7 +49688,21 @@ var _filterform = _interopRequireDefault(require("./filterform"));
 
 var _mylist = _interopRequireDefault(require("./mylist"));
 
+var _accountdetails = _interopRequireDefault(require("./accountdetails"));
+
+var _homepage = _interopRequireDefault(require("./homepage"));
+
+var _mylistfunctions = require("./mylistfunctions");
+
+var _reactRouterDom = require("react-router-dom");
+
+var _varinlistgamepage = _interopRequireDefault(require("./varinlistgamepage"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 //@ts-check
@@ -46420,6 +49935,13 @@ $('img').map(function () {
     $(this).attr('src', "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg");
   }
 });
+$(function () {
+  $('a').each(function () {
+    if ($(this).prop('href') == window.location.href) {
+      $(this).addClass('current');
+    }
+  });
+});
 
 function isEmpty(str) {
   return !str.trim().length;
@@ -46485,124 +50007,6 @@ $(function () {
       }
     });
   }
-});
-$(function () {
-  //  $('.personalratingchange').on('click',function(){
-  //     $(this).trigger('focus')
-  //  })
-  $('.table-personal-rating, .table-hours-played, .table-status').on('click', function () {
-    var formerrating = $(this).text();
-    var modifyingelements = document.getElementsByClassName('modifying');
-    classundefined = 0;
-    console.log($(this).attr('class'));
-
-    if (modifyingelements.length == 0 && $(this).attr('class') == "table-personal-rating") {
-      $(this).html('<input type = "number" class = "mx-auto w-auto blah " id=  "personalratingchange"  name = "rating"  min = "0" max = "100">');
-      $(this).addClass('modifying');
-      globalThis.classname = $(this).attr('class');
-      $('.modifying > #personalratingchange').val(formerrating);
-      globalThis.editgamename = $(this).closest("tr").find('.editgamenames').text();
-      console.log(editgamename);
-    }
-
-    if (modifyingelements.length == 0 && $(this).attr('class') == "table-status") {
-      $(this).html('<select name="status" id = "edit-select-status" autocomplete="off"  class = "form-select form-control mx-auto w-100 game-form game-highlight "  placeholder = "Choose Status:" required> ' + '<option disable selected value>Choose Status:</option>' + '<option>Plan to Play</option>' + '<option>Dropped</option>' + '<option>Playing</option>' + '<option>On Hold</option>' + '<option>Completed</option>' + '<option>Wishlist</option>' + '</select>');
-      $(this).addClass('modifying');
-      globalThis.classname = $(this).attr('class'); //var conceptName = $('#aioConceptName').find(":selected").text();
-
-      $('.modifying > #edit-select-status').val(formerrating);
-      globalThis.editgamename = $(this).closest("tr").find('.editgamenames').text();
-      console.log(editgamename);
-    }
-
-    if (modifyingelements.length == 0 && $(this).attr('class') == "table-hours-played") {
-      $(this).html('<input type = "number" class = "form-control mx-auto w-100 game-highlight" name = "hoursplayed" id = "hoursplayed" " min="0">');
-      $(this).addClass('modifying');
-      globalThis.classname = $(this).attr('class');
-      $('.modifying > #hoursplayed').val(formerrating);
-      globalThis.editgamename = $(this).closest("tr").find('.editgamenames').text();
-      console.log(editgamename);
-    } //$('.table-personal-rating').off("click")
-    //$(this).val(formerrating);
-
-
-    var ratingchange = $(this).val();
-    console.log(ratingchange);
-  });
-  $(document).on('dblclick', function (e) {
-    // var container = $(".modifying>");
-    // if (!$(e.target).closest(container).length) {
-    if (classundefined == 1) {
-      e.stopPropagation();
-    }
-
-    if (classundefined == 0) {
-      if (classname == "table-personal-rating modifying") {
-        //$("#url-displayname").html($(this).val())
-        $('#personalratingchange').trigger('blur');
-        var personalratingchange = $('#personalratingchange').val();
-        $('.game-name-submit').val(editgamename);
-        var inputranking = $('.modifying > #personalratingchange').val();
-
-        if (inputranking === "") {
-          $("#edit-form").trigger('submit');
-          $(".modifying").html("_");
-          $('.game-name-submit').val(editgamename);
-        } else if (!isNaN(inputranking)) {
-          $("#edit-form").trigger('submit');
-          $(".modifying").html(inputranking);
-          $('.game-name-submit').val(editgamename);
-        } else {
-          $(".modifying").html("_");
-        } //$("#edit-form").trigger('submit')
-
-
-        $('.table-personal-rating').removeClass("modifying");
-      }
-
-      if (classname == "table-hours-played modifying") {
-        $('.game-name-submit').val(editgamename);
-        var inputplayed = $('.modifying > #hoursplayed').val();
-
-        if (inputplayed === "") {
-          $("#edit-form").trigger('submit');
-          $(".modifying").html("_");
-          $('.game-name-submit').val(editgamename);
-        } else if (!isNaN(inputplayed)) {
-          $("#edit-form").trigger('submit');
-          $(".modifying").html(inputplayed);
-          $('.game-name-submit').val(editgamename);
-        } else {
-          $(".modifying").html("_");
-        } //$("#edit-form").trigger('submit')
-
-
-        $('.table-hours-played').removeClass("modifying");
-      }
-
-      if (classname == "table-status modifying") {
-        $('.game-name-submit').val(editgamename);
-        var inputstatus = $('.modifying > #edit-select-status').find(":selected").text();
-
-        if (inputstatus === "") {
-          $(".modifying").html("_");
-          $('.game-name-submit').val(editgamename);
-        } else if (isNaN(inputstatus)) {
-          $("#edit-form").trigger('submit');
-          $(".modifying").html(inputstatus);
-          $('.game-name-submit').val(editgamename);
-        } else {
-          $(".modifying").html("_");
-        } //$("#edit-form").trigger('submit')
-
-
-        $('.table-hours-played').removeClass("modifying");
-      }
-    } // }
-    // })
-    // })
-
-  });
 }); // let db = new sqlite3.Database('C:/sqlite/gamestorage.db')
 // db.run(`UPDATE gamestorage SET personalrating = ? where id = ? AND game = ?`,$(this).text()
 //console.log($('.editgamelistoptions'))
@@ -46615,9 +50019,16 @@ $("#add-form").on('submit', function () {
   console.log(slugs[gameindex]);
   return true;
 });
-$('#gameSearch2, #gameSearch, #gameSearch3').on('keypress', function () {
-  $("#gamedropdown").css("display", "block");
+$('#gameSearch2, #gameSearch, #gameSearch3').on('keyup', function () {
+  $("#gamedropdown").fadeIn(1000);
   $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius", "5px 5px 0 0");
+});
+$(document).on("click", function (event) {
+  var $target = $(event.target);
+
+  if (!$target.closest('#gameSearch2, #gameSearch, #gameSearch3, #gamedropdown').length && $('#gamedropdown').is(":visible")) {
+    $('#gamedropdown').fadeOut(1000);
+  }
 });
 $('.editgamelistoptions, .gamedboptions').each(function () {
   $(this).on('click', function () {
@@ -46633,14 +50044,14 @@ $('#gameSearch2, #gameSearch, #gameSearch3').on('input', function () {
   console.log(text);
   $('.editgamelistoptions').each(function () {
     if ($(this).text().toUpperCase().indexOf(text) > -1) {
-      $(this).css('display', 'block');
+      $(this).css('display', 'inline-block');
     } else {
       $(this).css('display', 'none');
     }
   });
   $('.gamedboptions').each(function () {
     if ($(this).text().toUpperCase().indexOf(text) > -3) {
-      $(this).css('display', 'block');
+      $(this).css('display', 'inline-block');
     } else {
       $(this).css('display', 'none');
     }
@@ -46713,24 +50124,7 @@ $(function () {
   }
 });
 $("#add-form").on("submit", function () {// localStorage.clear()
-}); // $(".sortitem").on("click",function() {
-//   var sortval = $(this).text();
-//   // alert(sortval)
-//   $("#sort-input").val(sortval);
-//   $("#sort-dropdown").trigger("submit")
-// });
-// Rendering React Components if on the Page.
-// const rfilterform = document.getElementById('react-filter-form');
-// if (rfilterform){
-//   ReactDOM.render(<FilterForm />, rfilterform)
-// ;
-// }
-// const rsortdropdown = document.getElementById('react-sort-dropdown');
-// if (rsortdropdown){
-//   ReactDOM.render(<DropdownFilter />, rsortdropdown)
-// ;
-// }
-
+});
 var aboutreact = document.getElementById('test-react-component');
 
 if (aboutreact) {
@@ -46751,4 +50145,29 @@ if (mylistid) {
   _reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_mylist["default"], null), mylistid);
 }
 
-},{"./aboutpage":240,"./filterform":241,"./loginform":242,"./mylist":243,"./sortdropdown":245,"react":227,"react-dom":212,"react-reveal/Zoom":220}]},{},[246]);
+var acctdetails = document.getElementById('react-account-details');
+
+if (acctdetails) {
+  _reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_accountdetails["default"], null), acctdetails);
+} // const hmpg = document.getElementById('react-hmpg')
+// if (hmpg){
+//   ReactDOM.render(
+//     <Homepage />,hmpg
+//   )
+// }
+
+
+var rootElement = document.getElementById("react-hmpg");
+
+_reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Routes, null, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+  path: "/",
+  element: /*#__PURE__*/_react["default"].createElement(_homepage["default"], null)
+}), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+  path: "game/:game",
+  element: /*#__PURE__*/_react["default"].createElement(_varinlistgamepage["default"], null)
+}), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
+  path: "About",
+  element: /*#__PURE__*/_react["default"].createElement(_aboutpage["default"], null)
+}))), rootElement);
+
+},{"./aboutpage":249,"./accountdetails":250,"./filterform":252,"./homepage":254,"./loginform":255,"./mylist":256,"./mylistfunctions":257,"./sortdropdown":258,"./varinlistgamepage":260,"react":236,"react-dom":215,"react-reveal/Zoom":223,"react-router-dom":226}]},{},[261]);

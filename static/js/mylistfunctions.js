@@ -13,7 +13,7 @@ export const listfetch = (setGameOptions,sortfunction = "None") => {
     console.log(gr);
     var vargamedict = {Names: gr.name, BGimgs: gr.backgroundimages, GHP: gr.hoursplayed, GOR: gr.onlinerating, GPR: gr.personalrating, GRD: gr.releasedate,GST: gr.status, GWB: gr.website}
     for(let i = 0; i< (gr.name).length; i++){
-      gamelistdict.push({Number: [i],Name: gr.name[i], BGimg: gr.backgroundimages[i], GHP: gr.hoursplayed[i], GOR: gr.onlinerating[i], GPR: gr.personalrating[i], GRD: gr.releasedate[i],GST: gr.status[i], GWB: gr.website[i]})
+      gamelistdict.push({Number: [i],Name: gr.name[i], BGimg: gr.backgroundimages[i], GHP: gr.hoursplayed[i], GOR: gr.onlinerating[i], GPR: gr.personalrating[i], GRD: gr.releasedate[i],GST: gr.status[i], GWB: gr.website[i], Slug: gr.slug[i]})
     }
 
     if (sortfunction !== "None" ){
@@ -29,6 +29,40 @@ export const listfetch = (setGameOptions,sortfunction = "None") => {
   })
   .catch(error => console.log(error))
   }
+
+
+
+
+export const databasefetch = (setGameOptions, sortfunction = "None") => {
+  var gamelistdict = []
+
+  fetch('http://127.0.0.1:5000/databasefeeder',{
+    'methods':'GET',
+    headers : {
+      'Content-Type':'application/json'
+    }
+  })
+.then(response => (response.json()))
+.then(response => {
+  var gr = response
+  console.log(gr);
+  // var vargamedict = {Names: SSgr.gamename, BGimgs: gr.backgroundimage, GOR: gr.metacriticrating, GRD: gr.releasedate, GWB: gr.website, GPL : gr.platforms}
+  // for(let i = 0; i< (gr.name).length; i++){
+  //   gamelistdict.push({Number: [i],Name: gr.name[i], BGimg: gr.backgroundimages[i], GOR: gr.onlinerating[i], GRD: gr.releasedate[i], GWB: gr.website[i],  GPL : gr.platforms})
+  // }
+
+  // console.log(gamelistdict.map(x=> x))
+//  setGameDict(()=> vargamedict)
+
+ setGameOptions(() => gamelistdict)
+  //  console.log(GameOptions);
+ console.log("hello");
+//  console.log(gamelistdict[1].BGimg);
+
+})
+.catch(error => console.log(error))
+}
+
 
 
 
@@ -64,16 +98,16 @@ export const listfetch = (setGameOptions,sortfunction = "None") => {
   .catch(error => console.log(error))
   }
 
-  export const limittyping = (e,bool, int) =>{ 
-   if ((bool) 
-    && e.key !=="Delete" // keycode for delete
-    && e.key !== "Backspace" // keycode for backspace
-   ) 
-   {
-      e.preventDefault();
-      e.target.value = int
-    }
+export const limittyping = (e,bool, int) =>{ 
+  if ((bool) 
+  && e.key !=="Delete" // keycode for delete
+  && e.key !== "Backspace" // keycode for backspace
+  ) 
+  {
+    e.preventDefault();
+    e.target.value = int
   }
+}
 
 
 export const limittypingmax =(e,bool,func) => {
@@ -105,6 +139,10 @@ export const isBetween =  (x, min, max) => {
     return x >= min && x<=max
   }
 
+  export function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
 
   export const displayerror = (min, max, min2, max2, name, message,seterrorMessages) => {
     var existencebool = (min && max) || (min2 && max2)
@@ -130,6 +168,29 @@ export const isBetween =  (x, min, max) => {
       '60-79'    : 'nobgorange',
       '80-99'   : 'nobggreen',
       '100-100'     : 'nobggold'
+    }
+    var theclass = ""
+    $.each(mc,function (numbs,classname){
+
+      var min = parseInt(numbs.split("-")[0],10);
+      var max = parseInt(numbs.split("-")[1],10);
+      // console.log(classname)
+      // console.log(classname)
+      var valint = parseInt(val)    
+    if (isBetween(valint,min,max)){
+      theclass = classname
+    }
+    }
+    )
+  return (theclass) 
+  }
+  export const classnames = (val) => {
+
+    var mc = {
+      '0-59'     : 'red',
+      '60-79'    : 'orange',
+      '80-99'   : 'green',
+      '100-100'     : 'gold'
     }
     var theclass = ""
     $.each(mc,function (numbs,classname){

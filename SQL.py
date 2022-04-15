@@ -5,7 +5,7 @@ import random
 from random import randint
 import os 
 import json
-import app
+import app 
 def create_connection(path):
     connection = None
     try:
@@ -186,7 +186,7 @@ def getusersjson(json_str = False):
 
 def gd_dict_creation(usergamelist):
     semigamelist = [list(i) for i in usergamelist.fetchall()]
-    realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist = ([] for i in range(8))
+    realgamelist, personalgameratinglist, onlinegameratinglist, websitelist, backgroundimagelist, statuslist, hoursplayedlist, releasedatelist, sluglist,dayaddedlist = ([] for i in range(10))
     for i in range (len(semigamelist)):
         realgamelist.append(semigamelist[i][0])
         personalgameratinglist.append(semigamelist[i][1])
@@ -196,10 +196,12 @@ def gd_dict_creation(usergamelist):
         releasedatelist.append(semigamelist[i][7])
         websitelist.append(semigamelist[i][8])
         backgroundimagelist.append(semigamelist[i][10])
+        dayaddedlist.append(semigamelist[i][11])
+        sluglist.append(semigamelist[i][12])
 
         
     gamedatadict = {'name': realgamelist, 'personalrating' : personalgameratinglist, 'onlinerating': onlinegameratinglist, 
-    'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist}
+    'website' : websitelist, 'backgroundimages' :backgroundimagelist , 'status' : statuslist , 'hoursplayed' : hoursplayedlist, 'releasedate' :releasedatelist,'dayadded':dayaddedlist, 'slug' :sluglist}
     personalratings = gamedatadict['personalrating']
     metacriticratings = gamedatadict['onlinerating']
     hoursplayed = gamedatadict['hoursplayed']
@@ -230,7 +232,7 @@ def isint(value):
         value = int(value)
 
         return True
-    except ValueError:
+    except :
          return False
 
 def getgamelistdatafilter (mcrmin,mcrmax,permin,permax):
@@ -255,7 +257,7 @@ def getgamelistdatafilter (mcrmin,mcrmax,permin,permax):
     return (gamedatadict)
 
 def getgamedatabasedata():
-    usergamelist = app.db.execute ("SELECT * FROM gamedatabase")
+    usergamelist = (app.db.execute ("SELECT * FROM gamedatabase"))
     semigamelist = [list(i) for i in usergamelist.fetchall()]
     realgamelist, gameidlist, slugnamelist, onlinegameratinglist, backgroundimagelist, websitelist, releasedatelist,platformlist = ([] for i in range(8))
     for i in range (len(semigamelist)):
@@ -284,3 +286,50 @@ def listToString(s):
     str1 = str1[:-2]
     # return string  
     return str1 
+
+def isBetween(x,low,high):
+    return (x>= low and x<=high)
+
+
+
+
+
+def gen_sing_gdict(name,slug,rd,hp,gs,bg,mcr,pr,DA,DR,RS,plt, wb):
+    mcr_eval_list = [("Perfection",100,100), ("Universally Acclaimed", 90, 99 ), ("Amazing", 80,89), ("Decent", 60, 79), ("Poor",0,59)]
+    if isint(mcr):
+        for i in mcr_eval_list:
+            eval = i[0]
+            low = i[1]
+            high =i[2]
+
+            if isBetween(mcr,low,high):
+                mcrword = eval
+    else:
+        mcrword = "Not Reviewed"
+
+
+    if not isint(hp) or hp == 0:
+        hp = "Never Played"
+    if not pr: 
+        if not isint(pr):
+            pr = "_"
+    singlegamedict = {"Name": name, "Slug" : slug, "RD": rd, "HP" : hp, "ST": gs, "BGimg" : bg, "MCR" : mcr,
+"MCRWORD":mcrword ,"PR" : pr ,"DisplayAdd" : DA, "DisplayRemove": DR, "ReceivedSlug" : RS, "PLT" : plt, "GWB" : wb}
+    return (singlegamedict)
+
+def gm_db_conv(gd):
+    lsdict = []
+
+    name = gd["name"]
+    id = gd["gameid"]
+    slug = gd['slugname']
+    mcr = gd['onlinerating']
+    bgimg = gd['backgroundimages']
+    rd = gd['releasedate']
+    wb = gd['website']
+    plt = gd['platforms']
+
+    for i in range (len(name)):
+        lsdict.append({"ID": id[i], "Name" : name[i], "Slug": slug[i], "BGimg" : bgimg[i],
+        "GOR" : mcr[i], "GRD": rd[i], "GWB" : wb[i], "GPL" : plt[i]})
+    return(lsdict)
