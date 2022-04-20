@@ -4,24 +4,7 @@
 
 {% block main %}
 
-
-<div class="container-fluid">
-    <p class = login-title> A OTP has been sent to your Email </p>
-        <form action="/verify" method="post">
-            <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto email-verify-form" id="OTP" name="OTP" placeholder="Enter Code" type="text" required >
-            </div>
-            <div class="mb-3">
-                <button class="btn btn-primary" id = "submitbutton" type="submit" disabled="disabled">Log In</button>
-            </div>
-
-            <hr>
-        </form>
-        <form action = "/verify2" method ="post">
-            <div class="mb-3">
-                <h4>Didn't Get An Email? Click <button class="btn btn-link" id = "resendbutton" type="submit">Here</button>To Resend.</h4>
-            </div>
-        </form>
-    </div>
+<div id = "verify-form"></div>
+<div class = "loader"></div>
 
 {% endblock %}

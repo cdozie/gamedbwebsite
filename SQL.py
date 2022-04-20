@@ -100,7 +100,7 @@ def lookuplist(gamesearch):
 
     # Contact API
     try:
-        pagenumber=randint(1,40)
+        pagenumber=randint(1,100)
         api_key = "bbd0f6e116b145bd81a72ee35824f71f"
         url2 = f"https://api.rawg.io/api/games?key={api_key}&page={pagenumber}&page_size=10&search={gamesearch}" 
 
@@ -296,16 +296,21 @@ def isBetween(x,low,high):
 
 def gen_sing_gdict(name,slug,rd,hp,gs,bg,mcr,pr,DA,DR,RS,plt, wb):
     mcr_eval_list = [("Perfection",100,100), ("Universally Acclaimed", 90, 99 ), ("Amazing", 80,89), ("Decent", 60, 79), ("Poor",0,59)]
-    if isint(mcr):
-        for i in mcr_eval_list:
-            eval = i[0]
-            low = i[1]
-            high =i[2]
+    if mcr:
+        if isint(mcr):
+            for i in mcr_eval_list:
+                eval = i[0]
+                low = i[1]
+                high =i[2]
 
-            if isBetween(mcr,low,high):
-                mcrword = eval
-    else:
-        mcrword = "Not Reviewed"
+                if isBetween(mcr,low,high):
+                    mcrword = eval
+        else:
+            mcrword = "Not Reviewed"
+        if mcr == "" or mcr == " ":
+            mcr = "_"
+        
+
 
 
     if not isint(hp) or hp == 0:
@@ -333,3 +338,19 @@ def gm_db_conv(gd):
         lsdict.append({"ID": id[i], "Name" : name[i], "Slug": slug[i], "BGimg" : bgimg[i],
         "GOR" : mcr[i], "GRD": rd[i], "GWB" : wb[i], "GPL" : plt[i]})
     return(lsdict)
+def gm_data_dict_conv(gd):
+        gdlsdict =[] 
+        name = gd["name"]
+        bgimgs = gd["backgroundimages"]
+        ghp= gd["hoursplayed"]
+        gor= gd["onlinerating"]
+        gpr=gd["personalrating"]
+        grd= gd["releasedate"]
+        gst = gd["status"]
+        gwb = gd["website"]
+        gsl = gd ["slug"]
+        for i in range (len(name)):
+            gdlsdict.append({"Number": [i],"Name": name[i], "BGimg": bgimgs[i], 
+            "GHP": ghp[i], "GOR": gor[i], "GPR": gpr[i], "GRD": grd[i],
+            "GST": gst[i], "GWB": gwb[i], "Slug":gsl[i]})
+        return (gdlsdict)

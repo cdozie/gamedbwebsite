@@ -4,18 +4,28 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Zoom from 'react-reveal/Zoom';
 import About from './aboutpage';
-import DropdownFilter from './sortdropdown';
 import LoginForm from './loginform';
-import FilterForm from './filterform';
 import MyList from './mylist';
 import Details from './accountdetails';
 import Homepage from './homepage';
-import { useEffect, useState, useLayoutEffect } from 'react';
-import { classnames  } from './mylistfunctions';
-import { Routes, Route, useParams, useNavigate, BrowserRouter } from "react-router-dom";
+import { Routes, Route, useParams, useNavigate, BrowserRouter, Switch } from "react-router-dom";
 import GamePage from './varinlistgamepage';
+
+import AccountGames from './accountmain';
+import Layout from './layout';
+import AccountLayout from './accountlayout';
+import AccountWishlist from './accountwishlist';
+import ChangePassForm from './changepassword';
+import RegisterForm from './registerform';
+import ForgotPassForm from './forgotpass';
+import VerifyForm from './verifyemail';
+
+const AccWishlist = React.lazy(() => import('./accountwishlist'))
+
+import jQuery from "jquery";
+window.$ = window.jQuery = jQuery;
+
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 //@ts-check
@@ -32,8 +42,7 @@ if (scroller) {
 }*/
 
 (function () {
-    $('.registerinput, .login-form, .email-verify-form').on('keyup click keydown',function() {
-
+    $('.registerinput, .email-verify-form').on('keyup click keydown',function() {
         var empty = false;
         $('.registerinput').each(function() {
             if ($(this).val() == '') {
@@ -63,12 +72,13 @@ lists.forEach(el => {
 var typingTimer;                //timer identifier
 var doneTypingInterval = 0;  //time in ms, 5 seconds for example
 
-globalThis.names = [];
-globalThis.slugs = [];
-globalThis.images = [];
 
+var names = [];
+var slugs = [];
+var images = [];
 
 function searchGame() {
+
     
         var gamesearch = $("#gameSearch, #gameSearch3").val()
         //console.log(gameSearch)
@@ -79,7 +89,7 @@ function searchGame() {
         axios.get(url2)
             .then(response => {
                 const gameresponse = response.data;
-                //console.log (gameresponse.results.length)
+                // console.log (gameresponse.results)
                 slugs = [] 
                 names = []
                 images = []
@@ -178,25 +188,16 @@ $('#gameSearch3').on('input', function(){
 
 })
 
-  // // addsubmission = localStorage.getItem("addsubmission")
-  // if (names.includes(addsubmission)){
-  //   // submissionindex = slugs.indexOf(addsubmission)
-  //   submissionslug = slugs[submissionindex]
-  //   localStorage.setItem("submissionslug", submissionslug);
-  //   // console.log(alert(localStorage.getItem("submissionslug")))
-  //   $('gameSearch').val(localStorage.getItem("submissionslug"))
-
-  // }
 })
 
-$(".rand-name-forms").on('click', function () {
-  //In the random list on the index, using the id of the games to determine what for (each element is a form)
-  //gets submitted to the backend
-  var randgameid = $(this).attr("id")
-  var last = randgameid.charAt(randgameid.length-1)
-  var randgameidnumb = parseInt(last) 
-  $(`#rand-game-list-form${randgameidnumb}`).trigger("submit")
-} )
+// $(".rand-name-forms").on('click', function () {
+//   //In the random list on the index, using the id of the games to determine what for (each element is a form)
+//   //gets submitted to the backend
+//   var randgameid = $(this).attr("id")
+//   var last = randgameid.charAt(randgameid.length-1)
+//   var randgameidnumb = parseInt(last) 
+//   $(`#rand-game-list-form${randgameidnumb}`).trigger("submit")
+// } )
 
 
 function between(x, min, max) {
@@ -216,7 +217,7 @@ $(function(){
     var second;
     var th;
     
-    $('.rankings,.rankings2,.account-mcr,.tablerating,.accountranks, .vargamerankings, .varpersonalrankings').each(function(index){
+    $('.account-mcr,.accountranks').each(function(index){
       
       th = $(this);
       
@@ -246,57 +247,6 @@ $(function(){
 
   });
 
-$(function() {
-
-//For the Assigning of Descriptions to the Metacritic Ratings
-  var mc = {
-    '0-59'     : 'Poor',
-    '60-79'    : 'Decent',
-    '80-89'   : 'Amazing',
-    '90-99'   : 'Universally Acclaimed',
-    '100-100'     : 'Perfection'
-  };
-  var cmc = {
-    '0-59'     : 'red',
-    '60-79'    : 'orange',
-    '80-99'   : 'green',
-    '100-100'     : 'gold'
-  };
-
-  var description = $('.onlinerankdescription')
-  // var classcolors = ["red","orange", "green"]
-  var dattr = parseInt(description.attr('data-color'),10)
-
-  $.each(mc, function(name, descriptext){
-          
-          
-    var first = parseInt(name.split('-')[0],10);
-    var second = parseInt(name.split('-')[1],10);
-    
-    // console.log(between(dc, first, second));
-    
-    if( between(dattr, first, second) ){
-      description.text(descriptext)
-
-      // console.log(value)
-      // $('.rating-border').css({'border-color': name})
-    }
-    // else{
-    //   description.text("Not Reviewed")
-    // }
-
-  })
-  //Assigning the colors
-  $.each(cmc, function (name, color){
-    var first = parseInt(name.split('-')[0],10);
-    var second = parseInt(name.split('-')[1],10);
-
-    if ( between(dattr, first, second) ){
-      
-      description.addClass(color)
-  }
-})
-})
 $('img').map(function(){
     // console.log(this.src)
     $(this).attr('onerror',"this.onerror=null;this.src='https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';")
@@ -322,145 +272,25 @@ var classundefined = 1
 // var firstclass
 // var editbutton
 // var editform
-$(function () {
-  //the id is yes only if the item is in the user's game list
-  //Can then modify the data for the game
-  if ($(".var-page-container").attr('id') == "yes") {
-  $('.var-personal-rating-data, .var-status-data, .var-hours-played-data').on('click', function(){
-    var th = $(this)
-    var formerdata = $(this).text()
-    var modiefiedlements = $('.modifying')
-    var gradientclass = "gradientcolorpinkwhite"
-    globalThis.firstclass = th.attr('class').split(' ')[0]
-    console.log(firstclass)
-    globalThis.editbutton = $(".var-edit-button")
-    globalThis.editform = $('#var-edit-form')
-    
-    // Writing HTML in JavaScript. Can be better Here
-    $(".var-edit-button").css("display","block")
-    if(modiefiedlements.length == 0 && firstclass == "var-personal-rating-data"){
-      th.html('<input type = "number" class = "form-control mx-auto w-auto change" id=  "var-personal-rating-change"  name = "rating"  min = "0" max = "100">')
-      th.removeClass("varpersonalrankings")
-      th.addClass('modifying')
-      $('.modifying > #var-personal-rating-change').val(formerdata)
-      globalThis.varclass = th.attr ('class')
-    }
-     
-    else if (modiefiedlements.length == 0 && firstclass == "var-status-data"){
-      th.html('<select name="status" id = "var-edit-status" autocomplete="off"  class = "form-select form-control mx-auto w-100 game-form game-highlight "  placeholder = "Choose Status:" required> ' + 
-      '<option disable selected value>Choose Status:</option>'
-      +'<option>Plan to Play</option>'
-      +'<option>Dropped</option>'
-      +'<option>Playing</option>'
-      +'<option>On Hold</option>'
-      +'<option>Completed</option>'
-      + '<option>Wishlist</option>'
-  +'</select>')
-  // Removing Classes With Background Overlays For Colors As Interferes with Visibility of Text In The Form
-  th.removeClass(gradientclass)
-
-  th.addClass('modifying')
-  $('.modifying > #var-edit-status').val(formerdata)
-
-  globalThis.varclass = th.attr ('class')
-  } 
-  else if (modiefiedlements.length == 0 && firstclass == "var-hours-played-data"){
-    th.html('<input type = "number" class = "form-control mx-auto w-100" name = "hoursplayed" id = "var-edit-hours-played" " min="0">')
-    th.removeClass(gradientclass)
-
-    th.addClass('modifying')
-    $('.modifying> #var-edit-hours-played').val(formerdata)
-
-    globalThis.varclass = th.attr ('class')
-  }
-   
-  })
-  $(".var-edit-button").on("click", function() {
-    if (firstclass = "var-personal-rating-data"){
-      let input = $('.modifying').val()
-
-      if (input==="" || !isNaN(input)){
-        $('#var-edit-form').trigger("submit")
-        $(".modifying").html("_")
-        $(".modifying").removeClass("modifying")
-
-      }
-      else {
-        $(".modifying").html("_")
-        $(".modifying").removeClass("modifying")
-      }
-    }
-    else {
-      $('#var-edit-form').trigger("submit")
-      $(".modifying").html("_")
-      $(".modifying").removeClass("modifying")
-
-    }
-  })
-
-  }
-})
 
 
-// let db = new sqlite3.Database('C:/sqlite/gamestorage.db')
-// db.run(`UPDATE gamestorage SET personalrating = ? where id = ? AND game = ?`,$(this).text()
+
 
   //console.log($('.editgamelistoptions'))
   //Custom Search Bar With JavaScript to allow for customization that is not in datalist.
   $( "#add-form" ).on('submit', function() {
-    var gamechoice = $("#gameSearch2, #gameSearch , #gameSearch3" ).val();
+    var gamechoice = $("#gameSearch3" ).val();
     var gameindex = names.indexOf(gamechoice);
     
-    $("#gameSearch2, #gameSearch, #gameSearch3").html(`${slugs[gameindex]}`);
+    $("#gameSearch3").html(`${slugs[gameindex]}`);
     console.log(slugs[gameindex]);
   
     return true;
   });
   
-  $('#gameSearch2, #gameSearch, #gameSearch3').on('keyup',function () {
-    $("#gamedropdown").fadeIn(1000);
-    $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius","5px 5px 0 0");  
-  });
 
-  $(document).on("click", function(event) { 
-    var $target = $(event.target);
-    if(!$target.closest('#gameSearch2, #gameSearch, #gameSearch3, #gamedropdown').length && 
-    $('#gamedropdown').is(":visible")) {
-      $('#gamedropdown').fadeOut(1000);
-    }        
-  });
-  $('.editgamelistoptions, .gamedboptions').each(function(){
-    $(this).on('click',function () {
-      $('#gameSearch2 , #gameSearch, #gameSearch3').val($(this).val());
-      $('#headingsearch').trigger("submit");
-      $("#gamedropdown").css("display",'none');
-      $("#gameSearch2, #gameSearch, #gameSearch3").css("borderRadius","5px");  
-    }
-)});
-
-  $('#gameSearch2, #gameSearch, #gameSearch3').on('input',function() {
-    currentFocus = -1;
-    var text = $(this).val().toUpperCase()
-    console.log(text);
-    $('.editgamelistoptions').each(function(){
-      
-      if($(this).text().toUpperCase().indexOf(text) > -1){
-        $(this).css('display', 'inline-block');
-    }else{
-      $(this).css('display', 'none');
-      }
-    });
-    $('.gamedboptions').each(function(){
-           
-      if($(this).text().toUpperCase().indexOf(text) > -3){
-        $(this).css('display', 'inline-block');
-    }else{
-      $(this).css('display', 'none');
-      }
-    });
-  })
   var currentFocus = -1;
-  $('#gameSearch2, #gameSearch, #gameSearch3').on('keydown',function(e) {
+  $('#gameSearch3').on('keydown',function(e) {
     if(e.key === 'ArrowDown'){
       currentFocus++
      addActive($('.editgamelistoptions, .gamedboptions'));
@@ -534,9 +364,9 @@ $(function () {
 }
 })
 
-$("#add-form").on("submit", function() {
-  // localStorage.clear()
-});
+// $("#add-form").on("submit", function() {
+//   // localStorage.clear()
+// });
 
 
 
@@ -555,38 +385,120 @@ if (rloginform){
   )
 };
 
-const mylistid = document.getElementById('list-page');
-if (mylistid){
-  ReactDOM.render(
-    <MyList />,
-    mylistid
-  )
-}
-
-const acctdetails  = document.getElementById('react-account-details');
-if (acctdetails){
-  ReactDOM.render(
-    <Details />,
-    acctdetails
-  )
-}
-
-// const hmpg = document.getElementById('react-hmpg')
-// if (hmpg){
+// const mylistid = document.getElementById('list-page');
+// if (mylistid){
 //   ReactDOM.render(
-//     <Homepage />,hmpg
+//     <MyList />,
+//     mylistid
 //   )
 // }
+
+// const acctdetails  = document.getElementById('react-account-details');
+// if (acctdetails){
+//   ReactDOM.render(
+//     <Details />,
+//     acctdetails
+//   )
+// }
+
+
+// const homebartrue = document.getElementById('home-bar-true');
+// if (homebartrue){
+//   ReactDOM.render(
+//     <LinkBar loggedin  = {true}/>,
+//     homebartrue
+// )
+// }
+// const homebarfalse = document.getElementById('home-bar-false');
+// if (homebarfalse){
+//   ReactDOM.render(
+//     <LinkBar loggedin  = {false}/>,
+//     homebarfalse
+//     )
+
+// }
+
+// const searchbarid = document.getElementById('search-bar');
+// if (searchbarid){
+//   ReactDOM.render(
+//     <SearchBar />,
+//     searchbarid
+// )
+// }
+// const accountid = document.getElementById('account-main-react')
+// if (accountid){
+//   ReactDOM.render(
+//     <AccountGames />,
+//     accountid
+// )
+// }
+debugger;
 const rootElement = document.getElementById("react-hmpg");
 
-
+if (rootElement){
 ReactDOM.render(
   <BrowserRouter>
+  {/* <Header />  */}
     <Routes>
-      <Route path="/" element={<Homepage />} ></Route>
-      <Route path="game/:game" element={<GamePage />} />
-      <Route path ="About" element = {<About />} />
+
+
+      <Route path="/" element={<Layout child = {<Homepage />} Logged = {true} />} />
+      <Route path="game/:game" element={<Layout child = {<GamePage />} Logged = {true}/>} />
+      <Route path ="aboutsite" element = {<Layout child = {<About />} Logged = {true}/>} />
+      <Route path = "mylist" element = {<Layout child = {<MyList />} Logged = {true}/>} /> 
+      
+      <Route path ="account" element ={<AccountLayout child = {<AccountGames />}/>}/>
+      <Route path = "account/wishlist" element ={<AccountLayout child = {<AccountWishlist />} />}/>
+      <Route path = "account/changepassword" element ={<AccountLayout child = {<ChangePassForm />} />}/>
+      <Route path = "account/details" element ={<AccountLayout child = {<Details />} />}/>
+      {/* <Route path = "account/wishlist" element = {() => <AccountLayout child = {<AccWishlist />} />} /> */}
+
     </Routes>
   </BrowserRouter>,
+
   rootElement
-);
+)
+};
+
+const loginElement = document.getElementById("login-pg")
+if (loginElement){
+  ReactDOM.render(
+  <Layout child = {<LoginForm />} Logged = {false} />
+ ,loginElement
+
+  )
+}
+const registerElement = document.getElementById("register-form")
+
+if (registerElement){
+  ReactDOM.render(
+  <Layout child = {<RegisterForm />} Logged = {false} />
+ ,registerElement
+
+  )
+}
+const verifyElement = document.getElementById("verify-form")
+if (verifyElement){
+  ReactDOM.render(
+  <Layout child = {<VerifyForm/>} Logged = {false} />
+ ,verifyElement
+
+  )
+}
+const forgotpassElement = document.getElementById("forgot-pass-form")
+if (forgotpassElement){
+  ReactDOM.render(
+  <Layout child = {<ForgotPassForm/>} Logged = {false} />
+ ,forgotpassElement
+
+  )
+}
+
+$(function(){
+  $(".form-container").each(function(){
+    var length = $(this).height();
+    $(this).css('top', ($(window).height() - length)/2)
+  })
+}
+
+)

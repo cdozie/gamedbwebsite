@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
-from cmath import sin
+import threading
+from typing import final
 from flask import Flask, flash, redirect, render_template, request, session, url_for, g, jsonify
 from flask_session import Session
 from urllib.request import Request, urlopen
@@ -8,18 +9,12 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from celery import Celery
 
-# from sqlalchemy.ext.automap import automap_base
 
-# from sqlalchemy import create_engine, MetaData, Column, String, Table, Integer,Sequence
-# from sqlalchemy.ext.declarative import declarative_base
-# import sqlalchemy.orm
-# from sqlalchemy.orm import scoped_session, sessionmaker, Query
 from slugify import slugify
 import requests
 from sqlite3 import Error, SQLITE_PRAGMA
 from sqlalchemy import true
 
-from zmq import PROTOCOL_ERROR_ZMTP_UNEXPECTED_COMMAND
 from SQL import *
 from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -60,6 +55,7 @@ import re
 
 #     celery.Task = ContextTask
 #     return celery
+lock = threading.Lock()
 
 pattern = re.compile(r'[^-a-zA-Z0-9.]+')
 
@@ -98,46 +94,30 @@ from celery.utils.log import get_task_logger
 
 session1 = Session(app)
 
-
 cur_path = os.path.dirname(os.path.abspath(__file__))
 
 #names db2 since always call it after a database change 
 db2 = create_connection(cur_path + "\\gamestorage.db")
 db = db2.cursor()
 
-# from SQL import getgamelistdata, getgamelistdata2, getgamelistdatasort,getgamedatabasedata, listToString, ratingfilter
-
-
-# individualpagelinks = getgamelistdata()
-
-# for i in individualpagelinks["name"]:
-#     print (i)
 app.config.update(
     CELERY_BROKER_URL='redis://localhost:6379',
     CELERY_RESULT_BACKEND='redis://localhost:6379'
 )
 celery = make_celery(app)
 
-# def getusersjson():
-#         db2.row_factory = sqlite3.Row # This enables column access by name: row['column_name'] 
-#         usergamelist2 = db.execute ("SELECT * FROM users") 
-#         # where id = ?;", [session["user_id"]]).fetchall()
-#         # db2.commit()
-#         print("go")
-#         # semigamelist = [dict(i) for i in usergamelist2]
-#         yes = json.dumps(usergamelist2)
-#         return (yes)
-prepreviousgameinfo = db.execute("SELECT * from gamedatabase where slugname = ?;", ["persona-5"]).fetchall()
-# print(previousgameinfo)
-prepreviousgameinfols = [list(j) for j in prepreviousgameinfo]
 
-previousgameinfo = prepreviousgameinfols[0]
-# print(previousgameinfo)
+#GLOBALLY DEFINED VARIABLES
+webnoti = {} 
+def setwebnoti(noti,type):
+    webnoti = {"Noti" : noti , "Type" : type }
+    return webnoti
+sorteddict = None
+gamedatadict2filter = None
+singlegamedict = {}
 
 
 
-# previousgameinfo = list.sort(previousgameinfo)
-# print(previousgameinfo)
 @celery.task()
 def updatedatabase():
     gamedbdata=getgamedatabasedata()
@@ -200,15 +180,15 @@ def updatedatabase():
 def game_data():
     global gamedatadict2
     global gamedatadict2filter
-    gamedatadict2 = getgamelistdata()
     global sorteddict 
-    sorteddict = None
-    gamedatadict2filter = None
+    gamedatadict2 = getgamelistdata()
+
+    # sorteddict = None
+    # gamedatadict2filter = None
     global singlegamedict
-    singlegamedict = {}
 
 
-    global userdata,userid,username,userhash, gamedatadict,acabrev
+    global userdata,userid,username,userhash, gamedatadict,acabrev,email
  
     users = db.execute("SELECT * FROM users WHERE id = ?", [session["user_id"]])
     db2.commit()
@@ -222,31 +202,17 @@ def game_data():
     userid = session["user_id"]
     username = userdata[0][0]
     userhash = userdata[0][2]
+    email = userdata[0][4]
+
     usercharacters = list(username)
     firstchar = usercharacters[0]
     lastchar = usercharacters[len(usercharacters)-1]
     acabrev=firstchar+lastchar
-    randlist=[]
 
 
     gamedatadict=getgamelistdata()
     return render_template('index.html')
-def gm_data_dict_conv(gd):
-        gdlsdict =[] 
-        name = gd["name"]
-        bgimgs = gd["backgroundimages"]
-        ghp= gd["hoursplayed"]
-        gor= gd["onlinerating"]
-        gpr=gd["personalrating"]
-        grd= gd["releasedate"]
-        gst = gd["status"]
-        gwb = gd["website"]
-        gsl = gd ["slug"]
-        for i in range (len(name)):
-            gdlsdict.append({"Number": [i],"Name": name[i], "BGimg": bgimgs[i], 
-            "GHP": ghp[i], "GOR": gor[i], "GPR": gpr[i], "GRD": grd[i],
-            "GST": gst[i], "GWB": gwb[i], "Slug":gsl[i]})
-        return (gdlsdict)
+
 
 
 @app.route('/gmlistfeeder', methods = ["GET", "POST"])
@@ -254,31 +220,45 @@ def gm_data_dict_conv(gd):
 def homepagefeeder():
 
     randlist=[]
-    gamedatadict=getgamelistdata()
-    gdlsdict = gm_data_dict_conv(gamedatadict)
-    randgdlsdict = []
-    gamedatadictname = gamedatadict["name"]
-    gamedatalen = len(gamedatadictname)
-    if gamedatalen < 10 :
-        while len(randlist) <= gamedatalen:
+    try:
+        lock.acquire(True)
+        gamedatadict=getgamelistdata()
+        gdlsdict = gm_data_dict_conv(gamedatadict)
+        randgdlsdict = []
+        gamedatadictname = gamedatadict["name"]
+        gamedatalen = len(gamedatadictname)
+        if gamedatalen < 10 :
+            if gamedatalen > 0:
+                while len(randlist) <= gamedatalen:
+                    randnumb=rand.randint(0,len(gamedatadictname)-1)
+                    if randnumb not in randlist: 
+                        randlist.append(randnumb)
+            else: 
+                randlist=[]
+        else:
             #print(len(randlist))
-            randnumb=rand.randint(0,len(gamedatadictname)-1)
-            if randnumb not in randlist: 
-                randlist.append(randnumb)
-    else:
-        #print(len(randlist))
-        while len(randlist) <= 10:
-            # print(len(randlist))
-            randnumb=rand.randint(0,len(gamedatadictname)-1)
-            if randnumb not in randlist: 
-                randlist.append(randnumb)
+            while len(randlist) < 10:
+                # print(len(randlist))
+                randnumb=rand.randint(0,len(gamedatadictname)-1)
+                if randnumb not in randlist: 
+                    randlist.append(randnumb)
 
-
-    for i in randlist:
-        randgdlsdict.append(gdlsdict[i])
+        if randlist == []:
+            randgdlsdict = []
+        else:
+            for i in randlist:
+                randgdlsdict.append(gdlsdict[i])
+    finally:
+        lock.release()
 
     return(jsonify(randgdlsdict))
     # randomlist = None
+@app.route('/userlistfeeder', methods=["GET"])
+@login_required
+def userlistfeeder():
+    gamelistdata = gm_data_dict_conv(getgamelistdata())
+
+    return(jsonify(gamelistdata))
 
 @app.route('/rndgamefeeder', methods=["GET", "POST"])
 @login_required
@@ -303,6 +283,18 @@ def newrandgamesfeeder():
             # print(i)
             randgmdict.append ({'Name': randomlist["gamelist"][i], 'Rank' : ranklist[i],  'GOR' : randomlist["metacritic"][i], 
         'BGimg' : randomlist["backgroundimage"][i], 'Slug' :randomlist["slugs"][i]})
+        for i in randgmdict:
+            gamecheck=db.execute("SELECT * FROM gamedatabase where slugname = ?", [i["Slug"]])
+            if len(list(gamecheck)) == 0:
+                result = lookup(i["Slug"])
+                platforms = listToString(result["platform"])
+                try:
+                    lock.acquire(True)
+                    db.execute ("INSERT INTO gamedatabase(gamename,metacriticrating,slugname,backgroundimage,releasedate,websites,platforms) VALUES(?,?,?,?,?,?,?)",(
+                        result["name"],result["metacriticrating"],result["slug"],result["backgroundimage"],result["releasedate"], result["website"], platforms))
+                    db2.commit()
+                finally:
+                    lock.release()
 
     else:
         gdlist = getgamedatabasedata()
@@ -326,79 +318,82 @@ def displaypage (variable):
         variable3 =unidecode.unidecode(variable)
 
         slug = request.form.get("slug")
-        vargamedata=getgamelistdata()
-        varslugs = vargamedata["slug"]
-        if variable in varslugs:
-
+        try:
+            lock.acquire(True)
             vargamedata=getgamelistdata()
-            vargamedatadb = getgamedatabasedata()
             varslugs = vargamedata["slug"]
-            varslug = variable
-            gamedataindex=varslugs.index(variable)
-            varonlinerating = vargamedata["onlinerating"][gamedataindex]
-            varpersonalrating = vargamedata["personalrating"][gamedataindex]
-            print (varpersonalrating)
-            if varpersonalrating == None:
-                varpersonalrating = "_"
-            varbackgroundimage = vargamedata["backgroundimages"][gamedataindex]
-            varstatus = vargamedata["status"][gamedataindex]
-            varwebsite = vargamedata["website"][gamedataindex]
-            varreleasedate = vargamedata["releasedate"][gamedataindex]
-            varhoursplayed = vargamedata["hoursplayed"][gamedataindex]
-            displayadd = "No"
-            displayremove = "Yes"
-            
-            databasenames = vargamedatadb["slugname"]
-            #for determining if the editing features provided via javascript should be active
-            liststatus = "yes"
-            if variable in databasenames:
+            if variable in varslugs:
 
-                dbgameindex = databasenames.index(variable)
-                varplatform = vargamedatadb["platforms"][dbgameindex]
+                # vargamedata=getgamelistdata()
+                vargamedatadb = getgamedatabasedata()
+                varslugs = vargamedata["slug"]
+                varslug = variable
+                gamedataindex=varslugs.index(variable)
+                varonlinerating = vargamedata["onlinerating"][gamedataindex]
+                varpersonalrating = vargamedata["personalrating"][gamedataindex]
+                print (varpersonalrating)
+                if varpersonalrating == None:
+                    varpersonalrating = "_"
+                varbackgroundimage = vargamedata["backgroundimages"][gamedataindex]
+                varstatus = vargamedata["status"][gamedataindex]
+                varwebsite = vargamedata["website"][gamedataindex]
+                varreleasedate = vargamedata["releasedate"][gamedataindex]
+                varhoursplayed = vargamedata["hoursplayed"][gamedataindex]
+                displayadd = "No"
+                displayremove = "Yes"
                 
-                varnames = vargamedatadb["name"][dbgameindex]
-                varonlinerating = vargamedatadb["onlinerating"][dbgameindex]
-                varbackgroundimage = vargamedatadb["backgroundimages"][dbgameindex]
-                varwebsite = vargamedatadb["website"][dbgameindex]  
-                varreleasedate = vargamedatadb["releasedate"][dbgameindex]
+                databasenames = vargamedatadb["slugname"]
+                #for determining if the editing features provided via javascript should be active
+                liststatus = "yes"
+                if variable in databasenames:
+
+                    dbgameindex = databasenames.index(variable)
+                    varplatform = vargamedatadb["platforms"][dbgameindex]
+                    
+                    varnames = vargamedatadb["name"][dbgameindex]
+                    varonlinerating = vargamedatadb["onlinerating"][dbgameindex]
+                    varbackgroundimage = vargamedatadb["backgroundimages"][dbgameindex]
+                    varwebsite = vargamedatadb["website"][dbgameindex]  
+                    varreleasedate = vargamedatadb["releasedate"][dbgameindex]
 
 
+                    if varplatform == None:
+                        varplatform = "Not Yet Stored"
+
+                else:
+                    varnames = variable
+                    varplatform = "Not Yet Stored"
+
+                print (varhoursplayed)
+            
+            else:
+                vargamedata = getgamedatabasedata()
+                varslugs = vargamedata["slugname"]
+                varslug = variable
+                gamedataindex=varslugs.index(variable)
+                varonlinerating = vargamedata["onlinerating"][gamedataindex]
+                varpersonalrating = "_"
+                varbackgroundimage = vargamedata["backgroundimages"][gamedataindex]
+                varstatus = "Not in List"
+                varwebsite = vargamedata["website"][gamedataindex]
+                varreleasedate = vargamedata["releasedate"][gamedataindex]
+                varplatform = vargamedata["platforms"][gamedataindex]
+                # for storing game slug id to use for when search for game from redirect as will use the id in the search
+                varnames = vargamedata["name"][gamedataindex]
                 if varplatform == None:
                     varplatform = "Not Yet Stored"
 
-            else:
-                varnames = variable
-                varplatform = "Not Yet Stored"
+                # varplatform = varplatform[:-2]
+                varhoursplayed = "Not in List"
+                displayadd = "Yes"
+                displayremove = "No"
+                
+                liststatus = "not"
 
-            print (varhoursplayed)
-        
-        else:
-            vargamedata = getgamedatabasedata()
-            varslugs = vargamedata["slugname"]
-            varslug = variable
-            gamedataindex=varslugs.index(variable)
-            varonlinerating = vargamedata["onlinerating"][gamedataindex]
-            varpersonalrating = "_"
-            varbackgroundimage = vargamedata["backgroundimages"][gamedataindex]
-            varstatus = "Not in List"
-            varwebsite = vargamedata["website"][gamedataindex]
-            varreleasedate = vargamedata["releasedate"][gamedataindex]
-            varplatform = vargamedata["platforms"][gamedataindex]
-            # for storing game slug id to use for when search for game from redirect as will use the id in the search
-            varnames = vargamedata["name"][gamedataindex]
-            if varplatform == None:
-                varplatform = "Not Yet Stored"
-
-            # varplatform = varplatform[:-2]
-            varhoursplayed = "Not in List"
-            displayadd = "Yes"
-            displayremove = "No"
-            
-            liststatus = "not"
-
-        singlegamedict = gen_sing_gdict(varnames,varslug,varreleasedate,varhoursplayed,varstatus,varbackgroundimage,
-        varonlinerating,varpersonalrating,displayadd,displayremove,variable,varplatform,varwebsite)
-
+            singlegamedict = gen_sing_gdict(varnames,varslug,varreleasedate,varhoursplayed,varstatus,varbackgroundimage,
+            varonlinerating,varpersonalrating,displayadd,displayremove,variable,varplatform,varwebsite)
+        finally:
+            lock.release()
         return (jsonify(singlegamedict))
     else:
         return(render_template("index.html"))
@@ -408,7 +403,7 @@ def displaypage (variable):
 
 @app.route('/gamegetter', methods=["GET", "POST"])
 @login_required
-def gamegetter ():
+def gamegetter():
     global singlegamedict
     return(jsonify(singlegamedict))
 
@@ -416,6 +411,8 @@ def gamegetter ():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
+    global webnoti
+    global usererror
     #global userdata
     # Forget the user id
     session.clear()
@@ -434,28 +431,30 @@ def login():
         userdata = [list(i) for i in users]
   
         if not username:
-            return render_template("login.html", warning = "No Username")
+            webnoti = setwebnoti("No Username", "error")
+            return(jsonify(webnoti))
         elif not password:
-            return render_template("login.html", warning = "No Password")
-            
+            webnoti = setwebnoti("No Password","error")
+            return(jsonify(webnoti))
         # Makes sure that the username exists in the database and that the provided password 
         # for the username is correct
-        if len(list(userdata)) != 1 :
-            return render_template("login.html", warning = "Invalid Username")
+        if len(list(userdata)) != 1 or not check_password_hash(userdata[0][2], password) :
+            webnoti = setwebnoti("Invalid Username and/or Password","error")
+            return(jsonify(webnoti))
         elif not check_password_hash(userdata[0][2], password):
-            return render_template("login.html", warning = "Invalid Password")
-
+            webnoti = setwebnoti("Invalid Password","error")
+            return(jsonify(webnoti))
         # Remembers the logged in user
 
         session["user_id"] = userdata[0][3]
-
+        webnoti = setwebnoti("Logged In","success")
         gamedatadict = getgamelistdata()
         # Redirect user to index page
         return redirect("/")
 
     # Takes to login page if used anything but POST to get to page
     else:
-        return render_template("login.html", warning = "" , jsondata=jsondata)
+        return render_template("login.html")
 def renderregister(warning):
     return render_template("register.html", warning= warning)
 
@@ -464,6 +463,7 @@ regex2 = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 @app.route("/register", methods=["GET", "POST"])
 def register ():
     global username, password, email, secret
+    global webnoti
     if request.method == "POST":
 
         
@@ -478,52 +478,52 @@ def register ():
         confirmingpassword = request.form.get("confirmation")
         # Makes sure the user submits a username
         if not username:
-            return renderregister("Provide Username")
+            webnoti = setwebnoti("Provide Username","error")
+            return("")
         elif not email:
-            return renderregister("Provide An Email")
+            webnoti = setwebnoti("Provide An Email","error")
+            return("")
         elif re.fullmatch(regex2, email) == None:
-            return renderregister("Not a Valid Email")
+            webnoti = setwebnoti("Not a Valid Email","error")
+            return("")
 
         # Makes sure the password was submitted or gives error
         elif not password:
-            return renderregister("Provide Password")
+            webnoti = setwebnoti("Provide Password","error")
+            return("")
         
         # Makes sure that the username is not already used by seeing if there is more than one row
         # for that username
 
         userrows = db.execute( "SELECT * FROM users WHERE username = ?", [username])
         if len(list(userrows)) != 0:
-            return renderregister("Username is Already Taken")
+            webnoti = setwebnoti("Username is Already Taken","error")
+
+            return("")
         emailrows = db.execute( "SELECT * FROM users WHERE email = ?", [email])
         if len(list(emailrows)) != 0:
-            return renderregister("Another Account is Already Using That Email? Is It You?")
+            webnoti = setwebnoti("Another Account is Already Using That Email? Is It You?","error")
+
+            return("")
 
         # Have to retype the password for confirmation if do not
         elif not confirmingpassword:
-            return renderregister( "Must Retype Password")
+            webnoti = setwebnoti("Provide Confirmation Password","error")
+            return("")
 
         # Have to match to proceed
         elif password != confirmingpassword:
-            return renderregister( "Passwords Do Not Match")
+            webnoti = setwebnoti("Passwords Do Not Match","error")
+            # return renderregister( "Passwords Do Not Match")
+            return("")
 
         # Only Runs if no errors pop up
         else:
+            webnoti = setwebnoti("Verify Registration","success")
             secret = pyotp.random_base32()
-            return redirect("/verify")
-            # Generating the hash for the password to store
-            # Inserting the new user since everything is valid
-            db.execute("INSERT INTO users (username, hash, email) VALUES (?, ?, ?) ", (username, generate_password_hash(password), email))
-            db2.commit()
-            
+        
+        return(jsonify(webnoti))
 
-            # subject = "Confirm your email"
-
-            # token = ts.dumps(email, salt='email-confirm-key')
-            # Going back to the main page
-            return redirect("/account")
-
-    # Takes to main page if used anything but POST to get to page
-    # For Loading The Page
     
     return render_template("register.html", warning = "")
 def mailsend(email,secret):
@@ -548,6 +548,8 @@ def mailsendforgotpassword(forgotemail,forgotsecret):
         return(None)
 @app.route("/verify", methods=["GET", "POST"])
 def verify():
+    global webnoti
+    global secret
 
     if request.method == "POST":
         
@@ -558,21 +560,31 @@ def verify():
             db.execute("INSERT INTO users (username, hash, email) VALUES (?, ?, ?) ", (username, generate_password_hash(password), email))
             db2.commit()
             flash("Email Confirmed Successfully! You Can Now Login!")
+            webnoti = setwebnoti("Email Confirmed","success")
+            return("")
 
-            return redirect("/login")
+            # return redirect("/login")
         else:
-            flash("Code Was Incorrect! Please Reregister")
-            return redirect("/register")
+            webnoti = setwebnoti("Code Was Incorrect! A New Email Has Been Sent!", "error")
+            secret = pyotp.random_base32()
+            mailsend(email,secret)
+
+            return("")
+
+            # flash("Code Was Incorrect! Please Reregister")
+
+
+            # return redirect("/register")
     else: 
         mailsend(email,secret)
 
         return render_template("verify.html")
 
-@app.route("/verify2", methods=["GET", "POST"])
-def verify2():
-    if request.method == "POST":
-        return redirect("/verify")
-        #send mail with same code
+# @app.route("/verify2", methods=["GET", "POST"])
+# def verify2():
+#     if request.method == "POST":
+#         return redirect("/verify")
+#         #send mail with same code
 
 @app.route("/forgotresend", methods=["GET", "POST"])
 def forgotresend():
@@ -583,46 +595,87 @@ def renderpasswordemail(message):
     return render_template("forgotpasswordemail.html", message= message)
 @app.route("/forgotpasswordemail", methods=["GET", "POST"])
 def forgotpasswordemail():
-    global forgotpasswordsecret, useremail
+    global forgotpasswordsecret, useremail,webnoti
     if request.method == "POST":
         useremail = request.form.get("email")
         emailrows = db.execute( "SELECT * FROM users WHERE email = ?", [useremail])
         if re.fullmatch(regex2, useremail) == None:
-            return renderpasswordemail("Not a Valid Email")
+            webnoti = setwebnoti("Not a Valid Email","error")
+
+            # return renderpasswordemail("Not a Valid Email")
 
         elif len(list(emailrows)) == 0:
-            return renderpasswordemail("This Email Does Not Appear To Be Associated With An Account. Please Try Again")
-        else: 
-            forgotpasswordsecret = pyotp.random_base32()
-            return redirect("/forgotpassword")
+            webnoti = setwebnoti("This Email Does Not Appear To Be Associated With An Account.","error")
+
+            # return renderpasswordemail("This Email Does Not Appear To Be Associated With An Account. Please Try Again")
+        else:
+            webnoti = setwebnoti("Show Form","success")
+ 
+            # forgotpasswordsecret = pyotp.random_base32()
+        return jsonify(webnoti)
     else:
         return renderpasswordemail("")
-
+@app.route("/sendforgotpasswordemail", methods=["GET", "POST"])
+def sendforgotpasswordemail():
+    global webnoti
+    global forgotpasswordsecret
+    forgotpasswordsecret = pyotp.random_base32()
+    mailsendforgotpassword(useremail,forgotpasswordsecret)
+    webnoti = setwebnoti("Email Has Been Sent","success")
+    return("")
 @app.route("/forgotpassword", methods=["GET", "POST"])
 def forgotpassword():
     global forgotpasswordsecret
+    global webnoti
+    global useremail
     if request.method == "POST":
+        # useremail = request.form.get("email")
+        # emailrows = db.execute( "SELECT * FROM users WHERE email = ?", [useremail])
         emailotp = request.form.get("emailOTP")
         password = request.form.get("password")
         confirmationpassword = request.form.get("confirmation")
+        
+        # if re.fullmatch(regex2, useremail) == None:
+        #     webnoti = setwebnoti("Not a Valid Email","error")
+        #     # return renderpasswordemail("Not a Valid Email")
+
+        # elif len(list(emailrows)) == 0:
+        #     webnoti = setwebnoti("This Email Does Not Appear To Be Associated With An Account.","error")
+
+            # return renderpasswordemail("This Email Does Not Appear To Be Associated With An Account. Please Try Again")
+        
         if emailotp == forgotpasswordsecret and password:
             pwdhash = generate_password_hash(password)
             db.execute("UPDATE users SET hash = ? WHERE email = ?", (pwdhash, useremail))
             db2.commit()
-            flash("Your Password Has Been Changed")
-            return redirect("/")
+            webnoti = setwebnoti("Correct OTP","success")
+
+            # flash("Your Password Has Been Changed")
+            return redirect('/login')
         elif emailotp == forgotpasswordsecret: 
-            flash("Incorrect OTP. A New OTP has been sent")
-            return redirect("/forgotpassword")     
+            webnoti = setwebnoti("Incorrect OTP. A New OTP has been sent","error")
+
+            # flash("Incorrect OTP. A New OTP has been sent")
+            forgotpasswordsecret = pyotp.random_base32()
+            mailsendforgotpassword(useremail,forgotpasswordsecret)
+            # return redirect("/forgotpassword")     
         elif password != confirmationpassword:
-            flash("Passwords do Not Match. A New OTP has been sent")
-            return redirect("/forgotpassword")
+            webnoti = setwebnoti("Passwords do Not Match. A New OTP has been sent","error")
+            forgotpasswordsecret = pyotp.random_base32()
+            mailsendforgotpassword(useremail,forgotpasswordsecret)
+            # flash("Passwords do Not Match. A New OTP has been sent")
+            # return redirect("/forgotpassword")
         else:
-            flash("Ensure your OTP is Correct and All Forms Are Filled Out. A New OTP has been sent")
-            return redirect("/forgotpassword")
+            webnoti = setwebnoti("Ensure your OTP is Correct and All Forms Are Filled Out. A New OTP has been sent","Error")
+            forgotpasswordsecret = pyotp.random_base32()
+            mailsendforgotpassword(useremail,forgotpasswordsecret)
+            # flash("Ensure your OTP is Correct and All Forms Are Filled Out. A New OTP has been sent")
+            # return redirect("/forgotpassword")
+        return(jsonify(webnoti))
     else:
-        forgotpasswordsecret = pyotp.random_base32()
-        mailsendforgotpassword(useremail,forgotpasswordsecret)
+        # forgotpasswordsecret = pyotp.random_base32()
+        # webnoti = setwebnoti("Email Has Been Sent","success")
+        # mailsendforgotpassword(useremail,forgotpasswordsecret)
         return render_template("forgotpassword.html")
 
 
@@ -639,7 +692,7 @@ def mylist():
     gamedatadict2 = getgamelistdata()
     # mylistfeed(gamedatadict)
 
-    return (render_template("mylist.html", gamedata = gamedatadict))
+    return (render_template("index.html", gamedata = gamedatadict))
 
 
 def sort_list (type, stat, neg = False):
@@ -763,7 +816,11 @@ def account_details_feeder():
     return jsonify(front_end_details)
 
 
+@app.route("/profilefeeder")
+def profilefeeder ():
 
+    profileinfo = {"Username": username, "IconChars": acabrev}
+    return (jsonify(profileinfo))
 
 @app.route("/mylistfeeder", methods=["GET", "POST"])
 @login_required
@@ -779,16 +836,24 @@ def mylistfeeder():
         permin=request.form.get("fpermin")
         permax = request.form.get("fpermax")
         sorttype = request.form.get("sorttype")
-    
-        status = request.form.get("status")
         hoursplayed = request.form.get("hoursplayed")
+
+        status = request.form.get("status")
         try: 
             if (hoursplayed.strip() == ""):
-                hoursplayed = "Nah"
+                hoursplayed = "None"
         except:
             hoursplayed
+        # print(hoursplayed)
         personalrating = request.form.get("personalrating")
+        # print(personalrating)
+        try: 
+            if (personalrating.strip() == ""):
+                personalrating = "Nope"
+        except:
+            personalrating
         
+        # print(f'{personalrating} MYLISTFEEDER')
 
         if mcrmin or mcrmax or permin or permax:
             sorteddict = None
@@ -829,10 +894,10 @@ def mylistfeeder():
             if gamename in names:
                 nmindex = names.index(gamename)
                 gamedatadict2["status"][nmindex] = status 
-                singlegamedict["ST"] = status 
+            singlegamedict["ST"] = status 
         elif hoursplayed:
             gamename = (request.form.get("gamename")).strip()
-            print(gamename)
+            print(f'{gamename} {hoursplayed} is present')
             if isint(hoursplayed):
                 print(hoursplayed)
                 db.execute("UPDATE gamelist SET hoursplayed = ? where userid = ? AND game = ?", ((hoursplayed,session["user_id"], gamename)))
@@ -840,34 +905,39 @@ def mylistfeeder():
                 if gamename in names:
                     nmindex = names.index(gamename)
                     gamedatadict2["hoursplayed"][nmindex] = int(hoursplayed)
-                    singlegamedict["HP"] = int(hoursplayed) 
+                if int(hoursplayed) == 0: 
+                    singlegamedict["HP"] = "Never Played"
+                else:
+                    singlegamedict["HP"] = hoursplayed
             
             else:
-                db.execute("UPDATE gamelist SET hoursplayed = ? where userid = ? AND game = ?", ((None,session["user_id"], gamename))) 
+                print("HP not int")
+                db.execute("UPDATE gamelist SET hoursplayed = ? where userid = ? AND game = ?", ((0,session["user_id"], gamename))) 
                 names = gamedatadict2["name"]
                 if gamename in names:
                     nmindex = names.index(gamename)
-                    gamedatadict2["hoursplayed"][nmindex] = "_"
-                    singlegamedict["hp"] = "_"
+                    gamedatadict2["hoursplayed"][nmindex] = 0
+                singlegamedict["HP"] = "Never Played"
         elif personalrating:
             gamename = (request.form.get("gamename")).strip()
-            print(gamename)
-
+            print("Have PR")
+            print (personalrating)
             if isint(personalrating):
                 db.execute("UPDATE gamelist SET personalrating = ? where userid = ? AND game = ?", ((personalrating,session["user_id"], gamename)))
                 names = gamedatadict2["name"]
                 if gamename in names:
                     nmindex = names.index(gamename)
-                    gamedatadict2["personalrating"][nmindex] = int(personalrating) 
-                    singlegamedict["PR"] = int(personalrating)
+                    print("replacement")
+                    gamedatadict2["personalrating"][nmindex] = int(personalrating)
+                singlegamedict["PR"] = personalrating
             else:
                 db.execute("UPDATE gamelist SET personalrating = ? where userid = ? AND game = ?", ((None,session["user_id"], gamename)))
-
+                print("No PR")
                 names = gamedatadict2["name"]
                 if gamename in names:
                     nmindex = names.index(gamename)
                     gamedatadict2["personalrating"][nmindex] = "_"
-                    singlegamedict["PR"] = "_"
+                singlegamedict["PR"] = "_"
 
         db2.commit()
 
@@ -878,11 +948,6 @@ def mylistfeeder():
     else:   
             print(sorteddict)
             if (sorteddict):
-
-                # tabledata = db.execute('PRAGMA table_info(gamelist)')
-                # tabledata=tabledata.fetchall()
-                # gamedatadict2 = getgamelistdata()
-
                 return (jsonify(sorteddict))
             # elif (gamedatadict2filter):
             #     return (jsonify(gamedatadict2filter))
@@ -1038,15 +1103,8 @@ def aboutsite():
     bgimgdict = {"sitebgimgs":[]}
     gamedatadict=getgamelistdata()
     randlist = getrandomgamelist()
-    # for i in randlist:
-    #     bgimg = gamedatadict["backgroundimages"][i]
-    #     bgimgdict["sitebgimgs"].append(bgimg)
 
-    # print(bgimgdict)
-
-    # return bgimgdict
-
-    return render_template("aboutsite.html", gamedata = gamedatadict, numblist = randlist)
+    return render_template("index.html", gamedata = gamedatadict, numblist = randlist)
 
 @app.route("/addlist", methods=["GET", "POST"])
 @login_required
@@ -1162,7 +1220,10 @@ def search():
 
     if request.method == "POST":
         if request.form.get("headersluggame"):
-            gamename = request.form.get("headersluggame")
+            gamename = request.form.get("headerssluggame")
+        elif request.form.get('searchslug'):
+            gamename = request.form.get("searchslug")
+
         else:
             gamename = request.form.get("rand-game-slug")
         # gamename2= request.form.get("headersearchresult")
@@ -1172,44 +1233,46 @@ def search():
         games=gamename
         #print(games)
         
-        if lookup(games) == None:
-            queryresults=sluglookuplist(gamename)
-            searchnames=queryresults["gamelist"]
-            slugnames = queryresults["sluglist"]
-            metacriticrating = queryresults["metacriticlist"]
-            backgroundimages = queryresults["backgroundimage"]
 
-            if gamename in searchnames:
-                nameindex=searchnames.index(gamename)
-                sluggame=slugnames[nameindex]
-                #print(sluggame) 
-                gameresult = lookup(sluggame)
-            else:
-                return renderaddlist("That Game Does Not Exist")
-        else:
-            gameresult = lookup(games)
+        try:
+            lock.acquire(True)
+            gamecheck=db.execute("SELECT * FROM gamedatabase where slugname = ?",[str(gamename)])
+            if len(list(gamecheck)) == 0:
+                if lookup(games) == None:
+                    queryresults=sluglookuplist(gamename)
+                    searchnames=queryresults["gamelist"]
+                    slugnames = queryresults["sluglist"]
+                    metacriticrating = queryresults["metacriticlist"]
+                    backgroundimages = queryresults["backgroundimage"]
 
-        gamecheck=db.execute("SELECT * FROM gamedatabase where gamename = ?",[gameresult["name"]])
-        #print(len(list(gamecheck)))
+                    if gamename in searchnames:
+                        nameindex=searchnames.index(gamename)
+                        sluggame=slugnames[nameindex]
+                        #print(sluggame) 
+                        gameresult = lookup(sluggame)
+                    else:
+                        return renderaddlist("That Game Does Not Exist")
+                else:
+                    gameresult = lookup(games)
+                platforms = listToString(gameresult["platform"])
+                truegamename = gameresult["name"]
+                db.execute ("INSERT INTO gamedatabase(gamename,metacriticrating,slugname,backgroundimage,releasedate,websites,platforms) VALUES(?,?,?,?,?,?,?)",(
+                    truegamename,gameresult["metacriticrating"],gameresult["slug"],gameresult["backgroundimage"],gameresult["releasedate"], gameresult["website"], platforms))
+                db2.commit()
+        finally:
+            lock.release()
 
-        # print (gameresult["platform"])
-        platforms = listToString(gameresult["platform"])
-        truegamename = gameresult["name"]
-        # truegamename = truegamename.replace('“','"').replace('”','"').replace("’","'").replace("‘","'")
-        # print(platforms)
-        if len(list(gamecheck)) == 0:
-            db.execute ("INSERT INTO gamedatabase(gamename,metacriticrating,slugname,backgroundimage,releasedate,websites,platforms) VALUES(?,?,?,?,?,?,?)",(
-                truegamename,gameresult["metacriticrating"],gameresult["slug"],gameresult["backgroundimage"],gameresult["releasedate"], gameresult["website"], platforms))
-            db2.commit()
-        truegamename
-        return redirect(f'/game/{gameresult["slug"]}')
+        return("")
 
 def renderpasschange(warning):
-    return render_template("changepassword.html", warning= warning, iconchars = acabrev, username=username)
+    # flash(warning)
+    return render_template("index.html")
+
 @app.route("/account/changepassword", methods=["GET", "POST"])
 @login_required
 def password_change():
     global userdata
+    global webnoti
     """Let user change the password"""
     oldpassword = request.form.get("oldpassword")
     password = request.form.get("password")
@@ -1217,26 +1280,38 @@ def password_change():
     if request.method == "POST":
         # Ensure form was filled out
         if not oldpassword:
-            return renderpasschange( "Please Provide Your Old Password")
+            webnoti = setwebnoti("Please Provide Your Current Password", "error")
+            return("")
+
         elif not password:
-            return renderpasschange( "Please Submit a Password")
+            webnoti = setwebnoti("Please Submit a Password")
+            return("")
+
         elif not check_password_hash(userhash, oldpassword):
-             return renderpasschange("Please Ensure That Your Old Password is Correct")
-        # Ensure password equals confirmation password submitted
+             webnoti = setwebnoti("Please Ensure That Your Old Password is Correct", "error")
+             return("")
+
         elif password != confirmingpassword:
-            return renderpasschange("Passwords Don't Match")
+            webnoti = setwebnoti("Passwords Don't Match", "error")            
+            return("")
+
         else:
             # hash the password
             pwdhash = generate_password_hash(password)
             db.execute("UPDATE users SET hash = ? WHERE id = ?", (pwdhash, session["user_id"]))
             db2.commit()
             # Redirect user to home page
-            flash("Password Changed Successfully")
-            return redirect("/")
+            webnoti = setwebnoti("Password Changed Successfully", "success")
+
+            # return redirect("/")
+        return(jsonify(webnoti))
     # For Loading the Page
     else:
-        return renderpasschange("")
+        return render_template("index.html")
 
+@app.route("/notifeeder")
+def errorfeeder():
+    return(jsonify(webnoti))
 
 @app.route("/account")
 @login_required
@@ -1253,7 +1328,7 @@ def accountpage():
     names = gamedatadict['name']
 
 
-    return render_template("account.html", username=username, iconchars = acabrev, gamedata = gamedatadict, variable = "", onlynames = names)
+    return render_template("index.html")
 
 @app.route("/account/wishlist")
 @login_required
@@ -1282,12 +1357,18 @@ def wishlistpage():
 
     names = wishdatadict['name']
 
-    return render_template("wishlist.html", username=username, iconchars = acabrev, gamedata = wishdatadict, onlynames = names)
+    return render_template("index.html", username=username, iconchars = acabrev, gamedata = wishdatadict, onlynames = names)
+@app.route("/wishlistfeeder", methods = ["GET"])
+def wishlistfeeder():
+    usergamelist = db.execute("SELECT * FROM gamelist WHERE userid = ? AND status = ?;", (session["user_id"], "Wishlist"))
+    gamedatadict = gd_dict_creation(usergamelist)
+    gdict = gm_data_dict_conv(gamedatadict)
+    return(jsonify(gdict))
 @app.route("/account/details", methods=["GET", "POST"])
 def accountdetails():
 
-    return render_template("accountdetails.html", 
-    username = username, iconchars = acabrev)
+    return render_template("index.html", 
+    )
 @app.route("/logout")
 def logout():
     """Log user out"""

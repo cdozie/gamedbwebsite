@@ -38,58 +38,7 @@
 <body class = "Main-Theme">
 
     <div class = "app">
-    <header> <!-- The Header -->
-        <!-- Main Menu Class that includes navigation bar (Present if Other Things Would Be Added)-->
-        <div class="main_menu">
-            <!-- Class for navigation bar at top of page -->
-            <div class="row">
-                <!-- Section of page that links to other pages indicated by nav -->
-                <nav class="header-menu">
-                    <!-- Everything to be included in the navigation bar-->
-                    <!-- When one of these has "class='active' that one will be grayed out since will be on that page" -->
-                    {% if session["user_id"] %}                 
-                    <a href="/">Home</a> 
-                    <a href = "/logout">Log Out</a>
-                    <a href = "/addlist">Add to List</a>
-                    <a href = "/mylist">My List</a>
-                    <!-- <a href = "/editlist"> Edit List</a>  -->
-                    <a href = "/account"> My Account</a> 
-                    <a href ="/aboutsite">About</a>
-                    {% else %}                    
-                    <a href="/register">Register</a> 
-                    <a href = "/login">Login</a>
-                    {% endif %}
-                </nav>
-            </div>
-        </div>
-    </header>
-        <h1> <a href = "/"> UG Database </a></h1> 
-        {% if session["user_id"] %}
-           
-        <form action="/search" id = "headingsearch" method="post">
-            
-            <!-- <h3 class ="gradientcolorpinkwhite">Search Database:</h3> -->
-            <input type = "text"  autocomplete = "off"  list = ""  class="form-control mx-auto w-75 " 
-            id="gameSearch3" name = "headersearchresult" placeholder="Search Game:" required title="Search a Game" >
-            <datalist id= "gamedropdown" style = "width:75%">
-                {% for i in range (1,11)%}
-                <div class = "fullsearchresults">
-                    <div class = "search-result-block">
-                        <img class = "gameoptionimages" id= "game{{i}}images" src ="">
-                        <option class = "item-text gamedboptions" id ="game{{i}}"> </option> 
-                    </div> 
-                </div>
 
-
-                {% endfor %}
-            </datalist>
-
-            <input id = "realgameSearch3" name = "headersluggame"  style = "display: none;">
-
-            </form>
-        {% endif %}
-        <hr>
-    
      <main class="container-fluid overflow-auto py-2 text-center" id = "page-container">
             {% block main %}
             

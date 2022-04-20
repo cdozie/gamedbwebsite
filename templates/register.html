@@ -14,35 +14,8 @@ Log In
       {% endfor %}  
 {% endif %}  
 {% endwith %}  
-<p class = login-title> REGISTER</p>
-<form action="/register" method="post">
-    <!-- Have Proper Spacing With Correctly Sized Boxes -->
 
-    <div class="mb-3">
-        <div class="form-group">
-            <input autocomplete="off" autofocus  class="form-control mx-auto w-auto registerinput" name="email" placeholder="Email:" type="email" required>
-        </div>
-    </div>
-    <div class="mb-3">
-        <div class="form-group">
-            <input autocomplete="off" autofocus  class="form-control mx-auto w-auto registerinput" name="username" placeholder="Username:" type="text" required>
-        </div>
-    </div>
-    <div class="mb-3">
-        <div class="form-group">
-            <input class="form-control mx-auto w-auto registerinput" name="password" placeholder="Password:" type="password" required>
-        </div>
-    </div>
-    <div class="mb-3">
-        <div class="form-group">
-            <input class="form-control mx-auto w-auto registerinput" name="confirmation" placeholder="Confirm password" type="password" required>
-        </div>
-    </div>
-    
-    <button id = "submitbutton" class="btn btn-primary" type="submit" disabled="disabled">Log In</button> 
-
-</form>
-
-<p class = "add-warning" role="alert"> {{warning}}</p>
+<div id = "register-form"></div>
+<div class = "loader"></div>
 
 {% endblock %}

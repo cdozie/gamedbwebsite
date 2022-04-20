@@ -111,7 +111,6 @@ export default function MyList () {
         data:{
           personalrating: e.target.value,
           gamename: e.target.getAttribute('name')
-
         },
         success:function()
         {
@@ -238,7 +237,7 @@ export default function MyList () {
       setinvalidData(() => !(metaminval || metamaxval || perminval || permaxval));
       // displayerror(metaminval,metamaxval, perminval, permaxval,"metanv", maxvalerr,seterrorMessages);
   })
-    useLayoutEffect(() =>{
+    useEffect(() =>{
       listfetch(setGameOptions)},[])
 
 
@@ -326,13 +325,13 @@ export default function MyList () {
  
                         </td>
                         )
-                        :(<td data-color = {game.GPR} value = {game.GPR} onClick = {onGPRClick}  id = {`${game.Name}`} className = {`tablerating ${tableclassnames(game.GPR)} table-personal-rating`}>{game.GPR}</td>
+                        :(<td  value = {game.GPR} onClick = {onGPRClick}  id = {`${game.Name}`} className = {`tablerating ${tableclassnames(game.GPR)} table-personal-rating`}>{game.GPR}</td>
                         )
                     }
                       {/* {GNamePR !== `${game.Name}` &&
                         <td data-color = {game.GPR} value = {game.GPR} onClick = {onGPRClick}  id = {`${game.Name}`} className = {`tablerating ${tableclassnames(game.GPR)} table-personal-rating`}>{game.GPR}</td>
                     } */}
-                        <td data-color = {game.GOR} className = {`tablerating ${tableclassnames(game.GOR)}`}>{game.GOR}</td>
+                        <td  className = {`tablerating ${tableclassnames(game.GOR)}`}>{game.GOR}</td>
                         {/* <EditHoursPlayed GHP = {game.GHP} Name = {game.Name}/> */}
                           {GNameHP == `${game.Name}` 
                           ?(

@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { Routes, Route, useParams, useNavigate, BrowserRouter, Link } from "react-router-dom";
 import { classnames } from './vargamefuncs';
-import { fetchgeneral,dropdownlist, limittyping } from './generalfuncs';
+import { fetchgeneral,dropdownlist, limittyping, showLoader, hideLoader } from './generalfuncs';
 import OutsideClickHandler from 'react-outside-click-handler';
 import AddList from './addlist';
 import Form from 'react-bootstrap/Form';
+import classNames from 'classnames';
 
 
 
@@ -24,6 +25,8 @@ const GamePage = (props) => {
     const [showAddList,setshowAddList] = useState(false)
     const removeListHandler = (e) =>{
         e.preventDefault()
+        showLoader();
+
         $.ajax({
             type:'POST',
             url:"/removelist",
@@ -38,7 +41,9 @@ const GamePage = (props) => {
                     slug : e.target.getAttribute('slug')
                     },
                     success:function(){
-                        fetchgeneral("gamegetter",setgameProps) 
+                        fetchgeneral("gamegetter",setgameProps)
+                        hideLoader();
+ 
                     }
 
                 });
@@ -49,9 +54,11 @@ const GamePage = (props) => {
     }
     const addListHandler = (e) =>{
         e.preventDefault();
-        setshowAddList(true)
+        setshowAddList(true);
+        $('html').css("overflow-y","hidden")
+
     }
-    useLayoutEffect(()=> {
+    useEffect(()=> {
     $.ajax({
         type:'POST',
         url:`/game/${params.game}`,
@@ -59,12 +66,19 @@ const GamePage = (props) => {
         slug : params.game
         },
         success:function()
-        {
-            fetchgeneral("gamegetter",setgameProps) 
+        {           
+          hideLoader;
+
+            fetchgeneral("gamegetter",setgameProps);
+            if (!gameProps.RD || gameProps.RD ==""){
+              gameProps.RD = "None"
+            }
+
         }
       })
     },[])
     
+    useEffect(hideLoader, []);
 
     
   //Editing Form--------------------------------------------------------------------------------------------------------------
@@ -157,19 +171,16 @@ const GamePage = (props) => {
       }
     });
   }
-// Editing Function
-// function EditStatus(props){
 
-//     return(
-
-//     )
-// }
     return(
-        <div className='var-game-page'>
+        <div className={`${classNames({ 'var-game-page': true, 'hide-overflow' : showAddList, })}`}>
+        <div className ={`${classNames({'disable-bg-page': showAddList, })}`}></div>
+
         <div className = {`${params.game}-page`}>
+
             <div>
             { gameProps.Name &&
-            <div className="container-fluid var-page-container" id = "{liststatus}">
+            <div className="container-fluid var-page-container" >
             
             <div className = "var-page-heading"> 
                 <h2 className = "var-game-title gradientcolor"> <a href = {`${gameProps.GWB}`} > {gameProps.Name} </a></h2>
@@ -240,13 +251,13 @@ const GamePage = (props) => {
                     {/* Link To Add List Module To Be Reactified */}
                     {
                     gameProps.DisplayAdd =="Yes" &&
-                    <button type="button" className="btn btn-success var-add-button var-buttons" onClick = {addListHandler} slug = {`${gameProps.Slug}`} >Add to List</button>
+                    <button type="button" className="btn var-add-button var-buttons" onClick = {addListHandler} slug = {`${gameProps.Slug}`} >Add to List</button>
                     }
 
                     {
                         showAddList &&
-                    <OutsideClickHandler onOutsideClick={() => {setshowAddList(() => false)}}>
-                        <AddList slug = {gameProps.Slug} status = {true} name = {gameProps.Name} setgameProps = {setgameProps} bgimg ={gameProps.BGimg} />
+                    <OutsideClickHandler onOutsideClick={() => {setshowAddList(() => false); $('html').css("overflow-y","auto")}}>
+                        <AddList slug = {gameProps.Slug} status = {true} name = {gameProps.Name} setgameProps = {setgameProps} bgimg ={gameProps.BGimg} setshowAddList = {setshowAddList} />
                     </OutsideClickHandler>
                     }
             </div>

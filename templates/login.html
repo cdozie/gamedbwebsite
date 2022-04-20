@@ -10,34 +10,7 @@
       {% endfor %}  
 {% endif %}  
 {% endwith %}  
-<div class="container-fluid">
-    <p class = login-title> LOGIN </p>
-        <!-- <form action="/login" method="post">
-             Proper Spacing With Auto Sizing For Boxes 
-            <label for="username">Username</label>
-            <div class="mb-3">
-                <input autocomplete="off" autofocus class="form-control mx-auto w-auto login-form" id="username" name="username" placeholder="Username" type="text" required >
-            </div>
-            <div class="mb-3">
-                <input class="form-control mx-auto w-auto login-form" id="password" name="password" placeholder="Password" type="password" required>
-            </div>
-            <button class="btn btn-primary" id = "submitbutton" type="submit" disabled="disabled">Log In</button>
-            <hr>
-            <h4><a class="login-alternatives" href="/register">New around here? Register</a> </h4>
-            <h4><a class="login-alternatives" href="/forgotpasswordemail">Forgot password?</a></h4>
-        </form> -->
-        <div id = "react-login-form"></div>
-        <hr>
-        <h4><a class="login-alternatives" href="/register">New around here? Register</a> </h4>
-        <h4><a class="login-alternatives" href="/forgotpasswordemail">Forgot password?</a></h4>
-        <hr>
 
-
-
-</div>
-        
-
-<!-- </div> -->
-    <p class = "add-warning"> {{warning}}</p>
-    <span></span>
+<div id = "login-pg"></div>
+<div class = "loader"></div>
 {% endblock %}

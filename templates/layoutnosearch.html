@@ -40,35 +40,35 @@
 <div class ="background">
 <body class = "Main-Theme">
     <div class = "app">
-    <header> <!-- The Header -->
-        <!-- Main Menu Class that includes navigation bar (Present if Other Things Would Be Added)-->
+    <!-- <header>
         <div class="main_menu">
-            <!-- Class for navigation bar at top of page -->
             <div class="row">
-                <!-- Section of page that links to other pages indicated by nav -->
                 <nav class="header-menu">
-                    <!-- Everything to be included in the navigation bar-->
-                    <!-- When one of these has "class='active' that one will be grayed out since will be on that page" -->
+
                     {% if session["user_id"] %}                 
                     <a href="/">Home</a> 
                     <a href = "/logout">Log Out</a>
-                    <a href = "/addlist">Add to List</a>
                     <a href = "/mylist">My List</a>
-                    <!-- <a href = "/editlist"> Edit List</a>  -->
-                    <a href = "/account"> My Account</a>
+                    <a href = "/account"> My Account</a> 
                     <a href ="/aboutsite">About</a>
- 
                     {% else %}                    
                     <a href="/register">Register</a> 
                     <a href = "/login">Login</a>
                     {% endif %}
                 </nav>
-            
             </div>
         </div>
-    </header>
-        <h1> <a href = "/"> UG Database </a></h1> 
-        <hr>
+    </header> -->
+    {% if session["user_id"] %}
+    <div id = "home-bar-true"></div> 
+    <h1> <a href = "/"> UG Database </a></h1>            
+    <!-- <div id = "search-bar"></div> -->
+    <hr>
+    {% else %}                    
+    <div id = "home-bar-false"></div> 
+    <!-- <h1> <a href = "/"> UG Database </a></h1>             -->
+    <hr>
+    {% endif %}
     
      <main class="container-fluid overflow-auto py-2 text-center">
             {% block main %}

@@ -6,14 +6,13 @@ import Col from 'react-bootstrap/Col';
 const DisplayDetails = (props) => {
 
     return(
-        <Table bordered variant = "dark" hover>
+        <Table variant = "dark" hover>
             <thead>
                 <tr>
                     <th scope = "col"><h2 className='gradient-color-blue-black'>#</h2></th>
                     <th scope = "col" ><h2 className="acct-dtl-name gradientcolorpinkwhite">Stat Name</h2></th>
                     <th scope = "col" ><h2 className = "gradientcolor">Stat Value</h2></th>
                 </tr>
-
             </thead>
             <tbody>
             { props.details.map(

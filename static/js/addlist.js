@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { limittyping } from './mylistfunctions';
-import { fetchgeneral, isNumbCheck,dropdownlist } from './generalfuncs';
+import { fetchgeneral, isNumbCheck,dropdownlist,showLoader,hideLoader } from './generalfuncs';
 
 const preventval = (e) => {
     limittyping(e, e.target.value>100, 100)
@@ -48,6 +48,8 @@ const AddList = (props) =>{
 
     const submitHandler = (e) => {
         e.preventDefault();
+        showLoader();
+        $('html').css('overflow-y', "auto")
         $.ajax({
             type:'POST',
             url:'/addlist',
@@ -61,6 +63,10 @@ const AddList = (props) =>{
             success:function()
             {
               fetchgeneral("gamegetter",props.setgameProps)
+              props.setshowAddList(() => false);
+
+              hideLoader();
+
             }
           });
           setShow(() => false)
@@ -82,9 +88,7 @@ const AddList = (props) =>{
             {show &&
         <div className = "add-list-form" >
         <img className = "add-list-picture" src = {`${props.bgimg}`}></img>
-
-        <h2 id = "add-list-title"> {props.name}</h2>
-        
+        <div className='picture-spacing'></div>
         <Form.Group action ="/addlist" controlId = "add-list-form" className = 'mb-3'>
             {/* <Row>
                 <Col>
@@ -93,7 +97,7 @@ const AddList = (props) =>{
             </Row> */}
             <Row className = 'mb-3'>
                 <Col>
-                <select value = {STVal} name=  {`${props.name}`} autoComplete="off"  className = "form-select form-control mx-auto w-auto center-status"  placeholder = "Choose Status:" required onChange ={onSTChange}> ' + 
+                <select value = {STVal} name=  {`${props.name}`} autoComplete="off"  className = "form-select form-control mx-auto w-75 center-status"  placeholder = "Choose Status:" required onChange ={onSTChange}> ' + 
                     <option disabled = {true} >Choose Status:</option>
                     { 
                         dropdownlist.map(
@@ -104,7 +108,7 @@ const AddList = (props) =>{
                 </select>
                 </Col>
                 <Col>
-                    <Form.Control   min  = "0" type = "number" className ='w-auto mx-auto' onChange = {(e) => {limittyping(e, e.target.value <0, 0); onHPChange(e)}} value = {hpVal} placeholder = "Hours Played:"/>
+                    <Form.Control   min  = "0" type = "number" className ='w-75 mx-auto' onChange = {(e) => {limittyping(e, e.target.value <0, 0); onHPChange(e)}} value = {hpVal} placeholder = "Hours Played:"/>
                 </Col>
             </Row>
         </Form.Group>
@@ -118,9 +122,9 @@ const AddList = (props) =>{
 
         </Form.Group>
         <Row>
-                <Button variant="primary" className = 'w-auto mx-auto' disabled={invalidData} onClick ={submitHandler}>
+                <button className = 'btn w-auto mx-auto add-button' disabled={invalidData} onClick ={submitHandler}>
                     Add to List
-                </Button>
+                </button>
         </Row>
     </div>
 }
