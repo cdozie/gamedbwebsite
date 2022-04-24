@@ -67,7 +67,15 @@ const AddList = (props) =>{
 
               hideLoader();
 
+            },
+            error:function()
+            {
+                props.setErrorNoti({Noti : "Error Adding to List. Please Try Again", Type: "error"})
+                props.setshowAddList(() => false);
+
+                hideLoader();
             }
+
           });
           setShow(() => false)
         

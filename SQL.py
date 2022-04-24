@@ -349,8 +349,9 @@ def gm_data_dict_conv(gd):
         gst = gd["status"]
         gwb = gd["website"]
         gsl = gd ["slug"]
+        gda = gd["dayadded"]
         for i in range (len(name)):
             gdlsdict.append({"Number": [i],"Name": name[i], "BGimg": bgimgs[i], 
             "GHP": ghp[i], "GOR": gor[i], "GPR": gpr[i], "GRD": grd[i],
-            "GST": gst[i], "GWB": gwb[i], "Slug":gsl[i]})
+            "GST": gst[i], "GWB": gwb[i], "Slug":gsl[i], "GDA" : gda[i]})
         return (gdlsdict)

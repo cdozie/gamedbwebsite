@@ -8,26 +8,31 @@ const Layout = (props) => {
 
         <div className = "full-page">
         {props.Logged 
-        ?(<Header/>)
+        ?(
+            <div className='header-items'>
+            <Header/>
+            </div>)
         :( 
-        <div id = "notloggedbar">
-        <header>
-            <div className="main_menu">
-                <div className="row">
-                    <nav className="header-menu">
-    
-                        <a href="/register">Register</a> 
-                        <a href = "/login">Login</a>
-    
-    
-                    </nav>
+        <div className = 'header-items'>
+            <div id = "notloggedbar">
+            <header>
+                <div className="main_menu">
+                    <div className="row">
+                        <nav className="header-menu">
+        
+                            <a href="/register">Register</a> 
+                            <a href = "/login">Login</a>
+        
+        
+                        </nav>
+                    </div>
                 </div>
-            </div>
-        </header>
-        <h1> <a href = "/login"> UG Database </a></h1>  
+            </header>
+            
+            <h1> <a href = "/login"> UG Database </a></h1>  
 
-        </div>          
-   
+            </div>          
+        </div>
         )
         }
         {props.child} 

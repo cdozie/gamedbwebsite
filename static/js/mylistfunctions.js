@@ -78,7 +78,7 @@ export const databasefetch = (setGameOptions, sortfunction = "None") => {
   .then(response => (response.json()))
   .then(response => {
     var gr = response
-    console.log(gr);
+    // console.log(gr);
     // var vargamedict = {Names: gr.name, BGimgs: gr.backgroundimages, GHP: gr.hoursplayed, GOR: gr.onlinerating, GPR: gr.personalrating, GRD: gr.releasedate,GST: gr.status, GWB: gr.website}
     // for(let i = 0; i< (gr.name).length; i++){
     //   gamelistdict.push({Number: [i],Name: gr.name[i], BGimg: gr.backgroundimages[i], GHP: gr.hoursplayed[i], GOR: gr.onlinerating[i], GPR: gr.personalrating[i], GRD: gr.releasedate[i],GST: gr.status[i], GWB: gr.website[i]})

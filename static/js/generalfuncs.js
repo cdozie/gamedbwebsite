@@ -46,7 +46,7 @@ export const limittyping = (e,bool, int) =>{
   export const isBetween =  (x, min, max) => {
     return x >= min && x<=max
   }
-  export const classnames = (val) => {
+  export const colorclassnames = (val) => {
 
     var mc = {
       '0-59'     : 'red',

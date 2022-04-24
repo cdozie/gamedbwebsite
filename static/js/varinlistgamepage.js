@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { Routes, Route, useParams, useNavigate, BrowserRouter, Link } from "react-router-dom";
-import { classnames } from './vargamefuncs';
+import { colorclassnames } from './vargamefuncs';
 import { fetchgeneral,dropdownlist, limittyping, showLoader, hideLoader } from './generalfuncs';
 import OutsideClickHandler from 'react-outside-click-handler';
 import AddList from './addlist';
@@ -23,6 +23,8 @@ const GamePage = (props) => {
     console.log(params)
     const [gameProps, setgameProps] = useState({})
     const [showAddList,setshowAddList] = useState(false)
+    const [ErrorNoti,setErrorNoti] = useState({})
+
     const removeListHandler = (e) =>{
         e.preventDefault()
         showLoader();
@@ -67,7 +69,7 @@ const GamePage = (props) => {
         },
         success:function()
         {           
-          hideLoader;
+          hideLoader();
 
             fetchgeneral("gamegetter",setgameProps);
             if (!gameProps.RD || gameProps.RD ==""){
@@ -75,11 +77,12 @@ const GamePage = (props) => {
             }
 
         }
-      })
+      });
     },[])
-    
-    useEffect(hideLoader, []);
 
+
+    
+  
     
   //Editing Form--------------------------------------------------------------------------------------------------------------
   const preventval = (e) => {
@@ -186,9 +189,9 @@ const GamePage = (props) => {
                 <h2 className = "var-game-title gradientcolor"> <a href = {`${gameProps.GWB}`} > {gameProps.Name} </a></h2>
                 <div className = "var-online-rating">
                 <span className = "vargamelabels gradientcolor "> Metacritic Rating: </span>
-                <div data-color ={`${gameProps.MCR}`} className = {`vargamerankings var-online-rating-data ${classnames(gameProps.MCR)}`}>{gameProps.MCR}</div>
+                <div data-color ={`${gameProps.MCR}`} className = {`vargamerankings var-online-rating-data ${colorclassnames(gameProps.MCR)}`}>{gameProps.MCR}</div>
                 </div>
-                <h6 data-color ={`${gameProps.MCR}`} className = {`onlinerankdescription ${classnames(gameProps.MCR)}`}> {gameProps.MCRWORD}</h6>  
+                <h6 data-color ={`${gameProps.MCR}`} className = {`onlinerankdescription ${colorclassnames(gameProps.MCR)}`}> {gameProps.MCRWORD}</h6>  
                 
 
             </div> 
@@ -206,7 +209,7 @@ const GamePage = (props) => {
                               <Form.Control type = "number" min = "0" max = "100" value = {PRVal} placeholder = "Personal Rating"  className='w-auto mx-auto' onChange = {e => {preventval(e); onPRChange(e); }}/>
                            {/* </Form> */}
                            </OutsideClickHandler>)
-                            :(<div onClick = {(e) => {setGNamePR(true); onGPRClick(e)}} data-color = {`${gameProps.PR}`} className = {`var-personal-rating-data varpersonalrankings var-rating-border ${classnames(gameProps.PR)}`}>{gameProps.PR}</div>) 
+                            :(<div onClick = {(e) => {setGNamePR(true); onGPRClick(e)}} data-color = {`${gameProps.PR}`} className = {`var-personal-rating-data varpersonalrankings var-rating-border ${colorclassnames(gameProps.PR)}`}>{gameProps.PR}</div>) 
                             }
                             </h6>
 
@@ -257,7 +260,7 @@ const GamePage = (props) => {
                     {
                         showAddList &&
                     <OutsideClickHandler onOutsideClick={() => {setshowAddList(() => false); $('html').css("overflow-y","auto")}}>
-                        <AddList slug = {gameProps.Slug} status = {true} name = {gameProps.Name} setgameProps = {setgameProps} bgimg ={gameProps.BGimg} setshowAddList = {setshowAddList} />
+                        <AddList slug = {gameProps.Slug} status = {true} name = {gameProps.Name} setgameProps = {setgameProps} bgimg ={gameProps.BGimg} setshowAddList = {setshowAddList} setErrorNoti = {setErrorNoti} />
                     </OutsideClickHandler>
                     }
             </div>
@@ -265,6 +268,9 @@ const GamePage = (props) => {
                     {gameProps.DisplayRemove =="Yes" &&
                     <button type = "submit" onClick = {removeListHandler} className="btn btn-danger var-remove-button var-buttons" slug = {`${gameProps.Slug}`} style = {{display : `${gameProps.DisplayRemove}`}}>Remove from List</button>
                     }
+            {ErrorNoti != {} && 
+            <div className = {`${ErrorNoti.Type}`}>{ErrorNoti.Noti}</div>
+            }
                     {/* </form> */}
             
         </div>

@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 import { fetchgeneral,formcentering, showLoader,hideLoader } from './generalfuncs';
-import {Link, useNavigate} from 'react-router-dom'
-import { Navigate } from 'react-router-dom';
+// import {Link, useNavigate} from 'react-router-dom'
+// import { Navigate } from 'react-router-dom';
 
 const LoginForm = () => {
 
@@ -58,13 +58,13 @@ const LoginForm = () => {
 <Form action="/login" method="post" >
   <Form.Group className="mb-3" controlId="formBasicUsername">
     <Form.Label>Username</Form.Label>
-    <Form.Control type="text" placeholder="Username:" value = {UserVal} name = "username" className='w-auto mx-auto' onChange={onUserChange} autoComplete = "on" />
+    <Form.Control type="text" placeholder="Username:" value = {UserVal} name = "username" className='w-75 mx-auto' onChange={onUserChange} autoComplete = "on" />
   </Form.Group>
   <Form.Group className="mb-3" controlId="formBasicPassword">
     <Form.Label>Password</Form.Label>
-    <Form.Control type="password" value = {PassVal} placeholder="Password" name = "password" className='w-auto mx-auto' onChange={onPassChange} autoComplete = "on"/>
+    <Form.Control type="password" value = {PassVal} placeholder="Password" name = "password" className='w-75 mx-auto' onChange={onPassChange} autoComplete = "on"/>
   </Form.Group>
-  <Button  type="submit" disabled={InvalidData} onClick = {submithandler}>
+  <Button  type="submit" className = "w-50 mx-auto" disabled={InvalidData} onClick = {submithandler}>
     Login
   </Button>
   {(Noti != "" && Noti.Noti != "Logged In") &&

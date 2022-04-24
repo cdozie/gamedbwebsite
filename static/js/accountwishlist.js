@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
-import { classnames, fetchgeneral } from './generalfuncs';
+import { colorclassnames, fetchgeneral } from './generalfuncs';
 import { Link } from 'react-router-dom';
-
+import { hideLoader } from './generalfuncs';
 const DisplayAccountWishlist = (props) => {
 
     // const[Counter,setCounter] = useState(0)
@@ -10,22 +10,24 @@ const DisplayAccountWishlist = (props) => {
     <div> 
 
     {/* <AccountBar />  */}
-        <span className = "Game-Rows">
+        <div className = "accnt-page">
         {props.games.map((game) => 
-         <span key  = {`${game.Slug}`} className = "game-card" >   
+         <div key  = {`${game.Slug}`} className = "col-lg-3 col-md-3 col-sm-4 col-6" >
+            <div className='account-item ' >
+
              <img className = "game-card-images" alt = {`${game.Name} Image`} src ={`${game.BGimg}`}></img> 
              <div className= "container">  
-                 <div className = "account-text" ><Link to = {`/game/${game.Slug}`}>{game.Name} </Link> </div>
-                 <div  className = {`card-metacritic-rating account-text ${classnames(game.GOR)}`}>Metacritic Rating: 
-                     <div  className={`card-metacritic-rating account-mcr ${classnames(game.GOR)}`}>{game.GOR}</div> 
-                </div> 
+                 <div className = "account-text account-title" ><Link to= {`/game/${game.Slug}`}>{game.Name} </Link> </div>
+                 <span  className = {`card-metacritic-rating account-text`}>Metacritic Rating:</span> 
+                     <span  className={`card-metacritic-rating account-mcr ${colorclassnames(game.GOR)}`}> {game.GOR}</span> 
                 <div className = {`${game.GWB}`}>  <a href={`${game.GWB}`} className = "wishlist-websites gradientcolor account-text">{game.GWB}</a> </div>
                         <div className = "status account-text"> Release Date: {game.GRD}</div> 
-             </div>     
-         </span>
+             </div> 
+             </div> 
+         </div>
         ) 
         }     
-     </span>
+     </div>
      </div> 
     )}
 
@@ -35,12 +37,14 @@ const AccountWishlist = () => {
     var counter = 0
 
     useEffect(() =>{ 
-       fetchgeneral("wishlistfeeder",setGameList)
+       fetchgeneral("wishlistfeeder",setGameList);
+       hideLoader();
+
     },[])
     var nvar
     var gmlistlen = GameList.length
     return(
-        <div>
+        <div className='account-wishlist-page'>
         <DisplayAccountWishlist games = {GameList}/>  
         </div>
     )

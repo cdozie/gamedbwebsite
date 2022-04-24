@@ -256,13 +256,13 @@ $('img').map(function(){
     }
 });
 
-$(function(){
-  $('a').each(function() {
-    if ($(this).prop('href') == window.location.href) {
-      $(this).addClass('current');
-    }
-  });
-});
+// $(function(){
+//   $('a').each(function() {
+//     if ($(this).prop('href') == window.location.href) {
+//       $(this).addClass('current');
+//     }
+//   });
+// });
 
 
 function isEmpty(str) {
@@ -322,14 +322,14 @@ var classundefined = 1
     };
 
     
-    var scrollcheck = 1
-    $(window).on('scroll',function() {
-     if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-         scrollcheck++
-         $(`.tablesection${scrollcheck}`).css('display','inline');
-         $(`.actualtablesection${scrollcheck}`).css('display','table-row-group');
+    // var scrollcheck = 1
+    // $(window).on('scroll',function() {
+    //  if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+    //      scrollcheck++
+    //      $(`.tablesection${scrollcheck}`).css('display','inline');
+    //      $(`.actualtablesection${scrollcheck}`).css('display','table-row-group');
          
-     }})
+    //  }})
     //  var listscrollcheck = 1
     //  $('.hs').on('scroll',function(){
     //    if ($(window).scrollLeft()*2+ $(window).width() > $(document).width()-100){
@@ -338,31 +338,31 @@ var classundefined = 1
 
     //    }
     //  })
-    var presearch
-    var redirectsubmissionslug
-     $('.var-add-button').on('click', function(){
-      presearch = String($('.var-add-button').attr('id'))
-      redirectsubmissionslug = String ($('.var-slug-game').attr('id'))
-      localStorage.setItem("presearchgame", presearch);
-      localStorage.setItem("redirectsubmissionslug", redirectsubmissionslug);
-      window.location.href='/addlist#varredirect';
+//     var presearch
+//     var redirectsubmissionslug
+//      $('.var-add-button').on('click', function(){
+//       presearch = String($('.var-add-button').attr('id'))
+//       redirectsubmissionslug = String ($('.var-slug-game').attr('id'))
+//       localStorage.setItem("presearchgame", presearch);
+//       localStorage.setItem("redirectsubmissionslug", redirectsubmissionslug);
+//       window.location.href='/addlist#varredirect';
 
 
 
-    //  })
-    });
+//     //  })
+//     });
 
-$(function () {
-  if (window.location.hash) {
-    presearch = localStorage.getItem("presearchgame");
-    // console.log(alert(presearch))
-    // console.log(presearch)
-  $('#gameSearch').val(presearch)
+// $(function () {
+//   if (window.location.hash) {
+//     presearch = localStorage.getItem("presearchgame");
+//     // console.log(alert(presearch))
+//     // console.log(presearch)
+//   $('#gameSearch').val(presearch)
   
-  $('#realgameSearch').val(localStorage.getItem("redirectsubmissionslug"))
+//   $('#realgameSearch').val(localStorage.getItem("redirectsubmissionslug"))
 
-}
-})
+// }
+// })
 
 // $("#add-form").on("submit", function() {
 //   // localStorage.clear()
@@ -371,68 +371,7 @@ $(function () {
 
 
 
-const aboutreact = document.getElementById('test-react-component');
-if (aboutreact){
-  ReactDOM.render(<About />, aboutreact)
-};
-
-
-const rloginform = document.getElementById('react-login-form');
-if (rloginform){
-  ReactDOM.render(
-    <LoginForm />,
-    rloginform
-  )
-};
-
-// const mylistid = document.getElementById('list-page');
-// if (mylistid){
-//   ReactDOM.render(
-//     <MyList />,
-//     mylistid
-//   )
-// }
-
-// const acctdetails  = document.getElementById('react-account-details');
-// if (acctdetails){
-//   ReactDOM.render(
-//     <Details />,
-//     acctdetails
-//   )
-// }
-
-
-// const homebartrue = document.getElementById('home-bar-true');
-// if (homebartrue){
-//   ReactDOM.render(
-//     <LinkBar loggedin  = {true}/>,
-//     homebartrue
-// )
-// }
-// const homebarfalse = document.getElementById('home-bar-false');
-// if (homebarfalse){
-//   ReactDOM.render(
-//     <LinkBar loggedin  = {false}/>,
-//     homebarfalse
-//     )
-
-// }
-
-// const searchbarid = document.getElementById('search-bar');
-// if (searchbarid){
-//   ReactDOM.render(
-//     <SearchBar />,
-//     searchbarid
-// )
-// }
-// const accountid = document.getElementById('account-main-react')
-// if (accountid){
-//   ReactDOM.render(
-//     <AccountGames />,
-//     accountid
-// )
-// }
-debugger;
+// debugger;
 const rootElement = document.getElementById("react-hmpg");
 
 if (rootElement){
@@ -442,15 +381,15 @@ ReactDOM.render(
     <Routes>
 
 
-      <Route path="/" element={<Layout child = {<Homepage />} Logged = {true} />} />
-      <Route path="game/:game" element={<Layout child = {<GamePage />} Logged = {true}/>} />
-      <Route path ="aboutsite" element = {<Layout child = {<About />} Logged = {true}/>} />
-      <Route path = "mylist" element = {<Layout child = {<MyList />} Logged = {true}/>} /> 
+      <Route path="/" element={<Layout child = {<Homepage />} Logged = {true} overflow = {true}/>} overflow = {true} />
+      <Route path="game/:game" element={<Layout child = {<GamePage />} Logged = {true} overflow = {true}/>} />
+      <Route path ="aboutsite" element = {<Layout child = {<About />} Logged = {true} overflow = {true}/>} />
+      <Route path = "mylist" element = {<Layout child = {<MyList />} Logged = {true} overflow = {false}/>} /> 
       
-      <Route path ="account" element ={<AccountLayout child = {<AccountGames />}/>}/>
-      <Route path = "account/wishlist" element ={<AccountLayout child = {<AccountWishlist />} />}/>
-      <Route path = "account/changepassword" element ={<AccountLayout child = {<ChangePassForm />} />}/>
-      <Route path = "account/details" element ={<AccountLayout child = {<Details />} />}/>
+      <Route path ="account" element ={<AccountLayout child = {<AccountGames />} overflow = {true}/>}/>
+      <Route path = "account/wishlist" element ={<AccountLayout child = {<AccountWishlist />} overflow = {true} />}/>
+      <Route path = "account/changepassword" element ={<AccountLayout child = {<ChangePassForm />} overflow = {true}/>}/>
+      <Route path = "account/details" element ={<AccountLayout child = {<Details />} overflow = {true}/>}/>
       {/* <Route path = "account/wishlist" element = {() => <AccountLayout child = {<AccWishlist />} />} /> */}
 
     </Routes>
@@ -502,3 +441,22 @@ $(function(){
 }
 
 )
+
+console.log(window.location.href)
+console.log(window.location.origin)
+
+// $(function(){
+//   // if (window.location.href != window.location.origin){
+//     $('main').removeClass('overflow-auto');
+//   // }
+//   // else {
+//     // if (!$('main').hasClass('overflow-auto')){
+//     //   $('main').addClass('overflow-auto');
+//     // }
+//   // }
+// })
+
+
+const checkoverflow = () => {
+  
+}

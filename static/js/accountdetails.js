@@ -2,11 +2,12 @@ import React, { useEffect, useState, useLayoutEffect } from 'react';
 import Table from'react-bootstrap/Table'; 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { hideLoader } from './generalfuncs';
 
 const DisplayDetails = (props) => {
 
     return(
-        <Table variant = "dark" hover>
+        <Table bordered>
             <thead>
                 <tr>
                     <th scope = "col"><h2 className='gradient-color-blue-black'>#</h2></th>
@@ -46,10 +47,13 @@ const Details = () => {
        setDetail_lst(() => gr);
       
       })
-      .catch(error => console.log(error))},[])
+      .catch(error => console.log(error));
+      hideLoader()},[])
   
     return(
+      <div className='account-details-page'>
         <DisplayDetails details = {Detail_lst} />
+      </div>
     )
 }
 

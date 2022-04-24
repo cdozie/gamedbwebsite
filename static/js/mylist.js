@@ -10,13 +10,15 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { limittyping, limittypingmax, isNumbCheck, listfetch, tableclassnames, listfetchdictlist  } from './mylistfunctions';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { colorclassnames, hideLoader } from './generalfuncs';
+import classNames from 'classnames'
 
 var gnamehp = ""
 var gnamest = ""
 var gnamepr = ""
 
 var notfirstload = false
-
+const sort_btn_name = "Order By"
 export default function MyList () {
 // Add Check Box for Filtering Out Unrated Ones
 
@@ -31,6 +33,8 @@ export default function MyList () {
     const[metamaxval, setmetamaxval] = useState(100);
     const[perminval, setperminval] = useState(0);
     const[permaxval, setpermaxval] = useState(100);
+    const[ShowUpArrow, setShowUpArrow] = useState(true)
+    const[buttontitle, setbuttontitle] = useState(sort_btn_name)
     
     // Dropdown Menu Hooks------------------------------------------------------------------------------------------------------------------------
     const[formValue, setFormValue] = useState("")
@@ -94,7 +98,7 @@ export default function MyList () {
         },
         success:function()
         {
-          listfetch(setGameOptions)
+          listfetchdictlist(setGameOptions)
         }
       });
     }
@@ -114,7 +118,7 @@ export default function MyList () {
         },
         success:function()
         {
-          listfetch(setGameOptions)
+          listfetchdictlist(setGameOptions)
         }
       });
     }
@@ -131,7 +135,7 @@ export default function MyList () {
         },
         success:function()
         {
-          listfetch(setGameOptions)
+          listfetchdictlist(setGameOptions)
         }
       });
     }
@@ -185,16 +189,17 @@ export default function MyList () {
   //Dropdown Functions-----------------------------------------------------------------------------------------------------------------
     const UpdateFormValue = (e) => {
       setFormValue(() => (e.target.value).trim());
+      setbuttontitle(() =>(e.target.innerText))
     }
     var dropdownlist =[]
 
-    var dropdict = { Text : ["Metacritic Ascending", "Metacritic Descending", "Personal Ascending", "Personal Descending", "No Sort/Time Added", "Hours Played Descending", "Hours Played Ascending"],
+    var dropdict = { Text : ["Metacritic Ascending", "Metacritic Descending", "Personal Ascending", "Personal Descending", "Time Added", "Hours Played Descending", "Hours Played Ascending"],
     Value: ["MCA", "MCD", "PRA", "PRD", "NS/TA", "HPD", "HPA"]}
 
     for (let i = 0; i < (dropdict.Text).length;i++){
       dropdownlist.push({Text : (dropdict.Text[i]), Value: (dropdict.Value[i])})
     }
-
+    
   // Submit Handlers-------------------------------------------------------------------------------------------------------------------
     const filtersubmithandler = (e) => {
       e.preventDefault()
@@ -209,7 +214,10 @@ export default function MyList () {
         },
         success:function()
         {
-          listfetch(setGameOptions)
+          listfetchdictlist(setGameOptions)
+          setbuttontitle(() => sort_btn_name)
+
+
         }
       })
     };
@@ -229,6 +237,22 @@ export default function MyList () {
         }
       })
     }
+    const resetlist = (e) => {
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/mylistfeeder',
+        data:{
+          resetrequest : true,
+        },
+        success:function()
+        {
+          listfetchdictlist(setGameOptions)
+          setbuttontitle(() => sort_btn_name)
+
+        }
+      }) 
+    }
     ;
   //Table Data Function-------------------------------------------------------------------------------------------
 
@@ -238,7 +262,11 @@ export default function MyList () {
       // displayerror(metaminval,metamaxval, perminval, permaxval,"metanv", maxvalerr,seterrorMessages);
   })
     useEffect(() =>{
-      listfetch(setGameOptions)},[])
+      listfetchdictlist(setGameOptions);
+      hideLoader();
+      $('main').removeClass('overflow-auto');
+
+    },[])
 
 
     return(
@@ -274,25 +302,51 @@ export default function MyList () {
                 Filter
               </Button>
           </Form> 
-            <hr></hr>
+            {/* <hr></hr> */}
             {/* DROPDOWN MENU */}
-            <Form action="/sortlist" method="post"  >
-            {/* onSubmit = {ddownsubmithandler} */}
-              <Form.Group className="" controlId="sort-dropdown-list">
-                <DropdownButton id="dropdown-variants-Info" menuVariant = "dark" variant = "info" title="Order By">
-                  {
-                    dropdownlist.map((button) => 
-                  <Dropdown.Item key = {`${button.Text} Button`}as = "button" className = "sortitem" value ={`${button.Value}`} onClick = { e => {UpdateFormValue(e); ddownsubmithandler(e)}}>{button.Text}</Dropdown.Item>
-                  )}
-                  <Form.Control name = "sort-type" value ={formValue} style = {{ display: "none"}} onChange= {UpdateFormValue} />
-                </DropdownButton>
-              </Form.Group>
-              
-          </Form>            
-            <hr></hr> 
+            <hr/>
+          <div className='my-list-table my-list'>
+            {/* <div className = "select-dropdown-unit">
+              <span className = {` arrow ${classNames({'up': ShowUpArrow},{'down': !ShowUpArrow})}`}></span> 
+              <input className = "form-control w-50 mx-auto" type= "text" readOnly = {true} value = {formValue} placeholder = "Sort By..."/>
+              <ul className= 'select-dropdown-options' >
+                {
+                 dropdownlist.map((option) =>
+                 <li className='select-dropdown-item' id = {option.Value}
+                 onClick = { e => {UpdateFormValue(e); ddownsubmithandler(e)}}>{option.Text}</li> 
+                 )
+                }
+              </ul>
+            </div> */}
+            <aside>
+            <div className = 'edit-side-grid'>
+              {/* <div className='sticky-top'> */}
+              <Form action="/sortlist" method="post" id="sort-dropdown-list">
+              {/* onSubmit = {ddownsubmithandler} */}
+                <Form.Group >
+                  <Form.Label>Sort</Form.Label>
+                  <DropdownButton id="dropdown-variants-Info" variant = "info" title={buttontitle}>
+                    <div className = "all-sort-options">
+                    {
+                      dropdownlist.map((button) => 
+                    <Dropdown.Item key = {`${button.Text} Button`}as = "button" className = "sortitem" value ={`${button.Value}`} onClick = { e => {UpdateFormValue(e); ddownsubmithandler(e)}}>{button.Text}</Dropdown.Item>
+                    )}
+                  </div>
+                    <Form.Control name = "sort-type" value ={formValue} style = {{ display: "none"}} onChange= {UpdateFormValue} />
+                  </DropdownButton>
+                </Form.Group>
+                
+            </Form>
+            <Button className = "w-auto mx-auto" type = "submit" id = "reset-filters-button" onClick= {resetlist}>
+              Reset List
+            </Button> 
+            {/* </div> */}
+          </div>  
+          </aside> 
+        
+            {/* <hr></hr>  */}
             {/* DATA TABLE */}
-            <div className='my-list-table my-list'>
-                <Table  bordered>
+                <Table bordered>
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -302,7 +356,7 @@ export default function MyList () {
                             <th scope="col">Metacritic Rating</th>
                             <th scope="col">Hours Played</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Website</th>
+                            {/* <th scope="col">Website</th> */}
                         </tr> 
                     </thead>
                     <tbody>
@@ -350,7 +404,7 @@ export default function MyList () {
                             } */}
       
                         <EditStatus GST = {game.GST} Name = {game.Name}/> 
-                        <td><a className = "list-table-websites" href = {`${game.GWB}`}>{game.GWB}</a></td>
+                        {/* <td><a className = "list-table-websites" href = {`${game.GWB}`}>{game.GWB}</a></td> */}
                       </tr>
                       )
                     }   

@@ -58281,6 +58281,8 @@ var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
 
 var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
 
+var _generalfuncs = require("./generalfuncs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -58301,8 +58303,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var DisplayDetails = function DisplayDetails(props) {
   return /*#__PURE__*/_react["default"].createElement(_Table["default"], {
-    variant: "dark",
-    hover: true
+    bordered: true
   }, /*#__PURE__*/_react["default"].createElement("thead", null, /*#__PURE__*/_react["default"].createElement("tr", null, /*#__PURE__*/_react["default"].createElement("th", {
     scope: "col"
   }, /*#__PURE__*/_react["default"].createElement("h2", {
@@ -58352,16 +58353,19 @@ var Details = function Details() {
     })["catch"](function (error) {
       return console.log(error);
     });
+    (0, _generalfuncs.hideLoader)();
   }, []);
-  return /*#__PURE__*/_react["default"].createElement(DisplayDetails, {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "account-details-page"
+  }, /*#__PURE__*/_react["default"].createElement(DisplayDetails, {
     details: Detail_lst
-  });
+  }));
 };
 
 var _default = Details;
 exports["default"] = _default;
 
-},{"react":237,"react-bootstrap/Col":183,"react-bootstrap/Row":207,"react-bootstrap/Table":209}],253:[function(require,module,exports){
+},{"./generalfuncs":259,"react":237,"react-bootstrap/Col":183,"react-bootstrap/Row":207,"react-bootstrap/Table":209}],253:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -58386,7 +58390,9 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var AccountLayout = function AccountLayout(props) {
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "full-page"
-  }, /*#__PURE__*/_react["default"].createElement(_header["default"], null), /*#__PURE__*/_react["default"].createElement(_accountbar["default"], null), props.child);
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "header-items"
+  }, /*#__PURE__*/_react["default"].createElement(_header["default"], null)), /*#__PURE__*/_react["default"].createElement(_accountbar["default"], null), props.child);
 };
 
 var _default = AccountLayout;
@@ -58435,12 +58441,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DisplayAccountGames = function DisplayAccountGames(props) {
   // const[Counter,setCounter] = useState(0)
   // var counter = 0
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
-    className: "Game-Rows"
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "accnt-page"
   }, props.games.map(function (game) {
-    return /*#__PURE__*/_react["default"].createElement("span", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       key: "".concat(game.Slug),
-      className: "game-card"
+      className: "col-lg-3 col-md-3 col-sm-4 col-6"
+    }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: "/game/".concat(game.Slug)
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      className: "account-item"
     }, /*#__PURE__*/_react["default"].createElement("img", {
       className: "game-card-images",
       alt: "".concat(game.Name, " Image"),
@@ -58448,19 +58458,17 @@ var DisplayAccountGames = function DisplayAccountGames(props) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       className: "container"
     }, /*#__PURE__*/_react["default"].createElement("div", {
-      className: "account-text"
-    }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
-      to: "/game/".concat(game.Slug)
-    }, game.Name, " "), " "), /*#__PURE__*/_react["default"].createElement("span", {
-      className: "card-metacritic-rating account-text ".concat((0, _generalfuncs.classnames)(game.GOR))
+      className: "account-text account-title"
+    }, game.Name), /*#__PURE__*/_react["default"].createElement("span", {
+      className: "card-metacritic-rating account-text ".concat((0, _generalfuncs.colorclassnames)(game.GOR))
     }, "Metacritic Rating:"), /*#__PURE__*/_react["default"].createElement("span", {
-      className: "card-metacritic-rating account-mcr ".concat((0, _generalfuncs.classnames)(game.GOR))
-    }, game.GOR), /*#__PURE__*/_react["default"].createElement("div", {
-      className: "rankings2 accountranks rating-border ".concat((0, _generalfuncs.classnames)(game.GPR))
+      className: "card-metacritic-rating account-mcr ".concat((0, _generalfuncs.colorclassnames)(game.GOR))
+    }, " ", game.GOR), /*#__PURE__*/_react["default"].createElement("div", {
+      className: "rankings2 accountranks rating-border ".concat((0, _generalfuncs.colorclassnames)(game.GPR))
     }, game.GPR), /*#__PURE__*/_react["default"].createElement("div", {
       className: "status account-text"
-    }, " Status: ", game.GST)));
-  })));
+    }, " Status: ", game.GST)))));
+  }));
 };
 
 var AccountGames = function AccountGames() {
@@ -58472,10 +58480,13 @@ var AccountGames = function AccountGames() {
   var counter = 0;
   (0, _react.useEffect)(function () {
     (0, _generalfuncs.fetchgeneral)("userlistfeeder", setGameList);
+    (0, _generalfuncs.hideLoader)();
   }, []);
   var nvar;
   var gmlistlen = GameList.length;
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(DisplayAccountGames, {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "account-main-page"
+  }, /*#__PURE__*/_react["default"].createElement(DisplayAccountGames, {
     games: GameList
   }));
 };
@@ -58518,12 +58529,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var DisplayAccountWishlist = function DisplayAccountWishlist(props) {
   // const[Counter,setCounter] = useState(0)
   // var counter = 0
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("span", {
-    className: "Game-Rows"
+  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "accnt-page"
   }, props.games.map(function (game) {
-    return /*#__PURE__*/_react["default"].createElement("span", {
+    return /*#__PURE__*/_react["default"].createElement("div", {
       key: "".concat(game.Slug),
-      className: "game-card"
+      className: "col-lg-3 col-md-3 col-sm-4 col-6"
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      className: "account-item "
     }, /*#__PURE__*/_react["default"].createElement("img", {
       className: "game-card-images",
       alt: "".concat(game.Name, " Image"),
@@ -58531,21 +58544,21 @@ var DisplayAccountWishlist = function DisplayAccountWishlist(props) {
     }), /*#__PURE__*/_react["default"].createElement("div", {
       className: "container"
     }, /*#__PURE__*/_react["default"].createElement("div", {
-      className: "account-text"
+      className: "account-text account-title"
     }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
       to: "/game/".concat(game.Slug)
-    }, game.Name, " "), " "), /*#__PURE__*/_react["default"].createElement("div", {
-      className: "card-metacritic-rating account-text ".concat((0, _generalfuncs.classnames)(game.GOR))
-    }, "Metacritic Rating:", /*#__PURE__*/_react["default"].createElement("div", {
-      className: "card-metacritic-rating account-mcr ".concat((0, _generalfuncs.classnames)(game.GOR))
-    }, game.GOR)), /*#__PURE__*/_react["default"].createElement("div", {
+    }, game.Name, " "), " "), /*#__PURE__*/_react["default"].createElement("span", {
+      className: "card-metacritic-rating account-text"
+    }, "Metacritic Rating:"), /*#__PURE__*/_react["default"].createElement("span", {
+      className: "card-metacritic-rating account-mcr ".concat((0, _generalfuncs.colorclassnames)(game.GOR))
+    }, " ", game.GOR), /*#__PURE__*/_react["default"].createElement("div", {
       className: "".concat(game.GWB)
     }, "  ", /*#__PURE__*/_react["default"].createElement("a", {
       href: "".concat(game.GWB),
       className: "wishlist-websites gradientcolor account-text"
     }, game.GWB), " "), /*#__PURE__*/_react["default"].createElement("div", {
       className: "status account-text"
-    }, " Release Date: ", game.GRD)));
+    }, " Release Date: ", game.GRD))));
   })));
 };
 
@@ -58558,10 +58571,13 @@ var AccountWishlist = function AccountWishlist() {
   var counter = 0;
   (0, _react.useEffect)(function () {
     (0, _generalfuncs.fetchgeneral)("wishlistfeeder", setGameList);
+    (0, _generalfuncs.hideLoader)();
   }, []);
   var nvar;
   var gmlistlen = GameList.length;
-  return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement(DisplayAccountWishlist, {
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "account-wishlist-page"
+  }, /*#__PURE__*/_react["default"].createElement(DisplayAccountWishlist, {
     games: GameList
   }));
 };
@@ -58704,6 +58720,16 @@ var AddList = function AddList(props) {
       },
       success: function success() {
         (0, _generalfuncs.fetchgeneral)("gamegetter", props.setgameProps);
+        props.setshowAddList(function () {
+          return false;
+        });
+        (0, _generalfuncs.hideLoader)();
+      },
+      error: function error() {
+        props.setErrorNoti({
+          Noti: "Error Adding to List. Please Try Again",
+          Type: "error"
+        });
         props.setshowAddList(function () {
           return false;
         });
@@ -59206,7 +59232,7 @@ exports["default"] = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.showLoader = exports.loader = exports.limittyping = exports.isNumbCheck = exports.isBetween = exports.hideLoader = exports.formcentering = exports.fetchgeneral = exports.dropdownlist = exports.classnames = void 0;
+exports.showLoader = exports.loader = exports.limittyping = exports.isNumbCheck = exports.isBetween = exports.hideLoader = exports.formcentering = exports.fetchgeneral = exports.dropdownlist = exports.colorclassnames = void 0;
 
 var fetchgeneral = function fetchgeneral(place, stateChange) {
   fetch("http://127.0.0.1:5000/".concat(place), {
@@ -59264,7 +59290,7 @@ var isBetween = function isBetween(x, min, max) {
 
 exports.isBetween = isBetween;
 
-var classnames = function classnames(val) {
+var colorclassnames = function colorclassnames(val) {
   var mc = {
     '0-59': 'red',
     '60-79': 'orange',
@@ -59286,7 +59312,7 @@ var classnames = function classnames(val) {
   return theclass;
 };
 
-exports.classnames = classnames;
+exports.colorclassnames = colorclassnames;
 
 var formcentering = function formcentering(ElementHeight) {
   $(function () {
@@ -59360,8 +59386,6 @@ exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _mylistfunctions = require("./mylistfunctions");
-
 var _reactRouterDom = require("react-router-dom");
 
 var _generalfuncs = require("./generalfuncs");
@@ -59403,64 +59427,77 @@ var DisplayRandList = function DisplayRandList(props) {
   (0, _generalfuncs.hideLoader)();
   return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
     className: "hmpg-rand-list"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "hmpg-list"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "hmpg-headings"
   }, /*#__PURE__*/_react["default"].createElement("h2", {
-    id: "Highest-Heading",
-    className: "left-align"
-  }, " RANDOM GAMES TO TRY"), /*#__PURE__*/_react["default"].createElement("ul", {
+    className: "left-align hmpg-list-title"
+  }, " RANDOM GAMES TO TRY")), /*#__PURE__*/_react["default"].createElement("div", {
     className: "hs full"
   }, props.randmodules.map(function (randmodule) {
     return (
       /*#__PURE__*/
       // <form action="/search" className = "rand-game-list-form" id = {`rand-game-list-form${parseInt(randmodule.Rank) -1}`} method = "post" key = {`${randmodule.Name}`}>
-      _react["default"].createElement("li", {
-        className: "item",
+      _react["default"].createElement("div", {
+        className: "col-lg-2 col-md-3 col-sm-4 col-6",
         key: "".concat(randmodule.Slug)
-      }, /*#__PURE__*/_react["default"].createElement("div", {
-        className: "rand-name-forms item-text form-link",
-        id: "".concat(randmodule.Slug)
       }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
         to: "/game/".concat(randmodule.Slug)
-      }, " ", randmodule.Rank, ". ", randmodule.Name, " ")), /*#__PURE__*/_react["default"].createElement("img", {
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "item"
+      }, /*#__PURE__*/_react["default"].createElement("img", {
         className: "game-image-items",
         src: randmodule.BGimg
       }), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "item-text",
+        id: "".concat(randmodule.Slug)
+      }, randmodule.Name), /*#__PURE__*/_react["default"].createElement("div", {
         className: "gradientcolor"
       }, "Metacritic Rating:"), /*#__PURE__*/_react["default"].createElement("div", {
-        className: "rankings inlinemarker ".concat((0, _mylistfunctions.classnames)(randmodule.GOR))
-      }, randmodule.GOR))
+        className: "rankings inlinemarker ".concat((0, _generalfuncs.colorclassnames)(randmodule.GOR))
+      }, randmodule.GOR))))
     );
-  }))));
+  })))));
 };
 
 var DisplayMyList = function DisplayMyList(props) {
   return /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
     className: "hmpg-my-list"
-  }, /*#__PURE__*/_react["default"].createElement("h2", {
-    id: "add-list-label",
-    className: "left-align"
-  }, /*#__PURE__*/_react["default"].createElement("a", {
-    href: "/mylist",
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "hmpg-list"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "hmpg-headings"
+  }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+    to: "/mylist",
     id: "index-my-list-link"
-  }, "Your Games")), /*#__PURE__*/_react["default"].createElement("ul", {
+  }, /*#__PURE__*/_react["default"].createElement("h2", {
+    id: "game-list-label",
+    className: "left-align inline hmpg-list-title"
+  }, "Your Games"), /*#__PURE__*/_react["default"].createElement("h5", {
+    className: "inline view-all-redirect"
+  }, " View All", '>', '>', '>', " "))), /*#__PURE__*/_react["default"].createElement("div", {
     className: "hs full main-page-game-list"
   }, props.mylistmodules.map(function (mylistmodule) {
-    return /*#__PURE__*/_react["default"].createElement("li", {
-      className: "item",
+    return /*#__PURE__*/_react["default"].createElement("div", {
+      className: "col-lg-2 col-md-3 col-sm-4 col-6",
       key: "".concat(mylistmodule.Name)
-    }, /*#__PURE__*/_react["default"].createElement("div", {
-      className: "item-text"
     }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
       to: "/game/".concat(mylistmodule.Slug)
-    }, mylistmodule.Name), " "), /*#__PURE__*/_react["default"].createElement("img", {
-      className: "add-list-images",
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      className: "item"
+    }, /*#__PURE__*/_react["default"].createElement("img", {
+      className: "game-image-items",
       alt: "".concat(mylistmodule.Name, " Image"),
       src: mylistmodule.BGimg
     }), /*#__PURE__*/_react["default"].createElement("div", {
+      className: "item-text"
+    }, mylistmodule.Name, " "), /*#__PURE__*/_react["default"].createElement("div", {
       className: "gradientcolor"
     }, "Your Rating:"), /*#__PURE__*/_react["default"].createElement("div", {
-      className: "rankings ".concat((0, _mylistfunctions.classnames)(mylistmodule.GPR))
-    }, mylistmodule.GPR));
-  }))));
+      className: "rankings inlinemarker ".concat((0, _generalfuncs.colorclassnames)(mylistmodule.GPR))
+    }, mylistmodule.GPR))));
+  })))));
 };
 
 var Homepage = function Homepage() {
@@ -59491,6 +59528,10 @@ var Homepage = function Homepage() {
     })["catch"](function (error) {
       return console.log(error);
     }); // hideLoader();
+
+    if (!$('main').hasClass('overflow-auto')) {
+      $('main').addClass('overflow-auto');
+    }
   }, []);
   (0, _react.useLayoutEffect)(function () {
     fetch('http://127.0.0.1:5000/rndgamefeeder', {
@@ -59514,7 +59555,7 @@ var Homepage = function Homepage() {
     className: "hmpg"
   }, /*#__PURE__*/_react["default"].createElement(DisplayRandList, {
     randmodules: RandList
-  }), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(DisplayMyList, {
+  }), /*#__PURE__*/_react["default"].createElement(DisplayMyList, {
     mylistmodules: MyList
   })));
 };
@@ -59522,7 +59563,7 @@ var Homepage = function Homepage() {
 var _default = Homepage;
 exports["default"] = _default;
 
-},{"./generalfuncs":259,"./mylistfunctions":267,"react":237,"react-router-dom":227}],262:[function(require,module,exports){
+},{"./generalfuncs":259,"react":237,"react-router-dom":227}],262:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -59547,7 +59588,11 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 var Layout = function Layout(props) {
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "full-page"
-  }, props.Logged ? /*#__PURE__*/_react["default"].createElement(_header["default"], null) : /*#__PURE__*/_react["default"].createElement("div", {
+  }, props.Logged ? /*#__PURE__*/_react["default"].createElement("div", {
+    className: "header-items"
+  }, /*#__PURE__*/_react["default"].createElement(_header["default"], null)) : /*#__PURE__*/_react["default"].createElement("div", {
+    className: "header-items"
+  }, /*#__PURE__*/_react["default"].createElement("div", {
     id: "notloggedbar"
   }, /*#__PURE__*/_react["default"].createElement("header", null, /*#__PURE__*/_react["default"].createElement("div", {
     className: "main_menu"
@@ -59561,7 +59606,7 @@ var Layout = function Layout(props) {
     href: "/login"
   }, "Login"))))), /*#__PURE__*/_react["default"].createElement("h1", null, " ", /*#__PURE__*/_react["default"].createElement("a", {
     href: "/login"
-  }, " UG Database "))), props.child);
+  }, " UG Database ")))), props.child);
 };
 
 var _default = Layout;
@@ -59627,8 +59672,6 @@ var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
 
 var _generalfuncs = require("./generalfuncs");
 
-var _reactRouterDom = require("react-router-dom");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -59647,6 +59690,8 @@ function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Sy
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+// import {Link, useNavigate} from 'react-router-dom'
+// import { Navigate } from 'react-router-dom';
 var LoginForm = function LoginForm() {
   var _useState = (0, _react.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
@@ -59734,7 +59779,7 @@ var LoginForm = function LoginForm() {
     placeholder: "Username:",
     value: UserVal,
     name: "username",
-    className: "w-auto mx-auto",
+    className: "w-75 mx-auto",
     onChange: onUserChange,
     autoComplete: "on"
   })), /*#__PURE__*/_react["default"].createElement(_Form["default"].Group, {
@@ -59745,11 +59790,12 @@ var LoginForm = function LoginForm() {
     value: PassVal,
     placeholder: "Password",
     name: "password",
-    className: "w-auto mx-auto",
+    className: "w-75 mx-auto",
     onChange: onPassChange,
     autoComplete: "on"
   })), /*#__PURE__*/_react["default"].createElement(_Button["default"], {
     type: "submit",
+    className: "w-50 mx-auto",
     disabled: InvalidData,
     onClick: submithandler
   }, "Login"), Noti != "" && Noti.Noti != "Logged In" && /*#__PURE__*/_react["default"].createElement("div", {
@@ -59768,7 +59814,7 @@ var LoginForm = function LoginForm() {
 var _default = LoginForm;
 exports["default"] = _default;
 
-},{"./generalfuncs":259,"react":237,"react-bootstrap/Button":182,"react-bootstrap/Form":193,"react-router-dom":227}],265:[function(require,module,exports){
+},{"./generalfuncs":259,"react":237,"react-bootstrap/Button":182,"react-bootstrap/Form":193}],265:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -59960,6 +60006,10 @@ var _mylistfunctions = require("./mylistfunctions");
 
 var _reactOutsideClickHandler = _interopRequireDefault(require("react-outside-click-handler"));
 
+var _generalfuncs = require("./generalfuncs");
+
+var _classnames = _interopRequireDefault(require("classnames"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -59982,6 +60032,7 @@ var gnamehp = "";
 var gnamest = "";
 var gnamepr = "";
 var notfirstload = false;
+var sort_btn_name = "Order By";
 
 function MyList() {
   // Add Check Box for Filtering Out Unrated Ones
@@ -60010,49 +60061,59 @@ function MyList() {
   var _useState9 = (0, _react.useState)(100),
       _useState10 = _slicedToArray(_useState9, 2),
       permaxval = _useState10[0],
-      setpermaxval = _useState10[1]; // Dropdown Menu Hooks------------------------------------------------------------------------------------------------------------------------
+      setpermaxval = _useState10[1];
 
-
-  var _useState11 = (0, _react.useState)(""),
+  var _useState11 = (0, _react.useState)(true),
       _useState12 = _slicedToArray(_useState11, 2),
-      formValue = _useState12[0],
-      setFormValue = _useState12[1]; // Table Data Hooks--------------------------------------------------------------------------------------------------------------------------
+      ShowUpArrow = _useState12[0],
+      setShowUpArrow = _useState12[1];
 
-
-  var _useState13 = (0, _react.useState)([]),
+  var _useState13 = (0, _react.useState)(sort_btn_name),
       _useState14 = _slicedToArray(_useState13, 2),
-      GameOptions = _useState14[0],
-      setGameOptions = _useState14[1];
+      buttontitle = _useState14[0],
+      setbuttontitle = _useState14[1]; // Dropdown Menu Hooks------------------------------------------------------------------------------------------------------------------------
+
 
   var _useState15 = (0, _react.useState)(""),
       _useState16 = _slicedToArray(_useState15, 2),
-      HPVal = _useState16[0],
-      setHPVal = _useState16[1];
+      formValue = _useState16[0],
+      setFormValue = _useState16[1]; // Table Data Hooks--------------------------------------------------------------------------------------------------------------------------
 
-  var _useState17 = (0, _react.useState)(""),
+
+  var _useState17 = (0, _react.useState)([]),
       _useState18 = _slicedToArray(_useState17, 2),
-      PRVal = _useState18[0],
-      setPRVal = _useState18[1];
+      GameOptions = _useState18[0],
+      setGameOptions = _useState18[1];
 
   var _useState19 = (0, _react.useState)(""),
       _useState20 = _slicedToArray(_useState19, 2),
-      STVal = _useState20[0],
-      setSTVal = _useState20[1];
+      HPVal = _useState20[0],
+      setHPVal = _useState20[1];
 
   var _useState21 = (0, _react.useState)(""),
       _useState22 = _slicedToArray(_useState21, 2),
-      GNameHP = _useState22[0],
-      setGNameHP = _useState22[1];
+      PRVal = _useState22[0],
+      setPRVal = _useState22[1];
 
   var _useState23 = (0, _react.useState)(""),
       _useState24 = _slicedToArray(_useState23, 2),
-      GNamePR = _useState24[0],
-      setGNamePR = _useState24[1];
+      STVal = _useState24[0],
+      setSTVal = _useState24[1];
 
   var _useState25 = (0, _react.useState)(""),
       _useState26 = _slicedToArray(_useState25, 2),
-      GNameST = _useState26[0],
-      setGNameST = _useState26[1];
+      GNameHP = _useState26[0],
+      setGNameHP = _useState26[1];
+
+  var _useState27 = (0, _react.useState)(""),
+      _useState28 = _slicedToArray(_useState27, 2),
+      GNamePR = _useState28[0],
+      setGNamePR = _useState28[1];
+
+  var _useState29 = (0, _react.useState)(""),
+      _useState30 = _slicedToArray(_useState29, 2),
+      GNameST = _useState30[0],
+      setGNameST = _useState30[1];
 
   var preventval = function preventval(e) {
     (0, _mylistfunctions.limittyping)(e, e.target.value > 100, 100);
@@ -60114,7 +60175,7 @@ function MyList() {
         gamename: e.target.getAttribute('name')
       },
       success: function success() {
-        (0, _mylistfunctions.listfetch)(setGameOptions);
+        (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
       }
     });
   };
@@ -60138,7 +60199,7 @@ function MyList() {
         gamename: e.target.getAttribute('name')
       },
       success: function success() {
-        (0, _mylistfunctions.listfetch)(setGameOptions);
+        (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
       }
     });
   };
@@ -60155,7 +60216,7 @@ function MyList() {
         gamename: e.target.getAttribute('name')
       },
       success: function success() {
-        (0, _mylistfunctions.listfetch)(setGameOptions);
+        (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
       }
     });
   };
@@ -60261,11 +60322,14 @@ function MyList() {
     setFormValue(function () {
       return e.target.value.trim();
     });
+    setbuttontitle(function () {
+      return e.target.innerText;
+    });
   };
 
   var dropdownlist = [];
   var dropdict = {
-    Text: ["Metacritic Ascending", "Metacritic Descending", "Personal Ascending", "Personal Descending", "No Sort/Time Added", "Hours Played Descending", "Hours Played Ascending"],
+    Text: ["Metacritic Ascending", "Metacritic Descending", "Personal Ascending", "Personal Descending", "Time Added", "Hours Played Descending", "Hours Played Ascending"],
     Value: ["MCA", "MCD", "PRA", "PRD", "NS/TA", "HPD", "HPA"]
   };
 
@@ -60289,7 +60353,10 @@ function MyList() {
         fpermax: permaxval
       },
       success: function success() {
-        (0, _mylistfunctions.listfetch)(setGameOptions);
+        (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
+        setbuttontitle(function () {
+          return sort_btn_name;
+        });
       }
     });
   };
@@ -60306,6 +60373,23 @@ function MyList() {
         (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
       }
     });
+  };
+
+  var resetlist = function resetlist(e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '/mylistfeeder',
+      data: {
+        resetrequest: true
+      },
+      success: function success() {
+        (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
+        setbuttontitle(function () {
+          return sort_btn_name;
+        });
+      }
+    });
   }; //Table Data Function-------------------------------------------------------------------------------------------
   // Effect Hooks-----------------------------------------------------------------------------------------------
 
@@ -60316,7 +60400,9 @@ function MyList() {
     }); // displayerror(metaminval,metamaxval, perminval, permaxval,"metanv", maxvalerr,seterrorMessages);
   });
   (0, _react.useEffect)(function () {
-    (0, _mylistfunctions.listfetch)(setGameOptions);
+    (0, _mylistfunctions.listfetchdictlist)(setGameOptions);
+    (0, _generalfuncs.hideLoader)();
+    $('main').removeClass('overflow-auto');
   }, []);
   return /*#__PURE__*/_react["default"].createElement("div", {
     className: "mylistpage"
@@ -60383,17 +60469,20 @@ function MyList() {
     variant: "primary",
     type: "submit",
     disabled: invalidData
-  }, "Filter")), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_Form["default"], {
+  }, "Filter")), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "my-list-table my-list"
+  }, /*#__PURE__*/_react["default"].createElement("aside", null, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "edit-side-grid"
+  }, /*#__PURE__*/_react["default"].createElement(_Form["default"], {
     action: "/sortlist",
-    method: "post"
-  }, /*#__PURE__*/_react["default"].createElement(_Form["default"].Group, {
-    className: "",
-    controlId: "sort-dropdown-list"
-  }, /*#__PURE__*/_react["default"].createElement(_DropdownButton["default"], {
+    method: "post",
+    id: "sort-dropdown-list"
+  }, /*#__PURE__*/_react["default"].createElement(_Form["default"].Group, null, /*#__PURE__*/_react["default"].createElement(_Form["default"].Label, null, "Sort"), /*#__PURE__*/_react["default"].createElement(_DropdownButton["default"], {
     id: "dropdown-variants-Info",
-    menuVariant: "dark",
     variant: "info",
-    title: "Order By"
+    title: buttontitle
+  }, /*#__PURE__*/_react["default"].createElement("div", {
+    className: "all-sort-options"
   }, dropdownlist.map(function (button) {
     return /*#__PURE__*/_react["default"].createElement(_Dropdown["default"].Item, {
       key: "".concat(button.Text, " Button"),
@@ -60405,16 +60494,19 @@ function MyList() {
         ddownsubmithandler(e);
       }
     }, button.Text);
-  }), /*#__PURE__*/_react["default"].createElement(_Form["default"].Control, {
+  })), /*#__PURE__*/_react["default"].createElement(_Form["default"].Control, {
     name: "sort-type",
     value: formValue,
     style: {
       display: "none"
     },
     onChange: UpdateFormValue
-  })))), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("div", {
-    className: "my-list-table my-list"
-  }, /*#__PURE__*/_react["default"].createElement(_Table["default"], {
+  })))), /*#__PURE__*/_react["default"].createElement(_Button["default"], {
+    className: "w-auto mx-auto",
+    type: "submit",
+    id: "reset-filters-button",
+    onClick: resetlist
+  }, "Reset List"))), /*#__PURE__*/_react["default"].createElement(_Table["default"], {
     bordered: true
   }, /*#__PURE__*/_react["default"].createElement("thead", null, /*#__PURE__*/_react["default"].createElement("tr", null, /*#__PURE__*/_react["default"].createElement("th", {
     scope: "col"
@@ -60430,9 +60522,7 @@ function MyList() {
     scope: "col"
   }, "Hours Played"), /*#__PURE__*/_react["default"].createElement("th", {
     scope: "col"
-  }, "Status"), /*#__PURE__*/_react["default"].createElement("th", {
-    scope: "col"
-  }, "Website"))), /*#__PURE__*/_react["default"].createElement("tbody", null, GameOptions.map(function (game) {
+  }, "Status"))), /*#__PURE__*/_react["default"].createElement("tbody", null, GameOptions.map(function (game) {
     return /*#__PURE__*/_react["default"].createElement("tr", {
       key: "".concat(game.Name)
     }, /*#__PURE__*/_react["default"].createElement("th", {
@@ -60500,14 +60590,11 @@ function MyList() {
     }, game.GHP), /*#__PURE__*/_react["default"].createElement(EditStatus, {
       GST: game.GST,
       Name: game.Name
-    }), /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("a", {
-      className: "list-table-websites",
-      href: "".concat(game.GWB)
-    }, game.GWB)));
+    }));
   })))));
 }
 
-},{"./mylistfunctions":267,"./sortdropdown":269,"react":237,"react-bootstrap/Button":182,"react-bootstrap/Col":183,"react-bootstrap/Dropdown":184,"react-bootstrap/DropdownButton":185,"react-bootstrap/Form":193,"react-bootstrap/Row":207,"react-bootstrap/Table":209,"react-outside-click-handler":222}],267:[function(require,module,exports){
+},{"./generalfuncs":259,"./mylistfunctions":267,"./sortdropdown":269,"classnames":94,"react":237,"react-bootstrap/Button":182,"react-bootstrap/Col":183,"react-bootstrap/Dropdown":184,"react-bootstrap/DropdownButton":185,"react-bootstrap/Form":193,"react-bootstrap/Row":207,"react-bootstrap/Table":209,"react-outside-click-handler":222}],267:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60617,8 +60704,8 @@ var listfetchdictlist = function listfetchdictlist(setGameOptions) {
   }).then(function (response) {
     return response.json();
   }).then(function (response) {
-    var gr = response;
-    console.log(gr); // var vargamedict = {Names: gr.name, BGimgs: gr.backgroundimages, GHP: gr.hoursplayed, GOR: gr.onlinerating, GPR: gr.personalrating, GRD: gr.releasedate,GST: gr.status, GWB: gr.website}
+    var gr = response; // console.log(gr);
+    // var vargamedict = {Names: gr.name, BGimgs: gr.backgroundimages, GHP: gr.hoursplayed, GOR: gr.onlinerating, GPR: gr.personalrating, GRD: gr.releasedate,GST: gr.status, GWB: gr.website}
     // for(let i = 0; i< (gr.name).length; i++){
     //   gamelistdict.push({Number: [i],Name: gr.name[i], BGimg: gr.backgroundimages[i], GHP: gr.hoursplayed[i], GOR: gr.onlinerating[i], GPR: gr.personalrating[i], GRD: gr.releasedate[i],GST: gr.status[i], GWB: gr.website[i]})
     // }
@@ -61092,7 +61179,7 @@ function DropDownFilter() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.isBetween = exports.fetchgeneral = exports.classnames = void 0;
+exports.isBetween = exports.colorclassnames = void 0;
 
 var isBetween = function isBetween(x, min, max) {
   return x >= min && x <= max;
@@ -61100,7 +61187,7 @@ var isBetween = function isBetween(x, min, max) {
 
 exports.isBetween = isBetween;
 
-var classnames = function classnames(val) {
+var colorclassnames = function colorclassnames(val) {
   var mc = {
     '0-59': 'red',
     '60-79': 'orange',
@@ -61122,28 +61209,7 @@ var classnames = function classnames(val) {
   return theclass;
 };
 
-exports.classnames = classnames;
-
-var fetchgeneral = function fetchgeneral(place, propChange) {
-  fetch("http://127.0.0.1:5000/".concat(place), {
-    'methods': 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(function (response) {
-    return response.json();
-  }).then(function (response) {
-    var gr = response;
-    console.log(gr);
-    propChange(function () {
-      return gr;
-    });
-  })["catch"](function (error) {
-    return console.log(error);
-  });
-};
-
-exports.fetchgeneral = fetchgeneral;
+exports.colorclassnames = colorclassnames;
 
 },{}],271:[function(require,module,exports){
 "use strict";
@@ -61234,6 +61300,11 @@ var GamePage = function GamePage(props) {
       showAddList = _useState16[0],
       setshowAddList = _useState16[1];
 
+  var _useState17 = (0, _react.useState)({}),
+      _useState18 = _slicedToArray(_useState17, 2),
+      ErrorNoti = _useState18[0],
+      setErrorNoti = _useState18[1];
+
   var removeListHandler = function removeListHandler(e) {
     e.preventDefault();
     (0, _generalfuncs.showLoader)();
@@ -61273,7 +61344,7 @@ var GamePage = function GamePage(props) {
         slug: params.game
       },
       success: function success() {
-        _generalfuncs.hideLoader;
+        (0, _generalfuncs.hideLoader)();
         (0, _generalfuncs.fetchgeneral)("gamegetter", setgameProps);
 
         if (!gameProps.RD || gameProps.RD == "") {
@@ -61281,8 +61352,7 @@ var GamePage = function GamePage(props) {
         }
       }
     });
-  }, []);
-  (0, _react.useEffect)(_generalfuncs.hideLoader, []); //Editing Form--------------------------------------------------------------------------------------------------------------
+  }, []); //Editing Form--------------------------------------------------------------------------------------------------------------
 
   var preventval = function preventval(e) {
     (0, _generalfuncs.limittyping)(e, e.target.value > 100, 100);
@@ -61414,10 +61484,10 @@ var GamePage = function GamePage(props) {
     className: "vargamelabels gradientcolor "
   }, " Metacritic Rating: "), /*#__PURE__*/_react["default"].createElement("div", {
     "data-color": "".concat(gameProps.MCR),
-    className: "vargamerankings var-online-rating-data ".concat((0, _vargamefuncs.classnames)(gameProps.MCR))
+    className: "vargamerankings var-online-rating-data ".concat((0, _vargamefuncs.colorclassnames)(gameProps.MCR))
   }, gameProps.MCR)), /*#__PURE__*/_react["default"].createElement("h6", {
     "data-color": "".concat(gameProps.MCR),
-    className: "onlinerankdescription ".concat((0, _vargamefuncs.classnames)(gameProps.MCR))
+    className: "onlinerankdescription ".concat((0, _vargamefuncs.colorclassnames)(gameProps.MCR))
   }, " ", gameProps.MCRWORD)), /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement("form", {
     action: "/editgamepage",
     id: "var-edit-form",
@@ -61454,7 +61524,7 @@ var GamePage = function GamePage(props) {
       onGPRClick(e);
     },
     "data-color": "".concat(gameProps.PR),
-    className: "var-personal-rating-data varpersonalrankings var-rating-border ".concat((0, _vargamefuncs.classnames)(gameProps.PR))
+    className: "var-personal-rating-data varpersonalrankings var-rating-border ".concat((0, _vargamefuncs.colorclassnames)(gameProps.PR))
   }, gameProps.PR)), /*#__PURE__*/_react["default"].createElement("h6", {
     className: "var-status analytic"
   }, " Game Status:", GNameST && gameProps.DisplayRemove == "Yes" ? /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
@@ -61537,7 +61607,8 @@ var GamePage = function GamePage(props) {
     name: gameProps.Name,
     setgameProps: setgameProps,
     bgimg: gameProps.BGimg,
-    setshowAddList: setshowAddList
+    setshowAddList: setshowAddList,
+    setErrorNoti: setErrorNoti
   })))), gameProps.DisplayRemove == "Yes" && /*#__PURE__*/_react["default"].createElement("button", {
     type: "submit",
     onClick: removeListHandler,
@@ -61546,7 +61617,9 @@ var GamePage = function GamePage(props) {
     style: {
       display: "".concat(gameProps.DisplayRemove)
     }
-  }, "Remove from List")))));
+  }, "Remove from List"), ErrorNoti != {} && /*#__PURE__*/_react["default"].createElement("div", {
+    className: "".concat(ErrorNoti.Type)
+  }, ErrorNoti.Noti)))));
 };
 
 var _default = GamePage;
@@ -61933,14 +62006,13 @@ $('img').map(function () {
   if ($(this).attr('src') == "None") {
     $(this).attr('src', "https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg");
   }
-});
-$(function () {
-  $('a').each(function () {
-    if ($(this).prop('href') == window.location.href) {
-      $(this).addClass('current');
-    }
-  });
-});
+}); // $(function(){
+//   $('a').each(function() {
+//     if ($(this).prop('href') == window.location.href) {
+//       $(this).addClass('current');
+//     }
+//   });
+// });
 
 function isEmpty(str) {
   return !str.trim().length;
@@ -61991,100 +62063,44 @@ function removeActive(x) {
   }
 }
 
-;
-var scrollcheck = 1;
-$(window).on('scroll', function () {
-  if ($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
-    scrollcheck++;
-    $(".tablesection".concat(scrollcheck)).css('display', 'inline');
-    $(".actualtablesection".concat(scrollcheck)).css('display', 'table-row-group');
-  }
-}); //  var listscrollcheck = 1
+; // var scrollcheck = 1
+// $(window).on('scroll',function() {
+//  if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+//      scrollcheck++
+//      $(`.tablesection${scrollcheck}`).css('display','inline');
+//      $(`.actualtablesection${scrollcheck}`).css('display','table-row-group');
+//  }})
+//  var listscrollcheck = 1
 //  $('.hs').on('scroll',function(){
 //    if ($(window).scrollLeft()*2+ $(window).width() > $(document).width()-100){
 //      listscrollcheck++
 //     $(`.listrowsection${listscrollcheck}`).css('display','flex');
 //    }
 //  })
-
-var presearch;
-var redirectsubmissionslug;
-$('.var-add-button').on('click', function () {
-  presearch = String($('.var-add-button').attr('id'));
-  redirectsubmissionslug = String($('.var-slug-game').attr('id'));
-  localStorage.setItem("presearchgame", presearch);
-  localStorage.setItem("redirectsubmissionslug", redirectsubmissionslug);
-  window.location.href = '/addlist#varredirect'; //  })
-});
-$(function () {
-  if (window.location.hash) {
-    presearch = localStorage.getItem("presearchgame"); // console.log(alert(presearch))
-    // console.log(presearch)
-
-    $('#gameSearch').val(presearch);
-    $('#realgameSearch').val(localStorage.getItem("redirectsubmissionslug"));
-  }
-}); // $("#add-form").on("submit", function() {
+//     var presearch
+//     var redirectsubmissionslug
+//      $('.var-add-button').on('click', function(){
+//       presearch = String($('.var-add-button').attr('id'))
+//       redirectsubmissionslug = String ($('.var-slug-game').attr('id'))
+//       localStorage.setItem("presearchgame", presearch);
+//       localStorage.setItem("redirectsubmissionslug", redirectsubmissionslug);
+//       window.location.href='/addlist#varredirect';
+//     //  })
+//     });
+// $(function () {
+//   if (window.location.hash) {
+//     presearch = localStorage.getItem("presearchgame");
+//     // console.log(alert(presearch))
+//     // console.log(presearch)
+//   $('#gameSearch').val(presearch)
+//   $('#realgameSearch').val(localStorage.getItem("redirectsubmissionslug"))
+// }
+// })
+// $("#add-form").on("submit", function() {
 //   // localStorage.clear()
 // });
+// debugger;
 
-var aboutreact = document.getElementById('test-react-component');
-
-if (aboutreact) {
-  _reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_aboutpage["default"], null), aboutreact);
-}
-
-;
-var rloginform = document.getElementById('react-login-form');
-
-if (rloginform) {
-  _reactDom["default"].render( /*#__PURE__*/_react["default"].createElement(_loginform["default"], null), rloginform);
-}
-
-; // const mylistid = document.getElementById('list-page');
-// if (mylistid){
-//   ReactDOM.render(
-//     <MyList />,
-//     mylistid
-//   )
-// }
-// const acctdetails  = document.getElementById('react-account-details');
-// if (acctdetails){
-//   ReactDOM.render(
-//     <Details />,
-//     acctdetails
-//   )
-// }
-// const homebartrue = document.getElementById('home-bar-true');
-// if (homebartrue){
-//   ReactDOM.render(
-//     <LinkBar loggedin  = {true}/>,
-//     homebartrue
-// )
-// }
-// const homebarfalse = document.getElementById('home-bar-false');
-// if (homebarfalse){
-//   ReactDOM.render(
-//     <LinkBar loggedin  = {false}/>,
-//     homebarfalse
-//     )
-// }
-// const searchbarid = document.getElementById('search-bar');
-// if (searchbarid){
-//   ReactDOM.render(
-//     <SearchBar />,
-//     searchbarid
-// )
-// }
-// const accountid = document.getElementById('account-main-react')
-// if (accountid){
-//   ReactDOM.render(
-//     <AccountGames />,
-//     accountid
-// )
-// }
-
-debugger;
 var rootElement = document.getElementById("react-hmpg");
 
 if (rootElement) {
@@ -62092,45 +62108,54 @@ if (rootElement) {
     path: "/",
     element: /*#__PURE__*/_react["default"].createElement(_layout["default"], {
       child: /*#__PURE__*/_react["default"].createElement(_homepage["default"], null),
-      Logged: true
-    })
+      Logged: true,
+      overflow: true
+    }),
+    overflow: true
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "game/:game",
     element: /*#__PURE__*/_react["default"].createElement(_layout["default"], {
       child: /*#__PURE__*/_react["default"].createElement(_varinlistgamepage["default"], null),
-      Logged: true
+      Logged: true,
+      overflow: true
     })
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "aboutsite",
     element: /*#__PURE__*/_react["default"].createElement(_layout["default"], {
       child: /*#__PURE__*/_react["default"].createElement(_aboutpage["default"], null),
-      Logged: true
+      Logged: true,
+      overflow: true
     })
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "mylist",
     element: /*#__PURE__*/_react["default"].createElement(_layout["default"], {
       child: /*#__PURE__*/_react["default"].createElement(_mylist["default"], null),
-      Logged: true
+      Logged: true,
+      overflow: false
     })
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "account",
     element: /*#__PURE__*/_react["default"].createElement(_accountlayout["default"], {
-      child: /*#__PURE__*/_react["default"].createElement(_accountmain["default"], null)
+      child: /*#__PURE__*/_react["default"].createElement(_accountmain["default"], null),
+      overflow: true
     })
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "account/wishlist",
     element: /*#__PURE__*/_react["default"].createElement(_accountlayout["default"], {
-      child: /*#__PURE__*/_react["default"].createElement(_accountwishlist["default"], null)
+      child: /*#__PURE__*/_react["default"].createElement(_accountwishlist["default"], null),
+      overflow: true
     })
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "account/changepassword",
     element: /*#__PURE__*/_react["default"].createElement(_accountlayout["default"], {
-      child: /*#__PURE__*/_react["default"].createElement(_changepassword["default"], null)
+      child: /*#__PURE__*/_react["default"].createElement(_changepassword["default"], null),
+      overflow: true
     })
   }), /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Route, {
     path: "account/details",
     element: /*#__PURE__*/_react["default"].createElement(_accountlayout["default"], {
-      child: /*#__PURE__*/_react["default"].createElement(_accountdetails["default"], null)
+      child: /*#__PURE__*/_react["default"].createElement(_accountdetails["default"], null),
+      overflow: true
     })
   }))), rootElement);
 }
@@ -62178,5 +62203,18 @@ $(function () {
     $(this).css('top', ($(window).height() - length) / 2);
   });
 });
+console.log(window.location.href);
+console.log(window.location.origin); // $(function(){
+//   // if (window.location.href != window.location.origin){
+//     $('main').removeClass('overflow-auto');
+//   // }
+//   // else {
+//     // if (!$('main').hasClass('overflow-auto')){
+//     //   $('main').addClass('overflow-auto');
+//     // }
+//   // }
+// })
+
+var checkoverflow = function checkoverflow() {};
 
 },{"./aboutpage":250,"./accountdetails":252,"./accountlayout":253,"./accountmain":254,"./accountwishlist":255,"./changepassword":257,"./forgotpass":258,"./homepage":261,"./layout":262,"./loginform":264,"./mylist":266,"./registerform":268,"./varinlistgamepage":271,"./verifyemail":272,"jquery":152,"react":237,"react-dom":216,"react-router-dom":227}]},{},[273]);

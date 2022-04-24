@@ -5,7 +5,9 @@ const AccountLayout = (props) => {
 
     return(
         <div className = "full-page">
+        <div className='header-items'>
         <Header/>
+        </div>
         <AccountBar /> 
         {props.child}
         </div>
