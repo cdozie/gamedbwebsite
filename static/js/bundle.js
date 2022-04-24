@@ -58098,6 +58098,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _Zoom = _interopRequireDefault(require("react-reveal/Zoom"));
 
+var _generalfuncs = require("./generalfuncs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -58121,40 +58123,35 @@ function AboutDo(props) {
     className: "about-page"
   }, /*#__PURE__*/_react["default"].createElement("h1", {
     className: "about-title gradientcolor"
-  }, "About this Website:"), props.abtmodule.map(function (abtmodule) {
+  }, "About this Website:"), /*#__PURE__*/_react["default"].createElement("div", {
+    className: "about-main-page"
+  }, props.abtmodule.map(function (abtmodule) {
     return /*#__PURE__*/_react["default"].createElement("div", {
-      className: "txt-img-pair",
+      className: "row",
       key: abtmodule.Text
-    }, /*#__PURE__*/_react["default"].createElement("hr", null), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
+    }, /*#__PURE__*/_react["default"].createElement("div", {
+      className: "txt-img-pair"
+    }, /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
       left: true
     }, /*#__PURE__*/_react["default"].createElement("h4", {
       className: "about-text gradientcolorpinkwhite"
     }, abtmodule.Text, " ")), /*#__PURE__*/_react["default"].createElement(_Zoom["default"], {
       right: true
     }, /*#__PURE__*/_react["default"].createElement("img", {
-      className: "about-rand-imgs",
+      className: "about-rand-imgs inline",
       src: "".concat(abtmodule.Picture)
-    })));
-  }));
+    }))));
+  })));
 }
 
 function About() {
-  var abouttext = ["This site was created by Chidozie as a way to delve into Web Development and \n    learn more about JavaScript, CSS, HTML, and SQLite. It also acted as a gateway to get into ReactJS as well. This specifc page was made entirely with React\n    as a start to learning how it works", "This website was my first foray into Web Development and I hope to learn more.\n    Especially about React since it is very powerful for creating dynamic UI and this page of the website was my first experience with it before I learned more about it\n    and remade this page", "This Website was first made entirely with plain Javascript and CSS on the Front End as a way to learn the fundamentals, then much of it got implemented in react\n    as a way to eliminate loading screens and have seamless updating.", "Thank You for taking the time to explore this website and seeing the work put in.\n    Your time is appreciated deeply and we hope you enjoy your time on the site and if you are not a gamer, I hope this gets you GAMING."];
-  var txt_pic_dictlst = [];
-
   var _useState = (0, _react.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
       gameOptions = _useState2[0],
       setgameOptions = _useState2[1];
 
-  var _useState3 = (0, _react.useState)([]),
-      _useState4 = _slicedToArray(_useState3, 2),
-      txtpicmodule = _useState4[0],
-      settxtPicModule = _useState4[1];
-
   (0, _react.useEffect)(function () {
     // var pictures = [] 
-    var md_dict_list = [];
     fetch('http://127.0.0.1:5000/databasefeeder', {
       'methods': 'GET',
       headers: {
@@ -58165,29 +58162,23 @@ function About() {
     }).then(function (response) {
       var gr = response;
       console.log(gr);
-
-      for (var i = 0; i < gr.length; i++) {
-        md_dict_list.push({
-          Text: abouttext[i],
-          Picture: gr[i]
-        });
-      }
-
-      ;
       setgameOptions(function () {
-        return md_dict_list;
+        return gr;
       });
       console.log("hello");
     })["catch"](function (error) {
       return console.log(error);
     });
   }, []);
+  (0, _react.useEffect)(function () {
+    (0, _generalfuncs.hideLoader)();
+  }, []);
   return /*#__PURE__*/_react["default"].createElement(AboutDo, {
     abtmodule: gameOptions
   });
 }
 
-},{"react":237,"react-reveal/Zoom":224}],251:[function(require,module,exports){
+},{"./generalfuncs":259,"react":237,"react-reveal/Zoom":224}],251:[function(require,module,exports){
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -60010,6 +60001,8 @@ var _generalfuncs = require("./generalfuncs");
 
 var _classnames = _interopRequireDefault(require("classnames"));
 
+var _reactRouterDom = require("react-router-dom");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -60524,7 +60517,7 @@ function MyList() {
     scope: "col"
   }, "Status"))), /*#__PURE__*/_react["default"].createElement("tbody", null, GameOptions.map(function (game) {
     return /*#__PURE__*/_react["default"].createElement("tr", {
-      key: "".concat(game.Name)
+      key: "".concat(game.Slug)
     }, /*#__PURE__*/_react["default"].createElement("th", {
       scope: "row"
     }, parseInt(game.Number) + 1, " "), /*#__PURE__*/_react["default"].createElement("td", null, /*#__PURE__*/_react["default"].createElement("img", {
@@ -60532,8 +60525,8 @@ function MyList() {
       src: "".concat(game.BGimg)
     })), /*#__PURE__*/_react["default"].createElement("td", {
       value: game.Name
-    }, /*#__PURE__*/_react["default"].createElement("a", {
-      href: "/game/".concat(game.Slug)
+    }, /*#__PURE__*/_react["default"].createElement(_reactRouterDom.Link, {
+      to: "/game/".concat(game.Slug)
     }, game.Name)), GNamePR == "".concat(game.Name) ? /*#__PURE__*/_react["default"].createElement("td", {
       id: "editPR"
     }, /*#__PURE__*/_react["default"].createElement(_reactOutsideClickHandler["default"], {
@@ -60594,7 +60587,7 @@ function MyList() {
   })))));
 }
 
-},{"./generalfuncs":259,"./mylistfunctions":267,"./sortdropdown":269,"classnames":94,"react":237,"react-bootstrap/Button":182,"react-bootstrap/Col":183,"react-bootstrap/Dropdown":184,"react-bootstrap/DropdownButton":185,"react-bootstrap/Form":193,"react-bootstrap/Row":207,"react-bootstrap/Table":209,"react-outside-click-handler":222}],267:[function(require,module,exports){
+},{"./generalfuncs":259,"./mylistfunctions":267,"./sortdropdown":269,"classnames":94,"react":237,"react-bootstrap/Button":182,"react-bootstrap/Col":183,"react-bootstrap/Dropdown":184,"react-bootstrap/DropdownButton":185,"react-bootstrap/Form":193,"react-bootstrap/Row":207,"react-bootstrap/Table":209,"react-outside-click-handler":222,"react-router-dom":227}],267:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

@@ -12,6 +12,7 @@ import { limittyping, limittypingmax, isNumbCheck, listfetch, tableclassnames, l
 import OutsideClickHandler from 'react-outside-click-handler';
 import { colorclassnames, hideLoader } from './generalfuncs';
 import classNames from 'classnames'
+import { Link } from 'react-router-dom';
 
 var gnamehp = ""
 var gnamest = ""
@@ -363,10 +364,10 @@ export default function MyList () {
                     {
                     GameOptions.map(
                      (game) => 
-                    <tr key = {`${game.Name}`}>
+                    <tr key = {`${game.Slug}`}>
                          <th scope = "row">{parseInt(game.Number) + 1} </th>
                         <td><img className ="my-list-images" src = {`${game.BGimg}`}></img></td>
-                        <td value = {game.Name}><a href ={`/game/${game.Slug}`}>{game.Name}</a></td>
+                        <td value = {game.Name}><Link to ={`/game/${game.Slug}`}>{game.Name}</Link></td>
                         
                         {GNamePR == `${game.Name}` 
                         ?(

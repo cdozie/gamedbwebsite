@@ -184,6 +184,10 @@ html::before {
     grid-column: 1/-1;
   }
 
+  .header-items{
+    margin-bottom: 2rem
+  }
+
   h2,#Highest-Heading {
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
@@ -1342,7 +1346,7 @@ h6 >*{
 /* ABOUT REACT PAGE */
 .about-title{
   text-align: left;
-  margin-bottom: 0%;
+  margin-bottom: 3rem;
   margin-left: 1%;
 }
 /* .about-main{
@@ -1357,24 +1361,66 @@ hr.about-title-separator{
 }
 
 .about-page{
-  display:grid;
-  grid-template-columns: repeat(2,1fr);
-  column-gap: 2%;
-  /* grid-row-gap: 1%; */
-  grid-auto-rows: min-content;
+padding-left: 5%;
+padding-right: 5%;
 }
-.about-page img{
-  max-height:100% !important;
-  height:30vw;
-  /* min-height:100%; */
-  width: 30vw !important;
-  border-radius: 20%;
-  margin-top:1vh;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom:auto;
+
+
+.about-main-page{
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  row-gap: 3rem;
 
 }
+
+/* .about-main-page{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-auto-rows: min-content;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap; 
+
+} */
+
+.txt-img-pair{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  box-shadow:0 0 0px .25vw white;
+  padding-top:2% ;
+  padding-bottom:2% ;
+  transition: .5s;
+  border-radius:30px
+}
+
+.txt-img-pair:hover{
+box-shadow:0 0 5px .75vw white;
+
+}
+.txt-img-pair h4{
+  grid-column: 1;
+  margin:auto;
+  margin-inline-start: 5%;
+  margin-inline-end: 5%;
+}
+.txt-img-pair img{
+  max-height:100% !important;
+  height:20vw;
+  /* min-height:100%; */
+  width: 20vw !important;
+  object-fit: fill;
+  border-radius: 20%;
+  /* margin-top:1vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom:auto; */
+  margin:auto;
+  grid-column: 2
+}
+
+.abo
 .about-title{
   grid-column: 1/-1;
   margin-bottom: 3%;
@@ -1382,7 +1428,7 @@ hr.about-title-separator{
 }
 
 .about-page h4{
-  font-size: 2vw;
+  font-size: 1.5rem;
 }
 .about-text{
   margin-left:2%;
