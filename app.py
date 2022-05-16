@@ -63,7 +63,7 @@ def make_celery(app):
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'cdozcodeprojects@gmail.com'
-app.config['MAIL_PASSWORD'] = 'chimchid8912'
+app.config['MAIL_PASSWORD'] = '*********'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -87,16 +87,23 @@ celery = make_celery(app)
 
 
 #GLOBALLY DEFINED VARIABLES
-webnoti = {} #For General Warnings to The User
+webnoti = {} #For Form Warnings To User
 funcerrornoti = {} #For Operational Errors Like Execution Failures
+statusnoti = {}#For Status of Adding and Removing Things From List
 def setwebnoti(noti,type):
     webnoti = {"Noti" : noti , "Type" : type }
     return webnoti
+
+def setstatusnoti(noti,type):
+    statusnoti = {"Noti" : noti , "Type" : type }
+    return statusnoti
+
 sorteddict = None
 gamedatadict2filter = None
 singlegamedict = {}
 gamedatadict3 = None
 
+sorteddictempty = False
 
 
 @celery.task()
@@ -810,7 +817,7 @@ def dblockexecute(execution):
         db2.commit()
     finally:
         lock.release()
-def checkexforname( dict,gamename,stat,value):
+def checkexforname(dict,gamename,stat,value):
     counter = 0 
     for i in dict:
         if i["Name"] == gamename:
@@ -826,8 +833,11 @@ def mylistfeeder():
     global sorteddict
     global gamedatadict2filter
     global singlegamedict
+    global sorteddictempty
+
     # Modify the Same Dictionary File So That The List Adapts Changes
     if request.method == "POST":
+
         # sorteddict = None
 
         mcrmin = request.form.get("fmetamin")
@@ -858,12 +868,18 @@ def mylistfeeder():
 
         if mcrmin or mcrmax or permin or permax:
             gamedatadict2 = getgamelistdatafilter(mcrmin,mcrmax,permin,permax)
+            # print(gamedatadict2)
             sorteddict = gm_data_dict_conv(gamedatadict2)
-            return (jsonify (gamedatadict2))
+            print(sorteddict)
+            if sorteddict == []:
+                sorteddictempty= True
+            else:
+                sorteddictempty = False
+            return (jsonify (sorteddict))
         if reset:
             sorteddict = gm_data_dict_conv(getgamelistdata())
         elif sorttype:
-            gd2 = gamedatadict2
+            # gd2 = gamedatadict2
             gdlsdict = gamedatadict2
             print("sorting")
             unsortedgdlsdict= gdlsdict
@@ -878,8 +894,6 @@ def mylistfeeder():
                 sorteddict = sorted(gdlsdict,key = partial(sort_list,stat = "GPR",desc = False))
             elif sorttype == "NS/TA": 
                 sorteddict = sorted(gdlsdict, key= partial(sort_date, stat ="GDA", desc = False ))
- 
-                # sorteddict = unsortedgdlsdict
             elif sorttype == "HPD":
                 sorteddict = sorted(gdlsdict, key = partial(sort_list,stat = "GHP",desc = True))
             elif sorttype == "HPA":
@@ -888,14 +902,15 @@ def mylistfeeder():
                 sorteddict = unsortedgdlsdict
             return (jsonify(sorteddict))
         elif status:
-            if sorteddict:
-                gamedatadict2=sorteddict
+            if not sorteddict:
+                sorteddict = gm_data_dict_conv(getgamelistdata())
+                
             status = status.strip()
             print(status)
             gamename = (request.form.get("gamename")).strip()
             print(gamename)
             dblockexecute(db.execute("UPDATE gamelist SET status = ? WHERE userid = ? AND game = ?", ((status), session["user_id"], gamename)))
-            gd2 = gamedatadict2
+            # gd2 = gamedatadict2
             # names = gamedatadict2["name"]
             checkexforname(sorteddict,gamename,"GST", status )
 
@@ -904,8 +919,9 @@ def mylistfeeder():
             #     gamedatadict2["status"][nmindex] = status 
             singlegamedict["ST"] = status 
         elif hoursplayed:
-            if sorteddict:
-                gamedatadict2=sorteddict
+
+            if not sorteddict:
+                sorteddict = gm_data_dict_conv(getgamelistdata())
             gamename = (request.form.get("gamename")).strip()
             print(f'{gamename} {hoursplayed} is present')
             if isint(hoursplayed):
@@ -923,6 +939,7 @@ def mylistfeeder():
                     singlegamedict["HP"] = hoursplayed
             
             else:
+
                 print("HP not int")
                 dblockexecute(db.execute("UPDATE gamelist SET hoursplayed = ? where userid = ? AND game = ?", ((0,session["user_id"], gamename)))) 
                 # names = gamedatadict2["name"]
@@ -936,8 +953,8 @@ def mylistfeeder():
                     #     counter = counter + 1
                 singlegamedict["HP"] = "Never Played"
         elif personalrating:
-            if sorteddict:
-                gamedatadict2=sorteddict
+            if not sorteddict:
+                sorteddict = gm_data_dict_conv(getgamelistdata())
             gamename = (request.form.get("gamename")).strip()
             print("Have PR")
             print (personalrating)
@@ -956,7 +973,7 @@ def mylistfeeder():
                 dblockexecute(db.execute("UPDATE gamelist SET personalrating = ? where userid = ? AND game = ?", ((None,session["user_id"], gamename))))
                     
                 print("No PR")
-                names = gamedatadict2["name"]
+                # names = gamedatadict2["name"]
                 checkexforname(sorteddict,gamename,"GPR", "_" )
 
                 # if gamename in names:
@@ -983,8 +1000,8 @@ def mylistfeeder():
             # if (gamedatadict2):
                 # if gamedatadict3 :
                 #     gamedatadict2 = gamedatadict3
-       
-                if (sorteddict):
+                print(sorteddictempty)
+                if (sorteddict) or sorteddictempty:
                     print("in sorted")
                     gamedatadict2 = sorteddict
                 else :
@@ -1076,6 +1093,7 @@ def addlist():
     tabledata = db.execute('PRAGMA table_info(gamelist)')
     tabledata=tabledata.fetchall()
     global singlegamedict
+    global statusnoti
     #print(tabledata)
     
     if request.method == "POST":
@@ -1136,6 +1154,7 @@ def addlist():
         db.execute("INSERT INTO gamelist (userid, game, status, personalrating, onlinerating, releasedate,website, hoursplayed,backgroundimage, dayadded,slugs) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
         (session["user_id"],truegamename, gamestatus, gamerating, gameresult["metacriticrating"] , gameresult["releasedate"], gameresult["website"], hoursplayed, gameresult["backgroundimage"], datetime.utcnow().strftime("%m-%d-%Y-%H-%M-%S"), gameresult["slug"]))    
         db2.commit()
+        statusnoti = setstatusnoti("Game Sucessfully Added", "positive")
 
         gamecheck=db.execute("SELECT * FROM gamedatabase where gamename = ?",[gameresult["name"]])
         
@@ -1162,12 +1181,13 @@ def addlistfeeder():
 @app.route("/removelist", methods=["GET", "POST"])
 @login_required
 def removelist():
+    global statusnoti
 
     if request.method == "POST":
         deletedgame= request.form.get("deletedgame")
         db.execute("DELETE from gamelist WHERE userid = ? AND slugs = ?;", (session["user_id"], deletedgame))
         db2.commit()
-        flash("Game Has Been Removed From List","success")
+        statusnoti = setstatusnoti("Game Removed","negative")
         return (redirect(f"/game/{deletedgame}"))
 
     
@@ -1272,6 +1292,11 @@ def password_change():
 @app.route("/notifeeder")
 def notifeeder():
     return(jsonify(webnoti))
+
+@app.route("/actionstatusfeeder")
+def actionstatusfeeder():
+    print(statusnoti)
+    return(jsonify(statusnoti))
 
 @app.route("/funcerrorfeeder")
 def funcerrorfeeder():
