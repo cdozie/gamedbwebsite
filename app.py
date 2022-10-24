@@ -11,7 +11,6 @@ from flask_sqlalchemy import SQLAlchemy
 from celery import Celery
 
 
-# from slugify import slugify
 import requests
 from sqlite3 import Error, SQLITE_PRAGMA
 from sqlalchemy import true
@@ -63,13 +62,12 @@ def make_celery(app):
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = 'cdozcodeprojects@gmail.com'
-app.config['MAIL_PASSWORD'] = '*********'
+app.config['MAIL_PASSWORD'] = 'chimchid8912'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 from celery.utils.log import get_task_logger
 
-# logger = get_task_logger(__name__)
 
 session1 = Session(app)
 
@@ -108,13 +106,15 @@ sorteddictempty = False
 
 @celery.task()
 def updatedatabase():
+    # Getting Lists for Updating
     gamedbdata=getgamedatabasedata()
     gamelistdata=getgamelistdata2()
+
     slugsdb = gamedbdata["slugname"]
     dbnames = gamedbdata["name"]
     gamenamelist = gamelistdata["name"]
     names = gamedbdata["slugname"]
-    # metacriticlist = [] 
+
     for i in slugsdb:
         gamedata=lookup(i)
         print("doing")
@@ -133,11 +133,9 @@ def updatedatabase():
             newlist[j] = element.strip()
         
         newdata = newlist
-        # print(previousgameinfo)
-        
         newdata = Counter(newdata)
-        # print(newdata)
-        # print(previousgameinfo != newdata)
+
+        # Only updating database where an update is needed when get new data
         if previousgameinfo != newdata:
             db.execute("UPDATE gamedatabase set gamename = ?, slugname = ?, metacriticrating = ?, backgroundimage = ?, releasedate = ?, websites = ?, platforms = ? WHERE slugname = ? ",
             (gamedata["name"], gamedata["slug"],gamedata["metacriticrating"],gamedata["backgroundimage"] , gamedata["releasedate"] , gamedata["website"], platforms, i))
@@ -157,8 +155,10 @@ def updatedatabase():
             for j in range(len(newlist2)):
                 element2 = str(newlist2[j])
                 newlist2[j] = element2.strip()
-            
+
             newdata2 = Counter(newlist2)
+            
+            # Only updating our list where an update is needed
             if pgmlsinfo != newdata2:
                 db.execute("UPDATE gamelist set game = ?, slugs = ?, onlinerating = ?, backgroundimage = ? , releasedate = ? WHERE game = ?",
                 (gamedata2["name"], gamedata2["slug"],gamedata2["metacriticrating"],gamedata2["backgroundimage"] , gamedata2["releasedate"], i))
@@ -172,8 +172,7 @@ def game_data():
     gamedatadict2 = getgamelistdata()
     gamedatadict2 = gm_data_dict_conv(gamedatadict2)
 
-    # sorteddict = None
-    # gamedatadict2filter = None
+
     global singlegamedict
 
 
@@ -181,6 +180,7 @@ def game_data():
  
     users = db.execute("SELECT * FROM users WHERE id = ?", [session["user_id"]])
     db2.commit()
+
     #Updates the database with new data if changed but with the API Limits of the free plan
     # updatedatabase.delay()
     # schedule.every().monday.do(updatedatabase.delay)
@@ -225,9 +225,7 @@ def homepagefeeder():
             else: 
                 randlist=[]
         else:
-            #print(len(randlist))
             while len(randlist) < 10:
-                # print(len(randlist))
                 randnumb=rand.randint(0,len(gamedatadictname)-1)
                 if randnumb not in randlist: 
                     randlist.append(randnumb)
@@ -241,7 +239,6 @@ def homepagefeeder():
         lock.release()
 
     return(jsonify(randgdlsdict))
-    # randomlist = None
 @app.route('/userlistfeeder', methods=["GET"])
 @login_required
 def userlistfeeder():
@@ -263,13 +260,11 @@ def newrandgamesfeeder():
         randgmdict = []
         randomlistmcr = randomlist["metacritic"]
         for i in range(len(randomlistmcr)):
-            # print (i)
             if randomlistmcr[i] == None:
                 randomlistmcr[i] = "_"
         for i in range(0, frontpagelisttotal-1):
             ranklist = list(range(1,11))
-            # print(ranklist)
-            # print(i)
+
             randgmdict.append ({'Name': randomlist["gamelist"][i], 'Rank' : ranklist[i],  'GOR' : randomlist["metacritic"][i], 
         'BGimg' : randomlist["backgroundimage"][i], 'Slug' :randomlist["slugs"][i]})
         for i in randgmdict:
@@ -308,6 +303,7 @@ def displaypage (variable):
 
         slug = request.form.get("slug")
         try:
+            # Locking to prevent SQLite from blocking data retrieval
             lock.acquire(True)
             vargamedata=getgamelistdata()
             varslugs = vargamedata["slug"]
@@ -332,6 +328,7 @@ def displaypage (variable):
                 displayremove = "Yes"
                 
                 databasenames = vargamedatadb["slugname"]
+
                 #for determining if the editing features provided via javascript should be active
                 liststatus = "yes"
                 if variable in databasenames:
@@ -402,7 +399,7 @@ def login():
     """Log user in"""
     global webnoti
     global usererror
-    #global userdata
+
     # Forget the user id
     session.clear()
     allusers =db.execute("SELECT * FROM users").fetchall()
@@ -425,6 +422,7 @@ def login():
         elif not password:
             webnoti = setwebnoti("No Password","error")
             return(jsonify(webnoti))
+
         # Makes sure that the username exists in the database and that the provided password 
         # for the username is correct
         if len(list(userdata)) != 1 or not check_password_hash(userdata[0][2], password) :
@@ -460,9 +458,6 @@ def register ():
         username = request.form.get("username")
         email = request.form.get ("email")
         
-       # db2.commit()
-       # db2.commit()
-
         password = request.form.get("password")
         confirmingpassword = request.form.get("confirmation")
         # Makes sure the user submits a username
@@ -515,6 +510,8 @@ def register ():
 
     
     return render_template("register.html", warning = "")
+
+# Email Sending Functions for Registration and Password Retrieval
 def mailsend(email,secret):
         msg = Message(
                 'UG Database Registration',
@@ -552,7 +549,6 @@ def verify():
             webnoti = setwebnoti("Email Confirmed","success")
             return("")
 
-            # return redirect("/login")
         else:
             webnoti = setwebnoti("Code Was Incorrect! A New Email Has Been Sent!", "error")
             secret = pyotp.random_base32()
@@ -560,20 +556,11 @@ def verify():
 
             return("")
 
-            # flash("Code Was Incorrect! Please Reregister")
-
-
-            # return redirect("/register")
     else: 
         mailsend(email,secret)
 
         return render_template("verify.html")
 
-# @app.route("/verify2", methods=["GET", "POST"])
-# def verify2():
-#     if request.method == "POST":
-#         return redirect("/verify")
-#         #send mail with same code
 
 @app.route("/forgotresend", methods=["GET", "POST"])
 def forgotresend():
@@ -591,16 +578,11 @@ def forgotpasswordemail():
         if re.fullmatch(regex2, useremail) == None:
             webnoti = setwebnoti("Not a Valid Email","error")
 
-            # return renderpasswordemail("Not a Valid Email")
-
         elif len(list(emailrows)) == 0:
             webnoti = setwebnoti("This Email Does Not Appear To Be Associated With An Account.","error")
-
-            # return renderpasswordemail("This Email Does Not Appear To Be Associated With An Account. Please Try Again")
         else:
             webnoti = setwebnoti("Show Form","success")
  
-            # forgotpasswordsecret = pyotp.random_base32()
         return jsonify(webnoti)
     else:
         return renderpasswordemail("")
@@ -612,14 +594,14 @@ def sendforgotpasswordemail():
     mailsendforgotpassword(useremail,forgotpasswordsecret)
     webnoti = setwebnoti("Email Has Been Sent","success")
     return("")
+
 @app.route("/forgotpassword", methods=["GET", "POST"])
 def forgotpassword():
     global forgotpasswordsecret
     global webnoti
     global useremail
     if request.method == "POST":
-        # useremail = request.form.get("email")
-        # emailrows = db.execute( "SELECT * FROM users WHERE email = ?", [useremail])
+
         emailotp = request.form.get("emailOTP")
         password = request.form.get("password")
         confirmationpassword = request.form.get("confirmation")
@@ -631,32 +613,25 @@ def forgotpassword():
             db2.commit()
             webnoti = setwebnoti("Correct OTP","success")
 
-            # flash("Your Password Has Been Changed")
             return redirect('/login')
         elif emailotp == forgotpasswordsecret: 
             webnoti = setwebnoti("Incorrect OTP. A New OTP has been sent","error")
-
-            # flash("Incorrect OTP. A New OTP has been sent")
             forgotpasswordsecret = pyotp.random_base32()
             mailsendforgotpassword(useremail,forgotpasswordsecret)
-            # return redirect("/forgotpassword")     
+
         elif password != confirmationpassword:
             webnoti = setwebnoti("Passwords do Not Match. A New OTP has been sent","error")
             forgotpasswordsecret = pyotp.random_base32()
             mailsendforgotpassword(useremail,forgotpasswordsecret)
-            # flash("Passwords do Not Match. A New OTP has been sent")
-            # return redirect("/forgotpassword")
+
         else:
             webnoti = setwebnoti("Ensure your OTP is Correct and All Forms Are Filled Out. A New OTP has been sent","Error")
             forgotpasswordsecret = pyotp.random_base32()
             mailsendforgotpassword(useremail,forgotpasswordsecret)
-            # flash("Ensure your OTP is Correct and All Forms Are Filled Out. A New OTP has been sent")
-            # return redirect("/forgotpassword")
+
         return(jsonify(webnoti))
     else:
-        # forgotpasswordsecret = pyotp.random_base32()
-        # webnoti = setwebnoti("Email Has Been Sent","success")
-        # mailsendforgotpassword(useremail,forgotpasswordsecret)
+
         return render_template("forgotpassword.html")
 
 
@@ -671,7 +646,6 @@ def mylist():
     tabledata=tabledata.fetchall()
     gamedatadict=getgamelistdata()
     gamedatadict2 = getgamelistdata()
-    # mylistfeed(gamedatadict)
 
     return (render_template("index.html", gamedata = gamedatadict))
 
@@ -685,10 +659,10 @@ def sort_list (type, stat, desc):
             return val
     else:
         return 0
+# Sorting the list by date
 def sort_date (type,stat, desc):
     val = type[stat]
     noval = "01-01-0001-00-00-00"
-    # val = datetime.strptime(val, "%d-%b-%y")
     if val:
 
         if val.strip() == "":
@@ -734,7 +708,6 @@ def databasefeeder():
         randnumb=rand.randint(0,nameslength-1)
 
         if bgimgs[randnumb]: 
-            # if (bgimgs[randnumb].strip() != "" or bgimgs[randnumb] !="None"):
                 if (bgimgs[randnumb] not in randimages):
                     randimages.append(bgimgs[randnumb])
 
@@ -744,6 +717,8 @@ def databasefeeder():
 
     
     return(jsonify(abtpgdict))
+
+# 
 @app.route("/account/detailsfeeder", methods = ["GET", "POST"]) 
 @login_required
 def account_details_feeder():
@@ -760,7 +735,6 @@ def account_details_feeder():
     gametotalquery= db.execute("SELECT * FROM gamelist where userid = ?", [session["user_id"]]).fetchall()
     usergames = [list(i) for i in gametotalquery]
     gametotal = len(usergames)
-    # print(gametotal)
     personalratings, high90,high80,unrated,metacriticratings,metacritichigh90,avgmcrlist,avgperlist = ([] for i in range(8))
 
     for i in range(gametotal):
@@ -1261,19 +1235,15 @@ def password_change():
         # Ensure form was filled out
         if not oldpassword:
             webnoti = setwebnoti("Please Provide Your Current Password", "error")
-            return("")
 
         elif not password:
             webnoti = setwebnoti("Please Submit a Password")
-            return("")
 
         elif not check_password_hash(userhash, oldpassword):
              webnoti = setwebnoti("Please Ensure That Your Old Password is Correct", "error")
-             return("")
 
         elif password != confirmingpassword:
             webnoti = setwebnoti("Passwords Don't Match", "error")            
-            return("")
 
         else:
             # hash the password
@@ -1283,7 +1253,7 @@ def password_change():
             # Redirect user to home page
             webnoti = setwebnoti("Password Changed Successfully", "success")
 
-            # return redirect("/")
+          # return redirect("/")
         return(jsonify(webnoti))
     # For Loading the Page
     else:
@@ -1330,6 +1300,7 @@ def wishlistfeeder():
     gdict = gm_data_dict_conv(gamedatadict)
     return(jsonify(gdict))
 
+# For account statistics
 @app.route("/account/details", methods=["GET", "POST"])
 def accountdetails():
 
