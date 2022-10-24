@@ -88,6 +88,8 @@ celery = make_celery(app)
 webnoti = {} #For Form Warnings To User
 funcerrornoti = {} #For Operational Errors Like Execution Failures
 statusnoti = {}#For Status of Adding and Removing Things From List
+
+# For setting these notifications
 def setwebnoti(noti,type):
     webnoti = {"Noti" : noti , "Type" : type }
     return webnoti
@@ -103,9 +105,10 @@ gamedatadict3 = None
 
 sorteddictempty = False
 
-
+# Celery Task to run asynchronously
 @celery.task()
 def updatedatabase():
+
     # Getting Lists for Updating
     gamedbdata=getgamedatabasedata()
     gamelistdata=getgamelistdata2()
@@ -115,6 +118,7 @@ def updatedatabase():
     gamenamelist = gamelistdata["name"]
     names = gamedbdata["slugname"]
 
+    # Using slugs to find the data we have on games and compare it to the newly found data
     for i in slugsdb:
         gamedata=lookup(i)
         print("doing")
@@ -140,6 +144,8 @@ def updatedatabase():
             db.execute("UPDATE gamedatabase set gamename = ?, slugname = ?, metacriticrating = ?, backgroundimage = ?, releasedate = ?, websites = ?, platforms = ? WHERE slugname = ? ",
             (gamedata["name"], gamedata["slug"],gamedata["metacriticrating"],gamedata["backgroundimage"] , gamedata["releasedate"] , gamedata["website"], platforms, i))
             db2.commit()
+    
+    # Doing it for gamenames as well as some slugs from the database being used were unreliable 
     for i in gamenamelist:
         if i in dbnames:
             i = str(i)
@@ -163,21 +169,20 @@ def updatedatabase():
                 db.execute("UPDATE gamelist set game = ?, slugs = ?, onlinerating = ?, backgroundimage = ? , releasedate = ? WHERE game = ?",
                 (gamedata2["name"], gamedata2["slug"],gamedata2["metacriticrating"],gamedata2["backgroundimage"] , gamedata2["releasedate"], i))
                 db2.commit()
+
 @app.route("/")
 @login_required
 def game_data():
     global gamedatadict2
     global gamedatadict2filter
     global sorteddict 
-    gamedatadict2 = getgamelistdata()
-    gamedatadict2 = gm_data_dict_conv(gamedatadict2)
-
 
     global singlegamedict
-
-
     global userdata,userid,username,userhash, gamedatadict,acabrev,email
  
+
+    gamedatadict2 = getgamelistdata()
+    gamedatadict2 = gm_data_dict_conv(gamedatadict2)
     users = db.execute("SELECT * FROM users WHERE id = ?", [session["user_id"]])
     db2.commit()
 
@@ -185,6 +190,7 @@ def game_data():
     # updatedatabase.delay()
     # schedule.every().monday.do(updatedatabase.delay)
 
+    # Getting the user's data alongside the game data.
     rawuserdata=users.fetchall()
 
     userdata = [list(i) for i in rawuserdata]
@@ -204,6 +210,7 @@ def game_data():
 
 
 
+# For displaying recommended game list data on the homepage of the website
 @app.route('/gmlistfeeder', methods = ["GET", "POST"])
 @login_required
 def homepagefeeder():
@@ -239,6 +246,8 @@ def homepagefeeder():
         lock.release()
 
     return(jsonify(randgdlsdict))
+
+# For showing the user's list
 @app.route('/userlistfeeder', methods=["GET"])
 @login_required
 def userlistfeeder():
@@ -246,6 +255,7 @@ def userlistfeeder():
 
     return(jsonify(gamelistdata))
 
+# For showing random games on the homepage
 @app.route('/rndgamefeeder', methods=["GET", "POST"])
 @login_required
 def newrandgamesfeeder():
@@ -292,6 +302,8 @@ def newrandgamesfeeder():
     return jsonify(randgmdict)
     
 
+# Using the link of a game to access data about the game and display it
+# on its own page 
 @app.route('/game/<variable>', methods=["GET", "POST"])
 @login_required
 def displaypage (variable):
@@ -307,6 +319,8 @@ def displaypage (variable):
             lock.acquire(True)
             vargamedata=getgamelistdata()
             varslugs = vargamedata["slug"]
+
+            # Checking if game is in the user's list as this affects the page
             if variable in varslugs:
 
                 # vargamedata=getgamelistdata()
@@ -352,6 +366,7 @@ def displaypage (variable):
 
                 print (varhoursplayed)
             
+            # For if the game was not in the user's list
             else:
                 vargamedata = getgamedatabasedata()
                 varslugs = vargamedata["slugname"]
@@ -364,12 +379,12 @@ def displaypage (variable):
                 varwebsite = vargamedata["website"][gamedataindex]
                 varreleasedate = vargamedata["releasedate"][gamedataindex]
                 varplatform = vargamedata["platforms"][gamedataindex]
+                
                 # for storing game slug id to use for when search for game from redirect as will use the id in the search
                 varnames = vargamedata["name"][gamedataindex]
                 if varplatform == None:
                     varplatform = "Not Yet Stored"
 
-                # varplatform = varplatform[:-2]
                 varhoursplayed = "Not in List"
                 displayadd = "Yes"
                 displayremove = "No"
